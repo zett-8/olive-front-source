@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "noon",
+  "author": "",
   "license": "ISC",
   "scripts": {
     "dev": "export NODE_ENV=development && webpack-dev-server --mode development --port 8001 --contentBase=dist",
     "build:prod": "export NODE_ENV=production && webpack --mode production",
     "build:dev": "export NODE_ENV=development && webpack --mode development"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -23,6 +21,8 @@
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-logger": "^3.0.6",
     "style-loader": "^0.22.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
@@ -34,6 +34,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
   }
 }

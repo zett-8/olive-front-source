@@ -1,4 +1,4 @@
-import { actionTypes } from "../actions/works"
+import { actionTypes } from '../actions/works'
 
 const INITIAL_STATE = []
 

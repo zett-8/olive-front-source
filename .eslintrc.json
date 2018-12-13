@@ -1,0 +1,60 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react", "jsx-a11y", "import"
+    ],
+    "rules": {
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "object-curly-newline": "off",
+        "object-shorthand": "off",
+        "react/destructuring-assignment": "off",
+        "no-use-before-define": "off",
+        "arrow-body-style": "off",
+        "comma-dangle": "off",
+        "react/require-default-props": "off",
+        "react/jsx-filename-extension": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/prefer-stateless-function": "off",
+        "prefer-template": "off",
+        "arrow-parens": "off",
+        "function-paren-newline": "off",
+        "implicit-arrow-linebreak": "off",
+        "react/jsx-boolean-value": "off",
+        "max-len": "off",
+        "consistent-return": "off",
+        "no-useless-escape": "warn",
+        "no-case-declarations": "off",
+        "array-callback-return": "off"
+    }
+}

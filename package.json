@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "export NODE_ENV=development && webpack-dev-server --mode development --port 8001 --contentBase=dist",
     "build:prod": "export NODE_ENV=production && webpack --mode production",
-    "build:dev": "export NODE_ENV=development && webpack --mode development"
+    "build:dev": "export NODE_ENV=development && webpack --mode development",
+    "eslint": "node node_modules/eslint/bin/eslint ."
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

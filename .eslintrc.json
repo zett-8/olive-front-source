@@ -55,6 +55,7 @@
         "consistent-return": "off",
         "no-useless-escape": "warn",
         "no-case-declarations": "off",
-        "array-callback-return": "off"
+        "array-callback-return": "off",
+        "operator-linebreak": "off"
     }
 }

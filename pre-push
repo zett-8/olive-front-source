@@ -7,13 +7,17 @@ RED='\033[1;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-while read local_ref local_sha1 remote_ref remote_sha1
-do
-  if [[ "${remote_ref##refs/heads/}" = "master" ]]; then
-    echo "Do not push to master branch!!!"
-    exit 1
-  fi
-done
+
+# =========================== forbid pushing to master ===========================
+# while read local_ref local_sha1 remote_ref remote_sha1
+# do
+#   if [[ "${remote_ref##refs/heads/}" = "master" ]]; then
+#     echo "Do not push to master branch!!!"
+#     exit 1
+#   fi
+# done
+
+# ================================================================================
 
 echo "Running Linters:"
 

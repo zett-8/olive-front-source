@@ -2,14 +2,17 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import ErrorBoundary from './hocs/errorBoundary'
-import LandingPageContainer from './containers/landingPageContainer'
+import Auth from './hocs/auth'
+import TopPageContainer from './containers/topPageContainer'
 
 export default () => (
   <ErrorBoundary>
-    <BrowserRouter>
-      <React.Fragment>
-        <Route exact={true} path="/" component={LandingPageContainer} />
-      </React.Fragment>
-    </BrowserRouter>
+    <Auth>
+      <BrowserRouter>
+        <React.Fragment>
+          <TopPageContainer/>
+        </React.Fragment>
+      </BrowserRouter>
+    </Auth>
   </ErrorBoundary>
 )

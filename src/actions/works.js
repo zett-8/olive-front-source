@@ -1,10 +1,17 @@
+import Api from '../utils/api'
+
 export const actionTypes = {
   GET_WORKS: 'GET_WORKS',
 }
 
 export const getWorks = () => dispatch => {
-  dispatch({
-    type: actionTypes.GET_WORKS,
-    payload: [],
-  })
+  return Api.login()
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_WORKS,
+        payload: res,
+      })
+    })
+    .catch(res => res)
+
 }

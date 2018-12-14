@@ -1,10 +1,16 @@
+import Api from '../utils/api'
+
 export const actionTypes = {
-  SET_STATUS: 'SET_STATUS',
+  LOGIN: 'LOGIN',
 }
 
-export const setStatus = () => dispatch => {
-  dispatch({
-    type: actionTypes.SET_STATUS,
-    payload: [],
-  })
+export const login = () => dispatch => {
+  return Api.login()
+    .then(res => {
+      dispatch({
+        type: actionTypes.LOGIN,
+        payload: res,
+      })
+    })
+    .catch(res => res)
 }

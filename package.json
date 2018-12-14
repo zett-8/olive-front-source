@@ -6,6 +6,7 @@
   "author": "noon-inc",
   "license": "ISC",
   "scripts": {
+    "local": "export NODE_ENV=local && webpack-dev-server --mode development --port 8001 --contentBase=dist",
     "dev": "export NODE_ENV=development && webpack-dev-server --mode development --port 8001 --contentBase=dist",
     "build:prod": "export NODE_ENV=production && webpack --mode production",
     "build:dev": "export NODE_ENV=development && webpack --mode development",
@@ -37,6 +38,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",

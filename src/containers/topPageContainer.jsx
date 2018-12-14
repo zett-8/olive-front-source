@@ -2,10 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { logout } from '../actions/loginStatus'
+import { getWorks } from '../actions/works'
 
 const T = () => 'Top Page'
 
 class TopPageContainer extends React.Component {
+  componentDidMount() {
+    this.props.getWorks()
+  }
+
   logout = () => {
     this.props.logout()
   }
@@ -21,8 +26,11 @@ class TopPageContainer extends React.Component {
 }
 
 export default connect(
-  null,
-  (dispatch) => ({
-    logout: () => dispatch(logout())
+  state => ({
+    works: state.works
+  }),
+  dispatch => ({
+    logout: () => dispatch(logout()),
+    getWorks: () => dispatch(getWorks()),
   })
 )(TopPageContainer)

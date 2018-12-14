@@ -5,12 +5,12 @@ export const actionTypes = {
   LOGOUT: 'LOGOUT',
 }
 
-export const login = () => dispatch => {
-  return Api.login()
+export const login = (username, password) => dispatch => {
+  return Api.login(username, password)
     .then(res => {
       dispatch({
         type: actionTypes.LOGIN,
-        payload: res,
+        payload: res.data,
       })
     })
     .catch(res => res)

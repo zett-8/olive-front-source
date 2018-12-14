@@ -1,21 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { login } from '../actions/loginStatus'
-import getWorks from '../actions/works'
-
-const Hello = () => 'hello world 2'
 
 class LandingPageContainer extends React.Component {
-  login = () => {
-    this.props.login()
+  componentDidMount() {
+    console.log(process.env.NODE_ENV)
   }
 
   render() {
     return (
       <React.Fragment>
-        <Hello />
-        <p onClick={this.login}>login</p>
+        <h1>Olive</h1>
+        <Link to='/login'>login</Link>
       </React.Fragment>
     )
   }

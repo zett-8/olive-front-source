@@ -10,7 +10,8 @@ export default () => (
     <Auth>
       <BrowserRouter>
         <React.Fragment>
-          <Route exact={true} path='/' component={TopPageContainer} />
+          <Route path='/' component={TopPageContainer} />
+          {/*<Route exact={true} path='/login' component={TopPageContainer} />*/}
         </React.Fragment>
       </BrowserRouter>
     </Auth>

@@ -5,10 +5,6 @@ import { Link } from 'react-router-dom'
 import { login } from '../actions/loginStatus'
 
 class LandingPageContainer extends React.Component {
-  componentDidMount() {
-    console.log(process.env.NODE_ENV)
-  }
-
   render() {
     return (
       <React.Fragment>

@@ -13,10 +13,17 @@ class LoginPageContainer extends React.Component {
     }
   }
 
-  login = e => {
+  login = async e => {
     e.preventDefault()
-    this.props.login(this.state.username, this.state.password)
-    this.props.history.push('/')
+    const error = await this.props.login(this.state.username, this.state.password)
+
+    if (!error) {
+      this.props.history.push('/')
+      return
+    }
+
+    if (error.response.status === 404) console.log('this user doensnt exist')
+    if (error.response.status === 400) console.log('password is not correct')
   }
 
   render() {

@@ -1,5 +1,15 @@
 import React from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
 
-const Hello = () => 'hello world'
+import ErrorBoundary from './hocs/errorBoundary'
+import LandingPageContainer from './containers/landingPageContainer'
 
-export default () => <Hello />
+export default () => (
+  <ErrorBoundary>
+    <BrowserRouter>
+      <React.Fragment>
+        <Route exact={true} path="/" component={LandingPageContainer} />
+      </React.Fragment>
+    </BrowserRouter>
+  </ErrorBoundary>
+)

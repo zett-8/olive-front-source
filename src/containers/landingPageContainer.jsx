@@ -7,12 +7,17 @@ import getWorks from '../actions/works'
 const Hello = () => 'hello world 2'
 
 class LandingPageContainer extends React.Component {
-  componentDidMount() {
+  login = () => {
     this.props.login()
   }
 
   render() {
-    return <Hello/>
+    return (
+      <React.Fragment>
+        <Hello />
+        <p onClick={this.login}>login</p>
+      </React.Fragment>
+    )
   }
 }
 

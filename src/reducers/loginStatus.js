@@ -5,6 +5,9 @@ export default (state = {}, action) => {
     case actionTypes.LOGIN:
       return action.payload
 
+    case actionTypes.LOGOUT:
+      return {}
+
     default:
       return state
   }

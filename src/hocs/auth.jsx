@@ -1,19 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import LandingPageContainer from '../containers/landingPageContainer'
 
 class Auth extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      test: true
-    }
-  }
-
   render() {
-    if (this.state.test) return <LandingPageContainer/>
-    return this.props.children
+    if (this.props.loginStatus.token) return this.props.children
+
+    return <LandingPageContainer/>
   }
 }
 
-export default Auth
+export default connect(
+  (state) => ({
+    loginStatus: state.loginStatus
+  })
+)(Auth)

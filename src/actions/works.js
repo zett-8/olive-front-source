@@ -13,5 +13,4 @@ export const getWorks = () => dispatch => {
       })
     })
     .catch(res => res)
-
 }

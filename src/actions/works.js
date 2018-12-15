@@ -5,11 +5,11 @@ export const actionTypes = {
 }
 
 export const getWorks = () => dispatch => {
-  return Api.login()
+  return Api.getWorks()
     .then(res => {
       dispatch({
         type: actionTypes.GET_WORKS,
-        payload: res,
+        payload: res.data,
       })
     })
     .catch(res => res)

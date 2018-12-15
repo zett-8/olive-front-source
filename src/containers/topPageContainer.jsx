@@ -9,6 +9,7 @@ const T = () => 'Top Page'
 class TopPageContainer extends React.Component {
   componentDidMount() {
     this.props.getWorks()
+    console.log('aaa')
   }
 
   logout = () => {

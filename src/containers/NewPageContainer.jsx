@@ -1,26 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Header from '../containers/headerContainer'
+
 import { logout } from '../actions/loginStatus'
 import { getWorks } from '../actions/works'
 
-const T = () => 'Top Page'
 
-class TopPageContainer extends React.Component {
+class NewPageContainer extends React.Component {
   componentDidMount() {
     this.props.getWorks()
-    console.log('aaa')
-  }
-
-  logout = () => {
-    this.props.logout()
   }
 
   render() {
     return (
       <React.Fragment>
-        <T />
-        <p onClick={this.logout}>logout</p>
+        <Header />
+        <p>New Works</p>
       </React.Fragment>
     )
   }
@@ -34,4 +30,4 @@ export default connect(
     logout: () => dispatch(logout()),
     getWorks: () => dispatch(getWorks()),
   })
-)(TopPageContainer)
+)(NewPageContainer)

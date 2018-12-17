@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
+import Header from './headerContainer'
 import { login } from '../actions/loginStatus'
 
 class LandingPageContainer extends React.Component {
@@ -9,7 +9,7 @@ class LandingPageContainer extends React.Component {
     return (
       <React.Fragment>
         <h1>Olive</h1>
-        <Link to='/login'>login</Link>
+        <Header />
       </React.Fragment>
     )
   }

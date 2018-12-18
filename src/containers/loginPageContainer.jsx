@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Header from '../containers/headerContainer'
+import LoginForm from '../components/loginForm'
 import { login } from '../actions/loginStatus'
 
 class LoginPageContainer extends React.Component {
@@ -9,14 +10,14 @@ class LoginPageContainer extends React.Component {
     super(props)
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
     }
   }
 
   login = async e => {
     e.preventDefault()
-    const error = await this.props.login(this.state.username, this.state.password)
+    const error = await this.props.login(this.state.email, this.state.password)
 
     if (!error) {
       this.props.history.push('/')
@@ -27,17 +28,18 @@ class LoginPageContainer extends React.Component {
     if (error.response.status === 400) console.log('password is not correct')
   }
 
+  handleInputChanged = e => this.setState({ [e.target.name]: e.target.value })
+
   render() {
     return (
       <React.Fragment>
         <Header />
-        <form onSubmit={this.login}>
-          <label>E-mail</label>
-          <input value={this.state.username} onChange={(e) => this.setState({ username: e.target.value})}/>
-          <label>Password</label>
-          <input value={this.state.password} onChange={(e) => this.setState({ password: e.target.value})}/>
-          <button type="submit">Login</button>
-        </form>
+        <LoginForm
+          login={this.login}
+          handleInputChanged={this.handleInputChanged}
+          email={this.state.email}
+          password={this.state.password}
+        />
       </React.Fragment>
     )
   }
@@ -46,6 +48,6 @@ class LoginPageContainer extends React.Component {
 export default connect(
   null,
   dispatch => ({
-    login: (username, password) => dispatch(login(username, password)),
+    login: (email, password) => dispatch(login(email, password)),
   })
 )(LoginPageContainer)

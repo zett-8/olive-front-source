@@ -5,8 +5,8 @@ export const actionTypes = {
   LOGOUT: 'LOGOUT',
 }
 
-export const login = (username, password) => dispatch => {
-  return Api.login(username, password)
+export const login = (email, password) => dispatch => {
+  return Api.login(email, password)
     .then(res => {
       dispatch({
         type: actionTypes.LOGIN,

@@ -9,6 +9,6 @@ const PATH = {
 }
 
 export default {
-  login: (username, password) => axios.post(`${PATH[ENV]}-token-auth/`, { username, password }),
+  login: (email, password) => axios.post(`${PATH[ENV]}-token-auth/`, { username: email, password }),
   getWorks: () => axios.get(`${PATH[ENV]}/work/`)
 }

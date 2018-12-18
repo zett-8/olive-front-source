@@ -5,7 +5,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import ErrorBoundary from './hocs/errorBoundary'
 import LandingPageContainer from './containers/landingPageContainer'
 import LoginPageContainer from './containers/loginPageContainer'
-import NewPageContainer from './containers/NewPageContainer'
+import NewPageContainer from './containers/newPageContainer'
+import PopularContainer from './containers/popularPageContainer'
 
 export default () => (
   <ErrorBoundary>
@@ -15,6 +16,7 @@ export default () => (
           <Route exact={true} path='/' component={LandingPageContainer}/>
           <Route exact={true} path='/login' component={LoginPageContainer} />
           <Route exact={true} path='/new' component={NewPageContainer} />
+          <Route exact={true} path='/popular' component={PopularContainer} />
         </React.Fragment>
       </BrowserRouter>
     {/*</Auth>*/}

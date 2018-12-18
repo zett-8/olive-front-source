@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import Header from '../containers/headerContainer'
+import Header from './headerContainer'
 
-import { logout } from '../actions/loginStatus'
 import { getWorks } from '../actions/works'
 
-
-class NewPageContainer extends React.Component {
+class PopularPageContainer extends React.Component {
   componentDidMount() {
     this.props.getWorks()
   }
@@ -16,18 +15,21 @@ class NewPageContainer extends React.Component {
     return (
       <React.Fragment>
         <Header />
-        <p>New Works</p>
+        <p>Popular Works</p>
       </React.Fragment>
     )
   }
 }
 
+PopularPageContainer.propTypes = {
+  getWorks: PropTypes.func.isRequired,
+}
+
 export default connect(
   state => ({
-    works: state.works
+    works: state.works,
   }),
   dispatch => ({
-    logout: () => dispatch(logout()),
     getWorks: () => dispatch(getWorks()),
   })
-)(NewPageContainer)
+)(PopularPageContainer)

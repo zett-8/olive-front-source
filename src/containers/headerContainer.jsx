@@ -5,16 +5,23 @@ import { Link } from 'react-router-dom'
 import { logout } from '../actions/loginStatus'
 
 class HeaderContainer extends React.Component {
-  logout = () => {
-    this.props.logout()
-  }
+  top = () => this.props.history.push('/')
+
+  logout = () => this.props.logout()
+
+  common = () => (
+    <React.Fragment>
+      <h1 onClick={() => this.top()}>Olive</h1>
+      <Link to="/popular">Popular</Link>
+      <Link to="/new">New</Link>
+    </React.Fragment>
+  )
 
   render() {
     if (this.props.loginStatus.token) {
       return (
         <header>
-          <Link to="/popular">Popular</Link>
-          <Link to="/new">New</Link>
+          {this.common()}
           <p onClick={() => this.logout()}>Logout</p>
         </header>
       )
@@ -22,8 +29,7 @@ class HeaderContainer extends React.Component {
 
     return (
       <header>
-        <Link to="/popular">Popular</Link>
-        <Link to="/new">New</Link>
+        {this.common()}
         <Link to="/login">login</Link>
       </header>
     )

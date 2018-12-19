@@ -1,17 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Header from '../containers/headerContainer'
+import WorkDetail from '../components/workDetail'
+
+import { getDetail } from '../actions/detail'
 
 class DetailPageContainer extends React.Component {
+  componentDidMount() {
+    this.props.getDetail(this.props.match.params.id)
+  }
+
+  back = () => this.props.history.goBack()
+
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <p>detail</p>
+        <WorkDetail detail={this.props.detail} back={this.back} />
       </React.Fragment>
     )
   }
 }
 
-export default connect()(DetailPageContainer)
+export default connect(
+  state => ({
+    detail: state.detail
+  }),
+  dispatch => ({
+    getDetail: (id) => dispatch(getDetail(id))
+  })
+)(DetailPageContainer)

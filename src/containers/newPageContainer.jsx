@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Header from './headerContainer'
 import WorkList from '../components/workList'
 
 import { getWorks } from '../actions/works'
@@ -16,7 +15,6 @@ class NewPageContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <p>New Works</p>
         <WorkList works={this.props.works}/>
       </React.Fragment>

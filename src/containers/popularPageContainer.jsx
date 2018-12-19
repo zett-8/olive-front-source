@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Header from './headerContainer'
-
 import { getWorks } from '../actions/works'
 
 class PopularPageContainer extends React.Component {
@@ -14,7 +12,6 @@ class PopularPageContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <p>Popular Works</p>
       </React.Fragment>
     )

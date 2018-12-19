@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Header from '../containers/headerContainer'
 import LoginForm from '../components/loginForm'
 import { login } from '../actions/loginStatus'
 
@@ -33,7 +32,6 @@ class LoginPageContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <LoginForm
           login={this.login}
           handleInputChanged={this.handleInputChanged}

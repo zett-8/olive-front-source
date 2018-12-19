@@ -22,6 +22,8 @@ class HeaderContainer extends React.Component {
       return (
         <header>
           {this.common()}
+          <p>review</p>
+          <Link to={`/artist/${this.props.loginStatus.id}`}>account</Link>
           <p onClick={() => this.logout()}>Logout</p>
         </header>
       )

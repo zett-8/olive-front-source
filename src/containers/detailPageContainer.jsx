@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import WorkDetail from '../components/workDetail'
 
-import { getDetail } from '../actions/detail'
+import { getWorkDetail } from '../actions/workDetail'
 
 class DetailPageContainer extends React.Component {
   componentDidMount() {
@@ -13,9 +13,11 @@ class DetailPageContainer extends React.Component {
   back = () => this.props.history.goBack()
 
   render() {
+    if (!Object.keys(this.props.workDetail).length) return null
+
     return (
       <React.Fragment>
-        <WorkDetail detail={this.props.detail} back={this.back} />
+        <WorkDetail detail={this.props.workDetail} back={this.back} />
       </React.Fragment>
     )
   }
@@ -23,9 +25,9 @@ class DetailPageContainer extends React.Component {
 
 export default connect(
   state => ({
-    detail: state.detail
+    workDetail: state.workDetail
   }),
   dispatch => ({
-    getDetail: (id) => dispatch(getDetail(id))
+    getDetail: (id) => dispatch(getWorkDetail(id))
   })
 )(DetailPageContainer)

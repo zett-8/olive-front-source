@@ -13,12 +13,19 @@ class ArtistPageContainer extends React.Component {
   back = () => this.props.history.goBack()
 
   render() {
-    return <ArtistDetail detail={this.props.artistDetail} back={this.back} />
+    let myself = false
+
+    if (!Object.keys(this.props.artistDetail).length) return null
+
+    if (this.props.loginStatus.user_id === this.props.match.params.id - 0) myself = true
+
+    return <ArtistDetail detail={this.props.artistDetail} back={this.back} myself={myself}/>
   }
 }
 
 export default connect(
   state => ({
+    loginStatus: state.loginStatus,
     artistDetail: state.artistDetail,
   }),
   dispatch => ({

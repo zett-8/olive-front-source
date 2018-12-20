@@ -8,6 +8,7 @@ import LandingPageContainer from './containers/landingPageContainer'
 import LoginPageContainer from './containers/loginPageContainer'
 import NewPageContainer from './containers/newPageContainer'
 import PopularContainer from './containers/popularPageContainer'
+import UserContainer from './containers/userPageContainer'
 import ArtistContainer from './containers/artistPageContainer'
 import DetailContainer from './containers/detailPageContainer'
 
@@ -21,6 +22,7 @@ export default () => (
           <Route exact={true} path='/login' component={LoginPageContainer} />
           <Route exact={true} path='/new' component={NewPageContainer} />
           <Route exact={true} path='/popular' component={PopularContainer} />
+          <Route exact={true} path='/user/:id' component={UserContainer} />
           <Route exact={true} path='/artist/:id' component={ArtistContainer} />
           <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
         </React.Fragment>

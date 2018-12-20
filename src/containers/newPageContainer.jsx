@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import WorkList from '../components/workList'
 
@@ -20,10 +19,6 @@ class NewPageContainer extends React.Component {
       </React.Fragment>
     )
   }
-}
-
-NewPageContainer.propTypes = {
-  getWorks: PropTypes.func.isRequired
 }
 
 export default connect(

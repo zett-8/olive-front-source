@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-// import Auth from './hocs/auth'
+import Auth from './hocs/auth'
 import ErrorBoundary from './hocs/errorBoundary'
 import Header from './containers/headerContainer'
 import LandingPageContainer from './containers/landingPageContainer'
@@ -22,9 +22,11 @@ export default () => (
           <Route exact={true} path='/login' component={LoginPageContainer} />
           <Route exact={true} path='/new' component={NewPageContainer} />
           <Route exact={true} path='/popular' component={PopularContainer} />
-          <Route exact={true} path='/user/:id' component={UserContainer} />
           <Route exact={true} path='/artist/:id' component={ArtistContainer} />
           <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
+          <Auth>
+            <Route exact={true} path='/user/:id' component={UserContainer} />
+          </Auth>
         </React.Fragment>
       </BrowserRouter>
     {/*</Auth>*/}

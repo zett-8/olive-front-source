@@ -1,13 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import GuestRouter from '../guestRouter'
 
 class Auth extends React.Component {
+  componentDidMount() {
+    
+  }
+
   render() {
     if (this.props.loginStatus.token) return this.props.children
 
-    return <GuestRouter />
+    return <Redirect to='/' />
   }
 }
 

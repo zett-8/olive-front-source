@@ -6,7 +6,7 @@ import GuestRouter from '../guestRouter'
 
 class Auth extends React.Component {
   componentDidMount() {
-    
+
   }
 
   render() {

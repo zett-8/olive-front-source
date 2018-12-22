@@ -8,13 +8,12 @@ import { getUserDetail } from '../actions/userDetail'
 
 class UserPageContainer extends React.Component {
   componentDidMount() {
-    this.props.getUserDetail(this.props.match.params.id)
+    const ID = this.props.match.params.id
+
+    if (ID === this.props.loginStatus.user_id + '') this.props.getUserDetail(ID)
   }
 
   render() {
-    // login
-    if (!Object.keys(this.props.loginStatus).length) return <Redirect to='/'/>
-
     if (!Object.keys(this.props.userDetail).length) return null
 
     return (

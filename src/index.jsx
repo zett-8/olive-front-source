@@ -7,6 +7,9 @@ import store, { persistor } from './reducers/store'
 
 import Router from './router'
 
+import './styles/reset.css'
+import './styles/style.scss'
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>

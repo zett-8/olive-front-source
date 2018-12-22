@@ -18,15 +18,17 @@ export default () => (
       <BrowserRouter>
         <React.Fragment>
           <Route path='/' component={Header} />
-          <Route exact={true} path='/' component={LandingPageContainer}/>
-          <Route exact={true} path='/login' component={LoginPageContainer} />
-          <Route exact={true} path='/new' component={NewPageContainer} />
-          <Route exact={true} path='/popular' component={PopularContainer} />
-          <Route exact={true} path='/artist/:id' component={ArtistContainer} />
-          <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
-          <Auth>
-            <Route exact={true} path='/user/:id' component={UserContainer} />
-          </Auth>
+          <div id='contents'>
+            <Route exact={true} path='/' component={LandingPageContainer}/>
+            <Route exact={true} path='/login' component={LoginPageContainer} />
+            <Route exact={true} path='/new' component={NewPageContainer} />
+            <Route exact={true} path='/popular' component={PopularContainer} />
+            <Route exact={true} path='/artist/:id' component={ArtistContainer} />
+            <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
+            <Auth>
+              <Route exact={true} path='/user/:id' component={UserContainer} />
+            </Auth>
+          </div>
         </React.Fragment>
       </BrowserRouter>
     {/*</Auth>*/}

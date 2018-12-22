@@ -7,6 +7,9 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_WORKS:
       return action.payload
 
+    case actionTypes.GET_WORKS_OF_AN_ARTIST:
+      return action.payload
+
     default:
       return state
   }

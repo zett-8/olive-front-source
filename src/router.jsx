@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import Auth from './hocs/auth'
 import ErrorBoundary from './hocs/errorBoundary'
 import Header from './containers/headerContainer'
 import LandingPageContainer from './containers/landingPageContainer'
@@ -14,23 +13,20 @@ import DetailContainer from './containers/detailPageContainer'
 
 export default () => (
   <ErrorBoundary>
-    {/*<Auth>*/}
-      <BrowserRouter>
-        <React.Fragment>
-          <Route path='/' component={Header} />
-          <div id='contents'>
-            <Route exact={true} path='/' component={LandingPageContainer}/>
-            <Route exact={true} path='/login' component={LoginPageContainer} />
-            <Route exact={true} path='/new' component={NewPageContainer} />
-            <Route exact={true} path='/popular' component={PopularContainer} />
-            <Route exact={true} path='/artist/:id' component={ArtistContainer} />
-            <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
-            <Auth>
-              <Route exact={true} path='/user/:id' component={UserContainer} />
-            </Auth>
-          </div>
-        </React.Fragment>
-      </BrowserRouter>
-    {/*</Auth>*/}
+    <BrowserRouter>
+      <React.Fragment>
+        <Route path='/' component={Header} />
+        <div id='contents'>
+          <Route exact={true} path='/' component={LandingPageContainer}/>
+          <Route exact={true} path='/login' component={LoginPageContainer} />
+          <Route exact={true} path='/new' component={NewPageContainer} />
+          <Route exact={true} path='/popular' component={PopularContainer} />
+          <Route exact={true} path='/artist/:id' component={ArtistContainer} />
+          <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
+
+          <Route exact={true} path='/user/:id' component={UserContainer} />
+        </div>
+      </React.Fragment>
+    </BrowserRouter>
   </ErrorBoundary>
 )

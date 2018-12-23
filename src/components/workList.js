@@ -6,7 +6,7 @@ const workList = props => {
   return (
     <div id="workList">
       {props.works.map(w => (
-        <div>
+        <div key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>
             {w.name}
           </Link>

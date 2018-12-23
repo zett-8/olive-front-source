@@ -11,8 +11,9 @@ class ArtistPageContainer extends React.Component {
   componentDidMount() {
     const ID = this.props.match.params.id
 
-    this.props.getArtistDetail(ID)
-    this.props.getWorksOfAnArtist(ID)
+    let err
+    err = this.props.getArtistDetail(ID)
+    err = this.props.getWorksOfAnArtist(ID)
   }
 
   back = () => this.props.history.goBack()

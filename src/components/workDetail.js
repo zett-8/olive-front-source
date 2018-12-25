@@ -9,6 +9,13 @@ const workDetail = props => {
       <p>{props.detail.caption}</p>
       <p>{props.detail.price}</p>
       <Link to={`/artist/${props.detail.artist.user_id}`}>{props.detail.artist.artist_name}</Link>
+      {props.detail.sold ? (
+        <p>SOLD</p>
+      ) : (
+        <button type="button" onClick={props.buy}>
+          BUY
+        </button>
+      )}
       <p onClick={props.back}>back</p>
     </React.Fragment>
   )
@@ -20,7 +27,9 @@ workDetail.propTypes = {
     caption: PropTypes.string,
     price: PropTypes.number,
     artist: PropTypes.object,
+    sold: PropTypes.bool
   }),
+  buy: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
 }
 

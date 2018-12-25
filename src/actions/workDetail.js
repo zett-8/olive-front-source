@@ -14,3 +14,9 @@ export const getWorkDetail = (id) => dispatch => {
     })
     .catch(res => res)
 }
+
+export const buyWork = (buyerId, workId) => dispatch => {
+  return Api.buyWork(buyerId, workId)
+    .then(() => dispatch(getWorkDetail(buyerId)))
+    .catch(res => res)
+}

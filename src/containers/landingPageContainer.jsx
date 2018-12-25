@@ -19,3 +19,5 @@ export default connect(
     login: () => dispatch(login())
   })
 )(LandingPageContainer)
+
+// todo: feature message

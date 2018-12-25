@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NotificationSystem from 'react-notification-system'
 
 import LoginForm from '../components/loginForm'
+import FormValidation from '../utils/formValidation'
 import { login } from '../actions/loginStatus'
 
 class LoginPageContainer extends React.Component {
@@ -19,6 +20,18 @@ class LoginPageContainer extends React.Component {
 
   login = async e => {
     e.preventDefault()
+
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const message = FormValidation(this.state.email, this.state.password)
+    if (message) {
+      body.message = message
+      notification.addNotification(body)
+
+      return false
+    }
+
     const error = await this.props.login(this.state.email, this.state.password)
 
     if (!error) {
@@ -26,25 +39,9 @@ class LoginPageContainer extends React.Component {
       return
     }
 
-    const notification = this.notificationSystem.current
-
-    if (error.response.status === 404) {
-      notification.addNotification({
-        message: '存在しないユーザーです',
-        level: 'error',
-        autoDismiss: 2,
-        position: 'tc'
-      })
-    }
-
-    if (error.response.status === 400) {
-      notification.addNotification({
-        message: 'パスワードが違います',
-        level: 'error',
-        autoDismiss: 2,
-        position: 'tc'
-      })
-    }
+    if (error.response.status === 404) body.message = '存在しないユーザーです'
+    if (error.response.status === 400) body.message = 'パスワードが違います'
+    notification.addNotification(body)
   }
 
   handleInputChanged = e => this.setState({ [e.target.name]: e.target.value })

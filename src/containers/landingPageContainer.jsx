@@ -21,3 +21,6 @@ export default connect(
 )(LandingPageContainer)
 
 // todo: feature message
+// todo: feature edit buyer info
+// todo: feature edit artist info
+// todo: feature post work

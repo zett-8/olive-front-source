@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NotificationSystem from 'react-notification-system'
 
 import WorkDetail from '../components/workDetail'
+import Message from '../components/message'
 
 import { buyWork } from '../actions/workDetail'
 import { getWorkDetail } from '../actions/workDetail'
@@ -10,7 +11,11 @@ import { getWorkDetail } from '../actions/workDetail'
 class DetailPageContainer extends React.Component {
   constructor(props) {
     super(props)
+
     this.notificationSystem = React.createRef()
+    this.state = {
+      message: ''
+    }
   }
 
   componentDidMount() {
@@ -57,6 +62,9 @@ class DetailPageContainer extends React.Component {
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
         <WorkDetail detail={this.props.workDetail} buy={this.buy} back={this.back} />
+        {this.props.workDetail.sold && this.props.workDetail.buyer.user_id === this.props.loginStatus.user_id ? (
+          <Message />
+        ) : null}
       </React.Fragment>
     )
   }

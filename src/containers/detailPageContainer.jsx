@@ -7,6 +7,7 @@ import Message from '../components/message'
 
 import { buyWork } from '../actions/workDetail'
 import { getWorkDetail } from '../actions/workDetail'
+import { getMessages } from '../actions/messages'
 
 class DetailPageContainer extends React.Component {
   constructor(props) {
@@ -14,12 +15,17 @@ class DetailPageContainer extends React.Component {
 
     this.notificationSystem = React.createRef()
     this.state = {
-      message: ''
+      message: '',
     }
   }
 
-  componentDidMount() {
-    this.props.getDetail(this.props.match.params.id)
+  async componentWillMount() {
+    await this.props.getDetail(this.props.match.params.id)
+
+    if (this.props.workDetail.sold && this.props.workDetail.buyer.user_id === this.props.loginStatus.user_id) {
+      this.props.getMessages(this.props.workDetail.id)
+      this.setState({ bought: true })
+    }
   }
 
   buy = () => {
@@ -62,9 +68,7 @@ class DetailPageContainer extends React.Component {
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
         <WorkDetail detail={this.props.workDetail} buy={this.buy} back={this.back} />
-        {this.props.workDetail.sold && this.props.workDetail.buyer.user_id === this.props.loginStatus.user_id ? (
-          <Message />
-        ) : null}
+        {this.state.bought ? <Message /> : null}
       </React.Fragment>
     )
   }
@@ -78,5 +82,6 @@ export default connect(
   dispatch => ({
     buyWork: (buyerId, workId) => dispatch(buyWork(buyerId, workId)),
     getDetail: id => dispatch(getWorkDetail(id)),
+    getMessages: workId => dispatch(getMessages(workId))
   })
 )(DetailPageContainer)

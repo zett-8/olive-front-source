@@ -8,7 +8,10 @@ import { logout } from '../actions/loginStatus'
 class HeaderContainer extends React.Component {
   top = () => this.props.history.push('/')
 
-  logout = () => this.props.logout()
+  logout = () => {
+    this.props.logout()
+    this.props.history.push('/')
+  }
 
   render() {
     return (

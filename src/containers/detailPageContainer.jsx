@@ -23,14 +23,16 @@ class DetailPageContainer extends React.Component {
   async componentWillMount() {
     await this.props.getDetail(this.props.match.params.id)
 
-    if (this.props.workDetail.sold && this.props.workDetail.buyer.user_id === this.props.loginStatus.user_id) {
+    const w = this.props.workDetail, login = this.props.loginStatus
+
+    if (w.sold && (w.artist.user_id === login.user_id || w.buyer.user_id === login.user_id)) {
       this.props.getMessages(this.props.workDetail.id)
       this.setState({ bought: true })
     }
   }
 
   buy = () => {
-    // buyer情報が登録できていない
+    // buyer情報が登録できていない場合
     if (!this.props.loginStatus.buyer) {
       const notification = this.notificationSystem.current
 

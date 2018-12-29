@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import NotificationSystem from 'react-notification-system'
 
 import WorkDetail from '../components/workDetail'
-import Message from '../components/message'
+import Messages from '../components/messages'
 
 import { buyWork } from '../actions/workDetail'
 import { getWorkDetail } from '../actions/workDetail'
 import { getMessages } from '../actions/messages'
+import { sendMessage } from '../actions/messages'
 
 class DetailPageContainer extends React.Component {
   constructor(props) {
@@ -57,6 +58,26 @@ class DetailPageContainer extends React.Component {
     }
 
     const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.id)
+    this.setState({ bought: true })
+  }
+
+  handleInputChanged = e => {
+    e.preventDefault()
+    this.setState({ message: e.target.value })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const w = this.props.workDetail
+
+    this.props.sendMessage(
+      w.id,
+      this.props.loginStatus.user_id,
+      this.props.loginStatus.user_id === w.buyer.user_id ? w.artist.user_id : w.buyer.user_id,
+      this.state.message
+    )
+
+    this.setState({ message: '' })
   }
 
   back = () => this.props.history.goBack()
@@ -68,7 +89,14 @@ class DetailPageContainer extends React.Component {
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
         <WorkDetail detail={this.props.workDetail} buy={this.buy} back={this.back} />
-        {this.state.bought ? <Message /> : null}
+        {this.state.bought ? (
+          <Messages
+            messages={this.props.messages}
+            inputMessage={this.state.message}
+            handleInputChanged={this.handleInputChanged}
+            handleSubmit={this.handleSubmit}
+          />
+        ) : null}
       </React.Fragment>
     )
   }
@@ -78,10 +106,12 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     workDetail: state.workDetail,
+    messages: state.messages,
   }),
   dispatch => ({
     buyWork: (buyerId, workId) => dispatch(buyWork(buyerId, workId)),
     getDetail: id => dispatch(getWorkDetail(id)),
-    getMessages: workId => dispatch(getMessages(workId))
+    getMessages: workId => dispatch(getMessages(workId)),
+    sendMessage: (workId, sender, receiver, body) => dispatch(sendMessage(workId, sender, receiver, body)),
   })
 )(DetailPageContainer)

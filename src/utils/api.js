@@ -15,6 +15,8 @@ export default {
   getWorkDetail: id => axios.get(`${PATH[ENV]}/works/${id}/`),
   getWorksOfAnArtist: id => axios.get(`${PATH[ENV]}/works/?artist=${id}`),
   getMessages: workId => axios.get(`${PATH[ENV]}/messages/?work=${workId}`),
+  sendMessage: (workId, sender, receiver, body) =>
+    axios.post(`${PATH[ENV]}/messages/`, { work: workId, sender, receiver, body }),
   getUserDetail: id => axios.get(`${PATH[ENV]}/users/${id}/`),
   getArtistDetail: id => axios.get(`${PATH[ENV]}/artists/${id}/`),
 }

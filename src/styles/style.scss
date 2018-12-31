@@ -26,6 +26,7 @@ header{
 
 #workList{
   div{
+    margin-top: 20px;
     padding: 10px;
     border: solid 1px #454545;
   }
@@ -33,4 +34,9 @@ header{
 
 #messages{
   margin-top: 50px;
+}
+
+#selectors{
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

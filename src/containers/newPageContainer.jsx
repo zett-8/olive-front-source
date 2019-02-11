@@ -15,8 +15,7 @@ class NewPageContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <p>New Works</p>
-        <Selectors />
+        {/*<Selectors />*/}
         <WorkList works={this.props.works}/>
       </React.Fragment>
     )

@@ -1,0 +1,22 @@
+.nav {
+
+  grid-column: col-start / col-end;
+
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  align-items: center;
+
+  font-size: 1.8rem;
+  font-weight: 500;
+
+  padding-bottom: 5rem;
+
+  &__right {
+    justify-self: end;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $color-basic;
+  }
+}

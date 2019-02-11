@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import ErrorBoundary from './hocs/errorBoundary'
 import Header from './containers/headerContainer'
+import Footer from './components/footer'
 import LandingPageContainer from './containers/landingPageContainer'
 import LoginPageContainer from './containers/loginPageContainer'
 import NewPageContainer from './containers/newPageContainer'
@@ -16,7 +17,7 @@ export default () => (
     <BrowserRouter>
       <React.Fragment>
         <Route path='/' component={Header} />
-        <div id='contents'>
+        <div className='contents'>
           <Route exact={true} path='/' component={LandingPageContainer}/>
           <Route exact={true} path='/login' component={LoginPageContainer} />
           <Route exact={true} path='/new' component={NewPageContainer} />
@@ -26,6 +27,7 @@ export default () => (
 
           <Route exact={true} path='/user/:id' component={UserContainer} />
         </div>
+        <Route path='/' component={Footer} />
       </React.Fragment>
     </BrowserRouter>
   </ErrorBoundary>

@@ -1,0 +1,23 @@
+.footer {
+  grid-column: col-start / col-end;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.4rem;
+
+  margin-top: 7rem;
+  padding-bottom: 6rem;
+
+  &__menu {
+    font-weight: 400;
+
+    display: flex;
+    p { margin-right: 2rem; }
+  }
+
+  &__copy {
+    color: #777;
+  }
+}

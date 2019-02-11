@@ -4,35 +4,25 @@ import PropTypes from 'prop-types'
 
 export const header = props => {
   return (
-    <header>
+    <header className="nav">
+      <div className="nav__left">
+        <Link className="nav__link" to="/popular">Popular</Link>
+        <Link className="nav__link" to="/new">New</Link>
+        {props.loggedIn ? <p>review</p> : null}
+      </div>
+
       <h1 onClick={props.handleLogoClicked}>Olive</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/popular">Popular</Link>
-          </li>
-          <li>
-            <Link to="/new">New</Link>
-          </li>
-          {props.loggedIn ? (
-            <React.Fragment>
-              <li>
-                <p>review</p>
-              </li>
-              <li>
-                <Link to={`/user/${props.userId}`}>account</Link>
-              </li>
-              <li>
-                <p onClick={props.handleLogout}>Logout</p>
-              </li>
-            </React.Fragment>
-          ) : (
-            <li>
-              <Link to="/login">login</Link>
-            </li>
-          )}
-        </ul>
-      </nav>
+
+      <div className="nav__right">
+        {props.loggedIn ? (
+          <React.Fragment>
+            <Link className="nav__link" to={`/user/${props.userId}`}>account</Link>
+            <p onClick={props.handleLogout}>Logout</p>
+          </React.Fragment>
+        ) : (
+          <Link className="nav__link" to="/login">login</Link>
+        )}
+      </div>
     </header>
   )
 }

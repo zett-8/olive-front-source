@@ -6,8 +6,8 @@ export const header = props => {
   return (
     <header className="nav">
       <div className="nav__left">
-        <Link className="nav__link" to="/popular">Popular</Link>
-        <Link className="nav__link" to="/new">New</Link>
+        <p><Link className="nav__link" to="/popular">Popular</Link></p>
+        <p><Link className="nav__link" to="/new">New</Link></p>
         {props.loggedIn ? <p>review</p> : null}
       </div>
 
@@ -16,11 +16,10 @@ export const header = props => {
       <div className="nav__right">
         {props.loggedIn ? (
           <React.Fragment>
-            <Link className="nav__link" to={`/user/${props.userId}`}>account</Link>
-            <p onClick={props.handleLogout}>Logout</p>
+            <p><Link className="nav__link" to={`/user/${props.userId}`}>account</Link></p>
           </React.Fragment>
         ) : (
-          <Link className="nav__link" to="/login">login</Link>
+          <p><Link className="nav__link" to="/login">login</Link></p>
         )}
       </div>
     </header>
@@ -31,7 +30,6 @@ header.propTypes = {
   loggedIn: PropTypes.bool,
   userId: PropTypes.number,
   handleLogoClicked: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
 }
 
 export default header

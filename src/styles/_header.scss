@@ -11,8 +11,17 @@
 
   padding-bottom: 5rem;
 
+  &__left {
+    display: flex;
+    justify-self: start;
+    P { margin-right: 2rem; }
+  }
+
   &__right {
     justify-self: end;
+
+    display: flex;
+    P { margin-left: 2rem; }
   }
 
   &__link {

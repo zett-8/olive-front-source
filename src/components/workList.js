@@ -16,8 +16,6 @@ const workList = props => {
         </div>
       ))}
 
-      {/ *currently repeating */}
-
       {props.works.map(w => (
         <div className="work" key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>

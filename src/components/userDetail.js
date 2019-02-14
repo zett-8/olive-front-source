@@ -36,6 +36,8 @@ const userDetail = props => {
           </div>
         )
       }
+
+      <p onClick={props.handleLogout}>Logout</p>
     </React.Fragment>
   )
 }
@@ -51,7 +53,8 @@ userDetail.propTypes = {
       artist_name: PropTypes.string,
       place: PropTypes.string
     })
-  })
+  }),
+  handleLogout: PropTypes.func.isRequired
 }
 
 export default userDetail

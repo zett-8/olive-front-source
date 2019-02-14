@@ -35,7 +35,13 @@ module.exports = {
               presets: ['env', 'react'],
               plugins: ['transform-class-properties']
             }
-          }
+          },
+          // {
+          //   loader: 'react-svg-loader',
+          //   options: {
+          //     jsx: true // true outputs JSX tags
+          //   }
+          // }
         ]
       },
       {

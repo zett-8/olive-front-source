@@ -28,4 +28,11 @@
     text-decoration: none;
     color: $color-basic;
   }
+
+  svg {
+    height: 2.5rem;
+    fill: #fff;
+    stroke-width: 6rem;
+    stroke: black;
+  }
 }

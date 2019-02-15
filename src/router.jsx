@@ -10,7 +10,8 @@ import NewPageContainer from './containers/newPageContainer'
 import PopularContainer from './containers/popularPageContainer'
 import UserContainer from './containers/userPageContainer'
 import ArtistContainer from './containers/artistPageContainer'
-import DetailContainer from './containers/detailPageContainer'
+import WorkDetailContainer from './containers/WorkdetailPageContainer'
+import DealContainer from './containers/dealPageContainer'
 
 export default () => (
   <ErrorBoundary>
@@ -23,7 +24,8 @@ export default () => (
           <Route exact={true} path='/new' component={NewPageContainer} />
           <Route exact={true} path='/popular' component={PopularContainer} />
           <Route exact={true} path='/artist/:id' component={ArtistContainer} />
-          <Route exact={true} path='/work/:id/detail' component={DetailContainer} />
+          <Route exact={true} path='/work/:id/detail' component={WorkDetailContainer} />
+          <Route exact={true} path='/work/:id/deal/:artist_id/:buyer_id' component={DealContainer} />
 
           <Route exact={true} path='/user/:id' component={UserContainer} />
         </div>

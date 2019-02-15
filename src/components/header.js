@@ -29,13 +29,18 @@ export const header = props => {
         {props.loggedIn ? (
           <React.Fragment>
             <p>
-              <Link className="nav__link" to={`/user/${props.userId}`}>
-                <FavoriteIMG className="account" alt="account" />
+              <Link className="nav__link" to="/">
+                <SearchIMG alt="search" />
+              </Link>
+            </p>
+            <p>
+              <Link className="nav__link" to="/">
+                <FavoriteIMG alt="favorite" />
               </Link>
             </p>
             <p>
               <Link className="nav__link" to={`/user/${props.userId}`}>
-                <AccountIMG className="account" alt="account" />
+                <AccountIMG alt="account" />
               </Link>
             </p>
           </React.Fragment>

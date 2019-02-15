@@ -32,8 +32,8 @@ const workDetail = props => {
           <p>SOLD</p>
         )
       ) : (
-        <button type="button" onClick={props.buy}>
-          BUY
+        <button className="btn btn__buy" type="button" onClick={props.buy}>
+          Buy
         </button>
       )}
       <p onClick={props.back}>back</p>

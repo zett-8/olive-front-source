@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NotificationSystem from 'react-notification-system'
 
 import LoginForm from '../components/loginForm'
+import SignUpForm from '../components/signUpForm'
 import FormValidation from '../utils/formValidation'
 import { login } from '../actions/loginStatus'
 
@@ -15,7 +16,16 @@ class LoginPageContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
+      login: true,
     }
+  }
+
+  switch = () => {
+    this.setState({ login: !this.state.login })
+  }
+
+  signUp = async e => {
+    e.preventDefault()
   }
 
   login = async e => {
@@ -50,12 +60,23 @@ class LoginPageContainer extends React.Component {
     return (
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
-        <LoginForm
-          login={this.login}
-          handleInputChanged={this.handleInputChanged}
-          email={this.state.email}
-          password={this.state.password}
-        />
+        {this.state.login ? (
+          <LoginForm
+            login={this.login}
+            handleInputChanged={this.handleInputChanged}
+            email={this.state.email}
+            password={this.state.password}
+            handleSwitch={this.switch}
+          />
+        ) :
+          <SignUpForm
+            signUp={this.signUp}
+            handleInputChanged={this.handleInputChanged}
+            email={this.state.email}
+            password={this.state.password}
+            handleSwitch={this.switch}
+          />
+        }
       </React.Fragment>
     )
   }

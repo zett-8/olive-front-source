@@ -45,6 +45,15 @@ body {
   &__buy { width: 8rem; }
 
   &__send { width: 22rem; }
+
+  &__login { width: 30rem; }
+
+  &__switch {
+    background-color: white;
+    color: $color-basic;
+    border: black 0.05rem solid;
+    width: 30rem;
+  }
 }
 
 .input {

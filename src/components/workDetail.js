@@ -6,15 +6,17 @@ const workDetail = props => {
   return (
     <React.Fragment>
       <p className="workDetail__mainImage">
-        <img src={props.detail.images[0].url} alt="work image1" />
+        <img ref={props.mainImageRef} src={props.detail.images[0].url} alt="work image1" />
       </p>
-      {props.detail.images.map((img, idx) => {
-        return (
-          <p key={img.id} className="workDetail__subImage">
-            <img src={props.detail.images[idx].url} alt={`sub img${idx + 1}`} />
-          </p>
-        )
-      })}
+      {props.detail.images.map((img, idx) => (
+        <p key={img.id} className="workDetail__subImage">
+          <img
+            src={props.detail.images[idx].url}
+            alt={`sub img${idx + 1}`}
+            onClick={() => props.changeMainImage(props.detail.images[idx].url)}
+          />
+        </p>
+      ))}
       <p>{props.detail.name}</p>
       <p>{props.detail.caption}</p>
       <p>{props.detail.price}</p>
@@ -55,6 +57,10 @@ workDetail.propTypes = {
   buy: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
   bought: PropTypes.bool,
+  mainImageRef: PropTypes.shape({
+    current: PropTypes.object
+  }),
+  changeMainImage: PropTypes.func.isRequired
 }
 
 export default workDetail

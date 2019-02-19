@@ -7,6 +7,7 @@ import UserDetailPrime from '../components/userDetail_prime'
 import Uploader from '../components/uploader'
 
 import { getUserDetail } from '../actions/userDetail'
+import { uploadUserIcon } from '../actions/userDetail'
 import { logout } from '../actions/loginStatus'
 
 class UserPageContainer extends React.Component {
@@ -17,7 +18,7 @@ class UserPageContainer extends React.Component {
     this.iconRef = React.createRef()
     this.fileSelectButtonRef = React.createRef()
     this.state = {
-      iconImage: '',
+      iconImage: null,
       tab: 0,
     }
   }
@@ -42,13 +43,16 @@ class UserPageContainer extends React.Component {
     const f = e.target.files
     const url = f.length === 0 ? '' : this.createObjectURL(f[0])
 
-    this.setState({ iconImage: url })
+    this.setState({ iconImage: f[0] })
     this.iconRef.current.src = url
   }
 
   upload = e => {
     e.preventDefault()
 
+    if (this.state.iconImage === null) return
+
+    const err = this.props.uploadUserIcon(this.props.loginStatus.user_id, this.state.iconImage)
   }
 
   tabContents = () => {
@@ -96,5 +100,6 @@ export default connect(
   dispatch => ({
     logout: () => dispatch(logout()),
     getUserDetail: id => dispatch(getUserDetail(id)),
+    uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon))
   })
 )(UserPageContainer)

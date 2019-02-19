@@ -13,5 +13,10 @@ export default {
   sendMessage: (workId, sender, receiver, body) =>
     axios.post(`${PATH}/v1/messages/`, { work: workId, sender, receiver, body }),
   getUserDetail: id => axios.get(`${PATH}/v1/userDetails/${id}/`),
+  uploadUserIcon: (id, icon) => {
+    const params = new FormData()
+    params.append('icon', icon)
+    return axios.patch(`${PATH}/v1/userDetails/${id}/`, params)
+  },
   getArtistDetail: id => axios.get(`${PATH}/v1/artists/${id}/`),
 }

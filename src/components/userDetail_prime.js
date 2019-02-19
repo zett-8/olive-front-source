@@ -15,7 +15,7 @@ const userDetailPrime = props => {
 
         <button type="button" onClick={props.fileSelectClicked}>Upload new picture</button>
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.imageChange} />
-        <button type="submit" onSubmit={props.upload}>save</button>
+        <button type="submit" onClick={props.upload}>save</button>
       </div>
       <div>
         <p>Email</p>

@@ -5,6 +5,8 @@ import NotificationSystem from 'react-notification-system'
 import LoginForm from '../components/loginForm'
 import SignUpForm from '../components/signUpForm'
 import FormValidation from '../utils/formValidation'
+
+import { signUp } from '../actions/loginStatus'
 import { login } from '../actions/loginStatus'
 
 class LoginPageContainer extends React.Component {
@@ -26,6 +28,27 @@ class LoginPageContainer extends React.Component {
 
   signUp = async e => {
     e.preventDefault()
+
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const message = FormValidation(this.state.email, this.state.password)
+    if (message) {
+      body.message = message
+      notification.addNotification(body)
+
+      return false
+    }
+
+    const error = await this.props.signUp(this.state.email, this.state.password)
+
+    if (!error) {
+      console.log('OK')
+      return
+    }
+
+    if (error.response.status === 404) body.message = 'すでに登録されているユーザーです'
+    notification.addNotification(body)
   }
 
   login = async e => {
@@ -68,7 +91,7 @@ class LoginPageContainer extends React.Component {
             password={this.state.password}
             handleSwitch={this.switch}
           />
-        ) :
+        ) : (
           <SignUpForm
             signUp={this.signUp}
             handleInputChanged={this.handleInputChanged}
@@ -76,7 +99,7 @@ class LoginPageContainer extends React.Component {
             password={this.state.password}
             handleSwitch={this.switch}
           />
-        }
+        )}
       </React.Fragment>
     )
   }
@@ -85,6 +108,7 @@ class LoginPageContainer extends React.Component {
 export default connect(
   null,
   dispatch => ({
+    signUp: (email, password) => dispatch(signUp(email, password)),
     login: (email, password) => dispatch(login(email, password)),
   })
 )(LoginPageContainer)

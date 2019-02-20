@@ -1,21 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const artistDetail = props => (
-  <div>
-    <h3>artist detail</h3>
-    <p>
-      <img src={props.detail.icon} alt="artist" />
-    </p>
-    {props.myself ? <p>EDIT</p> : null}
-    <p>{props.detail.artist_name}</p>
-    <p // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
-      onClick={props.back}
-    >
-      back
-    </p>
-  </div>
-)
+import pathRetriever from '../utils/pathRetriever'
+
+const artistDetail = props => {
+  const PATH = pathRetriever()
+
+  return (
+    <div>
+      <h3>artist detail</h3>
+      <p>
+        <img src={PATH + props.detail.icon} alt="artist" />
+      </p>
+      {props.myself ? <p>EDIT</p> : null}
+      <p>{props.detail.artist_name}</p>
+      <p // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+        onClick={props.back}
+      >
+        back
+      </p>
+    </div>
+  )
+}
 
 artistDetail.propTypes = {
   detail: PropTypes.shape({

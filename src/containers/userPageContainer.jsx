@@ -53,6 +53,8 @@ class UserPageContainer extends React.Component {
     if (this.state.iconImage === null) return
 
     const err = this.props.uploadUserIcon(this.props.loginStatus.user_id, this.state.iconImage)
+
+    this.setState({ iconImage: null })
   }
 
   tabContents = () => {

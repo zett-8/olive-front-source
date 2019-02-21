@@ -22,6 +22,10 @@ body {
   line-height: 1.6;
 }
 
+a {
+  text-decoration: none;
+  color: $color-basic;
+}
 
 #root {
   padding-top: 2rem;

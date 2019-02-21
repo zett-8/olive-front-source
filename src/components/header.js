@@ -8,7 +8,7 @@ import SearchIMG from 'react-svg-loader!../assets/search.svg' // eslint-disable-
 
 export const header = props => {
   return (
-    <header className="nav">
+    <React.Fragment>
       <div className="nav__left">
         <p>
           <Link className="nav__link" to="/popular">
@@ -27,6 +27,7 @@ export const header = props => {
 
       <div className="nav__right">
         {props.loggedIn ? (
+          // while login
           <React.Fragment>
             <p>
               <Link className="nav__link" to="/">
@@ -45,14 +46,20 @@ export const header = props => {
             </p>
           </React.Fragment>
         ) : (
-          <p>
-            <Link className="nav__link" to="/login">
-              <AccountIMG className="account" alt="account" />
-            </Link>
-          </p>
+          // while not login
+          <React.Fragment>
+            <p onClick={props.openModal}>
+              <SearchIMG alt="search" />
+            </p>
+            <p>
+              <Link className="nav__link" to="/login">
+                <AccountIMG className="account" alt="account" />
+              </Link>
+            </p>
+          </React.Fragment>
         )}
       </div>
-    </header>
+    </React.Fragment>
   )
 }
 
@@ -60,6 +67,7 @@ header.propTypes = {
   loggedIn: PropTypes.bool,
   userId: PropTypes.number,
   handleLogoClicked: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired
 }
 
 export default header

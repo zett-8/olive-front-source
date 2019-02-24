@@ -29,10 +29,8 @@ export const header = props => {
         {props.loggedIn ? (
           // while login
           <React.Fragment>
-            <p>
-              <Link className="nav__link" to="/">
-                <SearchIMG alt="search" />
-              </Link>
+            <p onClick={props.openModal}>
+              <SearchIMG alt="search" />
             </p>
             <p>
               <Link className="nav__link" to="/">

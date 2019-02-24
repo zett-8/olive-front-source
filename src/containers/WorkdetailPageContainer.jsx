@@ -4,7 +4,7 @@ import NotificationSystem from 'react-notification-system'
 
 import WorkDetail from '../components/workDetail'
 
-import { buyWork } from '../actions/workDetail'
+import { buyWork, toggleFavorite } from '../actions/workDetail'
 import { getWorkDetail } from '../actions/workDetail'
 
 class WorkdetailPageContainer extends React.Component {
@@ -25,6 +25,10 @@ class WorkdetailPageContainer extends React.Component {
     if (w.sold && (w.artist.user_id === login.user_id || w.buyer.user_id === login.user_id)) {
       this.setState({ bought: true })
     }
+  }
+
+  toggleFavorite = () => {
+    const err = this.props.toggleFavorite(this.props.workDetail.id, this.props.loginStatus.user_id)
   }
 
   buy = () => {
@@ -61,7 +65,7 @@ class WorkdetailPageContainer extends React.Component {
 
   back = () => this.props.history.goBack()
 
-  changeMainImage = (url) => this.mainImageRef.current.src = url
+  changeMainImage = url => (this.mainImageRef.current.src = url)
 
   render() {
     if (!Object.keys(this.props.workDetail).length) return null
@@ -70,8 +74,10 @@ class WorkdetailPageContainer extends React.Component {
       <div className="workDetail">
         <NotificationSystem ref={this.notificationSystem} />
         <WorkDetail
+          self={this.props.loginStatus}
           detail={this.props.workDetail}
           buy={this.buy}
+          toggleFavorite={this.toggleFavorite}
           back={this.back}
           bought={this.state.bought}
           mainImageRef={this.mainImageRef}
@@ -89,6 +95,7 @@ export default connect(
   }),
   dispatch => ({
     buyWork: (buyerId, workId) => dispatch(buyWork(buyerId, workId)),
+    toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getDetail: id => dispatch(getWorkDetail(id)),
   })
 )(WorkdetailPageContainer)

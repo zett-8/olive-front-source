@@ -23,6 +23,15 @@ const workDetail = props => {
       <p>
         <Link to={`/artist/${props.detail.artist.user_id}`}>{props.detail.artist.artist_name}</Link>
       </p>
+      {props.detail.favorite_users.indexOf(props.self.user_id) === -1 ? (
+        <button className="btn btn_favorite" type="button" onClick={props.toggleFavorite}>
+          Favorite
+        </button>
+      ) : (
+        <button className="btn btn_favorite" type="button" onClick={props.toggleFavorite}>
+          UnFavorite
+        </button>
+      )}
       {props.detail.sold ? ( // eslint-disable-line
         props.bought ? (
           <p>
@@ -44,6 +53,9 @@ const workDetail = props => {
 }
 
 workDetail.propTypes = {
+  self: PropTypes.shape({
+    user_id: PropTypes.number,
+  }),
   detail: PropTypes.shape({
     id: PropTypes.number,
     images: PropTypes.array,
@@ -53,14 +65,16 @@ workDetail.propTypes = {
     artist: PropTypes.object,
     buyer: PropTypes.object,
     sold: PropTypes.bool,
+    favorite_users: PropTypes.arrayOf(PropTypes.number),
   }),
   buy: PropTypes.func.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
   back: PropTypes.func.isRequired,
   bought: PropTypes.bool,
   mainImageRef: PropTypes.shape({
-    current: PropTypes.object
+    current: PropTypes.object,
   }),
-  changeMainImage: PropTypes.func.isRequired
+  changeMainImage: PropTypes.func.isRequired,
 }
 
 export default workDetail

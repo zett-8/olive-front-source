@@ -6,6 +6,12 @@ const PATH = pathRetriever() + '/api'
 export default {
   signUp: (email, password) => axios.post(`${PATH}/v1/users/`, { email, password }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
+  toggleFavorite: (work, user) =>
+    axios.post(`${PATH}/v1/favorites/`, JSON.stringify({ work, user }), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }),
   buyWork: (buyerId, workId) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerId }),
   getWorks: () => axios.get(`${PATH}/v1/works/`),
   getWorkDetail: id => axios.get(`${PATH}/v1/works/${id}/`),

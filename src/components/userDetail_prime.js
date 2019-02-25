@@ -1,20 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import pathRetriever from '../utils/pathRetriever'
 
 const userDetailPrime = props => {
-  const PATH = pathRetriever()
-
   return (
     <React.Fragment>
       <div>
         <p>
-          <img ref={props.iconRef} src={PATH + props.detail.icon} alt="" />
+          <img ref={props.iconRef} src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="" />
         </p>
 
-        <button type="button" onClick={props.fileSelectClicked}>Upload new picture</button>
-        <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.imageChange} />
+        <button type="button" onClick={props.userIconSelectBtnClicked}>Upload new picture</button>
+        <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
         <button type="submit" onClick={props.upload}>save</button>
       </div>
       <div>
@@ -30,8 +27,8 @@ const userDetailPrime = props => {
 }
 
 userDetailPrime.propTypes = {
-  imageChange: PropTypes.func.isRequired,
-  fileSelectClicked: PropTypes.func.isRequired,
+  userIconSelected: PropTypes.func.isRequired,
+  userIconSelectBtnClicked: PropTypes.func.isRequired,
   upload: PropTypes.func.isRequired,
   self: PropTypes.shape({
     email: PropTypes.string,

@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import pathRetriever from '../utils/pathRetriever'
-
 const artistDetail = props => {
-  const PATH = pathRetriever()
-
   return (
     <div>
       <h3>artist detail</h3>
       <p>
-        <img src={PATH + props.detail.icon} alt="artist" />
+
+        <img src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="artist" />
       </p>
       {props.myself ? <p>EDIT</p> : null}
       <p>{props.detail.artist_name}</p>

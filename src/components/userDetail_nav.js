@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 
 const userDetailNav = props => {
   return (
-    <div>
+    <React.Fragment>
       <p onClick={() => props.navClicked(0)}>prime</p>
-      <p onClick={() => props.navClicked(1)}>other</p>
-    </div>
+      <p onClick={() => props.navClicked(1)}>upload</p>
+      <p onClick={() => props.navClicked(2)}>other</p>
+    </React.Fragment>
   )
 }
 

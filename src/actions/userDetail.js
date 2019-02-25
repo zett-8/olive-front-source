@@ -18,11 +18,6 @@ export const getUserDetail = id => dispatch => {
 
 export const uploadUserIcon = (id, icon) => dispatch => {
   return Api.uploadUserIcon(id, icon)
-    .then(res => {
-      dispatch({
-        type: actionTypes.UPLOAD_USER_ICON,
-        payload: res.data
-      })
-    })
+    .then(() => dispatch(getUserDetail(id)))
     .catch(res => res)
 }

@@ -16,6 +16,15 @@ export const getWorkDetail = (id) => dispatch => {
     .catch(res => res)
 }
 
+export const uploadWork = work => () => {
+  console.log(work)
+  return Api.uploadWork(work)
+    .then(() => {
+      console.log('uploaded')
+    })
+    .catch(res => res)
+}
+
 export const buyWork = (buyerId, workId) => dispatch => {
   return Api.buyWork(buyerId, workId)
     .then(() => dispatch(getWorkDetail(workId)))

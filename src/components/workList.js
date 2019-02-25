@@ -8,7 +8,7 @@ const workList = props => {
       {props.works.map(w => (
         <div className="work" key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>
-            <img src={w.images[0].url} alt="sample" />
+            <img src={w.image1} alt="sample" />
           </Link>
           <p>
             {w.name}
@@ -19,7 +19,7 @@ const workList = props => {
       {props.works.map(w => (
         <div className="work" key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>
-            <img src={w.images[0].url} alt="sample" />
+            <img src={w.image1} alt="sample" />
           </Link>
           <p>
             {w.name}
@@ -31,7 +31,11 @@ const workList = props => {
 }
 
 workList.propTypes = {
-  works: PropTypes.arrayOf(PropTypes.object),
+  works: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image1: PropTypes.string
+  })),
 }
 
 export default workList

@@ -6,17 +6,31 @@ const workDetail = props => {
   return (
     <React.Fragment>
       <p className="workDetail__mainImage">
-        <img ref={props.mainImageRef} src={props.detail.images[0].url} alt="work image1" />
+        <img
+          ref={props.mainImageRef}
+          src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.image1}
+          alt="work image1"
+        />
       </p>
-      {props.detail.images.map((img, idx) => (
-        <p key={img.id} className="workDetail__subImage">
-          <img
-            src={props.detail.images[idx].url}
-            alt={`sub img${idx + 1}`}
-            onClick={() => props.changeMainImage(props.detail.images[idx].url)}
-          />
-        </p>
-      ))}
+
+      {['1', '2', '3', '4', '5'].map(n => {
+        if (props.detail['image' + n] !== null) {
+          return (
+            <p key={n} className="workDetail__subImage">
+              <img
+                src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail['image' + n]}
+                alt={'sub img' + n}
+                onClick={() =>
+                  props.changeMainImage(
+                    (process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail['image' + n]
+                  )
+                }
+              />
+            </p>
+          )
+        }
+      })}
+
       <p>{props.detail.name}</p>
       <p>{props.detail.caption}</p>
       <p>{props.detail.price}</p>
@@ -58,7 +72,11 @@ workDetail.propTypes = {
   }),
   detail: PropTypes.shape({
     id: PropTypes.number,
-    images: PropTypes.array,
+    image1: PropTypes.string,
+    image2: PropTypes.string,
+    image3: PropTypes.string,
+    image4: PropTypes.string,
+    image5: PropTypes.string,
     name: PropTypes.string,
     caption: PropTypes.string,
     price: PropTypes.number,
@@ -74,7 +92,7 @@ workDetail.propTypes = {
   mainImageRef: PropTypes.shape({
     current: PropTypes.object,
   }),
-  changeMainImage: PropTypes.func.isRequired,
+  // changeMainImage: PropTypes.func.isRequired,
 }
 
 export default workDetail

@@ -3,14 +3,12 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const workDetail = props => {
+  const circumstantialUrl = process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null
+
   return (
     <React.Fragment>
       <p className="workDetail__mainImage">
-        <img
-          ref={props.mainImageRef}
-          src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.image1}
-          alt="work image1"
-        />
+        <img ref={props.mainImageRef} src={circumstantialUrl + props.detail.image1} alt="work image1" />
       </p>
 
       {['1', '2', '3', '4', '5'].map(n => {
@@ -18,13 +16,9 @@ const workDetail = props => {
           return (
             <p key={n} className="workDetail__subImage">
               <img
-                src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail['image' + n]}
+                src={circumstantialUrl + props.detail['image' + n]}
                 alt={'sub img' + n}
-                onClick={() =>
-                  props.changeMainImage(
-                    (process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail['image' + n]
-                  )
-                }
+                onClick={() => props.changeMainImage(circumstantialUrl + props.detail['image' + n])}
               />
             </p>
           )
@@ -92,7 +86,6 @@ workDetail.propTypes = {
   mainImageRef: PropTypes.shape({
     current: PropTypes.object,
   }),
-  // changeMainImage: PropTypes.func.isRequired,
 }
 
 export default workDetail

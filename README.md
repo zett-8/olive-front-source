@@ -19,7 +19,7 @@ cd olive-front/
 
 <br>
 
-#### 3/4 - Set up pre-push.sh
+#### 2/4 - Set up pre-push.sh
 ```terminal
 cp pre-push ./.git/hooks/
 
@@ -29,10 +29,26 @@ chmod a+x ./.git/hooks/pre-push
 **※使ってるエディターでEslintの設定を必ずしてください**  
 
 
+<br>
+
+#### 3/4 - install dependencies
+```terminal
+yarn 
+
+or
+
+npm install
+```
+
 <br />
 
 #### 4/4 - Start
+npm run [サーバー環境]で起動
 ```terminal
+npm run local
+
+or
+
 npm run dev
 ```
 

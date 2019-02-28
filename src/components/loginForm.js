@@ -9,7 +9,7 @@ const loginForm = props => (
         <input className="input" name="email" placeholder="Email" value={props.email} onChange={props.handleInputChanged} />
       </label>
       <label htmlFor="password">
-        <input className="input" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
+        <input className="input" type="password" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
       </label>
       <p>forget password?</p>
       <button className="btn btn__login" type="submit">Login</button>

@@ -18,6 +18,7 @@ class LoginPageContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
+      invitation: '',
       login: true,
     }
   }
@@ -97,6 +98,7 @@ class LoginPageContainer extends React.Component {
             handleInputChanged={this.handleInputChanged}
             email={this.state.email}
             password={this.state.password}
+            invitation={this.state.invitation}
             handleSwitch={this.switch}
           />
         )}

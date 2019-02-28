@@ -9,6 +9,12 @@ import SearchIMG from 'react-svg-loader!../assets/search.svg' // eslint-disable-
 export const header = props => {
   return (
     <React.Fragment>
+      <div // eslint-disable-line
+        onClick={props.burgerToggleClicked}
+        className="nav__toggleButton"
+      >
+        <button type="button" />
+      </div>
       <div className="nav__left">
         <p>
           <Link className="nav__link" to="/popular">
@@ -65,7 +71,8 @@ header.propTypes = {
   loggedIn: PropTypes.bool,
   userId: PropTypes.number,
   handleLogoClicked: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired
+  burgerToggleClicked: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 }
 
 export default header

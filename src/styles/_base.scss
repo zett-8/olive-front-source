@@ -1,6 +1,14 @@
+
+// basic
 $color-basic: #030303;
 $font-basic: 'Avenir Next';
 $font-button: 'Helvetica Neue';
+
+// responsive breakpoints
+$bp-largest: 75em; // 1200px
+$bp-large: 62.5em; // 1000px
+$bp-medium: 50em; // 800px
+$bp-small: 37.5em; //600px
 
 *,
 *::before,
@@ -32,6 +40,10 @@ a {
   display: grid;
   grid-template-rows: 10rem min-content 5rem;
   grid-template-columns: [full-start] minmax(2rem, 4rem) [col-start] minmax(min-content, 1fr) [col-end] minmax(2rem, 4rem) [full-end];
+
+  @media only screen and (max-width: $bp-small) {
+    grid-template-columns: [full-start] minmax(1rem, 2rem) [col-start] minmax(min-content, 1fr) [col-end] minmax(1rem, 2rem) [full-end];
+  }
 }
 
 

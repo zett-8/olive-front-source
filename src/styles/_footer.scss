@@ -10,14 +10,23 @@
   margin-top: 7rem;
   padding-bottom: 6rem;
 
+  @media only screen and (max-width: $bp-small) {
+    justify-content: center;
+  }
+
   &__menu {
     font-weight: 400;
 
     display: flex;
     p { margin-right: 2rem; }
+
+    @media only screen and (max-width: $bp-small) {
+      display: none;
+    }
   }
 
   &__copy {
     color: #777;
   }
+
 }

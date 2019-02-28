@@ -1,6 +1,7 @@
 .nav {
-
+  z-index: 10;
   grid-column: col-start / col-end;
+  grid-row: 1 / 2;
 
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
@@ -9,12 +10,48 @@
   font-size: 1.8rem;
   font-weight: 500;
 
-  padding-bottom: 5rem;
+  margin-bottom: 5rem;
+
+  &__toggleButton {
+    display: none;
+
+    @media only screen and (max-width: $bp-small) {
+      display: block;
+      width: 2rem;
+
+      button {
+        display: block;
+        border: none;
+        border-radius: 0;
+
+        background-color: #030303;
+        height: 1px;
+        width: 2rem;
+
+        margin-top: 14px;
+        margin-bottom: 4px;
+
+        &::before {
+          background-color: #030303;
+          height: 1px;
+          width: 2rem;
+          content: "";
+          display: block;
+
+          transform: translateY(-1rem);
+        }
+      }
+    }
+  }
 
   &__left {
     display: flex;
     justify-self: start;
     P { margin-right: 2rem; }
+
+    @media only screen and (max-width: $bp-small) {
+      display: none;
+    }
   }
 
   &__right {
@@ -30,4 +67,37 @@
     stroke-width: 6rem;
     stroke: black;
   }
+}
+
+
+.down-menu {
+  display: block;
+  background-color: white;
+  font-size: 1.8rem;
+  transition: all 300ms 0s ease;
+
+  width: 100%;
+
+  z-index: 2;
+  transform: translateY(-450px);
+
+  grid-column: col-start / col-end;
+  grid-row: 1 / 2;
+
+  p {
+    margin: 0 0 2rem 1rem;
+  }
+
+  hr {
+    margin-bottom: 2rem;
+    height: 0.5px;
+    border: none;
+    background-color: #777777;
+  }
+}
+
+.down-menu__down {
+
+  height: 36rem;
+  transform: translateY(70px);
 }

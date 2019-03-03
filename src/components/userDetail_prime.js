@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 const userDetailPrime = props => {
   return (
     <React.Fragment>
       <div>
-        <p>
-          <img className="user_icon" ref={props.iconRef} src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="" />
-        </p>
+        <div
+          className="user_icon"
+          ref={props.iconRef}
+          style={{
+            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) +
+              props.detail.icon})`,
+          }}
+        />
 
-        <button type="button" onClick={props.userIconSelectBtnClicked}>Upload new picture</button>
+        <button type="button" onClick={props.userIconSelectBtnClicked}>
+          Upload new picture
+        </button>
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
-        <button type="submit" onClick={props.upload}>save</button>
+        <button type="submit" onClick={props.upload}>
+          save
+        </button>
       </div>
       <div>
         <p>Email</p>
@@ -38,11 +46,11 @@ userDetailPrime.propTypes = {
     sex: PropTypes.number,
   }),
   iconRef: PropTypes.shape({
-    current: PropTypes.object
+    current: PropTypes.object,
   }),
   buttonRef: PropTypes.shape({
-    current: PropTypes.object
-  })
+    current: PropTypes.object,
+  }),
 }
 
 export default userDetailPrime

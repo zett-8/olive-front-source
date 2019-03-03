@@ -28,7 +28,7 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   toggleFavorite = () => {
-    const err = this.props.toggleFavorite(this.props.workDetail.id, this.props.loginStatus.user_id)
+    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
   }
 
   buy = () => {

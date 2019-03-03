@@ -72,7 +72,7 @@ class UserPageContainer extends React.Component {
     const url = this.createObjectURL(f[0])
 
     this.setState({ iconImage: f[0] })
-    this.iconRef.current.src = url
+    this.iconRef.current.style.backgroundImage = `url(${url})`
   }
 
   uploadUserIcon = e => {

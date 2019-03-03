@@ -21,13 +21,13 @@ class ArtistPageContainer extends React.Component {
   render() {
     let myself = false
 
-    if (!Object.keys(this.props.artistDetail).length) return null
+    if (this.props.artistDetail.pristine) return null
 
     if (this.props.loginStatus.user_id === this.props.match.params.id - 0) myself = true
 
     return (
       <React.Fragment>
-        <ArtistDetail detail={this.props.artistDetail} back={this.back} myself={myself} />
+        <ArtistDetail detail={this.props.artistDetail.contents} back={this.back} myself={myself} />
         <WorkList works={this.props.works.contents}/>
       </React.Fragment>
     )

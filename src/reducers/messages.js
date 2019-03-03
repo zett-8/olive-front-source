@@ -1,9 +1,17 @@
 import { actionTypes } from '../actions/messages'
 
-export default (state = [], action) => {
+const INITIAL_STATE = {
+  pristine: true,
+  contents: {}
+}
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.GET_MESSAGES:
-      return action.payload
+      return {
+        pristine: false,
+        contents: action.payload
+      }
 
     default:
       return state

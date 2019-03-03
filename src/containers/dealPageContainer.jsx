@@ -49,10 +49,12 @@ class DealPageContainer extends React.Component {
   }
 
   render() {
+    if (this.props.messages.contents) return null
+    
     return (
       <div className="deal">
         <Messages
-          messages={this.props.messages}
+          messages={this.props.messages.contents}
           inputMessage={this.state.message}
           handleInputChanged={this.handleInputChanged}
           handleSubmit={this.handleSubmit}

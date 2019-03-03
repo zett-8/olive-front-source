@@ -136,7 +136,7 @@ class UserPageContainer extends React.Component {
           <div className="userDetail_prime">
             <UserDetailPrime
               self={this.props.loginStatus}
-              detail={this.props.userDetail}
+              detail={this.props.userDetail.contents}
               userIconSelectBtnClicked={this.userIconSelectBtnClicked}
               userIconSelected={this.userIconSelected}
               upload={this.uploadUserIcon}
@@ -172,7 +172,7 @@ class UserPageContainer extends React.Component {
       case 2:
         return (
           <React.Fragment>
-            <UserDetail detail={this.props.userDetail} handleLogout={this.logout} />
+            <UserDetail detail={this.props.userDetail.contents} handleLogout={this.logout} />
             <Uploader />
           </React.Fragment>
         )
@@ -180,7 +180,7 @@ class UserPageContainer extends React.Component {
   }
 
   render() {
-    if (!Object.keys(this.props.userDetail).length) return null
+    if (this.props.userDetail.pristine) return null
 
     return (
       <div className="userDetail">

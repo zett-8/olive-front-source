@@ -68,14 +68,14 @@ class WorkdetailPageContainer extends React.Component {
   changeMainImage = url => (this.mainImageRef.current.src = url)
 
   render() {
-    if (!Object.keys(this.props.workDetail).length) return null
+    if (this.props.workDetail.pristine) return null
 
     return (
       <div className="workDetail">
         <NotificationSystem ref={this.notificationSystem} />
         <WorkDetail
           self={this.props.loginStatus}
-          detail={this.props.workDetail}
+          detail={this.props.workDetail.contents}
           buy={this.buy}
           toggleFavorite={this.toggleFavorite}
           back={this.back}

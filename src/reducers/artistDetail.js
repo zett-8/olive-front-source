@@ -1,9 +1,17 @@
 import { actionTypes } from '../actions/artistDetail'
 
-export default (state = {}, action) => {
+const INITIAL_STATE = {
+  pristine: true,
+  contents: {}
+}
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.GET_ARTIST_DETAIL:
-      return action.payload
+      return {
+        pristine: false,
+        contents: action.payload
+      }
 
     default:
       return state

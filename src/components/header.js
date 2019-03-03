@@ -9,12 +9,10 @@ import SearchIMG from 'react-svg-loader!../assets/search.svg' // eslint-disable-
 export const header = props => {
   return (
     <React.Fragment>
-      <div // eslint-disable-line
-        onClick={props.burgerToggleClicked}
-        className="nav__toggleButton"
-      >
+      <div role="button" tabIndex={0} onClick={props.burgerToggleClicked} className="nav__toggleButton">
         <button type="button" />
       </div>
+
       <div className="nav__left">
         <p>
           <Link className="nav__link" to="/popular">
@@ -39,7 +37,7 @@ export const header = props => {
               <SearchIMG alt="search" />
             </p>
             <p>
-              <Link className="nav__link" to="/">
+              <Link className="nav__link" to="/favorites">
                 <FavoriteIMG alt="favorite" />
               </Link>
             </p>

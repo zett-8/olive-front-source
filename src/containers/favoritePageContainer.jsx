@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getWorks } from '../actions/works'
+import { getFavoriteWorks } from '../actions/works'
 
-class PopularPageContainer extends React.Component {
-  componentDidMount() {
-    this.props.getWorks()
+class FavoritePageContainer extends React.Component {
+  componentWillMount() {
+    this.props.getFavoriteWorks(this.props.loginStatus.user_id)
   }
 
   render() {
@@ -23,9 +23,10 @@ class PopularPageContainer extends React.Component {
 
 export default connect(
   state => ({
+    loginStatus: state.loginStatus,
     works: state.works,
   }),
   dispatch => ({
-    getWorks: () => dispatch(getWorks()),
+    getFavoriteWorks: userId => dispatch(getFavoriteWorks(userId)),
   })
-)(PopularPageContainer)
+)(FavoritePageContainer)

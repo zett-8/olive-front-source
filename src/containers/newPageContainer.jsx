@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
-import Selectors from '../components/selectors'
 
 import { getWorks } from '../actions/works'
 
@@ -13,11 +12,12 @@ class NewPageContainer extends React.Component {
   }
 
   render() {
+    if(this.props.works.pristine) return null
+
     return (
-      <React.Fragment>
-        {/*<Selectors />*/}
-        <WorkList works={this.props.works}/>
-      </React.Fragment>
+      <div className="workList">
+        <WorkList works={this.props.works.contents}/>
+      </div>
     )
   }
 }

@@ -95,7 +95,11 @@
 }
 
 .down-menu__down {
+  display: none;
 
-  height: 36rem;
-  transform: translateY(70px);
+  @media only screen and (max-width: $bp-small) {
+    display: block;
+    height: 54vh;
+    transform: translateY(90px);
+  }
 }

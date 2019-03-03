@@ -2,6 +2,7 @@ import Api from '../utils/api'
 
 export const actionTypes = {
   GET_WORKS: 'GET_WORKS',
+  GET_FAVORITE_WORKS: 'GET_FAVORITE_WORKS',
   GET_WORKS_OF_AN_ARTIST: 'GET_WORKS_OF_AN_ARTIST'
 }
 
@@ -10,7 +11,18 @@ export const getWorks = () => dispatch => {
     .then(res => {
       dispatch({
         type: actionTypes.GET_WORKS,
-        payload: res.data,
+        payload: res.data
+      })
+    })
+    .catch(res => res)
+}
+
+export const getFavoriteWorks = (userId) => dispatch => {
+  return Api.getFavoriteWorks(userId)
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_FAVORITE_WORKS,
+        payload: res.data
       })
     })
     .catch(res => res)

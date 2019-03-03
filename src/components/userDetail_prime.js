@@ -7,7 +7,7 @@ const userDetailPrime = props => {
     <React.Fragment>
       <div>
         <p>
-          <img ref={props.iconRef} src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="" />
+          <img className="user_icon" ref={props.iconRef} src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="" />
         </p>
 
         <button type="button" onClick={props.userIconSelectBtnClicked}>Upload new picture</button>

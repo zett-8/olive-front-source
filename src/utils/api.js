@@ -19,6 +19,7 @@ export default {
   },
   buyWork: (buyerId, workId) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerId }),
   getWorks: () => axios.get(`${PATH}/v1/works/`),
+  getFavoriteWorks: (userId) => axios.get(`${PATH}/v1/works/?favoritesOf=${userId}`),
   getWorkDetail: id => axios.get(`${PATH}/v1/works/${id}/`),
   getWorksOfAnArtist: id => axios.get(`${PATH}/v1/works/?artist=${id}`),
 

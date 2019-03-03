@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const workList = props => {
   return (
-    <div className="workList">
+    <React.Fragment>
       {props.works.map(w => (
         <div className="work" key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>
@@ -26,7 +26,7 @@ const workList = props => {
           </p>
         </div>
       ))}
-    </div>
+    </React.Fragment>
   )
 }
 
@@ -35,7 +35,7 @@ workList.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     image1: PropTypes.string
-  })),
+  })).isRequired,
 }
 
 export default workList

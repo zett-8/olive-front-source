@@ -1,8 +1,16 @@
 import Api from '../utils/api'
 
 export const actionTypes = {
+  CLEAR_MESSAGE: 'CLEAR_MESSAGE',
   GET_MESSAGES: 'GET_MESSAGES',
   SEND_MESSAGE: 'SEND_MESSAGE'
+}
+
+export const clearMessage = () => dispatch => {
+  dispatch({
+    type: actionTypes.CLEAR_MESSAGE,
+    payload: null
+  })
 }
 
 export const getMessages = workId => dispatch => {

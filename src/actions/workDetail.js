@@ -1,8 +1,16 @@
 import Api from '../utils/api'
 
 export const actionTypes = {
+  CLEAR_WORK_DETAIL: 'CLEAR_WORK_DETAIL',
   GET_WORK_DETAIL: 'GET_WORK_DETAIL',
   TOGGLE_FAVORITE_WORK: 'TOGGLE_FAVORITE_WORK'
+}
+
+export const clearWorkDetail = () => dispatch => {
+  dispatch({
+    type: actionTypes.CLEAR_WORK_DETAIL,
+    payload: null
+  })
 }
 
 export const getWorkDetail = (id) => dispatch => {

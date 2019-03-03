@@ -1,9 +1,17 @@
 import Api from '../utils/api'
 
 export const actionTypes = {
+  CLEAR_WORKS: 'CLEAR_WORKS',
   GET_WORKS: 'GET_WORKS',
   GET_FAVORITE_WORKS: 'GET_FAVORITE_WORKS',
   GET_WORKS_OF_AN_ARTIST: 'GET_WORKS_OF_AN_ARTIST'
+}
+
+export const clearWorks = () => dispatch => {
+  dispatch({
+    type: actionTypes.CLEAR_WORKS,
+    payload: null
+  })
 }
 
 export const getWorks = () => dispatch => {

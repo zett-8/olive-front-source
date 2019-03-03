@@ -4,10 +4,9 @@ import NotificationSystem from 'react-notification-system'
 
 import WorkDetail from '../components/workDetail'
 
-import { buyWork, toggleFavorite } from '../actions/workDetail'
-import { getWorkDetail } from '../actions/workDetail'
+import { clearWorkDetail, getWorkDetail, buyWork, toggleFavorite } from '../actions/workDetail'
 
-class WorkdetailPageContainer extends React.Component {
+class WorkDetailPageContainer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -17,9 +16,10 @@ class WorkdetailPageContainer extends React.Component {
   }
 
   async componentWillMount() {
+    await this.props.clearWorkDetail()
     await this.props.getDetail(this.props.match.params.id)
 
-    const w = this.props.workDetail,
+    const w = this.props.workDetail.contents,
       login = this.props.loginStatus
 
     if (w.sold && (w.artist.user_id === login.user_id || w.buyer.user_id === login.user_id)) {
@@ -46,7 +46,7 @@ class WorkdetailPageContainer extends React.Component {
       return null
     }
     // 自分の作品は購入できない
-    if (this.props.loginStatus.user_id === this.props.workDetail.artist.user_id) {
+    if (this.props.loginStatus.user_id === this.props.workDetail.contents.artist.user_id) {
       const notification = this.notificationSystem.current
 
       notification.addNotification({
@@ -59,7 +59,7 @@ class WorkdetailPageContainer extends React.Component {
       return null
     }
 
-    const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.id)
+    const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.contents.id)
     this.setState({ bought: true })
   }
 
@@ -94,8 +94,9 @@ export default connect(
     workDetail: state.workDetail,
   }),
   dispatch => ({
+    clearWorkDetail: () => dispatch(clearWorkDetail()),
     buyWork: (buyerId, workId) => dispatch(buyWork(buyerId, workId)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getDetail: id => dispatch(getWorkDetail(id)),
   })
-)(WorkdetailPageContainer)
+)(WorkDetailPageContainer)

@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import Messages from '../components/messages'
 
 import { getWorkDetail } from '../actions/workDetail'
-import { getMessages } from '../actions/messages'
-import { sendMessage } from '../actions/messages'
+import { clearMessage, getMessages, sendMessage } from '../actions/messages'
 
 class DealPageContainer extends React.Component {
   constructor(props) {
@@ -17,6 +16,8 @@ class DealPageContainer extends React.Component {
   }
 
   async componentWillMount() {
+    await this.props.clearMessage()
+
     const params = this.props.match.params
     const self = this.props.loginStatus.user_id + ''
 
@@ -49,8 +50,8 @@ class DealPageContainer extends React.Component {
   }
 
   render() {
-    if (this.props.messages.contents) return null
-    
+    if (this.props.messages.pristine) return null
+
     return (
       <div className="deal">
         <Messages
@@ -72,6 +73,7 @@ export default connect(
   }),
   dispatch => ({
     getDetail: id => dispatch(getWorkDetail(id)),
+    clearMessage: () => dispatch(clearMessage()),
     getMessages: workId => dispatch(getMessages(workId)),
     sendMessage: (workId, sender, receiver, body) => dispatch(sendMessage(workId, sender, receiver, body)),
   })

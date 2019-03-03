@@ -7,6 +7,9 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case actionTypes.CLEAR_MESSAGE:
+      return INITIAL_STATE
+
     case actionTypes.GET_MESSAGES:
       return {
         pristine: false,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const loginForm = props => (
   <React.Fragment>
-    <p>Login</p>
+    <h2>Login</h2>
     <form onSubmit={props.login}>
       <label htmlFor="email">
         <input className="input" name="email" placeholder="Email" value={props.email} onChange={props.handleInputChanged} />
@@ -11,7 +11,7 @@ const loginForm = props => (
       <label htmlFor="password">
         <input className="input" type="password" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
       </label>
-      <p>forget password?</p>
+      <span>forget password?</span>
       <button className="btn btn__login" type="submit">Login</button>
     </form>
     <p>or</p>

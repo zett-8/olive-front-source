@@ -82,8 +82,9 @@ class LoginPageContainer extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="form_content">
         <NotificationSystem ref={this.notificationSystem} />
+        <div className="form_content__form">
         {this.state.login ? (
           <LoginForm
             login={this.login}
@@ -102,7 +103,8 @@ class LoginPageContainer extends React.Component {
             handleSwitch={this.switch}
           />
         )}
-      </React.Fragment>
+        </div>
+      </div>
     )
   }
 }

@@ -30,11 +30,14 @@
         margin-bottom: 4px;
 
         &::before {
+          content: "";
+          display: block;
+          border: none;
+          border-radius: 0;
+
           background-color: #030303;
           height: 1px;
           width: 2rem;
-          content: "";
-          display: block;
 
           transform: translateY(-1rem);
         }

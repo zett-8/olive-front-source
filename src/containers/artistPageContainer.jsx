@@ -28,7 +28,9 @@ class ArtistPageContainer extends React.Component {
     return (
       <React.Fragment>
         <ArtistDetail detail={this.props.artistDetail.contents} back={this.back} myself={myself} />
-        <WorkList works={this.props.works.contents}/>
+        <div className="workList">
+         <WorkList works={this.props.works.contents}/>
+        </div>
       </React.Fragment>
     )
   }

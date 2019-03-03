@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const loginForm = props => (
   <React.Fragment>
-    <p>Create Account</p>
+    <h2>Create Account</h2>
     <form onSubmit={props.signUp}>
       <label htmlFor="email">
         <input className="input" name="email" placeholder="Email" value={props.email} onChange={props.handleInputChanged} />

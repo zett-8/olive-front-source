@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const footer = () => {
   return (
@@ -8,7 +9,9 @@ const footer = () => {
         <p>Help</p>
         <p>Guidelines</p>
         <p>Privacy</p>
-        <p>Contact</p>
+        <p>
+          <Link to="/new">Contact</Link>
+        </p>
       </div>
       <p className="footer__copy">&copy; 2019 Olive. All rights reserved.</p>
     </footer>

@@ -2,13 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import VOID from '../assets/700.gif'
+
 const workList = props => {
   return (
     <React.Fragment>
       {props.works.map(w => (
         <div className="work" key={w.id}>
           <Link key={w.id} to={`/work/${w.id}/detail`}>
-            <img src={w.image1} alt="sample" />
+            <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
           </Link>
           <p>
             {w.name}
@@ -18,8 +20,8 @@ const workList = props => {
 
       {props.works.map(w => (
         <div className="work" key={w.id}>
-          <Link key={w.id} to={`/work/${w.id}/detail`}>
-            <img src={w.image1} alt="sample" />
+          <Link className="work__image" key={w.id} to={`/work/${w.id}/detail`}>
+            <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
           </Link>
           <p>
             {w.name}

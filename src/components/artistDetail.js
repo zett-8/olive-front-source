@@ -9,7 +9,7 @@ const artistDetail = props => {
         <div
           className="user_icon"
           style={{
-            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : '') +
+            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? '' : '') +
               props.detail.icon})`,
           }}
         />

@@ -9,7 +9,7 @@ import Router from './router'
 
 import './styles/main.scss'
 
-console.log(process.env.NODE_ENV)
+console.log(`==== connecting to ${process.env.NODE_ENV} server ====`)
 
 ReactDOM.render(
   <Provider store={store}>

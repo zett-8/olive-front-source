@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const workDetail = props => {
-  const circumstantialUrl = process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : ''
+  const circumstantialUrl = process.env.NODE_ENV === 'local' ? '' : ''
 
   return (
     <React.Fragment>

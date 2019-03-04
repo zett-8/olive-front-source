@@ -9,7 +9,7 @@ const userDetailPrime = props => {
           className="user_icon"
           ref={props.iconRef}
           style={{
-            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : '') +
+            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? '' : '') +
               props.detail.icon})`,
           }}
         />

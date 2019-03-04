@@ -12,7 +12,7 @@ const loginForm = props => (
         <input className="input" type="password" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
       </label>
       <label htmlFor="invitation">
-        <input className="input" name="invitation" placeholder="Invitation code" value={props.invitation} onChange={props.handleInputChanged} />
+        <input className="input" name="invitation" placeholder="Invitation code (Optional)" value={props.invitation} onChange={props.handleInputChanged} />
       </label>
       <button className="btn btn__login" type="submit">Create Account</button>
     </form>

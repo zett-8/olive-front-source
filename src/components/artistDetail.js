@@ -6,8 +6,13 @@ const artistDetail = props => {
     <div>
       <h3>artist detail</h3>
       <p>
-
-        <img src={(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : null) + props.detail.icon} alt="artist" />
+        <div
+          className="user_icon"
+          style={{
+            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? 'http://localhost:8008' : '') +
+              props.detail.icon})`,
+          }}
+        />
       </p>
       {props.myself ? <p>EDIT</p> : null}
       <p>{props.detail.artist_name}</p>

@@ -64,7 +64,7 @@
 
   svg {
     height: 2.5rem;
-    fill: #fff;
+    fill: none;
     stroke-width: 6rem;
     stroke: black;
   }
@@ -87,6 +87,7 @@
 
   p {
     margin: 0 0 2rem 1rem;
+    cursor: pointer;
   }
 
   hr {

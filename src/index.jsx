@@ -9,6 +9,8 @@ import Router from './router'
 
 import './styles/main.scss'
 
+console.log(process.env.NODE_ENV)
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>

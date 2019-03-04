@@ -7,6 +7,7 @@ import DownMenu from '../components/downMenu'
 
 const customStyles = {
   content: {
+    zIndex: '100',
     top: '20%',
     left: '50%',
     right: 'auto',
@@ -42,12 +43,18 @@ class HeaderContainer extends React.Component {
   closeModal = () => this.setState({ modalIsOpen: false })
   afterOpenModal = () => (this.subtitle.style.color = '#000')
 
+  menuClicked = page => {
+    this.props.history.push(page)
+    this.setState({ downMenuClass: true })
+  }
+
   render() {
     return (
       <React.Fragment>
         <DownMenu
           class={this.state.downMenuClass}
-          loggedIn={Object.keys(this.props.loginStatus).length ? true : false}
+          menuClicked={this.menuClicked}
+          loggedIn={!!Object.keys(this.props.loginStatus).length}
         />
         <header className="nav">
           <Modal
@@ -65,7 +72,7 @@ class HeaderContainer extends React.Component {
           </Modal>
 
           <Header
-            handleLogoClicked={this.top}
+            menuClicked={this.menuClicked}
             burgerToggleClicked={this.burgerToggleClicked}
             loggedIn={Object.keys(this.props.loginStatus).length ? true : false}
             userId={this.props.loginStatus.user_id}

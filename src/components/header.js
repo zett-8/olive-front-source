@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import AccountIMG from 'react-svg-loader!../assets/account.svg' // eslint-disable-line
@@ -14,20 +13,12 @@ export const header = props => {
       </div>
 
       <div className="nav__left">
-        <p>
-          <Link className="nav__link" to="/popular">
-            Popular
-          </Link>
-        </p>
-        <p>
-          <Link className="nav__link" to="/new">
-            New
-          </Link>
-        </p>
-        {props.loggedIn ? <p>review</p> : null}
+        <p onClick={() => props.menuClicked('/popular')}>popular</p>
+        <p onClick={() => props.menuClicked('/new')}>new</p>
+        {props.loggedIn ? <p onClick={() => props.menuClicked('/review')}>review</p> : null}
       </div>
 
-      <h1 onClick={props.handleLogoClicked}>Olive</h1>
+      <h1 onClick={() => props.menuClicked('/')}>Olive</h1>
 
       <div className="nav__right">
         {props.loggedIn ? (
@@ -36,15 +27,11 @@ export const header = props => {
             <p onClick={props.openModal}>
               <SearchIMG alt="search" />
             </p>
-            <p>
-              <Link className="nav__link" to="/favorites">
-                <FavoriteIMG alt="favorite" />
-              </Link>
+            <p onClick={() => props.menuClicked('/favorite')}>
+              <FavoriteIMG alt="favorite" />
             </p>
-            <p>
-              <Link className="nav__link" to={`/user/${props.userId}`}>
-                <AccountIMG alt="account" />
-              </Link>
+            <p onClick={() => props.menuClicked(`/user/${props.userId}`)}>
+              <AccountIMG alt="account" />
             </p>
           </React.Fragment>
         ) : (
@@ -53,10 +40,8 @@ export const header = props => {
             <p onClick={props.openModal}>
               <SearchIMG alt="search" />
             </p>
-            <p>
-              <Link className="nav__link" to="/login">
-                <AccountIMG className="account" alt="account" />
-              </Link>
+            <p onClick={() => props.menuClicked('/login')}>
+              <AccountIMG alt="account" />
             </p>
           </React.Fragment>
         )}
@@ -68,7 +53,7 @@ export const header = props => {
 header.propTypes = {
   loggedIn: PropTypes.bool,
   userId: PropTypes.number,
-  handleLogoClicked: PropTypes.func.isRequired,
+  menuClicked: PropTypes.func.isRequired,
   burgerToggleClicked: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
 }

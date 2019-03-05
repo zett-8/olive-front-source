@@ -28,6 +28,19 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   toggleFavorite = () => {
+    if (!Object.keys(this.props.loginStatus).length) {
+      const notification = this.notificationSystem.current
+
+      notification.addNotification({
+        message: 'お気に入りに追加するにはログインしてください',
+        level: 'error',
+        autoDismiss: 2,
+        position: 'tc',
+      })
+
+      return
+    }
+
     const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
   }
 
@@ -63,27 +76,26 @@ class WorkDetailPageContainer extends React.Component {
     this.setState({ bought: true })
   }
 
-  back = () => this.props.history.goBack()
-
-  changeMainImage = url => (this.mainImageRef.current.src = url)
+  changeMainImage = url => (this.mainImageRef.current.style.backgroundImage = `url(${url})`)
 
   render() {
     if (this.props.workDetail.pristine) return null
 
     return (
-      <div className="workDetail">
+      <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
-        <WorkDetail
-          self={this.props.loginStatus}
-          detail={this.props.workDetail.contents}
-          buy={this.buy}
-          toggleFavorite={this.toggleFavorite}
-          back={this.back}
-          bought={this.state.bought}
-          mainImageRef={this.mainImageRef}
-          changeMainImage={this.changeMainImage}
-        />
-      </div>
+        <div className="workDetail">
+          <WorkDetail
+            self={this.props.loginStatus}
+            detail={this.props.workDetail.contents}
+            buy={this.buy}
+            toggleFavorite={this.toggleFavorite}
+            bought={this.state.bought}
+            mainImageRef={this.mainImageRef}
+            changeMainImage={this.changeMainImage}
+          />
+        </div>
+      </React.Fragment>
     )
   }
 }

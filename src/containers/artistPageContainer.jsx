@@ -19,18 +19,14 @@ class ArtistPageContainer extends React.Component {
     err = this.props.getWorksOfAnArtist(ID)
   }
 
-  back = () => this.props.history.goBack()
-
   render() {
-    let myself = false
-
     if (this.props.artistDetail.pristine) return null
-
-    if (this.props.loginStatus.user_id === this.props.match.params.id - 0) myself = true
 
     return (
       <React.Fragment>
-        <ArtistDetail detail={this.props.artistDetail.contents} back={this.back} myself={myself} />
+        <div className="artistDetail">
+          <ArtistDetail detail={this.props.artistDetail.contents} />
+        </div>
         <div className="workList">
          <WorkList works={this.props.works.contents}/>
         </div>

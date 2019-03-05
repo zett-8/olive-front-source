@@ -1,0 +1,83 @@
+.artistDetail {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: min-content min-content;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-columns: 1fr;
+  }
+
+
+  &__info {
+    grid-row: 1 / 2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &__icon {
+      grid-column: 1 / -1;
+      @include icon;
+      width: 30vmin;
+      height: 30vmin;
+      justify-self: center;
+
+      @media only screen and (max-width: $bp-medium) { width: 50vmin; height: 50vmin; }
+    }
+
+    &__name {
+      grid-column: 1 / -1;
+      justify-self: center;
+      font-size: 2rem;
+    }
+
+    &__Q, &__A {
+      font-size: 1.3rem;
+      line-height: 2.7rem;
+      margin: 0 1.7rem;
+    }
+
+    &__Q {
+      justify-self: right;
+      color: #777777;
+    }
+  }
+
+
+  &__profile {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+
+    font-size: 1.4rem;
+
+
+    .sw1, .sw2 {
+      display: none;
+    }
+
+    &__box {
+      background-color: $color-gray;
+      padding: 3rem;
+      margin: 2rem 3rem;
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+
+      .profile_contents {
+        display: none;
+        transition: 0.8s;
+      }
+
+      .sw1 {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding: 2rem;
+        margin-top: -5.8rem;
+        transform: translateY(31px);
+      }
+      .sw2:checked + .profile_contents { display: block; margin-top: 1.8rem; }
+    }
+  }
+}

@@ -1,13 +1,14 @@
 
 // basic
 $color-basic: #030303;
+$color-gray: #eeeeee;
 $font-basic: 'Avenir Next';
 $font-button: 'Helvetica Neue';
 
 // responsive breakpoints
 $bp-largest: 75em; // 1200px
 $bp-large: 62.5em; // 1000px
-$bp-medium: 50em; // 800px
+$bp-medium: 55em; // 850px
 $bp-small: 37.5em; //600px
 
 *,
@@ -60,7 +61,7 @@ a {
   font-weight: 200;
   font-size: 1.3rem;
 
-  &__buy { width: 8rem; }
+  &__buy { width: 13rem; }
 
   &__send { width: 22rem; }
 
@@ -72,6 +73,37 @@ a {
     border: black 0.05rem solid;
     width: 30rem;
   }
+
+  &__favorite {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    background-color: white;
+    border: black 1px solid;
+    color: $color-basic;
+
+    width: 13rem;
+
+    @mixin heart {
+      height: 2rem;
+      stroke-width: 65px;
+      stroke: black;
+
+      margin-right: 1rem;
+    }
+
+    &__nega {
+      @include heart;
+      fill: none;
+    }
+
+    &__posi {
+      @include heart;
+      fill: black;
+    }
+  }
 }
 
 .input {
@@ -82,9 +114,7 @@ a {
   height: 3rem;
 }
 
-.user_icon {
-  width: 40rem;
-  height: 40rem;
+@mixin icon {
   border-radius: 50%;
   background: center no-repeat;
   background-size: cover;

@@ -17,17 +17,6 @@ const workList = props => {
           </p>
         </div>
       ))}
-
-      {props.works.map(w => (
-        <div className="work" key={w.id}>
-          <Link className="work__image" key={w.id} to={`/work/${w.id}/detail`}>
-            <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
-          </Link>
-          <p>
-            {w.name}
-          </p>
-        </div>
-      ))}
     </React.Fragment>
   )
 }

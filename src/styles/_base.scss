@@ -67,12 +67,17 @@ a {
 
   &__login { width: 30rem; }
 
-  &__switch {
+  &__save { width: 8rem;}
+
+  &__switch,
+  &__selectPic {
     background-color: white;
     color: $color-basic;
     border: black 0.05rem solid;
     width: 30rem;
   }
+
+  &__selectPic { width: 19rem; }
 
   &__favorite {
     cursor: pointer;

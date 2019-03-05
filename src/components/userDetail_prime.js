@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 const userDetailPrime = props => {
   return (
     <React.Fragment>
-      <div>
+      <div className="userDetail__prime__iconForm">
         <div
-          className="user_icon"
+          className="userDetail__prime__iconForm__icon"
           ref={props.iconRef}
           style={{
             backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? '' : '') +
@@ -14,21 +14,24 @@ const userDetailPrime = props => {
           }}
         />
 
-        <button type="button" onClick={props.userIconSelectBtnClicked}>
-          Upload new picture
+        <button className="btn btn__selectPic" type="button" onClick={props.userIconSelectBtnClicked}>
+          Select new picture
         </button>
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
-        <button type="submit" onClick={props.upload}>
-          save
+        <button className="btn btn__save" type="submit" onClick={props.upload}>
+          Save
         </button>
       </div>
       <div>
         <p>Email</p>
-        <p>{props.self.email}</p>
+        <input className="input" type="text" name="email" placeholder={props.self.email} />
+        <button className="btn" type="button">Change Email</button>
       </div>
       <div>
-        <p>Sex</p>
-        <p>{props.detail.sex}</p>
+        <label>Password</label>  {/* eslint-disable-line */}
+        <input className="input" type="password" name="password" placeholder="現在のパスワード" />
+        <input className="input" type="password" name="password" placeholder="新しいパスワード" />
+        <button className="btn" type="button">Change password</button>
       </div>
     </React.Fragment>
   )

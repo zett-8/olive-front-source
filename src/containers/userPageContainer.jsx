@@ -133,7 +133,7 @@ class UserPageContainer extends React.Component {
     switch (this.state.tab) {
       case 0:
         return (
-          <div className="userDetail_prime">
+          <div className="userDetail__prime">
             <UserDetailPrime
               self={this.props.loginStatus}
               detail={this.props.userDetail.contents}
@@ -148,7 +148,7 @@ class UserPageContainer extends React.Component {
 
       case 1:
         return (
-          <div className="userDetail_workUpload">
+          <div className="userDetail__workUpload">
             <UserDetailWorkUpload
               upload={this.uploadWork}
               workImageSelectBtnClicked={this.workImageSelectBtnClicked}

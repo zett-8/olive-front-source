@@ -11,6 +11,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 
+  @media only screen and (max-width: $bp-medium) { grid-template-columns: 1fr; }
+
   &__left{
     padding: 0 4rem;
     display: grid;
@@ -27,6 +29,8 @@
     &__subImage3 { grid-column: 3 / 4; grid-row: 2 / 3; @include IMG; }
     &__subImage4 { grid-column: 4 / 5; grid-row: 2 / 3; @include IMG; }
     &__subImage5 { grid-column: 5 / 6; grid-row: 2 / 3; @include IMG; }
+
+    @media only screen and (max-width: $bp-medium) { margin-bottom: 1.5rem; padding: 0; }
   }
 
   &__right {
@@ -34,7 +38,10 @@
 
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: min-content;
+    grid-template-rows: min-content min-content;
+    word-break: break-all;
+
+    @media only screen and (max-width: $bp-medium) { padding: 0; }
 
     h3 {
       grid-column: 1 / -1;
@@ -48,12 +55,12 @@
 
     &__Q {
       color: #777777;
-      margin-right: 2.5rem;
+      width: 9rem;
     }
 
     &__A {
       grid-column: 2 / -1;
-
+      &__caption { margin-bottom: 3rem;}
     }
 
     &__price {
@@ -62,8 +69,11 @@
       font-size: 2rem;
     }
 
+
+
     &__buttons {
       grid-column: 5 / 6;
+      justify-self: end;
 
       button:first-child{ margin-bottom: 2rem; }
     }

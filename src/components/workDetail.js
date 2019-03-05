@@ -54,10 +54,19 @@ const workDetail = props => {
           <p>
             <Link to={`/artist/${props.detail.artist.user_id}`}>{props.detail.artist.artist_name}</Link>
           </p>
-          <p>{props.detail.caption}</p>
+          <p>{props.detail.year ? props.detail.year : '-' }</p>
+          <p>{props.detail.technique ? props.detail.technique : '-'}　</p>
+          <p>{props.detail.genre.name}</p>
+          <p>{props.detail.subgenre.name}</p>
+          <p>{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
+          <p>{`${props.detail.color1.name}, ${props.detail.color2.name}, ${props.detail.color3.name}`}</p>
+          <p>{props.detail.edition ? props.detail.edition : '-'}</p>
+          <p>{props.detail.frame ? props.detail.frame : '-'}</p>
+          <p>{props.detail.sign ? props.detail.sign : '-'}</p>
+          <div className="workDetail__right__A__caption">{props.detail.caption}</div>
         </div>
 
-        <p className="workDetail__right__price">{'¥ ' + props.detail.price}</p>
+        <p className="workDetail__right__price">{'¥ ' +String(props.detail.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}</p>
 
         <div className="workDetail__right__buttons">
           {props.detail.sold ? ( // eslint-disable-line
@@ -105,6 +114,19 @@ workDetail.propTypes = {
     image5: PropTypes.string,
     name: PropTypes.string,
     caption: PropTypes.string,
+    color1: PropTypes.object,
+    color2: PropTypes.object,
+    color3: PropTypes.object,
+    technique: PropTypes.string,
+    sign: PropTypes.string,
+    edition: PropTypes.string,
+    frame: PropTypes.string,
+    year: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    depth: PropTypes.number,
+    genre: PropTypes.object,
+    subgenre: PropTypes.object,
     price: PropTypes.number,
     artist: PropTypes.object,
     buyer: PropTypes.object,

@@ -54,8 +54,8 @@ const workDetail = props => {
           <p>
             <Link to={`/artist/${props.detail.artist.user_id}`}>{props.detail.artist.artist_name}</Link>
           </p>
-          <p>{props.detail.year ? props.detail.year : '-' }</p>
-          <p>{props.detail.technique ? props.detail.technique : '-'}　</p>
+          <p>{props.detail.year ? props.detail.year : '-'}</p>
+          <p>{props.detail.technique ? props.detail.technique : '-'}</p>
           <p>{props.detail.genre.name}</p>
           <p>{props.detail.subgenre.name}</p>
           <p>{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
@@ -66,7 +66,9 @@ const workDetail = props => {
           <div className="workDetail__right__A__caption">{props.detail.caption}</div>
         </div>
 
-        <p className="workDetail__right__price">{'¥ ' +String(props.detail.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}</p>
+        <p className="workDetail__right__price">
+          {'¥ ' + String(props.detail.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+        </p>
 
         <div className="workDetail__right__buttons">
           {props.detail.sold ? ( // eslint-disable-line

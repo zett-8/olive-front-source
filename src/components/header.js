@@ -27,7 +27,7 @@ export const header = props => {
             <p onClick={props.openModal}>
               <SearchIMG alt="search" />
             </p>
-            <p onClick={() => props.menuClicked('/favorite')}>
+            <p onClick={() => props.menuClicked('/favorites')}>
               <FavoriteIMG alt="favorite" />
             </p>
             <p onClick={() => props.menuClicked(`/user/${props.userId}`)}>

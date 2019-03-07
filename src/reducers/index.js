@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import loginStatusReducer from './loginStatus'
+import filterReducer from './filters'
 import workReducer from './works'
 import workDetailReducer from './workDetail'
 import userDetailReducer from './userDetail'
@@ -10,6 +11,7 @@ import messagesReducer from './messages'
 
 export default combineReducers({
   loginStatus: loginStatusReducer,
+  filters: filterReducer,
   works: workReducer,
   workDetail: workDetailReducer,
   userDetail: userDetailReducer,

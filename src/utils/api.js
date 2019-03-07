@@ -7,6 +7,9 @@ export default {
   signUp: (email, password) => axios.post(`${PATH}/v1/users/`, { email, password }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
 
+  getColors: () => axios.get(`${PATH}/v1/colors/`),
+  getGenres: () => axios.get(`${PATH}/v1/genres/`),
+
   toggleFavorite: (work, user) =>
     axios.post(`${PATH}/v1/favorites/`, JSON.stringify({ work, user }), {
       headers: {

@@ -1,26 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Modal from 'react-modal'
 
+import ModalWindow from '../components/modalWindow'
 import Header from '../components/header'
 import DownMenu from '../components/downMenu'
 
-const customStyles = {
-  content: {
-    zIndex: '100',
-    top: '20%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-20%',
-    transform: 'translate(-50%, -50%)',
-  },
-  // overlay : {
-  //   backgroundColor: '#f6f6f6'
-  // }
-}
-
-Modal.setAppElement('#root')
+import { getColors, getGenres } from '../actions/filters'
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -29,7 +14,23 @@ class HeaderContainer extends React.Component {
     this.state = {
       modalIsOpen: false,
       downMenuClass: true,
+
+      // filter modal
+      main: 'random',
+      color: '',
+      genre: '',
+      selectableSubGenres: [],
+      subGenre: '',
+      width: '',
+      height: '',
+      depth: '',
+      price: '',
     }
+  }
+
+  componentWillMount() {
+    this.props.getColors()
+    this.props.getGenres()
   }
 
   top = () => this.props.history.push('/')
@@ -38,17 +39,33 @@ class HeaderContainer extends React.Component {
     this.setState({ downMenuClass: !this.state.downMenuClass })
   }
 
-  // modal functions
-  openModal = () => this.setState({ modalIsOpen: true })
-  closeModal = () => this.setState({ modalIsOpen: false })
-  afterOpenModal = () => (this.subtitle.style.color = '#000')
-
+  // slide down menu function
   menuClicked = page => {
     this.props.history.push(page)
     this.setState({ downMenuClass: true })
   }
 
+  // modal functions
+  openModal = () => this.setState({ modalIsOpen: true })
+  closeModal = () => this.setState({ modalIsOpen: false })
+
+  filterChanged = e => {
+    if (e.target.name === 'genre') {
+      const selectedGenre = this.props.filters.contents.genres.filter(g => g.name === e.target.value)
+
+      this.setState({
+        genre: selectedGenre[0].name,
+        selectableSubGenres: selectedGenre[0].subgenres
+      })
+      return null
+    }
+
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render() {
+    if (this.props.filters.pristine) return null
+
     return (
       <React.Fragment>
         <DownMenu
@@ -56,25 +73,29 @@ class HeaderContainer extends React.Component {
           menuClicked={this.menuClicked}
           loggedIn={!!Object.keys(this.props.loginStatus).length}
         />
+        
         <header className="nav">
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel={'search filter'}
-          >
-            <h2 ref={subtitle => (this.subtitle = subtitle)}>Search filter</h2>
-            <div>I am a modal</div>
-            <button onClick={() => console.log('not yet')}>save</button>
-            <button onClick={() => console.log('not yet')}>clear</button>
-            <button onClick={this.closeModal}>close</button>
-          </Modal>
+          <ModalWindow
+            modalIsOpen={this.state.modalIsOpen}
+            closeModal={this.closeModal}
+
+            main={this.state.main}
+            genre={this.state.genre}
+            subGenre={this.state.subGenre}
+            width={this.state.width}
+            height={this.state.height}
+            depth={this.state.depth}
+            price={this.state.price}
+            selectableSubGenres={this.state.selectableSubGenres}
+
+            filters={this.props.filters}
+            filterChanged={this.filterChanged}
+          />
 
           <Header
             menuClicked={this.menuClicked}
             burgerToggleClicked={this.burgerToggleClicked}
-            loggedIn={Object.keys(this.props.loginStatus).length ? true : false}
+            loggedIn={!!Object.keys(this.props.loginStatus).length}
             userId={this.props.loginStatus.user_id}
             openModal={this.openModal}
           />
@@ -87,6 +108,10 @@ class HeaderContainer extends React.Component {
 export default connect(
   state => ({
     loginStatus: state.loginStatus,
+    filters: state.filters,
   }),
-  null
+  dispatch => ({
+    getColors: () => dispatch(getColors()),
+    getGenres: () => dispatch(getGenres()),
+  })
 )(HeaderContainer)

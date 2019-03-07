@@ -23,7 +23,7 @@ const seedArtistList = props => {
           </div>
           <div className="seedArtistList__artist__works">
             {artist.works.map(work => (
-              <Link to={`/work/${work.id}/detail`}>
+              <Link key={work.id} to={`/work/${work.id}/detail`}>
                 <img src={VOID} style={{ backgroundImage: `url(${work.image1})` }} alt="" />
               </Link>
             ))}

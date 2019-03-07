@@ -34,5 +34,6 @@ export default {
     return axios.patch(`${PATH}/v1/userDetails/${id}/`, params)
   },
 
+  getSeedArtists: () => axios.get(`${PATH}/v1/seedArtists/`),
   getArtistDetail: id => axios.get(`${PATH}/v1/artists/${id}/`),
 }

@@ -6,7 +6,7 @@ import WorkDetail from '../components/workDetail'
 
 import { clearWorkDetail, getWorkDetail, buyWork, toggleFavorite } from '../actions/workDetail'
 
-class WorkDetailPageContainer extends React.Component {
+class WorkdetailPageContainer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -111,4 +111,4 @@ export default connect(
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getDetail: id => dispatch(getWorkDetail(id)),
   })
-)(WorkDetailPageContainer)
+)(WorkdetailPageContainer)

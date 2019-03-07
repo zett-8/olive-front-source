@@ -1,16 +1,13 @@
-import { actionTypes } from '../actions/messages'
+import { actionTypes } from '../actions/seedArtists'
 
 const INITIAL_STATE = {
   pristine: true,
-  contents: {},
+  contents: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.CLEAR_MESSAGE:
-      return INITIAL_STATE
-
-    case actionTypes.GET_MESSAGES:
+    case actionTypes.GET_SEED_ARTISTS:
       return {
         pristine: false,
         contents: action.payload,

@@ -8,10 +8,11 @@ import LandingPageContainer from './containers/landingPageContainer'
 import LoginPageContainer from './containers/loginPageContainer'
 import NewPageContainer from './containers/newPageContainer'
 import PopularContainer from './containers/popularPageContainer'
+import ReviewContainer from './containers/reviewPageContainer'
 import FavoriteContainer from './containers/favoritePageContainer'
 import UserContainer from './containers/userPageContainer'
 import ArtistContainer from './containers/artistPageContainer'
-import WorkDetailContainer from './containers/WorkdetailPageContainer'
+import WorkDetailContainer from './containers/workdetailPageContainer'
 import DealContainer from './containers/dealPageContainer'
 import Page404 from './components/404'
 
@@ -27,6 +28,7 @@ export default () => (
             <Route exact path="/new" component={NewPageContainer} />
             <Route exact path="/popular" component={PopularContainer} />
             <Route exact path="/favorites" component={FavoriteContainer} />
+            <Route exact path="/review" component={ReviewContainer} />
             <Route exact path="/artist/:id" component={ArtistContainer} />
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
             <Route exact path="/work/:id/deal/:artist_id/:buyer_id" component={DealContainer} />

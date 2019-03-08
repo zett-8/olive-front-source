@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import UserDetail from '../components/userDetail'
+import UserDetailOther from '../components/userDetail_other'
 import UserDetailNav from '../components/userDetail_nav'
 import UserDetailPrime from '../components/userDetail_prime'
+import UserDetailBuyer from '../components/userDetail_buyer'
+import UserDetailArtist from '../components/userDetail_artist'
 import UserDetailWorkUpload from '../components/userDetail_workUpload'
-import Uploader from '../components/uploader'
+import UserDetailHistory from '../components/userDetail_history'
 
 import { uploadWork } from '../actions/workDetail'
 import { getUserDetail } from '../actions/userDetail'
@@ -148,6 +150,20 @@ class UserPageContainer extends React.Component {
 
       case 1:
         return (
+          <div className="userDetail_buyer">
+            <UserDetailBuyer />
+          </div>
+        )
+
+      case 2:
+        return (
+          <div className="userDetail_artist">
+            <UserDetailArtist />
+          </div>
+        )
+
+      case 3:
+        return (
           <div className="userDetail__workUpload">
             <UserDetailWorkUpload
               upload={this.uploadWork}
@@ -169,11 +185,17 @@ class UserPageContainer extends React.Component {
           </div>
         )
 
-      case 2:
+      case 4:
+        return (
+          <div className="userDetail_history">
+            <UserDetailHistory />
+          </div>
+        )
+
+      case 5:
         return (
           <React.Fragment>
-            <UserDetail detail={this.props.userDetail.contents} handleLogout={this.logout} />
-            <Uploader />
+            <UserDetailOther detail={this.props.userDetail.contents} handleLogout={this.logout} />
           </React.Fragment>
         )
     }

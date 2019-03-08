@@ -73,7 +73,7 @@ class HeaderContainer extends React.Component {
           menuClicked={this.menuClicked}
           loggedIn={!!Object.keys(this.props.loginStatus).length}
         />
-        
+
         <header className="nav">
           <ModalWindow
             modalIsOpen={this.state.modalIsOpen}

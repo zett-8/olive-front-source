@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import NotificationSystem from 'react-notification-system'
 
 import UserDetailOther from '../components/userDetail_other'
 import UserDetailNav from '../components/userDetail_nav'
@@ -9,14 +11,17 @@ import UserDetailArtist from '../components/userDetail_artist'
 import UserDetailWorkUpload from '../components/userDetail_workUpload'
 import UserDetailHistory from '../components/userDetail_history'
 
+import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
 import { getUserDetail } from '../actions/userDetail'
 import { uploadUserIcon } from '../actions/userDetail'
-import { logout } from '../actions/loginStatus'
+import { logout, updateEmail, updatePassword } from '../actions/loginStatus'
 
 class UserPageContainer extends React.Component {
   constructor(props) {
     super(props)
+
+    this.notificationSystem = React.createRef()
 
     this.createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL
 
@@ -31,10 +36,13 @@ class UserPageContainer extends React.Component {
     this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
-      iconImage: null,
       tab: 0,
-
-      selectOrder:1,
+      // prime
+      iconImage: null,
+      email: '',
+      oldPassword: '',
+      newPassword: '',
+      selectOrder: 1,
       workImage1: null,
       workImage2: null,
       workImage3: null,
@@ -46,7 +54,7 @@ class UserPageContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const ID = this.props.match.params.id
 
     if (ID === this.props.loginStatus.user_id + '') this.props.getUserDetail(ID)
@@ -87,6 +95,52 @@ class UserPageContainer extends React.Component {
     this.setState({ iconImage: null })
   }
 
+  primeFormTyped = e => this.setState({ [e.target.name]: e.target.value })
+
+  updateEmail = async () => {
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const message = EmailValidation(this.state.email)
+    if (message) {
+      body.message = message
+      notification.addNotification(body)
+      return null
+    }
+
+    const err = await this.props.updateEmail(this.props.loginStatus.user_id, this.state.email)
+    if (err) {
+      body.message = 'メールアドレスの変更に失敗しました'
+      notification.addNotification(body)
+    }
+  }
+
+  updatePassword = async () => {
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const message = TwoPasswordValidation(this.state.oldPassword, this.state.newPassword)
+    if (message) {
+      body.message = message
+      notification.addNotification(body)
+      return null
+    }
+
+    const err = await this.props.updatePassword(
+      this.props.loginStatus.user_id,
+      this.state.oldPassword,
+      this.state.newPassword
+    )
+
+    if (err) {
+      body.message = err.response.data.message
+      notification.addNotification(body)
+      return null
+    }
+
+    this.setState({ oldPassword: '', newPassword: '' })
+  }
+
   // =============================
   // work upload tab
   // =============================
@@ -115,18 +169,18 @@ class UserPageContainer extends React.Component {
 
     const work = new FormData()
     work.append('artist', this.props.loginStatus.user_id),
-    work.append('name', this.state.workTitle),
-    work.append('caption', this.state.workCaption),
-    work.append('price', this.state.workPrice),
-    work.append('image1', this.state.workImage1),
-    work.append('image2', this.state.workImage2),
-    work.append('image3', this.state.workImage3),
-    work.append('image4', this.state.workImage4),
-    work.append('image5', this.state.workImage5),
-    work.append('size', 0),
-    work.append('color', 0),
-    work.append('genre', 0),
-    work.append('subgenre', 0)
+      work.append('name', this.state.workTitle),
+      work.append('caption', this.state.workCaption),
+      work.append('price', this.state.workPrice),
+      work.append('image1', this.state.workImage1),
+      work.append('image2', this.state.workImage2),
+      work.append('image3', this.state.workImage3),
+      work.append('image4', this.state.workImage4),
+      work.append('image5', this.state.workImage5),
+      work.append('size', 0),
+      work.append('color', 0),
+      work.append('genre', 0),
+      work.append('subgenre', 0)
 
     const err = this.props.uploadWork(work)
   }
@@ -144,6 +198,12 @@ class UserPageContainer extends React.Component {
               upload={this.uploadUserIcon}
               iconRef={this.iconRef}
               buttonRef={this.userIconSelectBtnRef}
+              primeFormTyped={this.primeFormTyped}
+              email={this.state.email}
+              oldPassword={this.state.oldPassword}
+              newPassword={this.state.newPassword}
+              updateEmail={this.updateEmail}
+              updatePassword={this.updatePassword}
             />
           </div>
         )
@@ -172,7 +232,6 @@ class UserPageContainer extends React.Component {
               workFormChanged={this.workFormChanged}
               workFormIntChanged={this.workFormIntChanged}
               buttonRef={this.workImageSelectBtnRef}
-
               workTitle={this.state.workTitle}
               workCaption={this.state.workCaption}
               workPrice={this.state.workPrice}
@@ -202,15 +261,20 @@ class UserPageContainer extends React.Component {
   }
 
   render() {
+    if (!Object.keys(this.props.loginStatus).length) return <Redirect to="/login" />
+
     if (this.props.userDetail.pristine) return null
 
     return (
-      <div className="userDetail">
-        <div className="userDetail__nav">
-          <UserDetailNav navClicked={this.navClicked} />
+      <React.Fragment>
+        <NotificationSystem ref={this.notificationSystem} />
+        <div className="userDetail">
+          <div className="userDetail__nav">
+            <UserDetailNav navClicked={this.navClicked} />
+          </div>
+          {this.tabContents()}
         </div>
-        {this.tabContents()}
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -222,6 +286,8 @@ export default connect(
   }),
   dispatch => ({
     logout: () => dispatch(logout()),
+    updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
+    updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
     uploadWork: work => dispatch(uploadWork(work)),
     getUserDetail: id => dispatch(getUserDetail(id)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),

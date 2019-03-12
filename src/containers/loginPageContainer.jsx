@@ -4,7 +4,7 @@ import NotificationSystem from 'react-notification-system'
 
 import LoginForm from '../components/loginForm'
 import SignUpForm from '../components/signUpForm'
-import FormValidation from '../utils/formValidation'
+import { FormValidation } from '../utils/Validator'
 
 import { signUp } from '../actions/loginStatus'
 import { login } from '../actions/loginStatus'

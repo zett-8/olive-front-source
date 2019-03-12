@@ -73,13 +73,13 @@ const workDetail = props => {
         <div className="workDetail__right__buttons">
           {props.detail.sold ? ( // eslint-disable-line
             props.bought ? (
-              <p>
+              <p className="btn message">
                 <Link to={`/work/${props.detail.id}/deal/${props.detail.artist.user_id}/${props.detail.buyer.user_id}`}>
-                  MESSAGE
+                  Message
                 </Link>
               </p>
             ) : (
-              <p>SOLD</p>
+              <p className="sold">SOLD</p>
             )
           ) : (
             <button className="btn btn__buy" type="button" onClick={props.buy}>

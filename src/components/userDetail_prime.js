@@ -24,14 +24,14 @@ const userDetailPrime = props => {
       </div>
       <div>
         <p>Email</p>
-        <input className="input" type="text" name="email" placeholder={props.self.email} />
-        <button className="btn" type="button">Change Email</button>
+        <input className="input" type="text" name="email" value={props.email} placeholder={props.self.email} onChange={props.primeFormTyped} />
+        <button className="btn" type="button" onClick={props.updateEmail}>Change Email</button>
       </div>
       <div>
         <label>Password</label>  {/* eslint-disable-line */}
-        <input className="input" type="password" name="password" placeholder="現在のパスワード" />
-        <input className="input" type="password" name="password" placeholder="新しいパスワード" />
-        <button className="btn" type="button">Change password</button>
+        <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormTyped} />
+        <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormTyped} />
+        <button className="btn" type="button" onClick={props.updatePassword}>Change password</button>
       </div>
     </React.Fragment>
   )
@@ -41,6 +41,12 @@ userDetailPrime.propTypes = {
   userIconSelected: PropTypes.func.isRequired,
   userIconSelectBtnClicked: PropTypes.func.isRequired,
   upload: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  oldPassword: PropTypes.string,
+  newPassword: PropTypes.string,
+  primeFormTyped: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func.isRequired,
+  updatePassword: PropTypes.func.isRequired,
   self: PropTypes.shape({
     email: PropTypes.string,
   }),

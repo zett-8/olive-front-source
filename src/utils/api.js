@@ -7,6 +7,9 @@ export default {
   signUp: (email, password) => axios.post(`${PATH}/v1/users/`, { email, password }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
 
+  updateEmail: (userId, email) => axios.patch(`${PATH}/v1/users/${userId}/`, { email }),
+  updatePassword: (userId, oldPassword, newPassword) => axios.patch(`${PATH}/v1/users/${userId}/`, { oldPassword, newPassword }),
+
   getColors: () => axios.get(`${PATH}/v1/colors/`),
   getGenres: () => axios.get(`${PATH}/v1/genres/`),
 

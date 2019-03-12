@@ -4,6 +4,8 @@ export const actionTypes = {
   SIGNUP: 'SIGNUP',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  UPDATE_EMAIL: 'UPDATE_EMAIL',
+  UPDATE_PASSWORD: 'UPDATE_PASSWORD'
 }
 
 export const signUp = (email, password) => dispatch => {
@@ -33,4 +35,19 @@ export const logout = () => dispatch => {
     type: actionTypes.LOGOUT,
     payload: null,
   })
+}
+
+export const updateEmail = (userId, email) => dispatch => {
+  return Api.updateEmail(userId, email)
+    .then(() => {
+      alert('メールアドレスを変更しました。\n新しいメールアドレスでもう一度ログインしてください')
+      dispatch(logout())
+    })
+    .catch(res => res)
+}
+
+export const updatePassword = (userId, oldPassword, newPassword) => () => {
+  return Api.updatePassword(userId, oldPassword, newPassword)
+    .then(() => console.log('password is updated'))
+    .catch(res => res)
 }

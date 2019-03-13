@@ -15,13 +15,15 @@ export const header = props => {
       <div className="nav__left">
         <p onClick={() => props.menuClicked('/popular')}>popular</p>
         <p onClick={() => props.menuClicked('/new')}>new</p>
-        {props.loggedIn ? <p onClick={() => props.menuClicked('/review')}>review</p> : null}
+        {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
+          <p onClick={() => props.menuClicked('/review')}>review</p>
+        ) : null}
       </div>
 
       <h1 onClick={() => props.menuClicked('/')}>Olive</h1>
 
       <div className="nav__right">
-        {props.loggedIn ? (
+        {Object.keys(props.loginStatus).length ? (
           // while login
           <React.Fragment>
             <p onClick={props.openModal}>
@@ -51,7 +53,9 @@ export const header = props => {
 }
 
 header.propTypes = {
-  loggedIn: PropTypes.bool,
+  loginStatus: PropTypes.shape({
+    artist: PropTypes.bool,
+  }),
   userId: PropTypes.number,
   menuClicked: PropTypes.func.isRequired,
   burgerToggleClicked: PropTypes.func.isRequired,

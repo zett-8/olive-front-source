@@ -95,7 +95,7 @@ class HeaderContainer extends React.Component {
           <Header
             menuClicked={this.menuClicked}
             burgerToggleClicked={this.burgerToggleClicked}
-            loggedIn={!!Object.keys(this.props.loginStatus).length}
+            loginStatus={this.props.loginStatus}
             userId={this.props.loginStatus.user_id}
             openModal={this.openModal}
           />

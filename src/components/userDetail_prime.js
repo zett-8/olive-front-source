@@ -24,13 +24,13 @@ const userDetailPrime = props => {
       </div>
       <div>
         <p>Email</p>
-        <input className="input" type="text" name="email" value={props.email} placeholder={props.self.email} onChange={props.primeFormTyped} />
+        <input className="input" type="text" name="email" value={props.email} placeholder={props.self.email} onChange={props.primeFormChanged} />
         <button className="btn" type="button" onClick={props.updateEmail}>Change Email</button>
       </div>
       <div>
         <label>Password</label>  {/* eslint-disable-line */}
-        <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormTyped} />
-        <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormTyped} />
+        <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormChanged} />
+        <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormChanged} />
         <button className="btn" type="button" onClick={props.updatePassword}>Change password</button>
       </div>
     </React.Fragment>
@@ -44,7 +44,7 @@ userDetailPrime.propTypes = {
   email: PropTypes.string,
   oldPassword: PropTypes.string,
   newPassword: PropTypes.string,
-  primeFormTyped: PropTypes.func.isRequired,
+  primeFormChanged: PropTypes.func.isRequired,
   updateEmail: PropTypes.func.isRequired,
   updatePassword: PropTypes.func.isRequired,
   self: PropTypes.shape({

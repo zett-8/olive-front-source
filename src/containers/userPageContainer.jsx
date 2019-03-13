@@ -13,8 +13,7 @@ import UserDetailHistory from '../components/userDetail_history'
 
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
-import { getUserDetail } from '../actions/userDetail'
-import { uploadUserIcon } from '../actions/userDetail'
+import { getUserDetail, uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { logout, updateEmail, updatePassword } from '../actions/loginStatus'
 
 class UserPageContainer extends React.Component {
@@ -37,12 +36,36 @@ class UserPageContainer extends React.Component {
 
     this.state = {
       tab: 0,
-      // prime
+      selectOrder: 1,
+
+      // prime tab
       iconImage: null,
       email: '',
       oldPassword: '',
       newPassword: '',
-      selectOrder: 1,
+
+      // buyer tab
+      firstName: '',
+      lastName: '',
+      zipCode: '',
+      address: '',
+      phoneNumber: '',
+
+      // artist tab
+      artistName: '',
+      profile: '',
+      website: '',
+      birthday: '',
+      sex: '',
+      place: '',
+      bankName: '',
+      bankCode: '',
+      bankBranchName: '',
+      bankBranchCode: '',
+      bankAccountNumber: '',
+      bankAccountName: '',
+
+      // work upload tab
       workImage1: null,
       workImage2: null,
       workImage3: null,
@@ -54,10 +77,31 @@ class UserPageContainer extends React.Component {
     }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const ID = this.props.match.params.id
 
-    if (ID === this.props.loginStatus.user_id + '') this.props.getUserDetail(ID)
+    if (ID === this.props.loginStatus.user_id + '') await this.props.getUserDetail(ID)
+
+    this.setState({
+      firstName: this.props.userDetail.contents.first_name,
+      lastName: this.props.userDetail.contents.last_name,
+      zipCode: this.props.userDetail.contents.zipcode,
+      address: this.props.userDetail.contents.address,
+      phoneNumber: this.props.userDetail.contents.phone_number,
+
+      artistName: this.props.userDetail.contents.artist_name,
+      profile: this.props.userDetail.contents.profile,
+      website: this.props.userDetail.contents.website,
+      birthday: this.props.userDetail.contents.birthday || '',
+      sex: this.props.userDetail.contents.sex,
+      place: this.props.userDetail.contents.place,
+      bankName: this.props.userDetail.contents.bank_name,
+      bankCode: this.props.userDetail.contents.bank_code,
+      bankBranchName: this.props.userDetail.contents.bank_branch_name,
+      bankBranchCode: this.props.userDetail.contents.bank_branch_code,
+      bankAccountNumber: this.props.userDetail.contents.bank_account_number,
+      bankAccountName: this.props.userDetail.contents.bank_account_name,
+    })
   }
 
   navClicked = num => this.setState({ tab: num })
@@ -95,7 +139,7 @@ class UserPageContainer extends React.Component {
     this.setState({ iconImage: null })
   }
 
-  primeFormTyped = e => this.setState({ [e.target.name]: e.target.value })
+  primeFormChanged = e => this.setState({ [e.target.name]: e.target.value })
 
   updateEmail = async () => {
     const notification = this.notificationSystem.current
@@ -139,6 +183,103 @@ class UserPageContainer extends React.Component {
     }
 
     this.setState({ oldPassword: '', newPassword: '' })
+  }
+
+  // =============================
+  // buyer tab
+  // =============================
+
+  buyerFormChanged = e => this.setState({ [e.target.name]: e.target.value })
+
+  updateBuyerInfo = async () => {
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const state = this.state
+    if (!state.firstName || !state.lastName || !state.zipCode || !state.address || !state.phoneNumber) {
+      body.message = '*必須項目を入力してください'
+      notification.addNotification(body)
+      return null
+    }
+
+    const data = {
+      ready_as_buyer: true,
+      user_id: this.props.loginStatus.user_id,
+      first_name: this.state.firstName,
+      last_name: this.state.lastName,
+      zipcode: this.state.zipCode,
+      address: this.state.address,
+      phone_number: this.state.phoneNumber
+    }
+
+    const err = await this.props.updateBuyerInfo(this.props.loginStatus.user_id, data)
+
+    if (err) {
+      body.message = 'Buyer情報の更新に失敗しました'
+      notification.addNotification(body)
+      return null
+    }
+
+    body.message = 'Buyer情報を更新しました'
+    body.level = 'success'
+    notification.addNotification(body)
+  }
+
+  // =============================
+  // artist tab
+  // =============================
+
+  artistFormChanged = e => this.setState({ [e.target.name]: e.target.value })
+
+  updateArtistInfo = async () => {
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    if (
+      !this.state.artistName ||
+      !this.state.profile ||
+      !this.state.bankName ||
+      !this.state.bankCode ||
+      !this.state.bankBranchName ||
+      !this.state.bankBranchCode ||
+      !this.state.bankAccountNumber ||
+      !this.state.bankAccountName
+    ) {
+      body.message = '*必須項目を入力してください'
+      notification.addNotification(body)
+      return null
+    }
+
+    const data = {
+      ready_as_artist: true,
+      user_id: this.props.loginStatus.user_id,
+      artist_name: this.state.artistName,
+      profile: this.state.profile,
+      website: this.state.website,
+      place: this.state.place,
+      birthday: this.state.birthday || null,
+      sex: this.state.sex,
+      bank_name: this.state.bankName,
+      bank_code: this.state.bankCode,
+      bank_branch_name: this.state.bankBranchName,
+      bank_branch_code: this.state.bankBranchCode,
+      bank_account_number: this.state.bankAccountNumber,
+      bank_account_name: this.state.bankAccountName
+    }
+
+    const err = await this.props.updateArtistInfo(this.props.loginStatus.user_id, data)
+
+    if (err) {
+      body.message = 'Artist情報の更新に失敗しました'
+      notification.addNotification(body)
+      return null
+    }
+
+    body.message = 'Buyer情報を更新しました'
+    body.level = 'success'
+    notification.addNotification(body)
+
+    console.log('update!')
   }
 
   // =============================
@@ -198,7 +339,7 @@ class UserPageContainer extends React.Component {
               upload={this.uploadUserIcon}
               iconRef={this.iconRef}
               buttonRef={this.userIconSelectBtnRef}
-              primeFormTyped={this.primeFormTyped}
+              primeFormChanged={this.primeFormChanged}
               email={this.state.email}
               oldPassword={this.state.oldPassword}
               newPassword={this.state.newPassword}
@@ -211,14 +352,37 @@ class UserPageContainer extends React.Component {
       case 1:
         return (
           <div className="userDetail_buyer">
-            <UserDetailBuyer />
+            <UserDetailBuyer
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              zipCode={this.state.zipCode}
+              address={this.state.address}
+              phoneNumber={this.state.phoneNumber}
+              buyerFormChanged={this.buyerFormChanged}
+              updateBuyerInfo={this.updateBuyerInfo}
+            />
           </div>
         )
 
       case 2:
         return (
           <div className="userDetail_artist">
-            <UserDetailArtist />
+            <UserDetailArtist
+              artistName={this.state.artistName}
+              profile={this.state.profile}
+              website={this.state.website}
+              birthday={this.state.birthday}
+              sex={this.state.sex}
+              place={this.state.place}
+              bankName={this.state.bankName}
+              bankCode={this.state.bankCode}
+              bankBranchName={this.state.bankBranchName}
+              bankBranchCode={this.state.bankBranchCode}
+              bankAccountNumber={this.state.bankAccountNumber}
+              bankAccountName={this.state.bankAccountName}
+              artistFormChanged={this.artistFormChanged}
+              updateArtistInfo={this.updateArtistInfo}
+            />
           </div>
         )
 
@@ -291,5 +455,7 @@ export default connect(
     uploadWork: work => dispatch(uploadWork(work)),
     getUserDetail: id => dispatch(getUserDetail(id)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
+    updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
+    updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),
   })
 )(UserPageContainer)

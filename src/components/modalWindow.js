@@ -55,16 +55,9 @@ const modalWindow = props => {
         <input type="radio" name="main" value="new" checked={props.main === 'new'} onChange={props.filterChanged} />
         New
 
-        {props.filters.contents.colors.map(c => (
-          <React.Fragment key={c.name}>
-            <input type="checkbox" name="color" value={c.name} />
-            {c.name}
-          </React.Fragment>
-        ))}
-
         <select name="genre" value={props.genre} onChange={props.filterChanged}>
           <option value="">-</option>
-          {props.filters.contents.genres.map(g => (
+          {props.genres.map(g => (
             <option key={g.name} value={g.name}>
               {g.name}
             </option>
@@ -126,6 +119,7 @@ modalWindow.propTypes = {
   filters: PropTypes.shape({
     contents: PropTypes.object,
   }),
+  genres: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default modalWindow

@@ -43,7 +43,7 @@ const userDetailWorkUpload = props => {
           onChange={props.workFormIntChanged}
         />
       </label>
-      <button className="btn" type="button" onClick={props.upload}>
+      <button className="btn btn__save" type="button" onClick={props.upload}>
         Save
       </button>
     </React.Fragment>

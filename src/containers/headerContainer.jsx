@@ -5,7 +5,7 @@ import ModalWindow from '../components/modalWindow'
 import Header from '../components/header'
 import DownMenu from '../components/downMenu'
 
-import { getColors, getGenres } from '../actions/filters'
+import { getGenres } from '../actions/genres'
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class HeaderContainer extends React.Component {
 
       // filter modal
       main: 'random',
-      color: '',
       genre: '',
       selectableSubGenres: [],
       subGenre: '',
@@ -29,11 +28,8 @@ class HeaderContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getColors()
     this.props.getGenres()
   }
-
-  top = () => this.props.history.push('/')
 
   burgerToggleClicked = () => {
     this.setState({ downMenuClass: !this.state.downMenuClass })
@@ -51,7 +47,7 @@ class HeaderContainer extends React.Component {
 
   filterChanged = e => {
     if (e.target.name === 'genre') {
-      const selectedGenre = this.props.filters.contents.genres.filter(g => g.name === e.target.value)
+      const selectedGenre = this.props.genres.contents.filter(g => g.name === e.target.value)
 
       this.setState({
         genre: selectedGenre[0].name,
@@ -64,7 +60,7 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    if (this.props.filters.pristine) return null
+    if (this.props.genres.pristine) return null
 
     return (
       <React.Fragment>
@@ -88,7 +84,7 @@ class HeaderContainer extends React.Component {
             price={this.state.price}
             selectableSubGenres={this.state.selectableSubGenres}
 
-            filters={this.props.filters}
+            genres={this.props.genres.contents}
             filterChanged={this.filterChanged}
           />
 
@@ -108,10 +104,9 @@ class HeaderContainer extends React.Component {
 export default connect(
   state => ({
     loginStatus: state.loginStatus,
-    filters: state.filters,
+    genres: state.genres,
   }),
   dispatch => ({
-    getColors: () => dispatch(getColors()),
     getGenres: () => dispatch(getGenres()),
   })
 )(HeaderContainer)

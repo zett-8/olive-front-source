@@ -51,7 +51,7 @@ const userDetailArtist = props => {
       <span>*</span>
       <input type="text" name="bankAccountName" value={props.bankAccountName} onChange={props.artistFormChanged} />
 
-      <button type="button" onClick={props.updateArtistInfo}>
+      <button className="btn btn__save" type="button" onClick={props.updateArtistInfo}>
         save
       </button>
     </React.Fragment>

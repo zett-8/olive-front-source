@@ -24,7 +24,7 @@ const userDetailBuyer = props => {
       <span>*</span>
       <input type="text" name="phoneNumber" value={props.phoneNumber} onChange={props.buyerFormChanged} />
 
-      <button type="button" onClick={props.updateBuyerInfo}>
+      <button className="btn btn__save" type="button" onClick={props.updateBuyerInfo}>
         Save
       </button>
     </React.Fragment>

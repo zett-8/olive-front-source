@@ -23,6 +23,8 @@ export default {
     return axios.post(`${PATH}/v1/works/`, work)
   },
 
+  getHistory: userId => axios.get(`${PATH}/v1/works/?historyOf=${userId}`),
+
   getColors: () => axios.get(`${PATH}/v1/colors/`),
   getGenres: () => axios.get(`${PATH}/v1/genres/`),
 

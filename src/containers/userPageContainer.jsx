@@ -10,9 +10,11 @@ import UserDetailBuyer from '../components/userDetail_buyer'
 import UserDetailArtist from '../components/userDetail_artist'
 import UserDetailWorkUpload from '../components/userDetail_workUpload'
 import UserDetailHistory from '../components/userDetail_history'
+import WorkList from '../components/workList'
 
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
+import { getHistory } from '../actions/history'
 import { getUserDetail, uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { logout, updateEmail, updatePassword } from '../actions/loginStatus'
 
@@ -209,7 +211,7 @@ class UserPageContainer extends React.Component {
       last_name: this.state.lastName,
       zipcode: this.state.zipCode,
       address: this.state.address,
-      phone_number: this.state.phoneNumber
+      phone_number: this.state.phoneNumber,
     }
 
     const err = await this.props.updateBuyerInfo(this.props.loginStatus.user_id, data)
@@ -264,7 +266,7 @@ class UserPageContainer extends React.Component {
       bank_branch_name: this.state.bankBranchName,
       bank_branch_code: this.state.bankBranchCode,
       bank_account_number: this.state.bankAccountNumber,
-      bank_account_name: this.state.bankAccountName
+      bank_account_name: this.state.bankAccountName,
     }
 
     const err = await this.props.updateArtistInfo(this.props.loginStatus.user_id, data)
@@ -412,6 +414,7 @@ class UserPageContainer extends React.Component {
         return (
           <div className="userDetail_history">
             <UserDetailHistory />
+            <WorkList works={this.props.history.contents} />
           </div>
         )
 
@@ -447,6 +450,7 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     userDetail: state.userDetail,
+    history: state.history,
   }),
   dispatch => ({
     logout: () => dispatch(logout()),
@@ -454,6 +458,7 @@ export default connect(
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
     uploadWork: work => dispatch(uploadWork(work)),
     getUserDetail: id => dispatch(getUserDetail(id)),
+    getHistory: userId => dispatch(getHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
     updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),

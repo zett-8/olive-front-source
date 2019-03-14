@@ -1,17 +1,18 @@
 .userDetail {
 
   &__nav {
-    background: $color-gray;
+    display: flex;
+    margin-bottom: 5rem;
 
     p {
-      display: block;
-      padding-left: 1rem;
-      line-height: 5rem;
-      border-bottom: 0.5px #777777 solid;
+      text-align: center;
       cursor: pointer;
-      font-size: 1.3rem;
-
-      &:last-of-type { border: none; }
+      border: 1px black solid;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 2rem 0 0 0;
+      width: 100%;
+      line-height: 3rem;
     }
   }
 

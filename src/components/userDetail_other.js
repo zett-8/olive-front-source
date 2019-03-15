@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const userDetailOther = props => {
   return (
     <React.Fragment>
-      <p onClick={props.handleLogout}>Logout</p>
+      <button type="button" className="btn btn__login" onClick={props.handleLogout}>Logout</button>
     </React.Fragment>
   )
 }

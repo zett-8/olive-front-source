@@ -3,22 +3,22 @@ import Api from '../utils/api'
 export const actionTypes = {
   CLEAR_WORK_DETAIL: 'CLEAR_WORK_DETAIL',
   GET_WORK_DETAIL: 'GET_WORK_DETAIL',
-  TOGGLE_FAVORITE_WORK: 'TOGGLE_FAVORITE_WORK'
+  TOGGLE_FAVORITE_WORK: 'TOGGLE_FAVORITE_WORK',
 }
 
 export const clearWorkDetail = () => dispatch => {
   dispatch({
     type: actionTypes.CLEAR_WORK_DETAIL,
-    payload: null
+    payload: null,
   })
 }
 
-export const getWorkDetail = (id) => dispatch => {
+export const getWorkDetail = id => dispatch => {
   return Api.getWorkDetail(id)
     .then(res => {
       dispatch({
         type: actionTypes.GET_WORK_DETAIL,
-        payload: res.data
+        payload: res.data,
       })
     })
     .catch(res => res)
@@ -33,14 +33,26 @@ export const uploadWork = work => () => {
     .catch(res => res)
 }
 
-export const buyWork = (buyerId, workId) => dispatch => {
-  return Api.buyWork(buyerId, workId)
-    .then(() => dispatch(getWorkDetail(workId)))
+export const changeWorkStatus = (workId, status) => dispatch => {
+  return Api.changeWorkStatus(workId, status)
+    .then(() => {
+      dispatch(getWorkDetail(workId))
+    })
+    .catch(res => res)
+}
+
+export const buyWork = (buyerId, workId, status) => dispatch => {
+  return Api.buyWork(buyerId, workId, status)
+    .then(() => {
+      dispatch(getWorkDetail(workId))
+    })
     .catch(res => res)
 }
 
 export const toggleFavorite = (workId, userId) => dispatch => {
   return Api.toggleFavorite(workId, userId)
-    .then(() => dispatch(getWorkDetail(workId)))
+    .then(() => {
+      dispatch(getWorkDetail(workId))
+    })
     .catch(res => res)
 }

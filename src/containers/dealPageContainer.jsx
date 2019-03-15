@@ -1,9 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Messages from '../components/messages'
+import Progress from '../components/deal_progress'
+import Info from '../components/deal_info'
+import Messages from '../components/deal_messages'
 
-import { getWorkDetail } from '../actions/workDetail'
+import { getWorkDetail, changeWorkStatus } from '../actions/workDetail'
+import { getBuyerInfo } from '../actions/buyerDetail'
 import { clearMessage, getMessages, sendMessage } from '../actions/messages'
 
 class DealPageContainer extends React.Component {
@@ -12,6 +15,7 @@ class DealPageContainer extends React.Component {
 
     this.state = {
       message: '',
+      role: '',
     }
   }
 
@@ -26,9 +30,20 @@ class DealPageContainer extends React.Component {
       this.props.history.push('/')
     }
 
-    await this.props.getDetail(params.id)
-    this.props.getMessages(this.props.workDetail.id)
+    await this.props.getWorkDetail(params.id)
+    this.props.getMessages(this.props.workDetail.contents.id)
+    this.props.getBuyerInfo(this.props.workDetail.contents.buyer.user_id)
+
+    this.setState({ role: params.artist_id === self ? 'artist' : 'buyer' })
   }
+
+  notifyPayment = () => {
+    this.props.changeWorkStatus(this.props.workDetail.contents.id, 3)
+  }
+
+  notifyShipment = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 4)
+
+  notifyReception = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 5)
 
   handleInputChanged = e => {
     e.preventDefault()
@@ -37,7 +52,7 @@ class DealPageContainer extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const w = this.props.workDetail
+    const w = this.props.workDetail.contents
 
     this.props.sendMessage(
       w.id,
@@ -54,6 +69,14 @@ class DealPageContainer extends React.Component {
 
     return (
       <div className="deal">
+        <Progress
+          work={this.props.workDetail.contents}
+          role={this.state.role}
+          notifyPayment={this.notifyPayment}
+          notifyShipment={this.notifyShipment}
+          notifyReception={this.notifyReception}
+        />
+        <Info work={this.props.workDetail.contents} buyerDetail={this.props.buyerDetail.contents} />
         <Messages
           messages={this.props.messages.contents}
           inputMessage={this.state.message}
@@ -69,10 +92,13 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     workDetail: state.workDetail,
+    buyerDetail: state.buyerDetail,
     messages: state.messages,
   }),
   dispatch => ({
-    getDetail: id => dispatch(getWorkDetail(id)),
+    getWorkDetail: id => dispatch(getWorkDetail(id)),
+    getBuyerInfo: id => dispatch(getBuyerInfo(id)),
+    changeWorkStatus: (workId, status) => dispatch(changeWorkStatus(workId, status)),
     clearMessage: () => dispatch(clearMessage()),
     getMessages: workId => dispatch(getMessages(workId)),
     sendMessage: (workId, sender, receiver, body) => dispatch(sendMessage(workId, sender, receiver, body)),

@@ -8,6 +8,7 @@ import workDetailReducer from './workDetail'
 import userDetailReducer from './userDetail'
 import seedArtistReducer from './seedArtists'
 import artistDetailReducer from './artistDetail'
+import buyerDetailReducer from './buyerDetail'
 import messagesReducer from './messages'
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
   userDetail: userDetailReducer,
   seedArtists: seedArtistReducer,
   artistDetail: artistDetailReducer,
+  buyerDetail: buyerDetailReducer,
   messages: messagesReducer,
 })

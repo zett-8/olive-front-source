@@ -72,7 +72,7 @@ class WorkdetailPageContainer extends React.Component {
       return null
     }
 
-    const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.contents.id)
+    const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.contents.id, '2')
     this.setState({ bought: true })
   }
 
@@ -107,7 +107,7 @@ export default connect(
   }),
   dispatch => ({
     clearWorkDetail: () => dispatch(clearWorkDetail()),
-    buyWork: (buyerId, workId) => dispatch(buyWork(buyerId, workId)),
+    buyWork: (buyerId, workId, status) => dispatch(buyWork(buyerId, workId, status)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getDetail: id => dispatch(getWorkDetail(id)),
   })

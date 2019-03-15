@@ -1,12 +1,105 @@
+@mixin phaseLineBase {
+  display: grid;
+  grid-template-columns: min-content 1fr 1fr min-content 1fr 1fr min-content 1fr 1fr min-content;
+  align-items: center;
+
+  .circle {
+    height: 1.7rem;
+    width: 1.7rem;
+    border-radius: 1rem;
+    background-color: #eeeeee;
+  }
+
+  .line {
+    height: 2px;
+    background-color: #eeeeee;
+  }
+}
+
 .deal {
 
-  .phase {
+  &__progress {
 
-    .circle {
-      height: 1rem;
-      width: 1rem;
-      border-radius: 1rem;
-      background-color: crimson;
+    &__message {
+      width: 90%;
+      background-color: #eeeeee;
+      padding: 2rem;
+      margin: 0 auto 6rem auto;
+      text-align: center;
+
+
+
+      &__main {
+        line-height: 2rem;
+        font-size: 2rem;
+        font-weight: 200;
+        margin-bottom: 1rem;
+
+        .circle {
+          display: inline-block;
+          height: 2rem;
+          width: 2rem;
+          background-color: crimson;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+      }
+
+    }
+
+    &__visual {
+      margin: 0 auto;
+      width: 70%;
+
+      &__phaseLine2 {
+        @include phaseLineBase;
+        .circle1, .line1 {
+          background-color: crimson;
+        }
+      }
+
+      &__phaseLine3 {
+        @include phaseLineBase;
+        .circle1, .circle2, .line1, .line2, .line3 {
+          background-color: crimson;
+        }
+      }
+
+      &__phaseLine4 {
+        @include phaseLineBase;
+        .circle1, .circle2, .circle3, .line1, .line2, .line3, .line4, .line5 {
+          background-color: crimson;
+        }
+      }
+
+      &__phaseLine5 {
+        @include phaseLineBase;
+        .line, .circle {
+          background-color: crimson;
+        }
+      }
+
+      &__phaseGuide {
+        display: grid;
+        grid-template-columns: max-content 1fr max-content 1fr max-content 1fr max-content;
+        margin-top: 0.6rem;
+
+        font-size: 1.3rem;
+        color: #777777;
+
+        :first-child { margin-left: -1.7rem; }
+        :last-child { margin-right: -1.7rem; }
+      }
     }
   }
+
+  &__info {
+    &__main {
+      background: center no-repeat;
+      background-size: contain;
+      width: 20rem;
+      height: 20rem;
+    }
+  }
+
 }

@@ -563,7 +563,7 @@ babel-core@^6.26.0, babel-core@^6.26.3:
     babel-code-frame "^6.26.0"
     babel-generator "^6.26.0"
     babel-helpers "^6.24.1"
-    babel-messages "^6.23.0"
+    babel-deal_messages "^6.23.0"
     babel-register "^6.26.0"
     babel-runtime "^6.26.0"
     babel-template "^6.26.0"
@@ -597,7 +597,7 @@ babel-generator@^6.26.0:
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.1.tgz#1844408d3b8f0d35a404ea7ac180f087a601bd90"
   integrity sha512-HyfwY6ApZj7BYTcJURpM5tznulaBvyio7/0d4zFOeMPUmfxkCjHocCuoLa2SAGzBI8AREcH3eP3758F672DppA==
   dependencies:
-    babel-messages "^6.23.0"
+    babel-deal_messages "^6.23.0"
     babel-runtime "^6.26.0"
     babel-types "^6.26.0"
     detect-indent "^4.0.0"
@@ -714,7 +714,7 @@ babel-helper-replace-supers@^6.24.1:
   integrity sha1-v22/5Dk40XNpohPKiov3S2qQqxo=
   dependencies:
     babel-helper-optimise-call-expression "^6.24.1"
-    babel-messages "^6.23.0"
+    babel-deal_messages "^6.23.0"
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
     babel-traverse "^6.24.1"
@@ -737,9 +737,9 @@ babel-loader@^7.1.5:
     loader-utils "^1.0.2"
     mkdirp "^0.5.1"
 
-babel-messages@^6.23.0:
+babel-deal_messages@^6.23.0:
   version "6.23.0"
-  resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
+  resolved "https://registry.yarnpkg.com/babel-deal_messages/-/babel-deal_messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
   integrity sha1-8830cDhYA1sqKVHG7F7fbGLyYw4=
   dependencies:
     babel-runtime "^6.22.0"
@@ -844,7 +844,7 @@ babel-plugin-transform-es2015-classes@^6.23.0:
     babel-helper-function-name "^6.24.1"
     babel-helper-optimise-call-expression "^6.24.1"
     babel-helper-replace-supers "^6.24.1"
-    babel-messages "^6.23.0"
+    babel-deal_messages "^6.23.0"
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
     babel-traverse "^6.24.1"
@@ -1174,7 +1174,7 @@ babel-traverse@^6.24.1, babel-traverse@^6.26.0:
   integrity sha1-RqnL1+3MYsjlwGTi0tjQ9ANXZu4=
   dependencies:
     babel-code-frame "^6.26.0"
-    babel-messages "^6.23.0"
+    babel-deal_messages "^6.23.0"
     babel-runtime "^6.26.0"
     babel-types "^6.26.0"
     babylon "^6.18.0"

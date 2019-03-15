@@ -34,17 +34,19 @@ export default {
       },
     }),
 
-  buyWork: (buyerId, workId) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerId }),
+  buyWork: (buyerId, workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerId, status }),
   getWorks: () => axios.get(`${PATH}/v1/works/`),
   getFavoriteWorks: userId => axios.get(`${PATH}/v1/works/?favoritesOf=${userId}`),
   getWorkDetail: id => axios.get(`${PATH}/v1/works/${id}/`),
-
   getWorksOfAnArtist: id => axios.get(`${PATH}/v1/works/?artist=${id}`),
-  getMessages: workId => axios.get(`${PATH}/v1/messages/?work=${workId}`),
+  changeWorkStatus: (workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { status }),
 
+  getMessages: workId => axios.get(`${PATH}/v1/messages/?work=${workId}`),
   sendMessage: (workId, sender, receiver, body) =>
     axios.post(`${PATH}/v1/messages/`, { work: workId, sender, receiver, body }),
 
   getSeedArtists: () => axios.get(`${PATH}/v1/seedArtists/`),
   getArtistDetail: id => axios.get(`${PATH}/v1/artists/${id}/`),
+
+  getBuyerInfo: id => axios.get(`${PATH}/v1/buyerInfo/${id}/`),
 }

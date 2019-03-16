@@ -10,12 +10,12 @@ const seedArtistList = props => {
       {props.seedArtists.map(artist => (
         <div key={artist.icon} className="seedArtistList__artist">
           <div className="seedArtistList__artist__info">
-            <Link to={`/artist/${artist.user_id}`}>
+            <Link to={`/artist/${artist.id}`}>
               <div className="seedArtistList__artist__info__icon" style={{ backgroundImage: `url(${artist.icon}` }} />
             </Link>
             <div className="seedArtistList__artist__info__list">
               <p>
-                <Link to={`/artist/${artist.user_id}`}>{artist.artist_name}</Link>
+                <Link to={`/artist/${artist.id}`}>{artist.artist_name}</Link>
               </p>
               <p>{artist.birthday}</p>
               <p>{artist.place}</p>

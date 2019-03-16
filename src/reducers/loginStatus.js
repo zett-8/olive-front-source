@@ -12,6 +12,7 @@ export default (state = {}, action) => {
     case actionTypes2.UPDATE_BUYER_INFO:
       return {
         token: state.token,
+        uuid: state.uuid,
         user_id: state.user_id,
         email: state.email,
         artist: state.artist,
@@ -21,6 +22,7 @@ export default (state = {}, action) => {
     case actionTypes2.UPDATE_ARTIST_INFO:
       return {
         token: state.token,
+        uuid: state.uuid,
         user_id: state.user_id,
         email: state.email,
         artist: true,

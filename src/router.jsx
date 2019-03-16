@@ -31,8 +31,8 @@ export default () => (
             <Route exact path="/review" component={ReviewContainer} />
             <Route exact path="/artist/:id" component={ArtistContainer} />
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
-            <Route exact path="/work/:id/deal/:artist_id/:buyer_id" component={DealContainer} />
-            <Route exact path="/user/:id" component={UserContainer} />
+            <Route exact path="/work/:workId/deal/:myUUID/:clientId" component={DealContainer} />
+            <Route exact path="/user/:UUID" component={UserContainer} />
 
             <Route component={Page404} />
           </Switch>

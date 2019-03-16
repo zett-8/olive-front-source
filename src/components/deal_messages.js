@@ -7,12 +7,12 @@ const dealMessages = props => {
       {props.messages.map(m => (
         <p key={m.id}>{m.body}</p>
       ))}
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={props.sendMessage}>
         <input
           className="input input__message"
           placeholder="Message"
           value={props.inputMessage}
-          onChange={props.handleInputChanged}
+          onChange={props.messageTyped}
         />
         <button className="btn btn__send" type="submit">
           メッセージを送る
@@ -25,8 +25,8 @@ const dealMessages = props => {
 dealMessages.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
   inputMessage: PropTypes.string,
-  handleInputChanged: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  messageTyped: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
 }
 
 export default dealMessages

@@ -52,7 +52,7 @@ const workDetail = props => {
         </div>
         <div className="workDetail__right__A">
           <p>
-            <Link to={`/artist/${props.detail.artist.user_id}`}>{props.detail.artist.artist_name}</Link>
+            <Link to={`/artist/${props.detail.artist.id}`}>{props.detail.artist.artist_name}</Link>
           </p>
           <p>{props.detail.year ? props.detail.year : '-'}</p>
           <p>{props.detail.technique ? props.detail.technique : '-'}</p>
@@ -75,7 +75,11 @@ const workDetail = props => {
           {props.detail.sold ? ( // eslint-disable-line
             props.bought ? (
               <p className="btn message">
-                <Link to={`/work/${props.detail.id}/deal/${props.detail.artist.user_id}/${props.detail.buyer.user_id}`}>
+                <Link
+                  to={`/work/${props.detail.id}/deal/${props.self.UUID}/${
+                    props.detail.artist.id === props.self.user_id ? props.detail.buyer.id : props.detail.artist.id
+                  }`}
+                >
                   Message
                 </Link>
               </p>
@@ -106,6 +110,7 @@ const workDetail = props => {
 
 workDetail.propTypes = {
   self: PropTypes.shape({
+    UUID: PropTypes.string,
     user_id: PropTypes.number,
   }),
   detail: PropTypes.shape({

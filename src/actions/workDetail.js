@@ -41,8 +41,8 @@ export const changeWorkStatus = (workId, status) => dispatch => {
     .catch(res => res)
 }
 
-export const buyWork = (buyerId, workId, status) => dispatch => {
-  return Api.buyWork(buyerId, workId, status)
+export const buyWork = (buyerUUID, workId, status) => dispatch => {
+  return Api.buyWork(buyerUUID, workId, status)
     .then(() => {
       dispatch(getWorkDetail(workId))
     })

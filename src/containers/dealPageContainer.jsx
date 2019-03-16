@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Progress from '../components/deal_progress'
 import Info from '../components/deal_info'
 import Messages from '../components/deal_messages'
+import Page404 from '../components/404'
 
 import { getWorkDetail, changeWorkStatus } from '../actions/workDetail'
 import { getBuyerInfo } from '../actions/buyerDetail'
@@ -14,6 +15,7 @@ class DealPageContainer extends React.Component {
     super(props)
 
     this.state = {
+      verified: false,
       message: '',
       role: '',
     }
@@ -22,42 +24,38 @@ class DealPageContainer extends React.Component {
   async componentWillMount() {
     await this.props.clearMessage()
 
-    const params = this.props.match.params
-    const self = this.props.loginStatus.user_id + ''
+    const { workId, clientId, myUUID } = this.props.match.params
+    const self = this.props.loginStatus
 
     // kick out stranger
-    if (params.artist_id !== self && params.buyer_id !== self) {
-      this.props.history.push('/')
-    }
+    if (myUUID !== self.uuid) this.props.history.push('/')
 
-    await this.props.getWorkDetail(params.id)
+    const err = await this.props.getWorkDetail(workId)
+    const work = this.props.workDetail.contents
+
+    if (!err && (work.buyer.id === parseInt(clientId, 10) || work.artist.id === parseInt(clientId, 10)))
+      this.setState({ verified: true })
+
     this.props.getMessages(this.props.workDetail.contents.id)
-    this.props.getBuyerInfo(this.props.workDetail.contents.buyer.user_id)
+    this.props.getBuyerInfo(this.props.workDetail.contents.buyer.id)
 
-    this.setState({ role: params.artist_id === self ? 'artist' : 'buyer' })
+    this.setState({ role: work.buyer.id === self.user_id ? 'buyer' : 'artist' })
   }
 
-  notifyPayment = () => {
-    this.props.changeWorkStatus(this.props.workDetail.contents.id, 3)
-  }
-
+  notifyPayment = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 3)
   notifyShipment = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 4)
-
   notifyReception = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 5)
 
-  handleInputChanged = e => {
-    e.preventDefault()
-    this.setState({ message: e.target.value })
-  }
+  messageTyped = e => this.setState({ message: e.target.value })
 
-  handleSubmit = e => {
+  sendMessage = e => {
     e.preventDefault()
-    const w = this.props.workDetail.contents
+    const work = this.props.workDetail.contents
 
     this.props.sendMessage(
-      w.id,
+      work.id,
       this.props.loginStatus.user_id,
-      this.props.loginStatus.user_id === w.buyer.user_id ? w.artist.user_id : w.buyer.user_id,
+      this.props.loginStatus.user_id === work.buyer.id ? work.artist.id : work.buyer.id,
       this.state.message
     )
 
@@ -65,7 +63,9 @@ class DealPageContainer extends React.Component {
   }
 
   render() {
-    if (this.props.messages.pristine) return null
+    if (this.props.messages.pristine || this.props.buyerDetail.pristine) return null
+
+    if (!this.state.verified) return <Page404 />
 
     return (
       <div className="deal">
@@ -80,8 +80,8 @@ class DealPageContainer extends React.Component {
         <Messages
           messages={this.props.messages.contents}
           inputMessage={this.state.message}
-          handleInputChanged={this.handleInputChanged}
-          handleSubmit={this.handleSubmit}
+          messageTyped={this.messageTyped}
+          sendMessage={this.sendMessage}
         />
       </div>
     )

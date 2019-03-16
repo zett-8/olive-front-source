@@ -51,7 +51,7 @@ class HeaderContainer extends React.Component {
 
       this.setState({
         genre: selectedGenre[0].name,
-        selectableSubGenres: selectedGenre[0].subgenres
+        selectableSubGenres: selectedGenre[0].subgenres,
       })
       return null
     }
@@ -74,7 +74,6 @@ class HeaderContainer extends React.Component {
           <ModalWindow
             modalIsOpen={this.state.modalIsOpen}
             closeModal={this.closeModal}
-
             main={this.state.main}
             genre={this.state.genre}
             subGenre={this.state.subGenre}
@@ -83,7 +82,6 @@ class HeaderContainer extends React.Component {
             depth={this.state.depth}
             price={this.state.price}
             selectableSubGenres={this.state.selectableSubGenres}
-
             genres={this.props.genres.contents}
             filterChanged={this.filterChanged}
           />
@@ -92,7 +90,6 @@ class HeaderContainer extends React.Component {
             menuClicked={this.menuClicked}
             burgerToggleClicked={this.burgerToggleClicked}
             loginStatus={this.props.loginStatus}
-            userId={this.props.loginStatus.user_id}
             openModal={this.openModal}
           />
         </header>
@@ -107,6 +104,6 @@ export default connect(
     genres: state.genres,
   }),
   dispatch => ({
-    getGenres: () => dispatch(getGenres()),
+    getGenres: () => dispatch(getGenres())
   })
 )(HeaderContainer)

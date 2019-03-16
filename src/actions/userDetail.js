@@ -7,8 +7,8 @@ export const actionTypes = {
   UPDATE_ARTIST_INFO: 'UPDATE_ARTIST_INFO'
 }
 
-export const getUserDetail = id => dispatch => {
-  return Api.getUserDetail(id)
+export const getUserDetail = UUID => dispatch => {
+  return Api.getUserDetail(UUID)
     .then(res => {
       dispatch({
         type: actionTypes.GET_USER_DETAIL,

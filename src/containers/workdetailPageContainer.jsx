@@ -22,7 +22,7 @@ class WorkdetailPageContainer extends React.Component {
     const w = this.props.workDetail.contents,
       login = this.props.loginStatus
 
-    if (w.sold && (w.artist.user_id === login.user_id || w.buyer.user_id === login.user_id)) {
+    if (w.sold && (w.artist.id === login.user_id || w.buyer.id === login.user_id)) {
       this.setState({ bought: true })
     }
   }
@@ -41,7 +41,7 @@ class WorkdetailPageContainer extends React.Component {
       return
     }
 
-    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
+    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.userDetail.contents.id)
   }
 
   buy = () => {
@@ -72,7 +72,7 @@ class WorkdetailPageContainer extends React.Component {
       return null
     }
 
-    const err = this.props.buyWork(this.props.loginStatus.user_id, this.props.workDetail.contents.id, '2')
+    const err = this.props.buyWork(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
     this.setState({ bought: true })
   }
 
@@ -86,7 +86,7 @@ class WorkdetailPageContainer extends React.Component {
         <NotificationSystem ref={this.notificationSystem} />
         <div className="workDetail">
           <WorkDetail
-            self={this.props.loginStatus}
+            self={{ user_id: this.props.loginStatus.user_id, UUID: this.props.loginStatus.uuid }}
             detail={this.props.workDetail.contents}
             buy={this.buy}
             toggleFavorite={this.toggleFavorite}
@@ -104,10 +104,11 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     workDetail: state.workDetail,
+    userDetail: state.userDetail
   }),
   dispatch => ({
     clearWorkDetail: () => dispatch(clearWorkDetail()),
-    buyWork: (buyerId, workId, status) => dispatch(buyWork(buyerId, workId, status)),
+    buyWork: (buyerUUID, workId, status) => dispatch(buyWork(buyerUUID, workId, status)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getDetail: id => dispatch(getWorkDetail(id)),
   })

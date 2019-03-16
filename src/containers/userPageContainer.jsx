@@ -96,9 +96,9 @@ class UserPageContainer extends React.Component {
   }
 
   async componentWillMount() {
-    const ID = this.props.match.params.id
+    const UUID = this.props.match.params.UUID
 
-    if (ID === this.props.loginStatus.user_id + '') await this.props.getUserDetail(ID)
+    if (UUID === this.props.loginStatus.uuid) await this.props.getUserDetail(UUID)
     this.props.getHistory(this.props.loginStatus.user_id)
 
     this.setState({
@@ -152,7 +152,7 @@ class UserPageContainer extends React.Component {
 
     if (this.state.iconImage === null) return
 
-    const err = this.props.uploadUserIcon(this.props.loginStatus.user_id, this.state.iconImage)
+    const err = this.props.uploadUserIcon(this.props.loginStatus.uuid, this.state.iconImage)
 
     this.setState({ iconImage: null })
   }
@@ -170,7 +170,8 @@ class UserPageContainer extends React.Component {
       return null
     }
 
-    const err = await this.props.updateEmail(this.props.loginStatus.user_id, this.state.email)
+    const err = await this.props.updateEmail(this.props.loginStatus.uuid, this.state.email)
+
     if (err) {
       body.message = 'メールアドレスの変更に失敗しました'
       notification.addNotification(body)
@@ -189,7 +190,7 @@ class UserPageContainer extends React.Component {
     }
 
     const err = await this.props.updatePassword(
-      this.props.loginStatus.user_id,
+      this.props.loginStatus.uuid,
       this.state.oldPassword,
       this.state.newPassword
     )
@@ -199,6 +200,10 @@ class UserPageContainer extends React.Component {
       notification.addNotification(body)
       return null
     }
+
+    body.level = 'success'
+    body.message = 'パスワードを変更しました'
+    notification.addNotification(body)
 
     this.setState({ oldPassword: '', newPassword: '' })
   }
@@ -221,7 +226,6 @@ class UserPageContainer extends React.Component {
     }
 
     const data = {
-      ready_as_buyer: true,
       user_id: this.props.loginStatus.user_id,
       first_name: this.state.firstName,
       last_name: this.state.lastName,
@@ -230,7 +234,7 @@ class UserPageContainer extends React.Component {
       phone_number: this.state.phoneNumber,
     }
 
-    const err = await this.props.updateBuyerInfo(this.props.loginStatus.user_id, data)
+    const err = await this.props.updateBuyerInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
       body.message = 'Buyer情報の更新に失敗しました'
@@ -269,14 +273,13 @@ class UserPageContainer extends React.Component {
     }
 
     const data = {
-      ready_as_artist: true,
       user_id: this.props.loginStatus.user_id,
       artist_name: this.state.artistName,
       profile: this.state.profile,
       website: this.state.website,
       place: this.state.place,
       birthday: this.state.birthday || null,
-      sex: this.state.sex,
+      sex: parseInt(this.state.sex, 10),
       bank_name: this.state.bankName,
       bank_code: this.state.bankCode,
       bank_branch_name: this.state.bankBranchName,
@@ -285,7 +288,7 @@ class UserPageContainer extends React.Component {
       bank_account_name: this.state.bankAccountName,
     }
 
-    const err = await this.props.updateArtistInfo(this.props.loginStatus.user_id, data)
+    const err = await this.props.updateArtistInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
       body.message = 'Artist情報の更新に失敗しました'
@@ -535,7 +538,7 @@ export default connect(
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
     uploadWork: work => dispatch(uploadWork(work)),
-    getUserDetail: id => dispatch(getUserDetail(id)),
+    getUserDetail: UUID => dispatch(getUserDetail(UUID)),
     getHistory: userId => dispatch(getHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),

@@ -7,18 +7,18 @@ export default {
   signUp: (email, password) => axios.post(`${PATH}/v1/users/`, { email, password }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
 
-  updateEmail: (userId, email) => axios.patch(`${PATH}/v1/users/${userId}/`, { email }),
-  updatePassword: (userId, oldPassword, newPassword) =>
-    axios.patch(`${PATH}/v1/users/${userId}/`, { oldPassword, newPassword }),
+  updateEmail: (UUID, email) => axios.patch(`${PATH}/v1/users/${UUID}/`, { email }),
+  updatePassword: (UUID, oldPassword, newPassword) =>
+    axios.patch(`${PATH}/v1/users/${UUID}/`, { oldPassword, newPassword }),
 
-  getUserDetail: id => axios.get(`${PATH}/v1/userDetails/${id}/`),
-  uploadUserIcon: (id, icon) => {
+  getUserDetail: UUID => axios.get(`${PATH}/v1/userDetails/${UUID}/`),
+  uploadUserIcon: (UUID, icon) => {
     const params = new FormData()
     params.append('icon', icon)
-    return axios.patch(`${PATH}/v1/userDetails/${id}/`, params)
+    return axios.patch(`${PATH}/v1/userDetails/${UUID}/`, params)
   },
-  updateBuyerInfo: (userId, data) => axios.put(`${PATH}/v1/userDetails/${userId}/`, data),
-  updateArtistInfo: (userId, data) => axios.put(`${PATH}/v1/userDetails/${userId}/`, data),
+  updateBuyerInfo: (UUID, data) => axios.put(`${PATH}/v1/userDetails/${UUID}/`, data),
+  updateArtistInfo: (UUID, data) => axios.put(`${PATH}/v1/userDetails/${UUID}/`, data),
   uploadWork: work => {
     return axios.post(`${PATH}/v1/works/`, work)
   },
@@ -34,7 +34,7 @@ export default {
       },
     }),
 
-  buyWork: (buyerId, workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerId, status }),
+  buyWork: (buyerUUID, workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerUUID, status }),
   getWorks: () => axios.get(`${PATH}/v1/works/`),
   getFavoriteWorks: userId => axios.get(`${PATH}/v1/works/?favoritesOf=${userId}`),
   getWorkDetail: id => axios.get(`${PATH}/v1/works/${id}/`),
@@ -48,5 +48,5 @@ export default {
   getSeedArtists: () => axios.get(`${PATH}/v1/seedArtists/`),
   getArtistDetail: id => axios.get(`${PATH}/v1/artists/${id}/`),
 
-  getBuyerInfo: id => axios.get(`${PATH}/v1/buyerInfo/${id}/`),
+  getBuyerInfo: BuyerId => axios.get(`${PATH}/v1/buyerInfo/${BuyerId}/`),
 }

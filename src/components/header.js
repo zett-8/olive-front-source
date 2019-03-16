@@ -32,7 +32,7 @@ export const header = props => {
             <p onClick={() => props.menuClicked('/favorites')}>
               <FavoriteIMG alt="favorite" />
             </p>
-            <p onClick={() => props.menuClicked(`/user/${props.userId}`)}>
+            <p onClick={() => props.menuClicked(`/user/${props.loginStatus.uuid}`)}>
               <AccountIMG alt="account" />
             </p>
           </React.Fragment>
@@ -54,9 +54,9 @@ export const header = props => {
 
 header.propTypes = {
   loginStatus: PropTypes.shape({
+    uuid: PropTypes.string,
     artist: PropTypes.bool,
   }),
-  userId: PropTypes.number,
   menuClicked: PropTypes.func.isRequired,
   burgerToggleClicked: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,

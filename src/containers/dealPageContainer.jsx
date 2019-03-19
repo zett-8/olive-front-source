@@ -63,9 +63,9 @@ class DealPageContainer extends React.Component {
   }
 
   render() {
-    if (this.props.messages.pristine || this.props.buyerDetail.pristine) return null
-
     if (!this.state.verified) return <Page404 />
+
+    if (this.props.messages.pristine || this.props.buyerDetail.pristine) return null
 
     return (
       <div className="deal">

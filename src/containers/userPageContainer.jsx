@@ -91,6 +91,15 @@ class UserPageContainer extends React.Component {
       workDepth: '',
       workGenre: '',
       workSubGenre: '',
+      workColorCrimson: false,
+      workColorMediumBlue: false,
+      workColorForestGreen: false,
+      workColorGold: false,
+      workColorPurple: false,
+      workColorBrown: false,
+      workColorBlack: false,
+      workColorGrey: false,
+      workColorIvory: false,
       workPrice: '',
     }
   }
@@ -308,18 +317,21 @@ class UserPageContainer extends React.Component {
   // =============================
 
   workFormChanged = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    let { name, value } = e.target
+    if (value === 'false' || value === 'true') value = value === 'true'
 
-    if (e.target.name === 'workGenre') {
-      const [selectedGenre] = this.props.genres.contents.filter(g => g.id === e.target.value - 0)
+    this.setState({ [name]: value })
+
+    if (name === 'workGenre') {
+      const [selectedGenre] = this.props.genres.contents.filter(g => g.id === value - 0)
       this.setState({
         selectableSubGenres: selectedGenre.subgenres,
         workSubGenre: '',
       })
     }
 
-    if (e.target.name === 'workPrice' && e.target.value.length >= 2 && e.target.value[0] === '0')
-      this.setState({ workPrice: e.target.value.slice(1) })
+    if (name === 'workPrice' && value.length >= 2 && value[0] === '0')
+      this.setState({ workPrice: value.slice(1) })
   }
 
   workImageSelectBtnClicked = () => this.workImageSelectBtnRef.current.click()
@@ -359,8 +371,52 @@ class UserPageContainer extends React.Component {
     })
   }
 
+  resetWorkForm = () => {
+    this.setState({
+      selectableSubGenres: [],
+      selectOrder: 1,
+      workImageUrlCurrent: '1',
+      workImageUrl1: One,
+      workImageUrl2: Two,
+      workImageUrl3: Three,
+      workImageUrl4: Four,
+      workImageUrl5: Five,
+      workImage1: null,
+      workImage2: null,
+      workImage3: null,
+      workImage4: null,
+      workImage5: null,
+      workTitle: '',
+      workCaption: '',
+      workTechnique: '',
+      workYear: '',
+      workEdition: '',
+      workSign: '',
+      workFrame: '',
+      workHeight: '',
+      workWidth: '',
+      workDepth: '',
+      workGenre: '',
+      workSubGenre: '',
+      workColorCrimson: false,
+      workColorMediumBlue: false,
+      workColorForestGreen: false,
+      workColorGold: false,
+      workColorPurple: false,
+      workColorBrown: false,
+      workColorBlack: false,
+      workColorGrey: false,
+      workColorIvory: false,
+      workPrice: '',
+    })
+  }
+
   uploadWork = async e => {
     e.preventDefault()
+
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
     const work = new FormData()
 
     work.append('status', this.props.userDetail.contents.debuted ? '1' : '0')
@@ -388,9 +444,31 @@ class UserPageContainer extends React.Component {
     work.append('genre', 0)
     work.append('subgenre', 0)
 
+    work.append('crimson', this.state.workColorCrimson)
+    work.append('mediumblue', this.state.workColorMediumBlue)
+    work.append('forestgreen', this.state.workColorForestGreen)
+    work.append('gold', this.state.workColorGold)
+    work.append('purple', this.state.workColorPurple)
+    work.append('brown', this.state.workColorBrown)
+    work.append('black', this.state.workColorBlack)
+    work.append('grey', this.state.workColorGrey)
+    work.append('ivory', this.state.workColorIvory)
+
     work.append('price', this.state.workPrice)
 
     const err = await this.props.uploadWork(work)
+
+    if (err) {
+      body.message = '作品のアップロードに失敗しました'
+      notification.addNotification(body)
+      return null
+    }
+
+    body.level = 'success'
+    body.message = '作品をアップロードしました'
+    notification.addNotification(body)
+
+    this.resetWorkForm()
   }
 
   tabContents = () => {
@@ -485,6 +563,15 @@ class UserPageContainer extends React.Component {
               workSubGenre={this.state.workSubGenre}
               selectableSubGenres={this.state.selectableSubGenres}
               genres={this.props.genres.contents}
+              workColorCrimson={this.state.workColorCrimson}
+              workColorMediumBlue={this.state.workColorMediumBlue}
+              workColorForestGreen={this.state.workColorForestGreen}
+              workColorGold={this.state.workColorGold}
+              workColorPurple={this.state.workColorPurple}
+              workColorBrown={this.state.workColorBrown}
+              workColorBlack={this.state.workColorBlack}
+              workColorGrey={this.state.workColorGrey}
+              workColorIvory={this.state.workColorIvory}
             />
           </div>
         )

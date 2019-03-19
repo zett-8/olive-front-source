@@ -5,16 +5,43 @@ const userDetailWorkUpload = props => {
   return (
     <React.Fragment>
       <div className="userDetail__workUpload__images">
-
-        <div className="userDetail__workUpload__images__main" style={{ backgroundImage: `url(${props[`workImageUrl${props.workImageUrlCurrent}`]})` }} />
+        <div
+          className="userDetail__workUpload__images__main"
+          style={{ backgroundImage: `url(${props[`workImageUrl${props.workImageUrlCurrent}`]})` }}
+        />
         <div className="userDetail__workUpload__images__subs">
-          <div role="button" tabIndex={0} style={{ backgroundImage: `url(${props.workImageUrl1})` }} onClick={() => props.workSubImagesClicked('1')} />
-          <div role="button" tabIndex={0} style={{ backgroundImage: `url(${props.workImageUrl2})` }} onClick={() => props.workSubImagesClicked('2')} />
-          <div role="button" tabIndex={0} style={{ backgroundImage: `url(${props.workImageUrl3})` }} onClick={() => props.workSubImagesClicked('3')} />
-          <div role="button" tabIndex={0} style={{ backgroundImage: `url(${props.workImageUrl4})` }} onClick={() => props.workSubImagesClicked('4')} />
-          <div role="button" tabIndex={0} style={{ backgroundImage: `url(${props.workImageUrl5})` }} onClick={() => props.workSubImagesClicked('5')} />
+          <div
+            role="button"
+            tabIndex={0}
+            style={{ backgroundImage: `url(${props.workImageUrl1})` }}
+            onClick={() => props.workSubImagesClicked('1')}
+          />
+          <div
+            role="button"
+            tabIndex={0}
+            style={{ backgroundImage: `url(${props.workImageUrl2})` }}
+            onClick={() => props.workSubImagesClicked('2')}
+          />
+          <div
+            role="button"
+            tabIndex={0}
+            style={{ backgroundImage: `url(${props.workImageUrl3})` }}
+            onClick={() => props.workSubImagesClicked('3')}
+          />
+          <div
+            role="button"
+            tabIndex={0}
+            style={{ backgroundImage: `url(${props.workImageUrl4})` }}
+            onClick={() => props.workSubImagesClicked('4')}
+          />
+          <div
+            role="button"
+            tabIndex={0}
+            style={{ backgroundImage: `url(${props.workImageUrl5})` }}
+            onClick={() => props.workSubImagesClicked('5')}
+          />
         </div>
-`
+        `
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.workImageSelected} />
         <button className="btn btn__select" type="button" onClick={props.workImageSelectBtnClicked}>
           Select
@@ -23,7 +50,6 @@ const userDetailWorkUpload = props => {
           Clear
         </button>
       </div>
-
       <p>Title</p>
       <span>*</span>
       <input
@@ -33,7 +59,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="Work Title"
       />
-
       <p>Caption</p>
       <span>*</span>
       <input
@@ -43,7 +68,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="caption"
       />
-
       <p>Technique</p>
       <span>*</span>
       <input
@@ -53,7 +77,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="technique"
       />
-
       <p>Year</p>
       <span>*</span>
       <input
@@ -63,7 +86,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="year"
       />
-
       <p>Sign</p>
       <span>*</span>
       <input
@@ -73,7 +95,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="sign"
       />
-
       <p>Edition</p>
       <span>*</span>
       <input
@@ -83,7 +104,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="edition"
       />
-
       <p>Frame</p>
       <span>*</span>
       <input
@@ -93,7 +113,6 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="frame"
       />
-
       <p>Size</p>
       <input
         className="input"
@@ -102,9 +121,7 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="height"
       />
-
       mm x
-
       <input
         className="input"
         name="workWidth"
@@ -112,9 +129,7 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="width"
       />
-
       mm x
-
       <input
         className="input"
         name="workDepth"
@@ -122,23 +137,44 @@ const userDetailWorkUpload = props => {
         onChange={props.workFormChanged}
         placeholder="depth"
       />
-
       mm
-
       <p>Genre</p>
       <select name="workGenre" value={props.workGenre} onChange={props.workFormChanged}>
         {props.genres.map(g => (
-          <option key={g.id} value={g.id}>{g.name}</option>
+          <option key={g.id} value={g.id}>
+            {g.name}
+          </option>
         ))}
       </select>
-
       <p>SubGenre</p>
       <select name="workSubGenre" value={props.workSubGenre} onChange={props.workFormChanged}>
         {props.selectableSubGenres.map(sg => (
-          <option key={sg.id} value={sg.id}>{sg.name}</option>
+          <option key={sg.id} value={sg.id}>
+            {sg.name}
+          </option>
         ))}
       </select>
-
+      <p>Colors</p>
+      <p>
+        <input type="checkbox" name="workColorRed" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'crimson' }} />
+        <input type="checkbox" name="workColorMediumBlue" value={!props.workColorMediumBlue} checked={props.workColorMediumBlue} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'mediumblue' }} />
+        <input type="checkbox" name="workColorForestGreen" value={!props.workColorForestGreen} checked={props.workColorForestGreen} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'forestgreen' }} />
+        <input type="checkbox" name="workColorGold" value={!props.workColorGold} checked={props.workColorGold} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'gold' }} />
+        <input type="checkbox" name="workColorPurple" value={!props.workColorPurple} checked={props.workColorPurple} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'purple' }} />
+        <input type="checkbox" name="workColorBrown" value={!props.workColorBrown} checked={props.workColorBrown} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'brown' }} />
+        <input type="checkbox" name="workColorBlack" value={!props.workColorBlack} checked={props.workColorBlack} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'black' }} />
+        <input type="checkbox" name="workColorGrey" value={!props.workColorGrey} checked={props.workColorGrey} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'grey' }} />
+        <input type="checkbox" name="workColorIvory" value={!props.workColorIvory} checked={props.workColorIvory} onChange={props.workFormChanged} />
+        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'ivory', border: '1px solid grey' }} />
+      </p>
       <p>Price</p>
       <span>*</span>
       <input
@@ -148,7 +184,6 @@ const userDetailWorkUpload = props => {
         value={props.workPrice}
         onChange={props.workFormChanged}
       />
-
       <button className="btn btn__save" type="button" onClick={props.upload}>
         Save
       </button>
@@ -184,6 +219,15 @@ userDetailWorkUpload.propTypes = {
   workSubGenre: PropTypes.string,
   genres: PropTypes.arrayOf(PropTypes.object),
   selectableSubGenres: PropTypes.arrayOf(PropTypes.object),
+  workColorCrimson: PropTypes.bool,
+  workColorMediumBlue: PropTypes.bool,
+  workColorForestGreen: PropTypes.bool,
+  workColorGold: PropTypes.bool,
+  workColorPurple: PropTypes.bool,
+  workColorBrown: PropTypes.bool,
+  workColorBlack: PropTypes.bool,
+  workColorGrey: PropTypes.bool,
+  workColorIvory: PropTypes.bool,
   buttonRef: PropTypes.shape({ current: PropTypes.object }),
 }
 

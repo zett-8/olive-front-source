@@ -60,7 +60,11 @@ const workDetail = props => {
           <p>{props.detail.subgenre.name}</p>
           <p>{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
           {/* <p>{`${props.detail.color1.name}, ${props.detail.color2.name}, ${props.detail.color3.name}`}</p> */}
-          <p>colors</p>
+          <p>
+            {Object.keys(props.detail.colors).map(Cname => {
+              if (props.detail.colors[Cname]) return <span style={{ display: 'inline-block', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
+            })}
+          </p>
           <p>{props.detail.edition ? props.detail.edition : '-'}</p>
           <p>{props.detail.frame ? props.detail.frame : '-'}</p>
           <p>{props.detail.sign ? props.detail.sign : '-'}</p>
@@ -132,6 +136,7 @@ workDetail.propTypes = {
     depth: PropTypes.number,
     genre: PropTypes.object,
     subgenre: PropTypes.object,
+    colors: PropTypes.object,
     price: PropTypes.number,
     artist: PropTypes.object,
     buyer: PropTypes.object,

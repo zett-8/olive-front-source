@@ -13,9 +13,9 @@ import WorkList from '../components/workList'
 
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
-import { getHistory } from '../actions/history'
+import { getPurchasedHistory } from '../actions/purchasedHistory'
 import { getUserDetail, uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
-import { logout, updateEmail, updatePassword } from '../actions/loginStatus'
+import { updateEmail, updatePassword } from '../actions/loginStatus'
 
 import One from '../assets/1.jpg'
 import Two from '../assets/2.jpg'
@@ -108,7 +108,7 @@ class UserPageContainer extends React.Component {
     const UUID = this.props.match.params.UUID
 
     if (UUID === this.props.loginStatus.uuid) await this.props.getUserDetail(UUID)
-    this.props.getHistory(this.props.loginStatus.user_id)
+    this.props.getPurchasedHistory(this.props.loginStatus.user_id)
 
     this.setState({
       firstName: this.props.userDetail.contents.first_name,
@@ -134,9 +134,7 @@ class UserPageContainer extends React.Component {
 
   navClicked = num => this.setState({ tab: num })
 
-  logout = () => {
-    this.props.logout()
-  }
+  logout = () => this.props.history.push('/logout')
 
   // =============================
   // user prime tab
@@ -578,9 +576,9 @@ class UserPageContainer extends React.Component {
 
       case 4:
         return (
-          <div className="userDetail_history">
+          <div className="userDetail_purchasedHistory">
             <div className="workList">
-              <WorkList works={this.props.history.contents} />
+              <WorkList works={this.props.purchasedHistory.contents} />
             </div>
           </div>
         )
@@ -618,15 +616,14 @@ export default connect(
     loginStatus: state.loginStatus,
     userDetail: state.userDetail,
     genres: state.genres,
-    history: state.history,
+    purchasedHistory: state.purchasedHistory,
   }),
   dispatch => ({
-    logout: () => dispatch(logout()),
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
     uploadWork: work => dispatch(uploadWork(work)),
     getUserDetail: UUID => dispatch(getUserDetail(UUID)),
-    getHistory: userId => dispatch(getHistory(userId)),
+    getPurchasedHistory: userId => dispatch(getPurchasedHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
     updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),

@@ -14,6 +14,7 @@ import UserContainer from './containers/userPageContainer'
 import ArtistContainer from './containers/artistPageContainer'
 import WorkDetailContainer from './containers/workdetailPageContainer'
 import DealContainer from './containers/dealPageContainer'
+import LogoutContainer from './containers/logoutPageContainer'
 import Page404 from './components/404'
 
 export default () => (
@@ -33,6 +34,7 @@ export default () => (
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
             <Route exact path="/work/:workId/deal/:myUUID/:clientId" component={DealContainer} />
             <Route exact path="/user/:UUID" component={UserContainer} />
+            <Route exact path="/logout" component={LogoutContainer} />
 
             <Route component={Page404} />
           </Switch>

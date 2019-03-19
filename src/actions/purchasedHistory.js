@@ -1,14 +1,14 @@
 import Api from '../utils/api'
 
 export const actionTypes = {
-  GET_HISTORY: 'GET_HISTORY'
+  GET_PURCHASED_HISTORY: 'GET_PURCHASED_HISTORY'
 }
 
-export const getHistory = (userId) => dispatch => {
-  return Api.getHistory(userId)
+export const getPurchasedHistory = (userId) => dispatch => {
+  return Api.getPurchasedHistory(userId)
     .then(res => {
       dispatch({
-        type: actionTypes.GET_HISTORY,
+        type: actionTypes.GET_PURCHASED_HISTORY,
         payload: res.data
       })
     })

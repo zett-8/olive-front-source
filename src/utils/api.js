@@ -23,7 +23,7 @@ export default {
     return axios.post(`${PATH}/v1/works/`, work)
   },
 
-  getHistory: userId => axios.get(`${PATH}/v1/works/?historyOf=${userId}`),
+  getPurchasedHistory: userId => axios.get(`${PATH}/v1/works/?historyOf=${userId}`),
 
   getGenres: () => axios.get(`${PATH}/v1/genres/`),
 

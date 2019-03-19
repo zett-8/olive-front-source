@@ -23,6 +23,10 @@ class LoginPageContainer extends React.Component {
     }
   }
 
+  componentWillMount() {
+    if (Object.keys(this.props.loginStatus).length) this.props.history.push(`/user/${this.props.loginStatus.uuid}`)
+  }
+
   switch = () => {
     this.setState({ login: !this.state.login })
   }
@@ -110,7 +114,9 @@ class LoginPageContainer extends React.Component {
 }
 
 export default connect(
-  null,
+  state => ({
+    loginStatus: state.loginStatus
+  }),
   dispatch => ({
     signUp: (email, password) => dispatch(signUp(email, password)),
     login: (email, password) => dispatch(login(email, password)),

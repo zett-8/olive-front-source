@@ -6,6 +6,7 @@ import Header from '../components/header'
 import DownMenu from '../components/downMenu'
 
 import { getGenres } from '../actions/genres'
+import { getFilteredWorks } from '../actions/works'
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class HeaderContainer extends React.Component {
       downMenuClass: true,
 
       // filter modal
-      main: 'random',
+      ordering: 'random',
       genre: '',
       selectableSubGenres: [],
       subGenre: '',
@@ -58,6 +59,8 @@ class HeaderContainer extends React.Component {
     let { name, value } = e.target
     if (value === 'false' || value === 'true') value = value === 'true'
 
+    if (name === 'price' && value.length > 0 && value[0] === '0') value = value.slice(1)
+
     if (name === 'genre') {
       if (value === '') {
         this.setState({
@@ -78,6 +81,24 @@ class HeaderContainer extends React.Component {
     this.setState({ [name]: value })
   }
 
+  filterWorks = () => {
+    let q = `ordering=${this.state.ordering}`
+
+    let colors = [];
+    ['Crimson', 'MediumBlue', 'ForestGreen', 'Gold', 'Purple', 'Brown', 'Black', 'Grey', 'White'].forEach(color => {
+      if (this.state[`color${color}`]) colors.push(color.toLowerCase())
+    })
+
+    if (colors.length) q += `&colors=${colors.join('-')}`
+    if (this.state.genre) q += `&genre=${this.state.genre}`
+    if (this.state.subGenre) q += `&subgenre=${this.state.subGenre}`
+    if (this.state.price) q += `&price=${this.state.price}`
+
+    this.closeModal()
+    this.props.getFilteredWorks(q)
+    this.props.history.push(`/filteredWorks/${q}`)
+  }
+
   render() {
     if (this.props.genres.pristine) return null
 
@@ -93,7 +114,7 @@ class HeaderContainer extends React.Component {
           <ModalWindow
             modalIsOpen={this.state.modalIsOpen}
             closeModal={this.closeModal}
-            main={this.state.main}
+            ordering={this.state.ordering}
             genre={this.state.genre}
             subGenre={this.state.subGenre}
             width={this.state.width}
@@ -112,6 +133,7 @@ class HeaderContainer extends React.Component {
             selectableSubGenres={this.state.selectableSubGenres}
             genres={this.props.genres.contents}
             filterChanged={this.filterChanged}
+            filterWorks={this.filterWorks}
           />
 
           <Header
@@ -132,6 +154,7 @@ export default connect(
     genres: state.genres,
   }),
   dispatch => ({
-    getGenres: () => dispatch(getGenres())
+    getGenres: () => dispatch(getGenres()),
+    getFilteredWorks: q => dispatch(getFilteredWorks(q))
   })
 )(HeaderContainer)

@@ -16,6 +16,12 @@ export default (state = INITIAL_STATE, action) => {
         contents: action.payload
       }
 
+    case actionTypes.GET_FILTERED_WORKS:
+      return {
+        pristine: false,
+        contents: action.payload
+      }
+
     case actionTypes.GET_FAVORITE_WORKS:
       return {
         pristine: false,

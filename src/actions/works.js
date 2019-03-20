@@ -3,6 +3,7 @@ import Api from '../utils/api'
 export const actionTypes = {
   CLEAR_WORKS: 'CLEAR_WORKS',
   GET_WORKS: 'GET_WORKS',
+  GET_FILTERED_WORKS: 'GET_FILTERED_WORKS',
   GET_FAVORITE_WORKS: 'GET_FAVORITE_WORKS',
   GET_WORKS_OF_AN_ARTIST: 'GET_WORKS_OF_AN_ARTIST'
 }
@@ -19,6 +20,17 @@ export const getWorks = () => dispatch => {
     .then(res => {
       dispatch({
         type: actionTypes.GET_WORKS,
+        payload: res.data
+      })
+    })
+    .catch(res => res)
+}
+
+export const getFilteredWorks = q => dispatch => {
+  return Api.getFilteredWorks(q)
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_FILTERED_WORKS,
         payload: res.data
       })
     })

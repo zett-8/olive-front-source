@@ -91,6 +91,26 @@ const modalWindow = props => {
           <option value="1000">〜 1000mm</option>
           <option value="2000">〜 2000mm</option>
         </select>
+        <p>
+          <input type="checkbox" name="colorCrimson" value={!props.colorCrimson} checked={props.colorCrimson} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'crimson' }} />
+          <input type="checkbox" name="colorMediumBlue" value={!props.colorMediumBlue} checked={props.colorMediumBlue} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'mediumblue' }} />
+          <input type="checkbox" name="colorForestGreen" value={!props.colorForestGreen} checked={props.colorForestGreen} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'forestgreen' }} />
+          <input type="checkbox" name="colorGold" value={!props.colorGold} checked={props.colorGold} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'gold' }} />
+          <input type="checkbox" name="colorPurple" value={!props.colorPurple} checked={props.colorPurple} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'purple' }} />
+          <input type="checkbox" name="colorBrown" value={!props.colorBrown} checked={props.colorBrown} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'brown' }} />
+          <input type="checkbox" name="colorBlack" value={!props.colorBlack} checked={props.colorBlack} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'black' }} />
+          <input type="checkbox" name="colorGrey" value={!props.colorGrey} checked={props.colorGrey} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'grey' }} />
+          <input type="checkbox" name="colorIvory" value={!props.colorIvory} checked={props.colorIvory} onChange={props.filterChanged} />
+          <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'ivory', border: '1px solid grey' }} />
+        </p>
         <input type="number" name="price" value={props.price} onChange={props.filterChanged} />
         <button type="submit">search</button>
         <button type="button" onClick={() => console.log('not yet')}>
@@ -114,6 +134,15 @@ modalWindow.propTypes = {
   genre: PropTypes.string,
   subGenre: PropTypes.string,
   selectableSubGenres: PropTypes.arrayOf(PropTypes.object),
+  colorCrimson: PropTypes.bool,
+  colorMediumBlue: PropTypes.bool,
+  colorForestGreen: PropTypes.bool,
+  colorGold: PropTypes.bool,
+  colorPurple: PropTypes.bool,
+  colorBrown: PropTypes.bool,
+  colorBlack: PropTypes.bool,
+  colorGrey: PropTypes.bool,
+  colorIvory: PropTypes.bool,
   price: PropTypes.string,
   filterChanged: PropTypes.func.isRequired,
   filters: PropTypes.shape({

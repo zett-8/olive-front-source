@@ -23,6 +23,15 @@ class HeaderContainer extends React.Component {
       width: '',
       height: '',
       depth: '',
+      colorCrimson: false,
+      colorMediumBlue: false,
+      colorForestGreen: false,
+      colorGold: false,
+      colorPurple: false,
+      colorBrown: false,
+      colorBlack: false,
+      colorGrey: false,
+      colorIvory: false,
       price: '',
     }
   }
@@ -46,8 +55,18 @@ class HeaderContainer extends React.Component {
   closeModal = () => this.setState({ modalIsOpen: false })
 
   filterChanged = e => {
-    if (e.target.name === 'genre') {
-      const selectedGenre = this.props.genres.contents.filter(g => g.name === e.target.value)
+    let { name, value } = e.target
+    if (value === 'false' || value === 'true') value = value === 'true'
+
+    if (name === 'genre') {
+      if (value === '') {
+        this.setState({
+          genre: '',
+          selectableSubGenres: []
+        })
+        return null
+      }
+      const selectedGenre = this.props.genres.contents.filter(g => g.name === value)
 
       this.setState({
         genre: selectedGenre[0].name,
@@ -56,7 +75,7 @@ class HeaderContainer extends React.Component {
       return null
     }
 
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [name]: value })
   }
 
   render() {
@@ -80,6 +99,15 @@ class HeaderContainer extends React.Component {
             width={this.state.width}
             height={this.state.height}
             depth={this.state.depth}
+            colorCrimson={this.state.colorCrimson}
+            colorMediumBlue={this.state.colorMediumBlue}
+            colorForestGreen={this.state.colorForestGreen}
+            colorGold={this.state.colorGold}
+            colorPurple={this.state.colorPurple}
+            colorBrown={this.state.colorBrown}
+            colorBlack={this.state.colorBlack}
+            colorGrey={this.state.colorGrey}
+            colorIvory={this.state.colorIvory}
             price={this.state.price}
             selectableSubGenres={this.state.selectableSubGenres}
             genres={this.props.genres.contents}

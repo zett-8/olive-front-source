@@ -62,7 +62,7 @@ const workDetail = props => {
           {/* <p>{`${props.detail.color1.name}, ${props.detail.color2.name}, ${props.detail.color3.name}`}</p> */}
           <p>
             {Object.keys(props.detail.colors).map(Cname => {
-              if (props.detail.colors[Cname]) return <span style={{ display: 'inline-block', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
+              if (props.detail.colors[Cname]) return <span key={Cname} style={{ display: 'inline-block', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
             })}
           </p>
           <p>{props.detail.edition ? props.detail.edition : '-'}</p>

@@ -156,7 +156,7 @@ const userDetailWorkUpload = props => {
       </select>
       <p>Colors</p>
       <p>
-        <input type="checkbox" name="workColorRed" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
+        <input type="checkbox" name="workColorCrimson" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
         <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'crimson' }} />
         <input type="checkbox" name="workColorMediumBlue" value={!props.workColorMediumBlue} checked={props.workColorMediumBlue} onChange={props.workFormChanged} />
         <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'mediumblue' }} />

@@ -1,4 +1,10 @@
 .workList {
+  .noWorks {
+    grid-column: 1 / -1;
+    height: 60vh;
+    line-height: 60vh;
+    vertical-align: center;
+  }
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, max-content));

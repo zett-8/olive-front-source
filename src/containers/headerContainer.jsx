@@ -21,9 +21,12 @@ class HeaderContainer extends React.Component {
       genre: '',
       selectableSubGenres: [],
       subGenre: '',
-      width: '',
-      height: '',
-      depth: '',
+      minWidth: '',
+      maxWidth: '',
+      minHeight: '',
+      maxHeight: '',
+      minDepth: '',
+      maxDepth: '',
       colorCrimson: false,
       colorMediumBlue: false,
       colorForestGreen: false,
@@ -33,6 +36,7 @@ class HeaderContainer extends React.Component {
       colorBlack: false,
       colorGrey: false,
       colorIvory: false,
+      excludeSoldWorks: false,
       price: '',
     }
   }
@@ -57,9 +61,9 @@ class HeaderContainer extends React.Component {
 
   filterChanged = e => {
     let { name, value } = e.target
+    // refine data
     if (value === 'false' || value === 'true') value = value === 'true'
-
-    if (name === 'price' && value.length > 0 && value[0] === '0') value = value.slice(1)
+    if ( value.length > 0 && value[0] === '0') value = value.slice(1)
 
     if (name === 'genre') {
       if (value === '') {
@@ -92,7 +96,14 @@ class HeaderContainer extends React.Component {
     if (colors.length) q += `&colors=${colors.join('-')}`
     if (this.state.genre) q += `&genre=${this.state.genre}`
     if (this.state.subGenre) q += `&subgenre=${this.state.subGenre}`
+    if (this.state.minWidth || this.state.maxWidth)
+      q += `&width=${this.state.minWidth || '0'}-${this.state.maxWidth || '100000'}`
+    if (this.state.minHeight || this.state.maxHeight)
+      q += `&height=${this.state.minHeight || '0'}-${this.state.maxHeight || '100000'}`
+    if (this.state.minDepth || this.state.maxDepth)
+      q += `&depth=${this.state.minDepth || '0'}-${this.state.maxDepth || '0'}`
     if (this.state.price) q += `&price=${this.state.price}`
+    if (this.state.excludeSoldWorks) q += '&excludeSoldWorks=true'
 
     this.closeModal()
     this.props.getFilteredWorks(q)
@@ -117,9 +128,12 @@ class HeaderContainer extends React.Component {
             ordering={this.state.ordering}
             genre={this.state.genre}
             subGenre={this.state.subGenre}
-            width={this.state.width}
-            height={this.state.height}
-            depth={this.state.depth}
+            minWidth={this.state.minWidth}
+            maxWidth={this.state.maxWidth}
+            minHeight={this.state.minHeight}
+            maxHeight={this.state.maxHeight}
+            minDepth={this.state.minDepth}
+            maxDepth={this.state.maxDepth}
             colorCrimson={this.state.colorCrimson}
             colorMediumBlue={this.state.colorMediumBlue}
             colorForestGreen={this.state.colorForestGreen}
@@ -129,6 +143,7 @@ class HeaderContainer extends React.Component {
             colorBlack={this.state.colorBlack}
             colorGrey={this.state.colorGrey}
             colorIvory={this.state.colorIvory}
+            excludeSoldWorks={this.state.excludeSoldWorks}
             price={this.state.price}
             selectableSubGenres={this.state.selectableSubGenres}
             genres={this.props.genres.contents}

@@ -67,24 +67,13 @@ const modalWindow = props => {
         ))}
       </select>
 
-      <select name="width" value={props.width} onChange={props.filterChanged}>
-        <option value="">-</option>
-        <option value="300">〜 300mm</option>
-        <option value="1000">〜 1000mm</option>
-        <option value="2000">〜 2000mm</option>
-      </select>
-      <select name="height" value={props.height} onChange={props.filterChanged}>
-        <option value="">-</option>
-        <option value="300">〜 300mm</option>
-        <option value="1000">〜 1000mm</option>
-        <option value="2000">〜 2000mm</option>
-      </select>
-      <select name="depth" value={props.depth} onChange={props.filterChanged}>
-        <option value="">-</option>
-        <option value="300">〜 300mm</option>
-        <option value="1000">〜 1000mm</option>
-        <option value="2000">〜 2000mm</option>
-      </select>
+      <input name="minWidth" type="number" value={props.minWidth} onChange={props.filterChanged} />
+      <input name="maxWidth" type="number" value={props.maxWidth} onChange={props.filterChanged} />
+      <input name="minHeight" type="number" value={props.minHeight} onChange={props.filterChanged} />
+      <input name="maxHeight" type="number" value={props.maxHeight} onChange={props.filterChanged} />
+      <input name="minDepth" type="number" value={props.minDepth} onChange={props.filterChanged} />
+      <input name="maxDepth" type="number" value={props.maxDepth} onChange={props.filterChanged} />
+
       <p>
         <input type="checkbox" name="colorCrimson" value={!props.colorCrimson} checked={props.colorCrimson} onChange={props.filterChanged} />
         <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'crimson' }} />
@@ -106,6 +95,7 @@ const modalWindow = props => {
         <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'ivory', border: '1px solid grey' }} />
       </p>
       <input type="number" name="price" value={props.price} onChange={props.filterChanged} />
+      <input type="checkbox" name="excludeSoldWorks" value={props.excludeSoldWorks} onChange={props.filterChanged} />
       <button type="button" onClick={props.filterWorks}>search</button>
       <button type="button" onClick={() => console.log('not yet')}>
         clear
@@ -121,9 +111,12 @@ modalWindow.propTypes = {
   modalIsOpen: PropTypes.bool,
   closeModal: PropTypes.func.isRequired,
   ordering: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  depth: PropTypes.string,
+  minWidth: PropTypes.string,
+  maxWidth: PropTypes.string,
+  minHeight: PropTypes.string,
+  maxHeight: PropTypes.string,
+  minDepth: PropTypes.string,
+  maxDepth: PropTypes.string,
   genre: PropTypes.string,
   subGenre: PropTypes.string,
   selectableSubGenres: PropTypes.arrayOf(PropTypes.object),
@@ -136,6 +129,7 @@ modalWindow.propTypes = {
   colorBlack: PropTypes.bool,
   colorGrey: PropTypes.bool,
   colorIvory: PropTypes.bool,
+  excludeSoldWorks: PropTypes.bool,
   price: PropTypes.string,
   filterChanged: PropTypes.func.isRequired,
   filterWorks: PropTypes.func.isRequired,

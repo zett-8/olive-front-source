@@ -17,7 +17,7 @@ const workList = props => {
           </div>
         ))
       ) : (
-        <p>作品がありません</p>
+        <p className="noWorks">作品がありません</p>
       )}
     </React.Fragment>
   )

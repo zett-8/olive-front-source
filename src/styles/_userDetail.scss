@@ -1,19 +1,32 @@
+@mixin commonTabStyle {
+  text-align: center;
+  cursor: pointer;
+  border: 1px black solid;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 2rem 0 0 0;
+  width: 100%;
+  line-height: 3rem;
+}
+
 .userDetail {
 
   &__nav {
     display: flex;
     margin-bottom: 5rem;
 
-    p {
-      text-align: center;
-      cursor: pointer;
-      border: 1px black solid;
-      border-right: none;
+    &__others {
+      @include commonTabStyle;
+      background-color: #eee;
+      border-color: #eeeeee;
+      box-shadow: -3px -2px 22px 0px rgba(0, 0, 0, 0.1) inset
+    }
+
+    &__current {
+      @include commonTabStyle;
+      background-color: white;
+      border: 1px #eeeeee solid;
       border-bottom: none;
-      border-radius: 2rem 0 0 0;
-      width: 100%;
-      line-height: 3rem;
-      background-color: #eeeeee;
     }
   }
 

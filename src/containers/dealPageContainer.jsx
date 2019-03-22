@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Progress from '../components/deal_progress'
-import Info from '../components/deal_info'
-import Messages from '../components/deal_messages'
+import Progress from '../components/deal/deal_progress'
+import Info from '../components/deal/deal_info'
+import Messages from '../components/deal/deal_messages'
 import Page404 from '../components/404'
 
 import { getWorkDetail, changeWorkStatus } from '../actions/workDetail'

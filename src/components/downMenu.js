@@ -7,7 +7,9 @@ const downMenu = props => {
       <p onClick={() => props.menuClicked('/popular')}>popular</p>
       <p onClick={() => props.menuClicked('/new')}>new</p>
 
-      {props.loggedIn ? <p onClick={() => props.menuClicked('/review')}>review</p> : null}
+      {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
+        <p onClick={() => props.menuClicked('/review')}>review</p>
+      ) : null}
       <hr />
       <p onClick={() => props.menuClicked('/about')}>About</p>
       <p onClick={() => props.menuClicked('/help')}>Help</p>
@@ -21,7 +23,9 @@ const downMenu = props => {
 downMenu.propTypes = {
   class: PropTypes.bool,
   menuClicked: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool,
+  loginStatus: PropTypes.shape({
+    artist: PropTypes.bool,
+  }),
 }
 
 export default downMenu

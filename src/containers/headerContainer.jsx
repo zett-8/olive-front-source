@@ -118,7 +118,7 @@ class HeaderContainer extends React.Component {
         <DownMenu
           class={this.state.downMenuClass}
           menuClicked={this.menuClicked}
-          loggedIn={!!Object.keys(this.props.loginStatus).length}
+          loginStatus={this.props.loginStatus}
         />
 
         <header className="nav">

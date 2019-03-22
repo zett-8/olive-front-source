@@ -4,7 +4,9 @@ import pathRetriever from './pathRetriever'
 const PATH = pathRetriever() + '/api'
 
 export default {
-  checkInvitationCode: (code) => axios.get(`${PATH}/checkInvitationCode/${code}/`).then(() => null).catch(res => res),
+  checkInvitationCode: code => axios.get(`${PATH}/checkInvitationCode/${code}/`).then(() => null).catch(res => res),
+  checkUserEmail: email => axios.get(`${PATH}/checkUserEmail/${email}/`).then(() => null).catch(res => res),
+  resetPassword: email => axios.get(`${PATH}/reset-password/${email}/`).then(() => null).catch(res => res),
   signUp: (email, password, invitationCode) => axios.post(`${PATH}/v1/users/`, { email, password, invitationCode }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
 

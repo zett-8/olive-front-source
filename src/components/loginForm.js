@@ -11,7 +11,7 @@ const loginForm = props => (
       <label htmlFor="password">
         <input className="input" type="password" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
       </label>
-      <span>forget password?</span>
+      <span role="button" tabIndex={0} onClick={props.handleForgetPassword}>forget password?</span>
       <button className="btn btn__login" type="submit">Login</button>
     </form>
     <p>or</p>
@@ -24,7 +24,8 @@ loginForm.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   handleInputChanged: PropTypes.func.isRequired,
-  handleSwitch: PropTypes.func.isRequired
+  handleSwitch: PropTypes.func.isRequired,
+  handleForgetPassword: PropTypes.func.isRequired
 }
 
 export default loginForm

@@ -17,6 +17,7 @@ import FilteredWorksContainer from './containers/filteredWorksPageContainer'
 import DealContainer from './containers/dealPageContainer'
 import LogoutContainer from './containers/logoutPageContainer'
 import MessageContainer from './containers/messagePageContainer'
+import PasswordResetContainer from './containers/passwordResetPageContainer'
 import Page404 from './components/404'
 
 export default () => (
@@ -39,6 +40,7 @@ export default () => (
             <Route exact path="/user/:UUID" component={UserContainer} />
             <Route exact path="/logout" component={LogoutContainer} />
 
+            <Route exact path="/password-reset/:email" component={PasswordResetContainer} />
             <Route exact path="/message/:type" component={MessageContainer} />
 
             <Route component={Page404} />

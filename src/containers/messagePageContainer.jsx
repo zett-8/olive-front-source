@@ -1,6 +1,7 @@
 import React from 'react'
 import RegistrationDone from '../components/message/registration_done'
 import RegistrationFail from '../components/message/registration_fail'
+import SentEmail from '../components/message/sent-email'
 
 class Message extends React.Component {
   componentWillMount() {
@@ -14,6 +15,9 @@ class Message extends React.Component {
 
       case 'registration-fail':
         return <RegistrationFail />
+
+      case 'sent-email':
+        return <SentEmail />
 
       default:
         return null

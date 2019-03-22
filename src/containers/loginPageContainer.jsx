@@ -32,6 +32,27 @@ class LoginPageContainer extends React.Component {
     this.setState({ login: !this.state.login })
   }
 
+  handleForgetPassword = async () => {
+    const notification = this.notificationSystem.current
+    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+
+    const message = FormValidation(this.state.email, 'pass1234')
+    if (message) {
+      body.message = message
+      notification.addNotification(body)
+      return null
+    }
+
+    const err = await API.checkUserEmail(this.state.email)
+    if (err) {
+      body.message = '登録されていないメールアドレスです'
+      notification.addNotification(body)
+      return null
+    }
+
+    this.props.history.push(`/password-reset/${this.state.email}`)
+  }
+
   signUp = async e => {
     e.preventDefault()
 
@@ -106,6 +127,7 @@ class LoginPageContainer extends React.Component {
             email={this.state.email}
             password={this.state.password}
             handleSwitch={this.switch}
+            handleForgetPassword={this.handleForgetPassword}
           />
         ) : (
           <SignUpForm

@@ -8,8 +8,8 @@ export const actionTypes = {
   UPDATE_PASSWORD: 'UPDATE_PASSWORD'
 }
 
-export const signUp = (email, password) => dispatch => {
-  return Api.signUp(email, password)
+export const signUp = (email, password, invitationCode) => dispatch => {
+  return Api.signUp(email, password, invitationCode)
     .then(res => {
       dispatch({
         type: actionTypes.SIGNUP,

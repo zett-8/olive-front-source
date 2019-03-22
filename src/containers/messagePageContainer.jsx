@@ -1,0 +1,32 @@
+import React from 'react'
+import RegistrationDone from '../components/message/registration_done'
+import RegistrationFail from '../components/message/registration_fail'
+
+class Message extends React.Component {
+  componentWillMount() {
+    this.setState({ type: this.props.match.params.type })
+  }
+
+  pageRenderer = () => {
+    switch (this.state.type) {
+      case 'registration-done':
+        return <RegistrationDone history={this.props.history} />
+
+      case 'registration-fail':
+        return <RegistrationFail />
+
+      default:
+        return null
+    }
+  }
+
+  render() {
+    return (
+      <div className="messagePage">
+        {this.pageRenderer()}
+      </div>
+    )
+  }
+}
+
+export default Message

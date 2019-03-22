@@ -5,6 +5,7 @@ import NotificationSystem from 'react-notification-system'
 import LoginForm from '../components/loginForm'
 import SignUpForm from '../components/signUpForm'
 import { FormValidation } from '../utils/Validator'
+import API from '../utils/api'
 
 import { signUp } from '../actions/loginStatus'
 import { login } from '../actions/loginStatus'
@@ -45,7 +46,16 @@ class LoginPageContainer extends React.Component {
       return false
     }
 
-    const error = await this.props.signUp(this.state.email, this.state.password)
+    if (this.state.invitation) {
+      const err = await API.checkInvitationCode(this.state.invitation)
+      if (err) {
+        body.message = '無効な招待コードです'
+        notification.addNotification(body)
+        return null
+      }
+    }
+
+    const error = await this.props.signUp(this.state.email, this.state.password, this.state.invitation || 'non')
 
     if (!error) {
       console.log('OK')
@@ -118,7 +128,7 @@ export default connect(
     loginStatus: state.loginStatus
   }),
   dispatch => ({
-    signUp: (email, password) => dispatch(signUp(email, password)),
+    signUp: (email, password, invitationCode) => dispatch(signUp(email, password, invitationCode)),
     login: (email, password) => dispatch(login(email, password)),
   })
 )(LoginPageContainer)

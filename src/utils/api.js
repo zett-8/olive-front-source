@@ -4,9 +4,9 @@ import pathRetriever from './pathRetriever'
 const PATH = pathRetriever() + '/api'
 
 export default {
-  checkInvitationCode: code => axios.get(`${PATH}/checkInvitationCode/${code}/`).then(() => null).catch(res => res),
-  checkUserEmail: email => axios.get(`${PATH}/checkUserEmail/${email}/`).then(() => null).catch(res => res),
-  resetPassword: email => axios.get(`${PATH}/reset-password/${email}/`).then(() => null).catch(res => res),
+  checkInvitationCode: code => axios.get(`${PATH}/v1/checkInvitationCode/${code}/`).then(() => null).catch(res => res),
+  checkUserEmail: email => axios.get(`${PATH}/v1/checkUserEmail/${email}/`).then(() => null).catch(res => res),
+  resetPassword: email => axios.get(`${PATH}/v1/reset-password/${email}/`).then(() => null).catch(res => res),
   signUp: (email, password, invitationCode) => axios.post(`${PATH}/v1/users/`, { email, password, invitationCode }),
   login: (email, password) => axios.post(`${PATH}-token-auth/`, { username: email, password }),
 
@@ -37,7 +37,8 @@ export default {
       },
     }),
 
-  buyWork: (buyerUUID, workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerUUID, status }),
+  workWasBought: (buyerUUID, workId, status) => axios.patch(`${PATH}/v1/works/${workId}/`, { sold: true, buyer: buyerUUID, status }),
+  purchaseWork: (description, tokenId, price, receipt) => axios.get(`${PATH}/v1/purchase-work/${description}/${tokenId}/${price}/${receipt}/`),
   getWorks: () => axios.get(`${PATH}/v1/works/`),
   getFilteredWorks: q => axios.get(`${PATH}/v1/filteredWorks/?${q}`),
   getFavoriteWorks: userId => axios.get(`${PATH}/v1/works/?favoritesOf=${userId}`),

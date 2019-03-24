@@ -91,7 +91,7 @@ const workDetail = props => {
               <p className="sold">SOLD</p>
             )
           ) : (
-            <button className="btn btn__buy" type="button" onClick={props.buy}>
+            <button className="btn btn__buy" type="button" onClick={props.chosePaymentMethod}>
               Buy
             </button>
           )}
@@ -143,7 +143,7 @@ workDetail.propTypes = {
     sold: PropTypes.bool,
     favorite_users: PropTypes.arrayOf(PropTypes.number),
   }),
-  buy: PropTypes.func.isRequired,
+  chosePaymentMethod: PropTypes.func.isRequired,
   toggleFavorite: PropTypes.func.isRequired,
   bought: PropTypes.bool,
   mainImageRef: PropTypes.shape({

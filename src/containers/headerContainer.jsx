@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ModalWindow from '../components/modalWindow'
+import ModalWindow from '../components/modal/filterModalWindow'
 import Header from '../components/header'
 import DownMenu from '../components/downMenu'
 
 import { getGenres } from '../actions/genres'
 import { getFilteredWorks } from '../actions/works'
+import { getUserDetail } from '../actions/userDetail'
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -43,6 +44,8 @@ class HeaderContainer extends React.Component {
 
   componentWillMount() {
     this.props.getGenres()
+
+    if (Object.keys(this.props.loginStatus).length) this.props.getUserDetail(this.props.loginStatus.uuid)
   }
 
   burgerToggleClicked = () => {
@@ -170,6 +173,7 @@ export default connect(
   }),
   dispatch => ({
     getGenres: () => dispatch(getGenres()),
-    getFilteredWorks: q => dispatch(getFilteredWorks(q))
+    getFilteredWorks: q => dispatch(getFilteredWorks(q)),
+    getUserDetail: UUID => dispatch(getUserDetail(UUID))
   })
 )(HeaderContainer)

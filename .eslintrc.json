@@ -57,6 +57,7 @@
         "no-case-declarations": "off",
         "array-callback-return": "off",
         "operator-linebreak": "off",
+        "import/prefer-default-export": "warn",
         "jsx-a11y/no-noninteractive-element-interactions": "warn",
         "jsx-a11y/click-events-have-key-events": "warn"
     }

@@ -151,13 +151,13 @@ const dealProgress = props => {
 }
 
 dealProgress.propTypes = {
-  role: PropTypes.string,
+  role: PropTypes.string, // eslint-disable-line
   work: PropTypes.shape({
     status: PropTypes.number,
   }),
-  notifyPayment: PropTypes.func.isRequired,
-  notifyShipment: PropTypes.func.isRequired,
-  notifyReception: PropTypes.func.isRequired,
+  notifyPayment: PropTypes.func.isRequired, // eslint-disable-line
+  notifyShipment: PropTypes.func.isRequired, // eslint-disable-line
+  notifyReception: PropTypes.func.isRequired, // eslint-disable-line
 }
 
 export default dealProgress

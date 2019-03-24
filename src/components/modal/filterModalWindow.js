@@ -19,7 +19,7 @@ const customStyles = {
 
 ModalSetting.setAppElement('#root')
 
-const modalWindow = props => {
+const filterModalWindow = props => {
   return (
     <ModalSetting
       isOpen={props.modalIsOpen}
@@ -107,7 +107,7 @@ const modalWindow = props => {
   )
 }
 
-modalWindow.propTypes = {
+filterModalWindow.propTypes = {
   modalIsOpen: PropTypes.bool,
   closeModal: PropTypes.func.isRequired,
   ordering: PropTypes.string,
@@ -139,4 +139,4 @@ modalWindow.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.object)
 }
 
-export default modalWindow
+export default filterModalWindow

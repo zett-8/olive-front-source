@@ -14,7 +14,7 @@ import WorkList from '../components/workList'
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
 import { getPurchasedHistory } from '../actions/purchasedHistory'
-import { getUserDetail, uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
+import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
 
 import One from '../assets/1.jpg'
@@ -105,9 +105,6 @@ class UserPageContainer extends React.Component {
   }
 
   async componentWillMount() {
-    const UUID = this.props.match.params.UUID
-
-    if (UUID === this.props.loginStatus.uuid) await this.props.getUserDetail(UUID)
     this.props.getPurchasedHistory(this.props.loginStatus.user_id)
 
     this.setState({
@@ -168,7 +165,7 @@ class UserPageContainer extends React.Component {
 
   updateEmail = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = EmailValidation(this.state.email)
     if (message) {
@@ -187,7 +184,7 @@ class UserPageContainer extends React.Component {
 
   updatePassword = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = TwoPasswordValidation(this.state.oldPassword, this.state.newPassword)
     if (message) {
@@ -223,7 +220,7 @@ class UserPageContainer extends React.Component {
 
   updateBuyerInfo = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const state = this.state
     if (!state.firstName || !state.lastName || !state.zipCode || !state.address || !state.phoneNumber) {
@@ -262,7 +259,7 @@ class UserPageContainer extends React.Component {
 
   updateArtistInfo = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     if (
       !this.state.artistName ||
@@ -413,7 +410,7 @@ class UserPageContainer extends React.Component {
     e.preventDefault()
 
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const work = new FormData()
 
@@ -622,7 +619,6 @@ export default connect(
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
     uploadWork: work => dispatch(uploadWork(work)),
-    getUserDetail: UUID => dispatch(getUserDetail(UUID)),
     getPurchasedHistory: userId => dispatch(getPurchasedHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),

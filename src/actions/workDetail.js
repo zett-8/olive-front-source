@@ -41,8 +41,16 @@ export const changeWorkStatus = (workId, status) => dispatch => {
     .catch(res => res)
 }
 
-export const buyWork = (buyerUUID, workId, status) => dispatch => {
-  return Api.buyWork(buyerUUID, workId, status)
+export const purchaseWork = (description, token, price, receipt) => () => {
+  return Api.purchaseWork(description, token, price, receipt)
+    .then(() => {
+      console.log('bought')
+    })
+    .catch(res => res)
+}
+
+export const workWasBought = (buyerUUID, workId, status) => dispatch => {
+  return Api.workWasBought(buyerUUID, workId, status)
     .then(() => {
       dispatch(getWorkDetail(workId))
     })

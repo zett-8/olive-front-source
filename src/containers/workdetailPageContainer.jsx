@@ -1,23 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NotificationSystem from 'react-notification-system'
+import { injectStripe } from 'react-stripe-elements'
 
 import WorkDetail from '../components/workDetail'
+import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
+import { errorNotificationBody, successNotificationBody } from '../utils/notification'
 
-import { clearWorkDetail, getWorkDetail, buyWork, toggleFavorite } from '../actions/workDetail'
+import { clearWorkDetail, getWorkDetail, purchaseWork, workWasBought, toggleFavorite } from '../actions/workDetail'
 
-class WorkdetailPageContainer extends React.Component {
+class WorkDetailPageContainer extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      modalIsOpen: false,
+    }
+
     this.notificationSystem = React.createRef()
     this.mainImageRef = React.createRef()
   }
 
   async componentWillMount() {
     await this.props.clearWorkDetail()
-    await this.props.getDetail(this.props.match.params.id)
+    await this.props.getWorkDetail(this.props.match.params.id)
 
     const w = this.props.workDetail.contents,
       login = this.props.loginStatus
@@ -27,6 +33,9 @@ class WorkdetailPageContainer extends React.Component {
     }
   }
 
+  openModal = () => this.setState({ modalIsOpen: true })
+  closeModal = () => this.setState({ modalIsOpen: false })
+
   toggleFavorite = () => {
     if (!Object.keys(this.props.loginStatus).length) {
       const notification = this.notificationSystem.current
@@ -34,17 +43,17 @@ class WorkdetailPageContainer extends React.Component {
       notification.addNotification({
         message: 'お気に入りに追加するにはログインしてください',
         level: 'error',
-        autoDismiss: 2,
+        autoDismiss: 4,
         position: 'tc',
       })
 
       return
     }
 
-    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.userDetail.contents.id)
+    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
   }
 
-  buy = () => {
+  chosePaymentMethod = () => {
     // buyer情報が登録できていない場合
     if (!this.props.loginStatus.buyer) {
       const notification = this.notificationSystem.current
@@ -52,12 +61,13 @@ class WorkdetailPageContainer extends React.Component {
       notification.addNotification({
         message: '購入者情報を登録してください',
         level: 'error',
-        autoDismiss: 2,
+        autoDismiss: 4,
         position: 'tc',
       })
 
       return null
     }
+
     // 自分の作品は購入できない
     if (this.props.loginStatus.user_id === this.props.workDetail.contents.artist.user_id) {
       const notification = this.notificationSystem.current
@@ -65,14 +75,44 @@ class WorkdetailPageContainer extends React.Component {
       notification.addNotification({
         message: '自分の作品は購入できません',
         level: 'error',
-        autoDismiss: 2,
+        autoDismiss: 4,
         position: 'tc',
       })
 
       return null
     }
 
-    const err = this.props.buyWork(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
+    this.setState({ modalIsOpen: true})
+  }
+
+  purchaseWithBankTransfer = async () => {
+
+  }
+
+  purchaseWithCredit = async () => {
+    const notification = this.notificationSystem.current
+
+    const detail = this.props.userDetail.contents
+    let { token } = await this.props.stripe.createToken({name: `${detail.last_name} ${detail.first_name}`})
+    const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.name}`
+    const price = this.props.workDetail.contents.price
+    const receipt = this.props.loginStatus.email
+
+    let err = await this.props.purchaseWork(description, token.id, price, receipt)
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+      return null
+    }
+
+    err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '3')
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+    }
+
     this.setState({ bought: true })
   }
 
@@ -84,11 +124,17 @@ class WorkdetailPageContainer extends React.Component {
     return (
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
+        <PurchaseModalWindow
+          closeModal={this.closeModal}
+          modalIsOpen={this.state.modalIsOpen}
+          purchaseWithCredit={this.purchaseWithCredit}
+        />
+
         <div className="workDetail">
           <WorkDetail
             self={{ user_id: this.props.loginStatus.user_id, UUID: this.props.loginStatus.uuid }}
             detail={this.props.workDetail.contents}
-            buy={this.buy}
+            chosePaymentMethod={this.chosePaymentMethod}
             toggleFavorite={this.toggleFavorite}
             bought={this.state.bought}
             mainImageRef={this.mainImageRef}
@@ -100,7 +146,7 @@ class WorkdetailPageContainer extends React.Component {
   }
 }
 
-export default connect(
+WorkDetailPageContainer = connect(
   state => ({
     loginStatus: state.loginStatus,
     workDetail: state.workDetail,
@@ -108,8 +154,11 @@ export default connect(
   }),
   dispatch => ({
     clearWorkDetail: () => dispatch(clearWorkDetail()),
-    buyWork: (buyerUUID, workId, status) => dispatch(buyWork(buyerUUID, workId, status)),
+    workWasBought: (buyerUUID, workId, status) => dispatch(workWasBought(buyerUUID, workId, status)),
+    purchaseWork: (description, token, price, receipt) => dispatch(purchaseWork(description, token, price, receipt)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
-    getDetail: id => dispatch(getWorkDetail(id)),
+    getWorkDetail: id => dispatch(getWorkDetail(id)),
   })
-)(WorkdetailPageContainer)
+)(WorkDetailPageContainer)
+
+export default injectStripe(WorkDetailPageContainer)

@@ -34,7 +34,7 @@ class LoginPageContainer extends React.Component {
 
   handleForgetPassword = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = FormValidation(this.state.email, 'pass1234')
     if (message) {
@@ -57,7 +57,7 @@ class LoginPageContainer extends React.Component {
     e.preventDefault()
 
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
@@ -91,7 +91,7 @@ class LoginPageContainer extends React.Component {
     e.preventDefault()
 
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 2, position: 'tc', message: '' }
+    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {

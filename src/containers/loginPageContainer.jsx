@@ -5,8 +5,9 @@ import NotificationSystem from 'react-notification-system'
 import LoginForm from '../components/loginForm'
 import SignUpForm from '../components/signUpForm'
 import { FormValidation } from '../utils/Validator'
-import API from '../utils/api'
+import { errorNotificationBody } from '../utils/notification'
 
+import API from '../utils/api'
 import { signUp } from '../actions/loginStatus'
 import { login } from '../actions/loginStatus'
 
@@ -34,19 +35,20 @@ class LoginPageContainer extends React.Component {
 
   handleForgetPassword = async () => {
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = FormValidation(this.state.email, 'pass1234')
     if (message) {
-      body.message = message
-      notification.addNotification(body)
+      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.message = message
+      notification.addNotification(errorNotificationBody)
       return null
     }
 
     const err = await API.checkUserEmail(this.state.email)
     if (err) {
-      body.message = '登録されていないメールアドレスです'
-      notification.addNotification(body)
+      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.message = '登録されていないメールアドレスです'
+      notification.addNotification(errorNotificationBody)
       return null
     }
 
@@ -61,56 +63,56 @@ class LoginPageContainer extends React.Component {
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
-      body.message = message
-      notification.addNotification(body)
-
-      return false
+      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.message = message
+      notification.addNotification(errorNotificationBody)
+      return null
     }
 
     if (this.state.invitation) {
       const err = await API.checkInvitationCode(this.state.invitation)
       if (err) {
-        body.message = '無効な招待コードです'
-        notification.addNotification(body)
+        errorNotificationBody.title = 'Something is wrong!'
+        errorNotificationBody.message = err.response.data.message
+        notification.addNotification(errorNotificationBody)
         return null
       }
     }
 
     const error = await this.props.signUp(this.state.email, this.state.password, this.state.invitation || 'non')
-
-    if (!error) {
-      console.log('OK')
-      return
+    if (error) {
+      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.message = 'すでに登録されているユーザーです'
+      notification.addNotification(errorNotificationBody)
+      return null
     }
 
-    if (error.response.status === 404) body.message = 'すでに登録されているユーザーです'
-    notification.addNotification(body)
+
+    console.log('OK')
   }
 
   login = async e => {
     e.preventDefault()
 
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
-      body.message = message
-      notification.addNotification(body)
-
-      return false
+      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.message = message
+      notification.addNotification(errorNotificationBody)
+      return null
     }
 
-    const error = await this.props.login(this.state.email, this.state.password)
-
-    if (!error) {
-      this.props.history.push('/')
-      return
+    const err = await this.props.login(this.state.email, this.state.password)
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+      return null
     }
 
-    if (error.response.status === 404) body.message = '存在しないユーザーです'
-    if (error.response.status === 400) body.message = 'パスワードが違います'
-    notification.addNotification(body)
+    this.props.history.push('/')
   }
 
   handleInputChanged = e => this.setState({ [e.target.name]: e.target.value })

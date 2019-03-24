@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import NotificationSystem from 'react-notification-system'
 import { injectStripe } from 'react-stripe-elements'
+import NotificationSystem from 'react-notification-system'
 
 import WorkDetail from '../components/workDetail'
 import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
@@ -36,21 +36,23 @@ class WorkDetailPageContainer extends React.Component {
   openModal = () => this.setState({ modalIsOpen: true })
   closeModal = () => this.setState({ modalIsOpen: false })
 
-  toggleFavorite = () => {
+  toggleFavorite = async () => {
+    const notification = this.notificationSystem.current
+
     if (!Object.keys(this.props.loginStatus).length) {
-      const notification = this.notificationSystem.current
-
-      notification.addNotification({
-        message: 'お気に入りに追加するにはログインしてください',
-        level: 'error',
-        autoDismiss: 4,
-        position: 'tc',
-      })
-
-      return
+      errorNotificationBody.title = 'User Only'
+      errorNotificationBody.message = 'お気に入りに追加するにはログインしてください'
+      notification.addNotification(errorNotificationBody)
+      return null
     }
 
-    const err = this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
+    const err = await this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
+
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+    }
   }
 
   chosePaymentMethod = () => {

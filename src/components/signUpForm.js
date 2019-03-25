@@ -14,10 +14,10 @@ const loginForm = props => (
       <label htmlFor="invitation">
         <input className="input" name="invitation" placeholder="Invitation code (Optional)" value={props.invitation} onChange={props.handleInputChanged} />
       </label>
-      <button className="btn btn__login" type="submit">Create Account</button>
+      <button className="b_btn b_btn__30rem" type="submit">Create Account</button>
     </form>
     <p>or</p>
-    <button type="button" className="btn btn__switch" onClick={props.handleSwitch}>Login</button>
+    <button type="button" className="w_btn w_btn__30rem" onClick={props.handleSwitch}>Login</button>
   </React.Fragment>
 )
 

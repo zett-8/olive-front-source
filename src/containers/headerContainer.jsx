@@ -114,8 +114,6 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    if (this.props.genres.pristine) return null
-
     return (
       <React.Fragment>
         <DownMenu

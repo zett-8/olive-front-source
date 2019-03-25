@@ -12,10 +12,10 @@ const loginForm = props => (
         <input className="input" type="password" name="password" placeholder="Password" value={props.password} onChange={props.handleInputChanged} />
       </label>
       <span role="button" tabIndex={0} onClick={props.handleForgetPassword}>forget password?</span>
-      <button className="btn btn__login" type="submit">Login</button>
+      <button className="b_btn b_btn__30rem" type="submit">Login</button>
     </form>
     <p>or</p>
-    <button type="button" className="btn btn__switch" onClick={props.handleSwitch}>Create Account</button>
+    <button type="button" className="w_btn w_btn__30rem" onClick={props.handleSwitch}>Create Account</button>
   </React.Fragment>
 )
 

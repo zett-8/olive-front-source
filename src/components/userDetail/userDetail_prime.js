@@ -14,24 +14,24 @@ const userDetailPrime = props => {
           }}
         />
 
-        <button className="btn btn__selectPic" type="button" onClick={props.userIconSelectBtnClicked}>
+        <button className="w_btn w_btn__30rem" type="button" onClick={props.userIconSelectBtnClicked}>
           Select new picture
         </button>
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
-        <button className="btn btn__save" type="submit" onClick={props.upload}>
+        <button className="b_btn b_btn__13rem" type="submit" onClick={props.upload}>
           Save
         </button>
       </div>
       <div>
         <p>Email</p>
         <input className="input" type="text" name="email" value={props.email} placeholder={props.self.email} onChange={props.primeFormChanged} />
-        <button className="btn" type="button" onClick={props.updateEmail}>Change Email</button>
+        <button className="b_btn b_btn__20rem" type="button" onClick={props.updateEmail}>Change Email</button>
       </div>
       <div>
         <label>Password</label>  {/* eslint-disable-line */}
         <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormChanged} />
         <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormChanged} />
-        <button className="btn" type="button" onClick={props.updatePassword}>Change password</button>
+        <button className="b_btn b_btn__20rem" type="button" onClick={props.updatePassword}>Change password</button>
       </div>
     </React.Fragment>
   )

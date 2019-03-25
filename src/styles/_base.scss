@@ -49,8 +49,7 @@ a {
   }
 }
 
-
-.btn {
+.b_btn {
   background-color: #030303;
   color: white;
   height: 3rem;
@@ -62,58 +61,42 @@ a {
   font-size: 1.3rem;
   cursor: pointer;
 
+  &__8rem { width: 8rem; }
+  &__13rem { width: 13rem; }
+  &__20rem { width: 20rem; }
   &__30rem { width: 30rem; }
+}
 
-  &__buy { width: 13rem; }
+.w_btn {
+  background-color: white;
+  color: $color-basic;
+  border: black 0.05rem solid;
+  height: 3rem;
+  border-radius: 5rem;
+  letter-spacing: 0.2rem;
+  font-family: $font-button;
+  font-weight: 200;
+  font-size: 1.3rem;
+  cursor: pointer;
 
-  &__send { width: 22rem; }
-
-  &__login { width: 30rem; }
-
-  &__save { width: 8rem;}
-
-  &__loginPage { width: 16rem; }
-  &__select,
-  &__clear,
-  &__switch,
-  &__selectPic {
-    background-color: white;
-    color: $color-basic;
-    border: black 0.05rem solid;
-    width: 30rem;
-  }
-
-  &__selectPic { width: 19rem; }
-
+  &__30rem { width: 30rem; }
   &__favorite {
-    cursor: pointer;
     display: flex;
     justify-content: center;
     justify-items: center;
     align-items: center;
-    background-color: white;
     border: black 1px solid;
-    color: $color-basic;
-
     width: 13rem;
 
     @mixin heart {
       height: 2rem;
       stroke-width: 65px;
       stroke: black;
-
       margin-right: 1rem;
     }
 
-    &__nega {
-      @include heart;
-      fill: none;
-    }
-
-    &__posi {
-      @include heart;
-      fill: black;
-    }
+    &__nega { @include heart; fill: none; }
+    &__posi { @include heart; fill: black; }
   }
 }
 

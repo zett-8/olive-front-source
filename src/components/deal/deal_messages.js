@@ -38,7 +38,7 @@ const dealMessages = props => {
           value={props.inputMessage}
           onChange={props.messageTyped}
         />
-        <button className="btn btn__30rem" type="submit">
+        <button className="b_btn b_btn__30rem" type="submit">
           メッセージを送る
         </button>
       </form>

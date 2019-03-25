@@ -91,18 +91,18 @@ const workDetail = props => {
               <p className="sold">SOLD</p>
             )
           ) : (
-            <button className="btn btn__buy" type="button" onClick={props.chosePaymentMethod}>
+            <button className="b_btn b_btn__13rem" type="button" onClick={props.chosePaymentMethod}>
               Buy
             </button>
           )}
           {props.detail.favorite_users.indexOf(props.self.user_id) === -1 ? (
-            <button className="btn btn__favorite" type="button" onClick={props.toggleFavorite}>
-              <HeartIMG className="btn__favorite__nega" alt="heart" />
+            <button className="w_btn w_btn__favorite" type="button" onClick={props.toggleFavorite}>
+              <HeartIMG className="w_btn__favorite__nega" alt="heart" />
               Like
             </button>
           ) : (
-            <button className="btn btn__favorite" type="button" onClick={props.toggleFavorite}>
-              <HeartIMG className="btn__favorite__posi" alt="heart" />
+            <button className="w_btn w_btn__favorite" type="button" onClick={props.toggleFavorite}>
+              <HeartIMG className="w_btn__favorite__posi" alt="heart" />
               Like
             </button>
           )}

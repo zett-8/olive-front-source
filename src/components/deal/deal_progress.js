@@ -95,21 +95,21 @@ const dealProgress = props => {
     switch (`${props.role}-phase-${props.work.status}`) {
       case 'buyer-phase-2':
         return (
-          <button className="btn btn__30rem" type="button" onClick={props.notifyPayment}>
+          <button className="b_btn b_btn__30rem" type="button" onClick={props.notifyPayment}>
             支払連絡をする
           </button>
         )
 
       case 'buyer-phase-4':
         return (
-          <button className="btn btn__30rem" type="button" onClick={props.notifyReception}>
+          <button className="b_btn b_btn__30rem" type="button" onClick={props.notifyReception}>
             受取連絡をする
           </button>
         )
 
       case 'artist-phase-3':
         return (
-          <button className="btn btn__30rem" type="button" onClick={props.notifyShipment}>
+          <button className="b_btn b_btn__30rem" type="button" onClick={props.notifyShipment}>
             発送連絡をする
           </button>
         )

@@ -184,7 +184,7 @@ const userDetailWorkUpload = props => {
         value={props.workPrice}
         onChange={props.workFormChanged}
       />
-      <button className="btn btn__save" type="button" onClick={props.upload}>
+      <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
         Save
       </button>
     </React.Fragment>

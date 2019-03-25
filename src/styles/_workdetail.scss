@@ -49,19 +49,16 @@
       margin-bottom: 1rem;
     }
 
-    &__Q, &__A {
-      font-size: 1.3rem;
-      line-height: 2.7rem;
-    }
+    &__list {
+      grid-column: 1 / -1;
+      margin-bottom: 3rem;
 
-    &__Q {
-      color: #777777;
-      width: 9rem;
-    }
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      grid-template-rows: repeat(11, minmax(2.5rem, max-content));
+      grid-row-gap: 0.6rem;
+      grid-column-gap: 3rem;
 
-    &__A {
-      grid-column: 2 / -1;
-      &__caption { margin-bottom: 3rem;}
     }
 
     &__price {

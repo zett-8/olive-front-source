@@ -13,10 +13,10 @@ export const header = props => {
       </div>
 
       <div className="nav__left">
-        <p onClick={() => props.menuClicked('/popular')}>Popular</p>
-        <p onClick={() => props.menuClicked('/new')}>New</p>
+        <p className="typ_header_menu" onClick={() => props.menuClicked('/popular')}>Popular</p>
+        <p className="typ_header_menu" onClick={() => props.menuClicked('/new')}>New</p>
         {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
-          <p onClick={() => props.menuClicked('/review')}>Review</p>
+          <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p>
         ) : null}
       </div>
 

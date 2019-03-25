@@ -37,38 +37,35 @@ const workDetail = props => {
       </div>
       <div className="workDetail__right">
         <h3>{props.detail.name}</h3>
-        <div className="workDetail__right__Q">
-          <p>Artist</p>
-          <p>Year</p>
-          <p>Technique</p>
-          <p>Genre</p>
-          <p>Sub genre</p>
-          <p>Size</p>
-          <p>Color</p>
-          <p>Edition</p>
-          <p>Frame</p>
-          <p>Sign</p>
-          <p>Caption</p>
-        </div>
-        <div className="workDetail__right__A">
-          <p>
+        <div className="workDetail__right__list">
+          <p className="typ_infoList_left">Artist</p>
+          <p className="typ_infoList_right">
             <Link to={`/artist/${props.detail.artist.id}`}>{props.detail.artist.artist_name}</Link>
           </p>
-          <p>{props.detail.year ? props.detail.year : '-'}</p>
-          <p>{props.detail.technique ? props.detail.technique : '-'}</p>
-          <p>{props.detail.genre.name}</p>
-          <p>{props.detail.subgenre.name}</p>
-          <p>{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
-          {/* <p>{`${props.detail.color1.name}, ${props.detail.color2.name}, ${props.detail.color3.name}`}</p> */}
-          <p>
+          <p className="typ_infoList_left">Year</p>
+          <p className="typ_infoList_right">{props.detail.year ? props.detail.year : '-'}</p>
+          <p className="typ_infoList_left">Technique</p>
+          <p className="typ_infoList_right">{props.detail.technique ? props.detail.technique : '-'}</p>
+          <p className="typ_infoList_left">Genre</p>
+          <p className="typ_infoList_right">{props.detail.genre.name}</p>
+          <p className="typ_infoList_left">Sub genre</p>
+          <p className="typ_infoList_right">{props.detail.subgenre.name}</p>
+          <p className="typ_infoList_left">Size</p>
+          <p className="typ_infoList_right">{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
+          <p className="typ_infoList_left">Color</p>
+          <p className="typ_infoList_right">
             {Object.keys(props.detail.colors).map(Cname => {
-              if (props.detail.colors[Cname]) return <span key={Cname} style={{ display: 'inline-block', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
+              if (props.detail.colors[Cname]) return <span key={Cname} style={{ display: 'inline-block', borderRadius: '50%', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
             })}
           </p>
-          <p>{props.detail.edition ? props.detail.edition : '-'}</p>
-          <p>{props.detail.frame ? props.detail.frame : '-'}</p>
-          <p>{props.detail.sign ? props.detail.sign : '-'}</p>
-          <div className="workDetail__right__A__caption">{props.detail.caption}</div>
+          <p className="typ_infoList_left">Edition</p>
+          <p className="typ_infoList_right">{props.detail.edition ? props.detail.edition : '-'}</p>
+          <p className="typ_infoList_left">Frame</p>
+          <p className="typ_infoList_right">{props.detail.frame ? props.detail.frame : '-'}</p>
+          <p className="typ_infoList_left">Sign</p>
+          <p className="typ_infoList_right">{props.detail.sign ? props.detail.sign : '-'}</p>
+          <p className="typ_infoList_left">Caption</p>
+          <div className="typ_infoList_caption">{props.detail.caption}</div>
         </div>
 
         <p className="workDetail__right__price">

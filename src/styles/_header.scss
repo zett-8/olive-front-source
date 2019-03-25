@@ -7,9 +7,6 @@
   grid-template-columns: 1fr min-content 1fr;
   align-items: center;
 
-  font-size: 1.8rem;
-  font-weight: 500;
-
   &__toggleButton {
     display: none;
 
@@ -82,7 +79,6 @@
 .down-menu {
   display: block;
   background-color: white;
-  font-size: 1.8rem;
   transition: all 300ms 0s ease;
 
   width: 100%;

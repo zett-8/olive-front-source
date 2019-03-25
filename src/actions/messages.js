@@ -25,7 +25,7 @@ export const getMessages = workId => dispatch => {
 }
 
 export const sendMessage = (workId, sender, receiver, body) => dispatch => {
-  Api.sendMessage(workId, sender, receiver, body)
+  return Api.sendMessage(workId, sender, receiver, body)
     .then(() => dispatch(getMessages(workId)))
     .catch(res => res)
 }

@@ -2,8 +2,8 @@
 // basic
 $color-basic: #030303;
 $color-gray: #eeeeee;
-$font-basic: 'Avenir Next';
-$font-button: 'Helvetica Neue';
+$font-basic: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+$font-button: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 
 // responsive breakpoints
 $bp-largest: 75em; // 1200px
@@ -61,6 +61,8 @@ a {
   font-weight: 200;
   font-size: 1.3rem;
   cursor: pointer;
+
+  &__30rem { width: 30rem; }
 
   &__buy { width: 13rem; }
 

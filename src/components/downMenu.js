@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 const downMenu = props => {
   return (
     <nav className={props.class ? 'down-menu' : 'down-menu down-menu__down'}>
-      <p onClick={() => props.menuClicked('/popular')}>popular</p>
-      <p onClick={() => props.menuClicked('/new')}>new</p>
+      <p onClick={() => props.menuClicked('/popular')}>Popular</p>
+      <p onClick={() => props.menuClicked('/new')}>New</p>
 
       {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
-        <p onClick={() => props.menuClicked('/review')}>review</p>
+        <p onClick={() => props.menuClicked('/review')}>Review</p>
       ) : null}
       <hr />
       <p onClick={() => props.menuClicked('/about')}>About</p>

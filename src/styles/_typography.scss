@@ -14,10 +14,29 @@ h2 {
 }
 
 h3 {
-  ont-family: $font-basic;
+  font-family: $font-basic;
   color: $color-basic;
   font-weight: 300;
   font-size: 1.8rem;
   line-height: 2;
   border-bottom: #333333 1px solid;
+}
+
+.typ_infoList_left {
+  color: #777777;
+  font-size: 1.3rem;
+  letter-spacing: 0.05rem;
+}
+
+.typ_infoList_right {
+  font-size: 1.3rem;
+  letter-spacing: 0.05rem;
+}
+
+.typ_deal_message_mine {
+  font-size: 1.3rem;
+}
+
+.typ_deal_message_others {
+  font-size: 1.3rem;
 }

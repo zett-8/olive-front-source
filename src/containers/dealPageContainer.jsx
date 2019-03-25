@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import NotificationSystem from 'react-notification-system'
 
 import Progress from '../components/deal/deal_progress'
 import Info from '../components/deal/deal_info'
 import Messages from '../components/deal/deal_messages'
 import Page404 from '../components/404'
+import { errorNotificationBody } from '../utils/notification'
 
 import { getWorkDetail, changeWorkStatus } from '../actions/workDetail'
 import { getBuyerInfo } from '../actions/buyerDetail'
@@ -13,6 +15,8 @@ import { clearMessage, getMessages, sendMessage } from '../actions/messages'
 class DealPageContainer extends React.Component {
   constructor(props) {
     super(props)
+
+    this.notificationSystem = React.createRef()
 
     this.state = {
       verified: false,
@@ -48,16 +52,26 @@ class DealPageContainer extends React.Component {
 
   messageTyped = e => this.setState({ message: e.target.value })
 
-  sendMessage = e => {
+  sendMessage = async e => {
     e.preventDefault()
+    if (this.state.message === '') return null
+
+    const notification = this.notificationSystem.current
+
     const work = this.props.workDetail.contents
 
-    this.props.sendMessage(
+    const err = await this.props.sendMessage(
       work.id,
       this.props.loginStatus.user_id,
       this.props.loginStatus.user_id === work.buyer.id ? work.artist.id : work.buyer.id,
       this.state.message
     )
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+      return null
+    }
 
     this.setState({ message: '' })
   }
@@ -68,22 +82,32 @@ class DealPageContainer extends React.Component {
     if (this.props.messages.pristine || this.props.buyerDetail.pristine) return null
 
     return (
-      <div className="deal">
-        <Progress
-          work={this.props.workDetail.contents}
-          role={this.state.role}
-          notifyPayment={this.notifyPayment}
-          notifyShipment={this.notifyShipment}
-          notifyReception={this.notifyReception}
-        />
-        <Info work={this.props.workDetail.contents} buyerDetail={this.props.buyerDetail.contents} />
-        <Messages
-          messages={this.props.messages.contents}
-          inputMessage={this.state.message}
-          messageTyped={this.messageTyped}
-          sendMessage={this.sendMessage}
-        />
-      </div>
+      <React.Fragment>
+        <NotificationSystem ref={this.notificationSystem} />
+        <div className="deal">
+          <div className="deal__progress">
+            <Progress
+              work={this.props.workDetail.contents}
+              role={this.state.role}
+              notifyPayment={this.notifyPayment}
+              notifyShipment={this.notifyShipment}
+              notifyReception={this.notifyReception}
+            />
+          </div>
+          <div className="deal__info">
+            <Info work={this.props.workDetail.contents} buyerDetail={this.props.buyerDetail.contents} />
+          </div>
+          <div className="deal__messages">
+            <Messages
+              userId={this.props.loginStatus.user_id}
+              messages={this.props.messages.contents}
+              inputMessage={this.state.message}
+              messageTyped={this.messageTyped}
+              sendMessage={this.sendMessage}
+            />
+          </div>
+        </div>
+      </React.Fragment>
     )
   }
 }

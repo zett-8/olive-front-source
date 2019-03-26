@@ -43,10 +43,10 @@ const userDetailWorkUpload = props => {
         </div>
         `
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.workImageSelected} />
-        <button className="btn btn__select" type="button" onClick={props.workImageSelectBtnClicked}>
+        <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>
           Select
         </button>
-        <button className="btn btn__clear" type="button" onClick={props.resetWorkImages}>
+        <button className="w_btn w_btn__15rem" type="button" onClick={props.resetWorkImages}>
           Clear
         </button>
       </div>

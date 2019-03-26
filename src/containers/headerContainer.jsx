@@ -66,7 +66,7 @@ class HeaderContainer extends React.Component {
     let { name, value } = e.target
     // refine data
     if (value === 'false' || value === 'true') value = value === 'true'
-    if ( value.length > 0 && value[0] === '0') value = value.slice(1)
+    if ( value.length > 1 && value[0] === '0') value = value.slice(1)
 
     if (name === 'genre') {
       if (value === '') {

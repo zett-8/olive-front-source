@@ -21,7 +21,7 @@ module.exports = {
     historyApiFallback: true
   },
 
-  devtool: process.env.NODE_ENV === 'development' || 'local' ? 'source-map' : false,
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
 
   module: {
     rules: [

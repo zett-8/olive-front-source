@@ -75,7 +75,7 @@ const workDetail = props => {
         <div className="workDetail__right__buttons">
           {props.detail.sold ? ( // eslint-disable-line
             props.bought ? (
-              <p className="btn message">
+              <p className="b_btn message">
                 <Link
                   to={`/work/${props.detail.id}/deal/${props.self.UUID}/${
                     props.detail.artist.id === props.self.user_id ? props.detail.buyer.id : props.detail.artist.id

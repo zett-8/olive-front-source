@@ -84,6 +84,11 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ja/),
+    new webpack.NormalModuleReplacementPlugin(
+      /moment-timezone\/data\/packed\/latest\.json/,
+      require.resolve('./doc/timezone-definitions.json'),
+    )
   ]
 }

@@ -112,6 +112,12 @@ a {
   height: 3rem;
 }
 
+.text_input {
+  border: 0.2px grey solid;
+  font-size: 1.6rem;
+  font-weight: 100;
+}
+
 @mixin icon {
   border-radius: 50%;
   background: center no-repeat;

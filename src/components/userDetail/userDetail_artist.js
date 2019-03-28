@@ -5,19 +5,26 @@ const userDetailArtist = props => {
   const today = new Date()
 
   return (
-    <React.Fragment>
-      <p>artist name</p>
-      <span>*</span>
-      <input type="text" name="artistName" value={props.artistName} onChange={props.artistFormChanged} />
-      <p>profile</p>
-      <span>*</span>
-      <textarea name="profile" value={props.profile} onChange={props.artistFormChanged} />
-      <p>website</p>
-      <input type="text" name="website" value={props.website} onChange={props.artistFormChanged} />
-      <p>place</p>
-      <input type="text" name="place" value={props.place} onChange={props.artistFormChanged} />
-      <p>birthday</p>
+    <div>
+      <p className="typ_form_label">* Artist name</p>
       <input
+        className="input"
+        type="text"
+        name="artistName"
+        value={props.artistName}
+        onChange={props.artistFormChanged}
+      />
+
+      <p className="typ_form_label">* Profile</p>
+      <textarea className="text_input" name="profile" value={props.profile} onChange={props.artistFormChanged} />
+
+      <p className="typ_form_label">Website</p>
+      <input className="input" type="text" name="website" value={props.website} onChange={props.artistFormChanged} />
+      <p className="typ_form_label">Place</p>
+      <input className="input" type="text" name="place" value={props.place} onChange={props.artistFormChanged} />
+      <p className="typ_form_label">Birthday</p>
+      <input
+        className="input"
         type="date"
         min="1900-01-01"
         max={`${today.getFullYear()}-${
@@ -27,34 +34,61 @@ const userDetailArtist = props => {
         value={props.birthday}
         onChange={props.artistFormChanged}
       />
-      <p>Sex</p>
-      <select name="sex" value={props.sex} onChange={props.artistFormChanged}>
-        <option>other</option>
-      </select>
 
-      <p>bank name</p>
+      <p className="typ_form_label">Sex</p>
+      <div className="select">
+        <select name="sex" value={props.sex} onChange={props.artistFormChanged}>
+          <option>other</option>
+        </select>
+      </div>
+
+      <p className="typ_form_label">Bank name</p>
       <span>*</span>
-      <input type="text" name="bankName" value={props.bankName} onChange={props.artistFormChanged} />
-      <p>bank code</p>
+      <input className="input" type="text" name="bankName" value={props.bankName} onChange={props.artistFormChanged} />
+      <p className="typ_form_label">Bank code</p>
       <span>*</span>
-      <input type="text" name="bankCode" value={props.bankCode} onChange={props.artistFormChanged} />
-      <p>bank branch name</p>
+      <input className="input" type="text" name="bankCode" value={props.bankCode} onChange={props.artistFormChanged} />
+      <p className="typ_form_label">Bank branch name</p>
       <span>*</span>
-      <input type="text" name="bankBranchName" value={props.bankBranchName} onChange={props.artistFormChanged} />
-      <p>bank branch code</p>
+      <input
+        className="input"
+        type="text"
+        name="bankBranchName"
+        value={props.bankBranchName}
+        onChange={props.artistFormChanged}
+      />
+      <p className="typ_form_label">Bank branch code</p>
       <span>*</span>
-      <input type="text" name="bankBranchCode" value={props.bankBranchCode} onChange={props.artistFormChanged} />
-      <p>bank account number</p>
+      <input
+        className="input"
+        type="text"
+        name="bankBranchCode"
+        value={props.bankBranchCode}
+        onChange={props.artistFormChanged}
+      />
+      <p className="typ_form_label">Bank account number</p>
       <span>*</span>
-      <input type="text" name="bankAccountNumber" value={props.bankAccountNumber} onChange={props.artistFormChanged} />
-      <p>bank account name</p>
+      <input
+        className="input"
+        type="text"
+        name="bankAccountNumber"
+        value={props.bankAccountNumber}
+        onChange={props.artistFormChanged}
+      />
+      <p className="typ_form_label">Bank account name</p>
       <span>*</span>
-      <input type="text" name="bankAccountName" value={props.bankAccountName} onChange={props.artistFormChanged} />
+      <input
+        className="input"
+        type="text"
+        name="bankAccountName"
+        value={props.bankAccountName}
+        onChange={props.artistFormChanged}
+      />
 
       <button className="b_btn b_btn__13rem" type="button" onClick={props.updateArtistInfo}>
-        save
+        Save
       </button>
-    </React.Fragment>
+    </div>
   )
 }
 

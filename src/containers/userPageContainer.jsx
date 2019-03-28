@@ -36,7 +36,12 @@ class UserPageContainer extends React.Component {
     this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
-      tab: 0,
+
+
+      tab: 2,
+
+
+
       // prime tab
       iconImage: null,
 
@@ -492,7 +497,7 @@ class UserPageContainer extends React.Component {
 
       case 1:
         return (
-          <div className="userDetail_buyer">
+          <div className="userDetail__buyer">
             <UserDetailBuyer
               firstName={this.state.firstName}
               lastName={this.state.lastName}
@@ -507,7 +512,7 @@ class UserPageContainer extends React.Component {
 
       case 2:
         return (
-          <div className="userDetail_artist">
+          <div className="userDetail__artist">
             <UserDetailArtist
               artistName={this.state.artistName}
               profile={this.state.profile}

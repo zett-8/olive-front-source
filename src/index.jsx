@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -11,7 +11,7 @@ import './styles/main.scss'
 
 console.log(`==== connecting to ${process.env.NODE_ENV} server ====`)
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>
       <Router />

@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
   resolve: {
@@ -71,6 +72,7 @@ module.exports = {
   },
 
   optimization: {
+    minimize: true,
     splitChunks: {
       name: 'vendor',
       chunks: 'initial'
@@ -88,7 +90,8 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ja/),
     new webpack.NormalModuleReplacementPlugin(
       /moment-timezone\/data\/packed\/latest\.json/,
-      require.resolve('./doc/timezone-definitions.json'),
-    )
+      require.resolve('./doc/timezone-definitions.json')
+    ),
+    new BundleAnalyzerPlugin()
   ]
 }

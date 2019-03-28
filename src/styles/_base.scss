@@ -1,6 +1,6 @@
 
 // basic
-$color-basic: #030303;
+$color-basic: #111111;
 $color-gray: #eeeeee;
 $font-basic: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 $font-button: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
@@ -50,7 +50,7 @@ a {
 }
 
 .b_btn {
-  background-color: #030303;
+  background-color: #111111;
   color: white;
   height: 3rem;
   border: none;
@@ -62,6 +62,7 @@ a {
   cursor: pointer;
 
   &__8rem { width: 8rem; }
+  &__10rem { width: 10rem; }
   &__13rem { width: 13rem; }
   &__20rem { width: 20rem; }
   &__30rem { width: 30rem; }
@@ -81,6 +82,7 @@ a {
 
   &__8rem { width: 8rem; }
   &__15rem { width: 15rem; }
+  &__20rem { width: 20rem; }
   &__30rem { width: 30rem; }
   &__favorite {
     display: flex;

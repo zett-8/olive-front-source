@@ -35,14 +35,51 @@
   }
 
   &__prime {
-    &__iconForm {
+    display: grid;
+    justify-content: center;
 
+    > div {
+      width: 40rem;
+      @media only screen and (max-width: $bp-small) { width: 70vw; }
+    }
+
+    &__iconForm {
+      display: grid;
+      grid-template-columns: min-content 1fr 1fr;
+      grid-column-gap: 1rem;
+      align-items: center;
+
+      @media only screen and (max-width: $bp-small) {
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+      }
 
       &__icon {
         @include icon;
-        height: 20rem;
-        width: 20rem;
+        height: 14vmax;
+        width: 14vmax;
+
+        @media only screen and (max-width: $bp-small) {
+          grid-column: 1 / -1;
+          justify-self: center;
+          margin-bottom: 1.5rem;
+        }
       }
+    }
+
+    &__form {
+      display: grid;
+      margin-top: 5rem;
+      p { font-size: 1.2rem; }
+      button {
+        justify-self: right;
+        margin: 2rem 0 3rem 0;
+      }
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 5rem;
     }
   }
 

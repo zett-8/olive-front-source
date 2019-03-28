@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const userDetailPrime = props => {
   return (
-    <React.Fragment>
+    <div>
       <div className="userDetail__prime__iconForm">
         <div
           className="userDetail__prime__iconForm__icon"
@@ -14,27 +14,27 @@ const userDetailPrime = props => {
           }}
         />
 
-        <button className="w_btn w_btn__30rem" type="button" onClick={props.userIconSelectBtnClicked}>
-          Select new picture
+        <button className="w_btn w_btn__15rem" type="button" onClick={props.userIconSelectBtnClicked}>
+          Select picture
         </button>
         <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
-        <button className="b_btn b_btn__13rem" type="submit" onClick={props.upload}>
+        <button className="b_btn b_btn__10rem" type="submit" onClick={props.upload}>
           Save
         </button>
       </div>
-      <div>
-        <p>Email</p>
+
+      <div className="userDetail__prime__form">
+        <p className="typ_form_label">Email</p>
         <input className="input" type="text" name="email" value={props.email} placeholder={props.self.email} onChange={props.primeFormChanged} />
         <button className="b_btn b_btn__20rem" type="button" onClick={props.updateEmail}>Change Email</button>
-      </div>
-      <div>
-        <label>Password</label>  {/* eslint-disable-line */}
+
+        <p className="typ_form_label">Password</p>
         <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormChanged} />
         <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormChanged} />
         <button className="b_btn b_btn__20rem" type="button" onClick={props.updatePassword}>Change password</button>
       </div>
-      <button type="button" className="b_btn b_btn__20rem" onClick={props.logout}>Logout</button>
-    </React.Fragment>
+      <button type="button" className="b_btn b_btn__20re logout" onClick={props.logout}>Logout</button>
+    </div>
   )
 }
 

@@ -16,6 +16,7 @@ export const clearWorks = () => dispatch => {
 }
 
 export const getWorks = () => dispatch => {
+  dispatch(clearWorks())
   return Api.getWorks()
     .then(res => {
       dispatch({
@@ -27,6 +28,7 @@ export const getWorks = () => dispatch => {
 }
 
 export const getFilteredWorks = q => dispatch => {
+  dispatch(clearWorks())
   return Api.getFilteredWorks(q)
     .then(res => {
       dispatch({
@@ -38,6 +40,7 @@ export const getFilteredWorks = q => dispatch => {
 }
 
 export const getFavoriteWorks = (userId) => dispatch => {
+  dispatch(clearWorks())
   return Api.getFavoriteWorks(userId)
     .then(res => {
       dispatch({
@@ -49,6 +52,7 @@ export const getFavoriteWorks = (userId) => dispatch => {
 }
 
 export const getWorksOfAnArtist = (id) => dispatch => {
+  dispatch(clearWorks())
   return Api.getWorksOfAnArtist(id)
     .then(res => {
       dispatch({

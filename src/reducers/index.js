@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 import loginStatusReducer from './loginStatus'
 import genreReducer from './genres'
 import workReducer from './works'
+import popularWorksReducer from './popularWorks'
+import newWorksReducer from './newWorks'
 import purchasedHistoryReducer from './purchasedHistory'
 import workDetailReducer from './workDetail'
 import userDetailReducer from './userDetail'
@@ -15,6 +17,8 @@ export default combineReducers({
   loginStatus: loginStatusReducer,
   genres: genreReducer,
   works: workReducer,
+  popularWorks: popularWorksReducer,
+  newWorks: newWorksReducer,
   purchasedHistory: purchasedHistoryReducer,
   workDetail: workDetailReducer,
   userDetail: userDetailReducer,

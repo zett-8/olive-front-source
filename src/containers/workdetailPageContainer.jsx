@@ -7,7 +7,7 @@ import WorkDetail from '../components/workDetail'
 import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
 import { errorNotificationBody, successNotificationBody } from '../utils/notification'
 
-import { clearWorkDetail, getWorkDetail, purchaseWork, workWasBought, toggleFavorite } from '../actions/workDetail'
+import { getWorkDetail, purchaseWork, workWasBought, toggleFavorite } from '../actions/workDetail'
 
 class WorkDetailPageContainer extends React.Component {
   constructor(props) {
@@ -22,7 +22,6 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   async componentWillMount() {
-    await this.props.clearWorkDetail()
     await this.props.getWorkDetail(this.props.match.params.id)
 
     const w = this.props.workDetail.contents,
@@ -155,7 +154,6 @@ WorkDetailPageContainer = connect(
     userDetail: state.userDetail
   }),
   dispatch => ({
-    clearWorkDetail: () => dispatch(clearWorkDetail()),
     workWasBought: (buyerUUID, workId, status) => dispatch(workWasBought(buyerUUID, workId, status)),
     purchaseWork: (description, token, price, receipt) => dispatch(purchaseWork(description, token, price, receipt)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),

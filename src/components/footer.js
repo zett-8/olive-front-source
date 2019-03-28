@@ -13,7 +13,7 @@ const footer = () => {
           <Link to="/contact">Contact</Link>
         </p>
       </div>
-      <p className="typ_footer_copy footer__copy">&copy; 2019 Olive. All rights reserved.</p>
+      <p className="typ_footer_copy footer__copy">&copy; 2019 Olive - by noon inc.</p>
     </footer>
   )
 }

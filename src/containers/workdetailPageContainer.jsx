@@ -87,7 +87,18 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   purchaseWithBankTransfer = async () => {
+    const notification = this.notificationSystem.current
 
+    const err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
+    console.log(err)
+    if (err) {
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
+    }
+
+    this.closeModal()
+    this.setState({ bought: true })
   }
 
   purchaseWithCredit = async () => {
@@ -114,6 +125,7 @@ class WorkDetailPageContainer extends React.Component {
       notification.addNotification(errorNotificationBody)
     }
 
+    this.closeModal()
     this.setState({ bought: true })
   }
 
@@ -129,6 +141,7 @@ class WorkDetailPageContainer extends React.Component {
           closeModal={this.closeModal}
           modalIsOpen={this.state.modalIsOpen}
           purchaseWithCredit={this.purchaseWithCredit}
+          purchaseWithBankTransfer={this.purchaseWithBankTransfer}
         />
 
         <div className="workDetail">

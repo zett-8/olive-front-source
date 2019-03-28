@@ -3,16 +3,19 @@ import PropTypes from 'prop-types'
 import ModalSetting from 'react-modal'
 import { CardElement } from 'react-stripe-elements'
 
+import { bankInfo } from '../../utils/settings'
+
 const customStyles = {
   content: {
     zIndex: '100',
-    top: '20%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-20%',
     transform: 'translate(-50%, -50%)',
-    width: '80%'
+    width: '80%',
+    maxWidth: '40rem'
   },
   // overlay : {
   //   backgroundColor: '#f6f6f6'
@@ -28,10 +31,12 @@ const purchaseModalWindow = props => {
       style={customStyles}
       contentLabel="Purchase Work"
     >
-      <div className="checkout">
-        <p>支払方法を選択</p>
+      <div className="checkout-modal">
+        <h2>支払方法を選択</h2>
+        {bankInfo()}
+        <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithBankTransfer}>銀行振込で支払う</button>
         <CardElement />
-        <button type="button" onClick={props.purchaseWithCredit}>Pay With Card</button>
+        <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithCredit}>カードで支払う</button>
       </div>
     </ModalSetting>
   )
@@ -40,7 +45,8 @@ const purchaseModalWindow = props => {
 purchaseModalWindow.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  purchaseWithCredit: PropTypes.func.isRequired
+  purchaseWithCredit: PropTypes.func.isRequired,
+  purchaseWithBankTransfer: PropTypes.func.isRequired,
 }
 
 export default purchaseModalWindow

@@ -91,4 +91,20 @@
   }
 }
 
+.checkout-modal {
+  display: grid;
+  grid-row-gap: 1.8rem;
+
+  h2 { margin: 0 auto; }
+
+  div {
+    text-align: center;
+    p { font-size: 1.2rem; }
+  }
+
+  button {
+    justify-self: center;
+  }
+  .StripeElement { border-bottom: 1px grey solid; margin-top: 2rem; }
+}
 

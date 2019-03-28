@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { login } from '../actions/loginStatus'
-
 class LandingPageContainer extends React.Component {
   render() {
     return (
@@ -15,11 +13,5 @@ class LandingPageContainer extends React.Component {
 
 export default connect(
   null,
-  (dispatch) => ({
-    login: () => dispatch(login())
-  })
+  null
 )(LandingPageContainer)
-
-// todo: feature edit buyer info
-// todo: feature edit artist info
-// todo: feature post work

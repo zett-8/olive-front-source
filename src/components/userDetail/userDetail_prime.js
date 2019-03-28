@@ -33,6 +33,7 @@ const userDetailPrime = props => {
         <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormChanged} />
         <button className="b_btn b_btn__20rem" type="button" onClick={props.updatePassword}>Change password</button>
       </div>
+      <button type="button" className="b_btn b_btn__20rem" onClick={props.logout}>Logout</button>
     </React.Fragment>
   )
 }
@@ -60,6 +61,7 @@ userDetailPrime.propTypes = {
   buttonRef: PropTypes.shape({
     current: PropTypes.object,
   }),
+  logout: PropTypes.func.isRequired
 }
 
 export default userDetailPrime

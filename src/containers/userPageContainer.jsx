@@ -485,6 +485,7 @@ class UserPageContainer extends React.Component {
               newPassword={this.state.newPassword}
               updateEmail={this.updateEmail}
               updatePassword={this.updatePassword}
+              logout={this.logout}
             />
           </div>
         )
@@ -599,7 +600,7 @@ class UserPageContainer extends React.Component {
         <NotificationSystem ref={this.notificationSystem} />
         <div className="userDetail">
           <div className="userDetail__nav">
-            <UserDetailNav navClicked={this.navClicked} tab={this.state.tab}/>
+            <UserDetailNav self={this.props.loginStatus} navClicked={this.navClicked} tab={this.state.tab}/>
           </div>
           {this.tabContents()}
         </div>

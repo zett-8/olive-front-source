@@ -15,12 +15,16 @@
     display: flex;
     margin-bottom: 5rem;
 
+    svg { height: 1.5rem; }
+
     &__others {
       @include commonTabStyle;
       background-color: #eee;
       border-color: #eeeeee;
       box-shadow: -3px -2px 22px 0px rgba(0, 0, 0, 0.1) inset
     }
+
+    .del { color: #777777; }
 
     &__current {
       @include commonTabStyle;

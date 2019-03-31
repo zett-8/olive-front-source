@@ -11,7 +11,7 @@
     "build:prod": "export NODE_ENV=production && webpack --mode production",
     "build:dev": "export NODE_ENV=development && webpack --mode development",
     "build:local": "export NODE_ENV=local && webpack --mode development",
-    "eslint": "node node_modules/eslint/bin/eslint ."
+    "eslint": "node node_modules/eslint/bin/eslint . --quiet"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

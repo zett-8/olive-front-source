@@ -14,12 +14,11 @@ jobs:
           name: lint check
           command: |
             npm run eslint
-            exit 1
+
       - run:
           name: build test
           command: |
             npm run build:prod
-            exit 1
 
   build_dev:
     <<: *defaults

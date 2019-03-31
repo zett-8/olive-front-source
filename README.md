@@ -5,7 +5,9 @@
 
 
 ## Dependencies
-package.json 参照
+Node: 10.15.3  
+React: 16.7.0
+その他: package.json 参照
 
 <br>
 

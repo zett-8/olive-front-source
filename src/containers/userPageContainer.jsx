@@ -10,6 +10,7 @@ import UserDetailBuyer from '../components/userDetail/userDetail_buyer'
 import UserDetailArtist from '../components/userDetail/userDetail_artist'
 import UserDetailWorkUpload from '../components/userDetail/userDetail_workUpload'
 import WorkList from '../components/workList'
+import { errorNotificationBody, successNotificationBody } from '../utils/notification'
 
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
@@ -36,18 +37,14 @@ class UserPageContainer extends React.Component {
     this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
-
-
-      tab: 2,
-
-
+      tab: 0,
 
       // prime tab
       iconImage: null,
-
       email: '',
       oldPassword: '',
       newPassword: '',
+
       // buyer tab
       firstName: '',
 
@@ -55,9 +52,9 @@ class UserPageContainer extends React.Component {
       zipCode: '',
       address: '',
       phoneNumber: '',
+
       // artist tab
       artistName: '',
-
       profile: '',
       website: '',
       birthday: '',
@@ -340,19 +337,19 @@ class UserPageContainer extends React.Component {
     e.preventDefault()
 
     const f = e.target.files
-    if (f.length === 0) return false
+    if (f.length === 0) return null
 
     const url = this.createObjectURL(f[0])
 
-    this.setState({ ['workImage' + this.state.selectOrder]: f[0] })
-    this.setState({ ['workImageUrl' + this.state.selectOrder]: url })
+    this.setState({
+      ['workImage' + this.state.selectOrder]: f[0],
+      ['workImageUrl' + this.state.selectOrder]: url
+    })
 
     this.setState({ selectOrder: this.state.selectOrder + 1 })
   }
 
-  workSubImagesClicked = num => {
-    this.setState({ workImageUrlCurrent: num })
-  }
+  workSubImagesClicked = num => this.setState({ workImageUrlCurrent: num })
 
   resetWorkImages = () => {
     this.setState({
@@ -413,9 +410,7 @@ class UserPageContainer extends React.Component {
 
   uploadWork = async e => {
     e.preventDefault()
-
     const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
 
     const work = new FormData()
 
@@ -457,16 +452,15 @@ class UserPageContainer extends React.Component {
     work.append('price', this.state.workPrice)
 
     const err = await this.props.uploadWork(work)
-
     if (err) {
-      body.message = '作品のアップロードに失敗しました'
-      notification.addNotification(body)
+      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
+      errorNotificationBody.message = err.response.data.message
+      notification.addNotification(errorNotificationBody)
       return null
     }
 
-    body.level = 'success'
-    body.message = '作品をアップロードしました'
-    notification.addNotification(body)
+    successNotificationBody.message = '作品をアップロードしました'
+    notification.addNotification(successNotificationBody)
 
     this.resetWorkForm()
   }

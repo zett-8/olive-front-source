@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
   resolve: {
@@ -92,6 +92,6 @@ module.exports = {
       /moment-timezone\/data\/packed\/latest\.json/,
       require.resolve('./doc/timezone-definitions.json')
     ),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 }

@@ -20,23 +20,26 @@ jobs:
           name: lint check
           command: |
             npm run eslint
-
       - run:
           name: build test
           command: |
             npm run build:prod
-      - run: ls
+      - save_cache:
+          key: dist-file-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "/dist"
 
   deploy_dev:
     <<: *aws
     steps:
       - checkout
       - setup_remote_docker
+      - restore_cache:
+          key: dist-file-{{ .Branch }}-{{ .Revision }}
       - run: sudo pip install awscli
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
       - run: aws configure set region $DEFAULT_REGION_NAME --profile olive-IAM
-      - run: ls
       - run:
           name: deploy to aws s3
           command: |

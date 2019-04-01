@@ -4,7 +4,7 @@ executors:
   default_executor:
     working_directory: ~/workspace
     docker:
-    - image: node:10.15.3-jessie
+      - image: node:10.15.3-jessie
 
 jobs:
   testing_build_prod:

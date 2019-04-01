@@ -1,19 +1,14 @@
 version: 2.0
 
-node: &node
-  working_directory: ~/workspace
-  docker:
-    - image: node:10.15.3-jessie
-
-with_aws: &with_aws
-  working_directory: ~/workspace
-  docker:
-    - image: node:10.15.3-jessie
-    - image: circleci/python:3.6.6
+executors:
+  default_executor:
+    working_directory: ~/workspace
 
 jobs:
-  build_test:
-    <<: *node
+  testing_build_prod:
+    executors: default_executor
+    docker:
+      - image: node:10.15.3-jessie
     steps:
       - checkout
       - run: npm install
@@ -26,20 +21,29 @@ jobs:
           command: |
             npm run build:prod
 
+  build_dev:
+    executors: default_executor
+    docker:
+    - image: node:10.15.3-jessie
+    steps:
+    - checkout
+    - run: npm install
+    - run:
+        name: lint check
+        command: |
+          npm run eslint
+    - run:
+        name: build test
+        command: |
+          npm run build:dev
+
   deploy_dev:
-    <<: *with_aws
+    executors: default_executor
+    docker:
+      - image: circleci/python:3.6.6
     steps:
       - checkout
       - setup_remote_docker
-      - run: npm install
-      - run:
-          name: lint check
-          command: |
-            npm run eslint
-      - run:
-          name: build
-          command: |
-            npm run build:dev
       - run: sudo pip install awscli
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
@@ -53,14 +57,21 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - build_test:
-          context: olive
+      - testing_build_prod:
           filters:
             branches:
-              only: /^feature/
+              ignore:
+                - /^dev/
+
+      - build_dev:
+          filters:
+            branches:
+              only: /^dev/
 
       - deploy_dev:
           context: olive
+          requires:
+            - build_dev
           filters:
             branches:
               only: /^dev/

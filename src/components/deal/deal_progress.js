@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { bankInfo } from '../../utils/settings'
+import { BANK_INFO } from '../../utils/settings'
 
 const dealProgress = props => {
   const messageRenderer = () => {
@@ -14,7 +14,7 @@ const dealProgress = props => {
               支払をしてください
             </p>
             <span>作品が購入されました。支払を完了させてください</span>
-            {bankInfo()}
+            {BANK_INFO()}
           </React.Fragment>
         )
 

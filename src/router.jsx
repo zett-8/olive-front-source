@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Elements, StripeProvider } from 'react-stripe-elements'
 
-import { STRIPE_API_KEY } from './utils/apiKeys'
+import { STRIPE_API_KEY } from './utils/settings'
 
 import ErrorBoundary from './hocs/errorBoundary'
 import Header from './containers/headerContainer'

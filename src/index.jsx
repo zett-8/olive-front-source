@@ -9,7 +9,7 @@ import Router from './router'
 
 import './styles/main.scss'
 
-console.log(`==== connecting to ${process.env.NODE_ENV} server ====`)
+if (process.env.NODE_ENV !== 'production') console.log(`==== connecting to ${process.env.NODE_ENV} server ====`)
 
 render(
   <Provider store={store}>

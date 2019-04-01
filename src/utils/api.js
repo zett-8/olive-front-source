@@ -1,5 +1,5 @@
 import axios from 'axios'
-import PATH from './pathRetriever'
+import { PATH } from './settings'
 
 export default {
   getGenres: () => axios.get(`${PATH}/api/v1/genres/`),

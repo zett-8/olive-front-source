@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ModalSetting from 'react-modal'
 import { CardElement } from 'react-stripe-elements'
 
-import { bankInfo } from '../../utils/settings'
+import { BANK_INFO } from '../../utils/settings'
 
 const customStyles = {
   content: {
@@ -33,7 +33,7 @@ const purchaseModalWindow = props => {
     >
       <div className="checkout-modal">
         <h2>支払方法を選択</h2>
-        {bankInfo()}
+        {BANK_INFO()}
         <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithBankTransfer}>銀行振込で支払う</button>
         <CardElement />
         <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithCredit}>カードで支払う</button>

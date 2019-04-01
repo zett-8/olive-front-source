@@ -43,7 +43,7 @@ export default () => (
                 <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
                 <Route exact path="/work/:workId/deal/:myUUID/:clientId" component={DealContainer} />
                 <Route exact path="/filteredWorks/:info" component={FilteredWorksContainer} />
-                <Route exact path="/user/:UUID" component={UserContainer} />
+                <Route exact path="/user" component={UserContainer} />
                 <Route exact path="/logout" component={LogoutContainer} />
 
                 <Route exact path="/password-reset/:email" component={PasswordResetContainer} />

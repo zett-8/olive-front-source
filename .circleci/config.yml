@@ -1,12 +1,18 @@
 version: 2.0
-defaults: &defaults
+
+node: &node
   working_directory: ~/workspace
   docker:
     - image: node:10.15.3-jessie
 
+aws: &aws
+  working_directory: ~/workspace
+  docker:
+    - image: circleci/python:3.6.6
+
 jobs:
   build_test:
-    <<: *defaults
+    <<: *node
     steps:
       - checkout
       - run: npm install
@@ -21,7 +27,7 @@ jobs:
             npm run build:prod
 
   deploy_dev:
-    <<: *defaults
+    <<: *aws
     steps:
       - checkout
       - setup_remote_docker
@@ -35,7 +41,7 @@ jobs:
             aws s3 sync dist s3://olive-gallery.dev/
 
 workflows:
-  version: 2
+  version: 2.0
   build_test_and_deploy:
     jobs:
       - build_test:

@@ -8,7 +8,7 @@ executors:
 
 jobs:
   testing_build_prod:
-    executors: default_executor
+    executor: default_executor
     steps:
       - checkout
       - run: npm install
@@ -22,7 +22,7 @@ jobs:
             npm run build:prod
 
   build_dev:
-    executors: default_executor
+    executor: default_executor
     steps:
     - checkout
     - run: npm install
@@ -36,7 +36,7 @@ jobs:
           npm run build:dev
 
   deploy_dev:
-    executors: default_executor
+    executor: default_executor
     steps:
       - checkout
       - setup_remote_docker

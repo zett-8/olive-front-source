@@ -52,6 +52,11 @@ jobs:
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
       - run: aws configure set region $DEFAULT_REGION_NAME --profile olive-IAM
+        
+      - run:
+          name: delete existing js files
+          command: |
+            aws s3 rm s3://olive-gallery.dev --exclude '*' --include '*.js' --include '*.js.map' --recursive --dryrun
       - run:
           name: deploy to aws s3
           command: |

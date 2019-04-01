@@ -52,7 +52,7 @@ jobs:
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
       - run: aws configure set region $DEFAULT_REGION_NAME --profile olive-IAM
-        
+
       - run:
           name: delete existing js files
           command: |
@@ -61,6 +61,16 @@ jobs:
           name: deploy to aws s3
           command: |
             aws s3 sync dist s3://olive-gallery.dev/
+
+      - run:
+          name: notify to slack
+          command: |
+            curl -X POST \
+            $SLACK_WEBHOOK_URL \
+            -H 'content-type: application/json' \
+            -d '{
+              "text": "Olive FRONT-DEV was updated !!"
+            }'
 
 workflows:
   version: 2

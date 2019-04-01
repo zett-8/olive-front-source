@@ -72,7 +72,6 @@ module.exports = {
   },
 
   optimization: {
-    minimize: true,
     splitChunks: {
       name: 'vendor',
       chunks: 'initial'

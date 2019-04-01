@@ -45,6 +45,7 @@ jobs:
           name: install python
           command: |
             apt-get update && apt-get install -y python3
+      - run: apt-get install python3-dev
       - run:
           name: install pip
           command: |

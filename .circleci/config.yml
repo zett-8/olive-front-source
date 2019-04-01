@@ -5,9 +5,10 @@ node: &node
   docker:
     - image: node:10.15.3-jessie
 
-aws: &aws
+with_aws: &with_aws
   working_directory: ~/workspace
   docker:
+    - image: node:10.15.3-jessie
     - image: circleci/python:3.6.6
 
 jobs:
@@ -24,22 +25,21 @@ jobs:
           name: build test
           command: |
             npm run build:prod
-      - run:
-          name: add permission
-          command: |
-            chmod -R 777 ~/workspace
-      - save_cache:
-          key: dist-file-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - "./dist"
 
   deploy_dev:
-    <<: *aws
+    <<: *with_aws
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          key: dist-file-{{ .Branch }}-{{ .Revision }}
+      - run: npm install
+      - run:
+          name: lint check
+          command: |
+            npm run eslint
+      - run:
+          name: build
+          command: |
+            npm run build:dev
       - run: sudo pip install awscli
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
@@ -55,6 +55,9 @@ workflows:
     jobs:
       - build_test:
           context: olive
+          filters:
+            branches:
+              only: /^feature/
 
       - deploy_dev:
           context: olive

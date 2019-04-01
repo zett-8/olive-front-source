@@ -61,8 +61,6 @@ workflows:
 
       - deploy_dev:
           context: olive
-          requires:
-            - build_test
           filters:
             branches:
               only: /^dev/

@@ -44,13 +44,13 @@ jobs:
       - run:
           name: install python
           command: |
-            apt-get update && sudo apt-get install -y python
+            apt-get update && apt-get install -y python
       - run:
           name: install pip
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
-      - run: sudo python get-pip.py
-      - run: sudo pip install awscli
+      - run: python get-pip.py
+      - run: pip install awscli
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
       - run: aws configure set region $DEFAULT_REGION_NAME --profile olive-IAM

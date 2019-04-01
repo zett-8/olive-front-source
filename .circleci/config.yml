@@ -24,6 +24,10 @@ jobs:
           name: build test
           command: |
             npm run build:prod
+      - run:
+          name: add permission
+          command: |
+            chown -R $USER:$USER ./dist
       - save_cache:
           key: dist-file-{{ .Branch }}-{{ .Revision }}
           paths:
@@ -35,6 +39,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: mkdir dist
+      - run:
+          name: add permission
+          command: |
+            chown -R $USER:$USER ./dist
       - restore_cache:
           key: dist-file-{{ .Branch }}-{{ .Revision }}
       - run: sudo pip install awscli

@@ -27,7 +27,7 @@ jobs:
       - run:
           name: add permission
           command: |
-            chmod -R 777 ./dist
+            chmod -R 777 ~/workspace
       - save_cache:
           key: dist-file-{{ .Branch }}-{{ .Revision }}
           paths:

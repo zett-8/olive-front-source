@@ -40,14 +40,16 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run: ls
       - run:
           name: install python
           command: |
-            sudo apt-get install python
+            sudo apt-get update && sudo apt-get install -y python
       - run:
           name: install pip
           command: |
-            curl -kL https://bootstrap.pypa.io/get-pip.py | python
+            sudo curl -O https://bootstrap.pypa.io/get-pip.py
+      - run: sudo python get-pip.py
       - run: sudo pip install awscli
       - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
       - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM

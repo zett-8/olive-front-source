@@ -27,7 +27,7 @@ jobs:
       - run:
           name: add permission
           command: |
-            chown -R $USER:$USER ./dist
+            chmod -R 777 ./dist
       - save_cache:
           key: dist-file-{{ .Branch }}-{{ .Revision }}
           paths:
@@ -38,11 +38,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: mkdir dist
-      - run:
-          name: add permission
-          command: |
-            chown -R $USER:$USER ./dist
       - restore_cache:
           key: dist-file-{{ .Branch }}-{{ .Revision }}
       - run: sudo pip install awscli

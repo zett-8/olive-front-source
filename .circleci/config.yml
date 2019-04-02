@@ -56,7 +56,7 @@ jobs:
       - run:
           name: delete existing js files
           command: |
-            aws s3 rm s3://olive-gallery.dev --exclude '*' --include '*.js' --include '*.js.map' --recursive --dryrun
+            aws s3 rm s3://olive-gallery.dev --exclude '*' --include '*.js' --include '*.js.map' --recursive
       - run:
           name: deploy to aws s3
           command: |

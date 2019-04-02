@@ -6,7 +6,7 @@ import Header from '../components/header'
 import DownMenu from '../components/downMenu'
 
 import { getGenres } from '../actions/genres'
-import { getFilteredWorks } from '../actions/works'
+import { getFilteredWorks } from '../actions/workList'
 import { getUserDetail } from '../actions/userDetail'
 
 class HeaderContainer extends React.Component {

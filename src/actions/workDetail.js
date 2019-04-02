@@ -14,7 +14,6 @@ export const clearWorkDetail = () => dispatch => {
 }
 
 export const getWorkDetail = id => dispatch => {
-  dispatch(clearWorkDetail())
   return Api.getWorkDetail(id)
     .then(res => {
       dispatch({

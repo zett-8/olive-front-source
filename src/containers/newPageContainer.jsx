@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getNewWorks } from '../actions/newWorks'
+import { getNewWorks } from '../actions/workList'
 
 
 class NewPageContainer extends React.Component {
   componentDidMount() {
-    if (this.props.newWorks.pristine) this.props.getNewWorks()
+    if (this.props.workList.newWorks.pristine) this.props.getNewWorks()
   }
 
   render() {
-    if(this.props.newWorks.pristine) return null
+    if(this.props.workList.newWorks.pristine) return null
 
     return (
       <div className="workList">
-        <WorkList works={this.props.newWorks.contents}/>
+        <WorkList works={this.props.workList.newWorks.contents}/>
       </div>
     )
   }
@@ -24,7 +24,7 @@ class NewPageContainer extends React.Component {
 
 export default connect(
   state => ({
-    newWorks: state.newWorks
+    workList: state.workList
   }),
   dispatch => ({
     getNewWorks: () => dispatch(getNewWorks()),

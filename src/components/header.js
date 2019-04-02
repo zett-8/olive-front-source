@@ -32,7 +32,7 @@ export const header = props => {
             <p onClick={() => props.menuClicked('/favorites')}>
               <FavoriteIMG alt="favorite" />
             </p>
-            <p onClick={() => props.menuClicked(`/user/${props.loginStatus.uuid}`)}>
+            <p onClick={() => props.menuClicked('/user')}>
               <AccountIMG alt="account" />
             </p>
           </React.Fragment>

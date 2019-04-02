@@ -1,192 +1,232 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import VOID from '../../assets/700.gif'
+
 const userDetailWorkUpload = props => {
   return (
     <React.Fragment>
       <div className="userDetail__workUpload__images">
-        <div
-          className="userDetail__workUpload__images__main"
-          style={{ backgroundImage: `url(${props[`workImageUrl${props.workImageUrlCurrent}`]})` }}
-        />
-        <div className="userDetail__workUpload__images__subs">
-          <div
-            role="button"
-            tabIndex={0}
+        <p className="userDetail__workUpload__images__main">
+          <img
+            src={VOID}
+            style={{ backgroundImage: `url(${props[`workImageUrl${props.workImageUrlCurrent}`]})` }}
+            alt=""
+          />
+        </p>
+
+        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('1')}>
+          <img
+            src={VOID}
             style={{ backgroundImage: `url(${props.workImageUrl1})` }}
-            onClick={() => props.workSubImagesClicked('1')}
+            alt=""
           />
-          <div
-            role="button"
-            tabIndex={0}
+        </p>
+
+        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('2')}>
+          <img
+            src={VOID}
             style={{ backgroundImage: `url(${props.workImageUrl2})` }}
-            onClick={() => props.workSubImagesClicked('2')}
+            alt=""
           />
-          <div
-            role="button"
-            tabIndex={0}
+        </p>
+
+        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('3')}>
+          <img
+            src={VOID}
             style={{ backgroundImage: `url(${props.workImageUrl3})` }}
-            onClick={() => props.workSubImagesClicked('3')}
+            alt=""
           />
-          <div
-            role="button"
-            tabIndex={0}
+        </p>
+
+        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('4')}>
+          <img
+            src={VOID}
             style={{ backgroundImage: `url(${props.workImageUrl4})` }}
-            onClick={() => props.workSubImagesClicked('4')}
+            alt=""
           />
-          <div
-            role="button"
-            tabIndex={0}
+        </p>
+
+        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('5')}>
+          <img
+            src={VOID}
             style={{ backgroundImage: `url(${props.workImageUrl5})` }}
-            onClick={() => props.workSubImagesClicked('5')}
+            alt=""
+          />
+        </p>
+
+        <div className="userDetail__workUpload__images__buttons">
+          <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.workImageSelected} />
+          <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>
+            Select
+          </button>
+          <button className="w_btn w_btn__15rem" type="button" onClick={props.resetWorkImages}>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <div className="userDetail__workUpload__form">
+        <p className="typ_form_label">* Title</p>
+        <input
+          className="input"
+          name="workTitle"
+          value={props.workTitle}
+          onChange={props.workFormChanged}
+          placeholder="Work Title"
+        />
+        <p className="typ_form_label">* Caption</p>
+        <textarea
+          className="input"
+          name="workCaption"
+          value={props.workCaption}
+          onChange={props.workFormChanged}
+          placeholder="caption"
+        />
+        <p className="typ_form_label">Technique</p>
+        <input
+          className="input"
+          name="workTechnique"
+          value={props.workTechnique}
+          onChange={props.workFormChanged}
+          placeholder="technique"
+        />
+        <p className="typ_form_label">Year</p>
+        <input
+          className="input"
+          name="workYear"
+          value={props.workYear}
+          onChange={props.workFormChanged}
+          placeholder="year"
+        />
+
+        <p className="typ_form_label">Sign</p>
+        <input
+          className="input"
+          name="workSign"
+          value={props.workSign}
+          onChange={props.workFormChanged}
+          placeholder="sign"
+        />
+
+        <p className="typ_form_label">Edition</p>
+        <input
+          className="input"
+          name="workEdition"
+          value={props.workEdition}
+          onChange={props.workFormChanged}
+          placeholder="edition"
+        />
+
+        <p className="typ_form_label">Frame</p>
+        <input
+          className="input"
+          name="workFrame"
+          value={props.workFrame}
+          onChange={props.workFormChanged}
+          placeholder="frame"
+        />
+        <p className="typ_form_label">*Size</p>
+        <div className="userDetail__workUpload__form__sizeInputs">
+          <input
+            className="input"
+            name="workHeight"
+            value={props.workHeight}
+            onChange={props.workFormChanged}
+            placeholder="height"
+          />
+          <span>x</span>
+          <input
+            className="input"
+            name="workWidth"
+            value={props.workWidth}
+            onChange={props.workFormChanged}
+            placeholder="width"
+          />
+          <span>x</span>
+          <input
+            className="input"
+            name="workDepth"
+            value={props.workDepth}
+            onChange={props.workFormChanged}
+            placeholder="depth"
           />
         </div>
-        `
-        <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.workImageSelected} />
-        <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>
-          Select
-        </button>
-        <button className="w_btn w_btn__15rem" type="button" onClick={props.resetWorkImages}>
-          Clear
+
+        <p className="typ_form_label">* Genre</p>
+        <div className="select">
+          <select name="workGenre" value={props.workGenre} onChange={props.workFormChanged}>
+            {props.genres.map(g => (
+              <option key={g.id} value={g.id}>
+                {g.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <p className="typ_form_label">* SubGenre</p>
+        <div className="select">
+          <select name="workSubGenre" value={props.workSubGenre} onChange={props.workFormChanged}>
+            {props.selectableSubGenres.map(sg => (
+              <option key={sg.id} value={sg.id}>
+                {sg.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <p className="typ_form_label">Colors</p>
+        <p className="userDetail__workUpload__form__colors">
+          <label htmlFor="crimson">
+            <input id="crimson" type="checkbox" name="workColorCrimson" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'crimson' }} />
+          </label>
+          <label htmlFor="mediumBlue">
+            <input id="mediumBlue" type="checkbox" name="workColorMediumBlue" value={!props.workColorMediumBlue} checked={props.workColorMediumBlue} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'mediumblue' }} />
+          </label>
+          <label htmlFor="forestGreen">
+            <input id="forestGreen" type="checkbox" name="workColorForestGreen" value={!props.workColorForestGreen} checked={props.workColorForestGreen} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'forestgreen' }} />
+          </label>
+          <label htmlFor="gold">
+            <input id="gold" type="checkbox" name="workColorGold" value={!props.workColorGold} checked={props.workColorGold} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'gold' }} />
+          </label>
+          <label htmlFor="purple">
+            <input id="purple" type="checkbox" name="workColorPurple" value={!props.workColorPurple} checked={props.workColorPurple} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'purple' }} />
+          </label>
+          <label htmlFor="brown">
+            <input id="brown" type="checkbox" name="workColorBrown" value={!props.workColorBrown} checked={props.workColorBrown} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'brown' }} />
+          </label>
+          <label htmlFor="black">
+            <input id="black" type="checkbox" name="workColorBlack" value={!props.workColorBlack} checked={props.workColorBlack} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'black' }} />
+          </label>
+          <label htmlFor="grey">
+            <input id="grey" type="checkbox" name="workColorGrey" value={!props.workColorGrey} checked={props.workColorGrey} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'grey' }} />
+          </label>
+          <label htmlFor="ivory">
+            <input id="ivory" type="checkbox" name="workColorIvory" value={!props.workColorIvory} checked={props.workColorIvory} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
+          </label>
+        </p>
+
+        <p className="typ_form_label">* Price</p>
+        <input
+          className="input"
+          name="workPrice"
+          type="number"
+          value={props.workPrice}
+          onChange={props.workFormChanged}
+        />
+        <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
+          Save
         </button>
       </div>
-      <p>Title</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workTitle"
-        value={props.workTitle}
-        onChange={props.workFormChanged}
-        placeholder="Work Title"
-      />
-      <p>Caption</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workCaption"
-        value={props.workCaption}
-        onChange={props.workFormChanged}
-        placeholder="caption"
-      />
-      <p>Technique</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workTechnique"
-        value={props.workTechnique}
-        onChange={props.workFormChanged}
-        placeholder="technique"
-      />
-      <p>Year</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workYear"
-        value={props.workYear}
-        onChange={props.workFormChanged}
-        placeholder="year"
-      />
-      <p>Sign</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workSign"
-        value={props.workSign}
-        onChange={props.workFormChanged}
-        placeholder="sign"
-      />
-      <p>Edition</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workEdition"
-        value={props.workEdition}
-        onChange={props.workFormChanged}
-        placeholder="edition"
-      />
-      <p>Frame</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workFrame"
-        value={props.workFrame}
-        onChange={props.workFormChanged}
-        placeholder="frame"
-      />
-      <p>Size</p>
-      <input
-        className="input"
-        name="workHeight"
-        value={props.workHeight}
-        onChange={props.workFormChanged}
-        placeholder="height"
-      />
-      mm x
-      <input
-        className="input"
-        name="workWidth"
-        value={props.workWidth}
-        onChange={props.workFormChanged}
-        placeholder="width"
-      />
-      mm x
-      <input
-        className="input"
-        name="workDepth"
-        value={props.workDepth}
-        onChange={props.workFormChanged}
-        placeholder="depth"
-      />
-      mm
-      <p>Genre</p>
-      <select name="workGenre" value={props.workGenre} onChange={props.workFormChanged}>
-        {props.genres.map(g => (
-          <option key={g.id} value={g.id}>
-            {g.name}
-          </option>
-        ))}
-      </select>
-      <p>SubGenre</p>
-      <select name="workSubGenre" value={props.workSubGenre} onChange={props.workFormChanged}>
-        {props.selectableSubGenres.map(sg => (
-          <option key={sg.id} value={sg.id}>
-            {sg.name}
-          </option>
-        ))}
-      </select>
-      <p>Colors</p>
-      <p>
-        <input type="checkbox" name="workColorCrimson" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'crimson' }} />
-        <input type="checkbox" name="workColorMediumBlue" value={!props.workColorMediumBlue} checked={props.workColorMediumBlue} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'mediumblue' }} />
-        <input type="checkbox" name="workColorForestGreen" value={!props.workColorForestGreen} checked={props.workColorForestGreen} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'forestgreen' }} />
-        <input type="checkbox" name="workColorGold" value={!props.workColorGold} checked={props.workColorGold} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'gold' }} />
-        <input type="checkbox" name="workColorPurple" value={!props.workColorPurple} checked={props.workColorPurple} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'purple' }} />
-        <input type="checkbox" name="workColorBrown" value={!props.workColorBrown} checked={props.workColorBrown} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'brown' }} />
-        <input type="checkbox" name="workColorBlack" value={!props.workColorBlack} checked={props.workColorBlack} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'black' }} />
-        <input type="checkbox" name="workColorGrey" value={!props.workColorGrey} checked={props.workColorGrey} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'grey' }} />
-        <input type="checkbox" name="workColorIvory" value={!props.workColorIvory} checked={props.workColorIvory} onChange={props.workFormChanged} />
-        <span style={{ display: 'inline-block', height: '2rem', width: '2rem', backgroundColor: 'ivory', border: '1px solid grey' }} />
-      </p>
-      <p>Price</p>
-      <span>*</span>
-      <input
-        className="input"
-        name="workPrice"
-        type="number"
-        value={props.workPrice}
-        onChange={props.workFormChanged}
-      />
-      <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
-        Save
-      </button>
     </React.Fragment>
   )
 }

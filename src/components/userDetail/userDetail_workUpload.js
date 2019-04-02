@@ -176,7 +176,7 @@ const userDetailWorkUpload = props => {
         </div>
 
         <p className="typ_form_label">Colors</p>
-        <p className="userDetail__workUpload__form__colors">
+        <p className="userDetail__workUpload__form__colors1">
           <label htmlFor="crimson">
             <input id="crimson" type="checkbox" name="workColorCrimson" value={!props.workColorCrimson} checked={props.workColorCrimson} onChange={props.workFormChanged} />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'crimson' }} />
@@ -197,6 +197,8 @@ const userDetailWorkUpload = props => {
             <input id="purple" type="checkbox" name="workColorPurple" value={!props.workColorPurple} checked={props.workColorPurple} onChange={props.workFormChanged} />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'purple' }} />
           </label>
+        </p>
+        <p className="userDetail__workUpload__form__colors2">
           <label htmlFor="brown">
             <input id="brown" type="checkbox" name="workColorBrown" value={!props.workColorBrown} checked={props.workColorBrown} onChange={props.workFormChanged} />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'brown' }} />
@@ -211,6 +213,10 @@ const userDetailWorkUpload = props => {
           </label>
           <label htmlFor="ivory">
             <input id="ivory" type="checkbox" name="workColorIvory" value={!props.workColorIvory} checked={props.workColorIvory} onChange={props.workFormChanged} />
+            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
+          </label>
+          <label htmlFor="dummy" style={{ opacity: '0' }}>
+            <input id="dummy" type="checkbox" name="dummy" />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
           </label>
         </p>

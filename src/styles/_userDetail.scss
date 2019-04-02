@@ -17,6 +17,17 @@
   }
 }
 
+@mixin basic_for_prime_buyer_artist {
+  display: grid;
+  justify-content: center;
+
+  > div {
+    width: 40rem;
+    display: grid;
+    @media only screen and (max-width: $bp-small) { width: 80vw; }
+  }
+}
+
 .userDetail {
 
   &__nav {
@@ -43,13 +54,7 @@
   }
 
   &__prime {
-    display: grid;
-    justify-content: center;
-
-    > div {
-      width: 40rem;
-      @media only screen and (max-width: $bp-small) { width: 70vw; }
-    }
+    @include basic_for_prime_buyer_artist;
 
     &__iconForm {
       display: grid;
@@ -92,13 +97,9 @@
   }
 
   &__buyer {
-    display: grid;
-    justify-content: center;
+    @include basic_for_prime_buyer_artist;
 
     > div {
-      width: 40rem;
-      display: grid;
-      @media only screen and (max-width: $bp-small) { width: 70vw; }
 
       > input { margin-bottom: 2.3rem; }
       > button { justify-self: right; }
@@ -106,15 +107,9 @@
   }
 
   &__artist {
-    display: grid;
-    justify-content: center;
+    @include basic_for_prime_buyer_artist;
 
     > div {
-      width: 40rem;
-      display: grid;
-
-      @media only screen and (max-width: $bp-small) { width: 70vw; }
-
       > input { margin-bottom: 2.3rem; }
 
       > textarea {
@@ -144,12 +139,14 @@
       &__main { grid-column: 1 / -1; @include IMG; }
       &__sub { @include IMG; }
 
-      &__buttons { grid-column: 1 / -1; justify-self: right; }
+      &__buttons { grid-column: 1 / -1; justify-self: right; width:100%; display: flex; justify-content: space-between; }
     }
 
     &__form {
       display: grid;
       padding: 0 4rem;
+
+      @media only screen and (max-width: $bp-medium) { padding: 0; }
 
       > input { margin-bottom: 2rem; }
 
@@ -172,7 +169,7 @@
 
       div.select { margin-bottom: 2rem; }
 
-      &__colors {
+      &__colors1, &__colors2 {
         display: flex;
         margin-bottom: 2rem;
         justify-content: space-between;
@@ -182,6 +179,8 @@
           > input { margin-right: 0.2rem; }
         }
       }
+
+      &__colors1 { margin-bottom: 0.5rem; }
 
       > button { justify-self: right; }
     }

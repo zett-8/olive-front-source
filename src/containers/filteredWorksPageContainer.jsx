@@ -3,21 +3,13 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getFilteredWorks } from '../actions/works'
-
 class FilteredWorks extends React.Component {
-  componentWillMount() {
-
-  }
-
-
   render() {
-    if (this.props.works.pristine) return null
+    if (this.props.worksList.filteredWorks.pristine) return null
 
     return (
-
       <div className="workList">
-        <WorkList works={this.props.works.contents} />
+        <WorkList works={this.props.worksList.filteredWorks.contents} />
       </div>
     )
   }
@@ -25,9 +17,7 @@ class FilteredWorks extends React.Component {
 
 export default connect(
   state => ({
-    works: state.works,
+    worksList: state.workList,
   }),
-  dispatch => ({
-    getFilteredWorks: q => dispatch(getFilteredWorks(q))
-  })
+  null
 )(FilteredWorks)

@@ -14,7 +14,7 @@ import { errorNotificationBody, successNotificationBody } from '../utils/notific
 
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
-import { getPurchasedHistory } from '../actions/purchasedHistory'
+import { getPurchasedHistory } from '../actions/workList'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
 
@@ -575,7 +575,7 @@ class UserPageContainer extends React.Component {
         return (
           <div className="userDetail_purchasedHistory">
             <div className="workList">
-              <WorkList works={this.props.purchasedHistory.contents} />
+              <WorkList works={this.props.workList.purchasedWorks.contents} />
             </div>
           </div>
         )
@@ -613,7 +613,7 @@ export default connect(
     loginStatus: state.loginStatus,
     userDetail: state.userDetail,
     genres: state.genres,
-    purchasedHistory: state.purchasedHistory,
+    workList: state.workList
   }),
   dispatch => ({
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),

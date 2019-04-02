@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ModalSetting from 'react-modal'
 import { CardElement } from 'react-stripe-elements'
-
 import { BANK_INFO } from '../../utils/settings'
 
 const customStyles = {

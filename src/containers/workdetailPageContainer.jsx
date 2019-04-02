@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { injectStripe } from 'react-stripe-elements'
 import NotificationSystem from 'react-notification-system'
 
+import StripeProvider from '../hocs/stripeProvider'
 import WorkDetail from '../components/workDetail'
 import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
 import { errorNotificationBody, successNotificationBody } from '../utils/notification'
@@ -160,7 +161,9 @@ class WorkDetailPageContainer extends React.Component {
   }
 }
 
-WorkDetailPageContainer = connect(
+const WrappedWorkDetail = StripeProvider(injectStripe(WorkDetailPageContainer))
+
+export default connect(
   state => ({
     loginStatus: state.loginStatus,
     workDetail: state.workDetail,
@@ -172,6 +175,6 @@ WorkDetailPageContainer = connect(
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getWorkDetail: id => dispatch(getWorkDetail(id)),
   })
-)(WorkDetailPageContainer)
+)(WrappedWorkDetail)
 
-export default injectStripe(WorkDetailPageContainer)
+

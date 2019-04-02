@@ -37,7 +37,7 @@ class UserPageContainer extends React.Component {
     this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
-      tab: 0,
+      tab: 3,
 
       // prime tab
       iconImage: null,

@@ -56,8 +56,6 @@ class DealPageContainer extends React.Component {
     e.preventDefault()
     if (this.state.message === '') return null
 
-    const notification = this.notificationSystem.current
-
     const work = this.props.workDetail.contents
 
     const err = await this.props.sendMessage(
@@ -69,7 +67,7 @@ class DealPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 

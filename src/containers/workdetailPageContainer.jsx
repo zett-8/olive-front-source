@@ -6,7 +6,7 @@ import NotificationSystem from 'react-notification-system'
 import StripeProvider from '../hocs/stripeProvider'
 import WorkDetail from '../components/workDetail'
 import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
-import { errorNotificationBody, successNotificationBody } from '../utils/notification'
+import { errorNotificationBody } from '../utils/notification'
 
 import { clearWorkDetail, getWorkDetail, purchaseWork, workWasBought, toggleFavorite } from '../actions/workDetail'
 
@@ -39,12 +39,10 @@ class WorkDetailPageContainer extends React.Component {
   closeModal = () => this.setState({ modalIsOpen: false })
 
   toggleFavorite = async () => {
-    const notification = this.notificationSystem.current
-
     if (!Object.keys(this.props.loginStatus).length) {
       errorNotificationBody.title = 'User Only'
       errorNotificationBody.message = 'お気に入りに追加するにはログインしてください'
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -53,36 +51,24 @@ class WorkDetailPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
     }
   }
 
   chosePaymentMethod = () => {
     // buyer情報が登録できていない場合
     if (!this.props.loginStatus.buyer) {
-      const notification = this.notificationSystem.current
-
-      notification.addNotification({
-        message: '購入者情報を登録してください',
-        level: 'error',
-        autoDismiss: 4,
-        position: 'tc',
-      })
-
+      errorNotificationBody.title = 'Oops!'
+      errorNotificationBody.message = '購入者情報を登録してください'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     // 自分の作品は購入できない
     if (this.props.loginStatus.user_id === this.props.workDetail.contents.artist.user_id) {
-      const notification = this.notificationSystem.current
-
-      notification.addNotification({
-        message: '自分の作品は購入できません',
-        level: 'error',
-        autoDismiss: 4,
-        position: 'tc',
-      })
-
+      errorNotificationBody.title = 'Oops!'
+      errorNotificationBody.message = '自分の作品は購入できません'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -90,14 +76,12 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   purchaseWithBankTransfer = async () => {
-    const notification = this.notificationSystem.current
-
     const err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
-    console.log(err)
+
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
     }
 
     this.closeModal()
@@ -105,8 +89,6 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   purchaseWithCredit = async () => {
-    const notification = this.notificationSystem.current
-
     const detail = this.props.userDetail.contents
     let { token } = await this.props.stripe.createToken({name: `${detail.last_name} ${detail.first_name}`})
     const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.name}`
@@ -117,7 +99,7 @@ class WorkDetailPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -125,7 +107,7 @@ class WorkDetailPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
     }
 
     this.closeModal()

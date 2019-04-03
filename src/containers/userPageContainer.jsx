@@ -135,32 +135,29 @@ class UserPageContainer extends React.Component {
   primeFormChanged = e => this.setState({ [e.target.name]: e.target.value })
 
   updateEmail = async () => {
-    const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
-
     const message = EmailValidation(this.state.email)
+
     if (message) {
-      body.message = message
-      notification.addNotification(body)
+      errorNotificationBody.title = 'Oops'
+      errorNotificationBody.message = message
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     const err = await this.props.updateEmail(this.props.loginStatus.uuid, this.state.email)
 
     if (err) {
-      body.message = 'メールアドレスの変更に失敗しました'
-      notification.addNotification(body)
+      errorNotificationBody.message = 'メールアドレスの変更に失敗しました'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
     }
   }
 
   updatePassword = async () => {
-    const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
-
     const message = TwoPasswordValidation(this.state.oldPassword, this.state.newPassword)
+
     if (message) {
-      body.message = message
-      notification.addNotification(body)
+      errorNotificationBody.message = message
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -171,14 +168,14 @@ class UserPageContainer extends React.Component {
     )
 
     if (err) {
-      body.message = err.response.data.message
-      notification.addNotification(body)
+      errorNotificationBody.message = err.response.data.message
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     body.level = 'success'
     body.message = 'パスワードを変更しました'
-    notification.addNotification(body)
+    this.notificationSystem.current.addNotification(errorNotificationBody)
 
     this.setState({ oldPassword: '', newPassword: '' })
   }
@@ -190,13 +187,12 @@ class UserPageContainer extends React.Component {
   buyerFormChanged = e => this.setState({ [e.target.name]: e.target.value })
 
   updateBuyerInfo = async () => {
-    const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
-
     const state = this.state
+
     if (!state.firstName || !state.lastName || !state.zipCode || !state.address || !state.phoneNumber) {
-      body.message = '*必須項目を入力してください'
-      notification.addNotification(body)
+      errorNotificationBody.title = 'Not Yet!'
+      errorNotificationBody.message = '*必須項目を入力してください'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -212,14 +208,13 @@ class UserPageContainer extends React.Component {
     const err = await this.props.updateBuyerInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
-      body.message = 'Buyer情報の更新に失敗しました'
-      notification.addNotification(body)
+      errorNotificationBody.message = 'Buyer情報の更新に失敗しました'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
-    body.message = 'Buyer情報を更新しました'
-    body.level = 'success'
-    notification.addNotification(body)
+    successNotificationBody.title = 'Updated Buyer Info!'
+    this.notificationSystem.current.addNotification(successNotificationBody)
   }
 
   // =============================
@@ -229,9 +224,6 @@ class UserPageContainer extends React.Component {
   artistFormChanged = e => this.setState({ [e.target.name]: e.target.value })
 
   updateArtistInfo = async () => {
-    const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
-
     if (
       !this.state.artistName ||
       !this.state.profile ||
@@ -242,8 +234,9 @@ class UserPageContainer extends React.Component {
       !this.state.bankAccountNumber ||
       !this.state.bankAccountName
     ) {
-      body.message = '*必須項目を入力してください'
-      notification.addNotification(body)
+      errorNotificationBody.title = 'Not Yet!'
+      errorNotificationBody.message = '*必須項目を入力してください'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -266,14 +259,13 @@ class UserPageContainer extends React.Component {
     const err = await this.props.updateArtistInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
-      body.message = 'Artist情報の更新に失敗しました'
-      notification.addNotification(body)
+      errorNotificationBody.message = 'Artist情報の更新に失敗しました'
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
-    body.message = 'Buyer情報を更新しました'
-    body.level = 'success'
-    notification.addNotification(body)
+    successNotificationBody.title = 'Updated Artist Info!'
+    this.notificationSystem.current.addNotification(successNotificationBody)
 
     console.log('update!')
   }
@@ -304,8 +296,6 @@ class UserPageContainer extends React.Component {
   workImageSelectBtnClicked = () => this.workImageSelectBtnRef.current.click()
 
   workImageSelected = e => {
-    e.preventDefault()
-
     const f = e.target.files
     if (f.length === 0) return null
 
@@ -346,14 +336,12 @@ class UserPageContainer extends React.Component {
   }
 
   uploadWork = async e => {
-    e.preventDefault()
-    const notification = this.notificationSystem.current
-
     const message = workFormValidation(this.state.work)
+
     if (message) {
       errorNotificationBody.title = 'Not Yet!'
       errorNotificationBody.message = message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -364,15 +352,16 @@ class UserPageContainer extends React.Component {
     Object.keys(this.state.work).forEach(key => work.append(key, this.state.work[key]))
 
     const err = await this.props.uploadWork(work)
+
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     successNotificationBody.message = '作品をアップロードしました'
-    notification.addNotification(successNotificationBody)
+    this.notificationSystem.current.addNotification(successNotificationBody)
 
     this.resetWorkForm()
   }

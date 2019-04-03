@@ -34,13 +34,11 @@ class LoginPageContainer extends React.Component {
   }
 
   handleForgetPassword = async () => {
-    const notification = this.notificationSystem.current
-
     const message = FormValidation(this.state.email, 'pass1234')
     if (message) {
-      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.title = 'Oops!'
       errorNotificationBody.message = message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -48,7 +46,7 @@ class LoginPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'Something is wrong!'
       errorNotificationBody.message = '登録されていないメールアドレスです'
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -58,14 +56,11 @@ class LoginPageContainer extends React.Component {
   signUp = async e => {
     e.preventDefault()
 
-    const notification = this.notificationSystem.current
-    const body = { level: 'error', autoDismiss: 4, position: 'tc', message: '' }
-
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
-      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.title = 'Oops!'
       errorNotificationBody.message = message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -74,32 +69,28 @@ class LoginPageContainer extends React.Component {
       if (err) {
         errorNotificationBody.title = 'Something is wrong!'
         errorNotificationBody.message = err.response.data.message
-        notification.addNotification(errorNotificationBody)
+        this.notificationSystem.current.addNotification(errorNotificationBody)
         return null
       }
     }
 
     const error = await this.props.signUp(this.state.email, this.state.password, this.state.invitation || 'non')
     if (error) {
-      errorNotificationBody.title = 'Something is wrong!'
+      errorNotificationBody.title = 'Something went wrong!'
       errorNotificationBody.message = error.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
-
-    console.log('OK')
   }
 
   login = async e => {
     e.preventDefault()
 
-    const notification = this.notificationSystem.current
-
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
       errorNotificationBody.title = 'Something is wrong!'
       errorNotificationBody.message = message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
@@ -107,7 +98,7 @@ class LoginPageContainer extends React.Component {
     if (err) {
       errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
       errorNotificationBody.message = err.response.data.message
-      notification.addNotification(errorNotificationBody)
+      this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 

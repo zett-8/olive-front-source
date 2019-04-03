@@ -12,7 +12,7 @@ import UserDetailWorkUpload from '../components/userDetail/userDetail_workUpload
 import WorkList from '../components/workList'
 import { errorNotificationBody, successNotificationBody } from '../utils/notification'
 
-import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
+import { EmailValidation, TwoPasswordValidation, workFormValidation } from '../utils/Validator'
 import { uploadWork } from '../actions/workDetail'
 import { getPurchasedHistory } from '../actions/workList'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
@@ -71,38 +71,7 @@ class UserPageContainer extends React.Component {
       selectableSubGenres: [],
       selectOrder: 1,
       workImageUrlCurrent: '1',
-      workImageUrl1: One,
-      workImageUrl2: Two,
-      workImageUrl3: Three,
-      workImageUrl4: Four,
-      workImageUrl5: Five,
-      workImage1: null,
-      workImage2: null,
-      workImage3: null,
-      workImage4: null,
-      workImage5: null,
-      workTitle: '',
-      workCaption: '',
-      workTechnique: '',
-      workYear: '',
-      workEdition: '',
-      workSign: '',
-      workFrame: '',
-      workHeight: '',
-      workWidth: '',
-      workDepth: '',
-      workGenre: '',
-      workSubGenre: '',
-      workColorCrimson: false,
-      workColorMediumBlue: false,
-      workColorForestGreen: false,
-      workColorGold: false,
-      workColorPurple: false,
-      workColorBrown: false,
-      workColorBlack: false,
-      workColorGrey: false,
-      workColorIvory: false,
-      workPrice: '',
+      work: JSON.parse(JSON.stringify(INITIAL_WORK_FORM))
     }
   }
 
@@ -317,18 +286,19 @@ class UserPageContainer extends React.Component {
     let { name, value } = e.target
     if (value === 'false' || value === 'true') value = value === 'true'
 
-    this.setState({ [name]: value })
+    const work = this.state.work
+    work[name] = value
 
-    if (name === 'workGenre') {
+    if (name === 'genre') {
       const [selectedGenre] = this.props.genres.contents.filter(g => g.id === value - 0)
-      this.setState({
-        selectableSubGenres: selectedGenre.subgenres,
-        workSubGenre: '',
-      })
+      this.setState({ selectableSubGenres: selectedGenre.subgenres })
+      work.subgenre = ''
     }
 
-    if (['workPrice', 'workHeight', 'workWidth', 'workDepth' ].indexOf(name) >= 0 && value.length >= 2 && value[0] === '0')
-      this.setState({ [name]: value.slice(1) })
+    if (['price', 'height', 'width', 'depth' ].indexOf(name) >= 0 && value.length >= 2 && value[0] === '0')
+      work[name] = value.slice(1)
+
+    this.setState({ work })
   }
 
   workImageSelectBtnClicked = () => this.workImageSelectBtnRef.current.click()
@@ -341,31 +311,29 @@ class UserPageContainer extends React.Component {
 
     const url = this.createObjectURL(f[0])
 
-    this.setState({
-      ['workImage' + this.state.selectOrder]: f[0],
-      ['workImageUrl' + this.state.selectOrder]: url
-    })
+    const work = this.state.work
+    work['image' + this.state.selectOrder] = f[0]
+    work['imageUrl' + this.state.selectOrder] = url
 
-    this.setState({ selectOrder: this.state.selectOrder + 1 })
+    this.setState({ work, selectOrder: this.state.selectOrder + 1 })
   }
 
   workSubImagesClicked = num => this.setState({ workImageUrlCurrent: num })
 
   resetWorkImages = () => {
-    this.setState({
-      selectOrder: 1,
-      workImageUrlCurrent: '1',
-      workImageUrl1: One,
-      workImageUrl2: Two,
-      workImageUrl3: Three,
-      workImageUrl4: Four,
-      workImageUrl5: Five,
-      workImage1: null,
-      workImage2: null,
-      workImage3: null,
-      workImage4: null,
-      workImage5: null,
-    })
+    const work = this.state.work
+    work.imageUrl1 = One
+    work.imageUrl2 = Two
+    work.imageUrl3 = Three
+    work.imageUrl4 = Four
+    work.imageUrl5 = Five
+    work.image1 = null
+    work.image2 = null
+    work.image3 = null
+    work.image4 = null
+    work.image5 = null
+
+    this.setState({ work, selectOrder: 1, workImageUrlCurrent: '1' })
   }
 
   resetWorkForm = () => {
@@ -373,38 +341,7 @@ class UserPageContainer extends React.Component {
       selectableSubGenres: [],
       selectOrder: 1,
       workImageUrlCurrent: '1',
-      workImageUrl1: One,
-      workImageUrl2: Two,
-      workImageUrl3: Three,
-      workImageUrl4: Four,
-      workImageUrl5: Five,
-      workImage1: null,
-      workImage2: null,
-      workImage3: null,
-      workImage4: null,
-      workImage5: null,
-      workTitle: '',
-      workCaption: '',
-      workTechnique: '',
-      workYear: '',
-      workEdition: '',
-      workSign: '',
-      workFrame: '',
-      workHeight: '',
-      workWidth: '',
-      workDepth: '',
-      workGenre: '',
-      workSubGenre: '',
-      workColorCrimson: false,
-      workColorMediumBlue: false,
-      workColorForestGreen: false,
-      workColorGold: false,
-      workColorPurple: false,
-      workColorBrown: false,
-      workColorBlack: false,
-      workColorGrey: false,
-      workColorIvory: false,
-      workPrice: '',
+      work: JSON.parse(JSON.stringify(INITIAL_WORK_FORM))
     })
   }
 
@@ -412,44 +349,19 @@ class UserPageContainer extends React.Component {
     e.preventDefault()
     const notification = this.notificationSystem.current
 
+    const message = workFormValidation(this.state.work)
+    if (message) {
+      errorNotificationBody.title = 'Not Yet!'
+      errorNotificationBody.message = message
+      notification.addNotification(errorNotificationBody)
+      return null
+    }
+
     const work = new FormData()
 
     work.append('status', this.props.userDetail.contents.debuted ? '1' : '0')
-
     work.append('artist', this.props.loginStatus.user_id)
-    work.append('name', this.state.workTitle)
-    work.append('caption', this.state.workCaption)
-
-    work.append('image1', this.state.workImage1)
-    work.append('image2', this.state.workImage2)
-    work.append('image3', this.state.workImage3)
-    work.append('image4', this.state.workImage4)
-    work.append('image5', this.state.workImage5)
-
-    work.append('edition', this.state.workEdition)
-    work.append('sign', this.state.workSign)
-    work.append('year', this.state.workYear)
-    work.append('technique', this.state.workTechnique)
-    work.append('frame', this.state.workFrame)
-
-    work.append('height', this.state.workHeight)
-    work.append('width', this.state.workWidth)
-    work.append('depth', this.state.workDepth)
-
-    work.append('genre', 0)
-    work.append('subgenre', 0)
-
-    work.append('crimson', this.state.workColorCrimson)
-    work.append('mediumblue', this.state.workColorMediumBlue)
-    work.append('forestgreen', this.state.workColorForestGreen)
-    work.append('gold', this.state.workColorGold)
-    work.append('purple', this.state.workColorPurple)
-    work.append('brown', this.state.workColorBrown)
-    work.append('black', this.state.workColorBlack)
-    work.append('grey', this.state.workColorGrey)
-    work.append('ivory', this.state.workColorIvory)
-
-    work.append('price', this.state.workPrice)
+    Object.keys(this.state.work).forEach(key => work.append(key, this.state.work[key]))
 
     const err = await this.props.uploadWork(work)
     if (err) {
@@ -537,36 +449,10 @@ class UserPageContainer extends React.Component {
               workSubImagesClicked={this.workSubImagesClicked}
               resetWorkImages={this.resetWorkImages}
               buttonRef={this.workImageSelectBtnRef}
-              workTitle={this.state.workTitle}
-              workCaption={this.state.workCaption}
-              workPrice={this.state.workPrice}
-              workImageUrlCurrent={this.state.workImageUrlCurrent}
-              workImageUrl1={this.state.workImageUrl1}
-              workImageUrl2={this.state.workImageUrl2}
-              workImageUrl3={this.state.workImageUrl3}
-              workImageUrl4={this.state.workImageUrl4}
-              workImageUrl5={this.state.workImageUrl5}
-              workYear={this.state.workYear}
-              workSign={this.state.workSign}
-              workTechnique={this.state.workTechnique}
-              workEdition={this.state.workEdition}
-              workFrame={this.state.workFrame}
-              workHeight={this.state.workHeight}
-              workWidth={this.state.workWidth}
-              workDepth={this.state.workDepth}
-              workGenre={this.state.workGenre}
-              workSubGenre={this.state.workSubGenre}
-              selectableSubGenres={this.state.selectableSubGenres}
               genres={this.props.genres.contents}
-              workColorCrimson={this.state.workColorCrimson}
-              workColorMediumBlue={this.state.workColorMediumBlue}
-              workColorForestGreen={this.state.workColorForestGreen}
-              workColorGold={this.state.workColorGold}
-              workColorPurple={this.state.workColorPurple}
-              workColorBrown={this.state.workColorBrown}
-              workColorBlack={this.state.workColorBlack}
-              workColorGrey={this.state.workColorGrey}
-              workColorIvory={this.state.workColorIvory}
+              selectableSubGenres={this.state.selectableSubGenres}
+              workImageUrlCurrent={this.state.workImageUrlCurrent}
+              work={this.state.work}
             />
           </div>
         )
@@ -625,3 +511,39 @@ export default connect(
     updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),
   })
 )(UserPageContainer)
+
+const INITIAL_WORK_FORM = {
+  imageUrl1: One,
+  imageUrl2: Two,
+  imageUrl3: Three,
+  imageUrl4: Four,
+  imageUrl5: Five,
+  image1: null,
+  image2: null,
+  image3: null,
+  image4: null,
+  image5: null,
+  title: '',
+  caption: '',
+  technique: '',
+  year: '',
+  edition: '',
+  sign: '',
+  frame: '',
+  height: '',
+  width: '',
+  depth: '',
+  genre: '',
+  subgenre: '',
+  price: '',
+
+  crimson: false,
+  mediumblue: false,
+  forestgreen: false,
+  gold: false,
+  purple: false,
+  brown: false,
+  black: false,
+  grey: false,
+  ivory: false,
+}

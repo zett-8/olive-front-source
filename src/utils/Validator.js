@@ -33,3 +33,22 @@ export const TwoPasswordValidation = (pass1, pass2) => {
 
   return message
 }
+
+export const workFormValidation = work => {
+  let message = ''
+
+  if (
+    work.title === '' ||
+    work.caption === '' ||
+    work.height === '' ||
+    work.width === '' ||
+    work.depth === '' ||
+    work.price === ''
+  ) {
+    message = '必須項目(*)を入力してください'
+  }
+
+  if (work.image1 === null) message = '少なくとも１つの画像をアップロードしてください'
+
+  return message
+}

@@ -13,7 +13,7 @@ const workList = props => {
             <Link key={w.id} to={`/work/${w.id}/detail`}>
               <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
             </Link>
-            <p>{w.name}</p>
+            <p>{w.title}</p>
           </div>
         ))
       ) : (
@@ -27,7 +27,7 @@ workList.propTypes = {
   works: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      name: PropTypes.string,
+      title: PropTypes.string,
       image1: PropTypes.string,
     })
   ).isRequired,

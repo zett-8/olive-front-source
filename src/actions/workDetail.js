@@ -25,7 +25,6 @@ export const getWorkDetail = id => dispatch => {
 }
 
 export const uploadWork = work => () => {
-  console.log(work)
   return Api.uploadWork(work)
     .then(() => {
       console.log('uploaded')

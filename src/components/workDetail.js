@@ -36,7 +36,7 @@ const workDetail = props => {
         })}
       </div>
       <div className="workDetail__right">
-        <h3>{props.detail.name}</h3>
+        <h3>{props.detail.title}</h3>
         <div className="workDetail__right__list">
           <p className="typ_infoList_left">Artist</p>
           <p className="typ_infoList_right">
@@ -121,7 +121,7 @@ workDetail.propTypes = {
     image3: PropTypes.string,
     image4: PropTypes.string,
     image5: PropTypes.string,
-    name: PropTypes.string,
+    title: PropTypes.string,
     caption: PropTypes.string,
     technique: PropTypes.string,
     sign: PropTypes.string,

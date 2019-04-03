@@ -37,7 +37,7 @@ class UserPageContainer extends React.Component {
     this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
-      tab: 3,
+      tab: 0,
 
       // prime tab
       iconImage: null,
@@ -327,8 +327,8 @@ class UserPageContainer extends React.Component {
       })
     }
 
-    if (name === 'workPrice' && value.length >= 2 && value[0] === '0')
-      this.setState({ workPrice: value.slice(1) })
+    if (['workPrice', 'workHeight', 'workWidth', 'workDepth' ].indexOf(name) >= 0 && value.length >= 2 && value[0] === '0')
+      this.setState({ [name]: value.slice(1) })
   }
 
   workImageSelectBtnClicked = () => this.workImageSelectBtnRef.current.click()

@@ -126,10 +126,11 @@ const userDetailWorkUpload = props => {
           onChange={props.workFormChanged}
           placeholder="frame"
         />
-        <p className="typ_form_label">*Size</p>
+        <p className="typ_form_label">*Size (mm)</p>
         <div className="userDetail__workUpload__form__sizeInputs">
           <input
             className="input"
+            type="number"
             name="workHeight"
             value={props.workHeight}
             onChange={props.workFormChanged}
@@ -138,6 +139,7 @@ const userDetailWorkUpload = props => {
           <span>x</span>
           <input
             className="input"
+            type="number"
             name="workWidth"
             value={props.workWidth}
             onChange={props.workFormChanged}
@@ -146,6 +148,7 @@ const userDetailWorkUpload = props => {
           <span>x</span>
           <input
             className="input"
+            type="number"
             name="workDepth"
             value={props.workDepth}
             onChange={props.workFormChanged}

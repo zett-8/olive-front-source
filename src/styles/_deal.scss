@@ -39,8 +39,8 @@
 
         .circle {
           display: inline-block;
-          height: 2rem;
-          width: 2rem;
+          height: 1.5rem;
+          width: 1.5rem;
           background-color: crimson;
           border-radius: 50%;
           margin-right: 0.5rem;
@@ -94,8 +94,8 @@
         :last-child { margin-right: -1.7rem; }
       }
 
-      button { margin-top: 4rem; }
     }
+    button { display: grid; margin: 4rem auto 0 auto;}
   }
 
   &__info {

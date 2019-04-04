@@ -147,8 +147,8 @@ const dealProgress = props => {
           <p />
           <p>取引完了</p>
         </div>
-        {buttonRenderer()}
       </div>
+      {buttonRenderer()}
     </React.Fragment>
   )
 }

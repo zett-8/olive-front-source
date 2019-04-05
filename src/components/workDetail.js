@@ -55,7 +55,22 @@ const workDetail = props => {
           <p className="typ_infoList_left">Color</p>
           <p className="typ_infoList_right">
             {Object.keys(props.detail.colors).map(Cname => {
-              if (props.detail.colors[Cname]) return <span key={Cname} style={{ display: 'inline-block', borderRadius: '50%', height: '2rem', width: '2rem', marginRight: '2rem', backgroundColor: Cname }} />
+              if (props.detail.colors[Cname]) {
+                return (
+                  <span
+                    key={Cname}
+                    style={{
+                      display: 'inline-block',
+                      borderRadius: '50%',
+                      height: '2rem',
+                      width: '2rem',
+                      marginRight: '2rem',
+                      backgroundColor: Cname,
+                      border: Cname === 'ivory' ? '1px #777777 solid' : 'none'
+                    }}
+                  />
+                )
+              }
             })}
           </p>
           <p className="typ_infoList_left">Edition</p>

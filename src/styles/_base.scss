@@ -37,7 +37,6 @@ a {
 }
 
 #root {
-  padding-top: 1rem;
   display: grid;
   grid-template-rows: 10rem min-content 5rem;
   grid-template-columns: [full-start] minmax(2rem, 4rem) [col-start] minmax(min-content, 1fr) [col-end] minmax(2rem, 4rem) [full-end];

@@ -7,11 +7,7 @@ class FilteredWorks extends React.Component {
   render() {
     if (this.props.worksList.filteredWorks.pristine) return null
 
-    return (
-      <div className="workList">
-        <WorkList works={this.props.worksList.filteredWorks.contents} />
-      </div>
-    )
+    return <WorkList works={this.props.worksList.filteredWorks.contents} />
   }
 }
 

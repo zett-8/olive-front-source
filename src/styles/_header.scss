@@ -43,7 +43,7 @@
   }
 
   svg {
-    height: 2.5rem;
+    height: 2.3rem;
     fill: none;
     stroke-width: 6rem;
     stroke: #111111;
@@ -54,6 +54,7 @@
   &__left {
     display: flex;
     justify-self: start;
+    margin-top: -2rem;
     P { margin-right: 2rem; cursor: pointer; }
 
     @media only screen and (max-width: $bp-small) {
@@ -63,6 +64,7 @@
 
   &__right {
     justify-self: end;
+    margin-top: -1.5rem;
 
     display: flex;
     P { margin-left: 2rem; cursor: pointer; }

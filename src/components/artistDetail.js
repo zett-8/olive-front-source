@@ -12,17 +12,15 @@ const artistDetail = props => {
           }}
         />
         <p className="artistDetail__info__name">{props.detail.artist_name}</p>
-        <div className="artistDetail__info__Q">
-          <p>Website</p>
-          <p>Place</p>
-          <p>Birthday</p>
-          <p>Sex</p>
-        </div>
-        <div className="artistDetail__info__A">
-          <p>{props.detail.website}</p>
-          <p>{props.detail.place}</p>
-          <p>{props.detail.birthday}</p>
-          <p>{props.detail.sex}</p>
+        <div className="artistDetail__info__list">
+          <p className="typ_infoList_left">Website</p>
+          <p className="typ_infoList_right">{props.detail.website}</p>
+          <p className="typ_infoList_left">Place</p>
+          <p className="typ_infoList_right">{props.detail.place}</p>
+          <p className="typ_infoList_left">Birthday</p>
+          <p className="typ_infoList_right">{props.detail.birthday}</p>
+          <p className="typ_infoList_left">Sex</p>
+          <p className="typ_infoList_right">{props.detail.sex}</p>
         </div>
       </div>
       <div className="artistDetail__profile">

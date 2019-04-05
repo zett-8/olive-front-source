@@ -13,11 +13,7 @@ class PopularPageContainer extends React.Component {
   render() {
     if (this.props.workList.popularWorks.pristine) return null
 
-    return (
-      <div className="workList">
-        <WorkList works={this.props.workList.popularWorks.contents} />
-      </div>
-    )
+    return <WorkList works={this.props.workList.popularWorks.contents} />
   }
 }
 

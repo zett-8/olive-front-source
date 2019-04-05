@@ -13,11 +13,9 @@ class FavoritePageContainer extends React.Component {
   render() {
     if (this.props.workList.favoriteWorks.pristine) return null
 
-    return (
-      <div className="workList">
-        <WorkList works={this.props.workList.favoriteWorks.contents} />
-      </div>
-    )
+    return <WorkList works={this.props.workList.favoriteWorks.contents} />
+
+
   }
 }
 

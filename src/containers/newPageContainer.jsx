@@ -14,11 +14,9 @@ class NewPageContainer extends React.Component {
   render() {
     if(this.props.workList.newWorks.pristine) return null
 
-    return (
-      <div className="workList">
-        <WorkList works={this.props.workList.newWorks.contents}/>
-      </div>
-    )
+    return <WorkList works={this.props.workList.newWorks.contents}/>
+
+
   }
 }
 

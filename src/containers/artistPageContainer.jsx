@@ -29,9 +29,7 @@ class ArtistPageContainer extends React.Component {
         <div className="artistDetail">
           <ArtistDetail detail={this.props.artistDetail.contents} />
         </div>
-        <div className="workList">
-         <WorkList works={this.props.workList.artistWorks.contents}/>
-        </div>
+        <WorkList works={this.props.workList.artistWorks.contents}/>
       </React.Fragment>
     )
   }

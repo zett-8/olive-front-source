@@ -449,9 +449,7 @@ class UserPageContainer extends React.Component {
       case 4:
         return (
           <div className="userDetail_purchasedHistory">
-            <div className="workList">
-              <WorkList works={this.props.workList.purchasedWorks.contents} />
-            </div>
+            <WorkList works={this.props.workList.purchasedWorks.contents} />
           </div>
         )
 

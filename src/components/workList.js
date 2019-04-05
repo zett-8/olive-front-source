@@ -8,16 +8,21 @@ const workList = props => {
   return (
     <React.Fragment>
       {props.works.length ? (
-        props.works.map(w => (
-          <div className="work" key={w.id}>
-            <Link key={w.id} to={`/work/${w.id}/detail`}>
-              <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
-            </Link>
-            <p>{w.title}</p>
-          </div>
-        ))
+        <div className="workList">
+          {props.works.map(w => (
+            <div className="work" key={w.id}>
+              <Link key={w.id} to={`/work/${w.id}/detail`}>
+                <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
+              </Link>
+              <p>{w.title}</p>
+            </div>
+          ))}
+        </div>
+
       ) : (
-        <p className="noWorks">作品がありません</p>
+        <div className="noWorkList">
+          <p className="noWorks">作品がありません</p>
+        </div>
       )}
     </React.Fragment>
   )

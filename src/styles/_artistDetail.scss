@@ -33,15 +33,14 @@
       margin-top: 1rem;
     }
 
-    &__Q, &__A {
-      font-size: 1.3rem;
-      line-height: 2.7rem;
-      margin: 0 1.7rem;
-    }
+    &__list {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: max-content auto;
+      grid-row-gap: 0.7rem;
+      grid-column-gap: 2rem;
 
-    &__Q {
-      justify-self: right;
-      color: #777777;
+      justify-content: center;
     }
   }
 

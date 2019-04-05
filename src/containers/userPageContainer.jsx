@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import NotificationSystem from 'react-notification-system'
@@ -66,6 +67,10 @@ class UserPageContainer extends React.Component {
       bankBranchCode: '',
       bankAccountNumber: '',
       bankAccountName: '',
+      selectableBanks: [],
+      selectableBranches: [],
+      searchBankInput: '',
+      searchBranchInput: '',
 
       // work upload tab
       selectableSubGenres: [],
@@ -229,6 +234,67 @@ class UserPageContainer extends React.Component {
   // =============================
 
   artistFormChanged = e => this.setState({ [e.target.name]: e.target.value })
+
+  searchBanks = async e => {
+    e.preventDefault()
+
+    if (e.target.name === 'Bank') {
+      const banks = await axios.get(`https://bank.teraren.com/banks/search.json?name=${this.state.searchBankInput}`).then(res => res.data)
+      this.setState({ selectableBanks: banks })
+
+      if (this.state.selectableBanks.length) {
+        this.setState({
+          bankName: this.state.selectableBanks[0].name,
+          bankCode: this.state.selectableBanks[0].code,
+        })
+
+        const branches = await axios.get(`https://bank.teraren.com/banks/${this.state.bankCode}/branches.json`).then(res => res.data)
+
+        if (branches.length) {
+          this.setState({
+            selectableBranches: branches,
+            bankBranchName: branches[0].name,
+            bankBranchCode: branches[0].code
+          })
+        }
+      }
+
+      return null
+    }
+
+    if (e.target.name === 'Branch') {
+      const branches = await axios.get(`https://bank.teraren.com/banks/${this.state.bankCode}/branches/search.json?name=${this.state.searchBranchInput}`).then(res => res.data)
+      if (branches.length) {
+        this.setState({
+          selectableBranches: branches,
+          bankBranchName: branches[0].name,
+          bankBranchCode: branches[0].code
+        })
+      }
+    }
+  }
+
+  banksWasSelected = async e => {
+    if (e.target.name === 'bank') {
+      const [bankName, bankCode] = e.target.value.split('-')
+      this.setState({ bankName, bankCode, selectableBranches: [] })
+
+      const branches = await axios.get(`https://bank.teraren.com/banks/${bankCode}/branches.json`).then(res => res.data)
+      this.setState({
+        selectableBranches: branches,
+        bankBranchName: branches[0].name,
+        bankBranchCode: branches[0].code
+      })
+      return null
+    }
+
+    if (e.target.name === 'branch') {
+      const [bankBranchName, bankBranchCode] = e.target.value.split('-')
+      this.setState({ bankBranchName, bankBranchCode })
+    }
+  }
+
+  handleBankInfoInput = e => this.setState({ [`search${e.target.name}Input`]: e.target.value })
 
   updateArtistInfo = async () => {
     if (
@@ -428,6 +494,13 @@ class UserPageContainer extends React.Component {
               bankBranchCode={this.state.bankBranchCode}
               bankAccountNumber={this.state.bankAccountNumber}
               bankAccountName={this.state.bankAccountName}
+              selectableBanks={this.state.selectableBanks}
+              selectableBranches={this.state.selectableBranches}
+              searchBanks={this.searchBanks}
+              searchBankInput={this.state.searchBankInput}
+              handleBankInfoInput={this.handleBankInfoInput}
+              banksWasSelected={this.banksWasSelected}
+              searchBranchInput={this.state.searchBranchInput}
               artistFormChanged={this.artistFormChanged}
               updateArtistInfo={this.updateArtistInfo}
             />

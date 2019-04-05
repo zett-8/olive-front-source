@@ -44,41 +44,59 @@ const userDetailArtist = props => {
         </select>
       </div>
 
-      <p className="typ_form_label">Bank name</p>
-      <span>*</span>
-      <input className="input" type="text" name="bankName" value={props.bankName} onChange={props.artistFormChanged} />
-      <p className="typ_form_label">Bank code</p>
-      <span>*</span>
-      <input className="input" type="text" name="bankCode" value={props.bankCode} onChange={props.artistFormChanged} />
-      <p className="typ_form_label">Bank branch name</p>
-      <span>*</span>
+      <p className="typ_form_label" style={{ marginTop: '2.3rem' }}>Bank</p>
+      <div className="searchSelector">
+        <form name="Bank" onSubmit={props.searchBanks}>
+          <input name="Bank" value={props.searchBankInput} onChange={props.handleBankInfoInput} />
+          <button type="submit">Search</button>
+        </form>
+        <div className="select">
+          <select name="bank" value={`${props.bankName}-${props.bankCode}`} onChange={props.banksWasSelected}>
+            {props.selectableBanks.map(bank =>
+              <option key={bank.code} value={`${bank.name}-${bank.code}`}>{bank.name}</option>
+            )}
+          </select>
+        </div>
+      </div>
       <input
         className="input"
+        readOnly={true}
         type="text"
-        name="bankBranchName"
-        value={props.bankBranchName}
-        onChange={props.artistFormChanged}
+        name="bankInfo"
+        value={props.bankName ? `${props.bankName} (${props.bankCode})` : ''}
       />
-      <p className="typ_form_label">Bank branch code</p>
-      <span>*</span>
+
+      <p className="typ_form_label">Bank branch</p>
+      <div className="searchSelector">
+        <form name="Branch" onSubmit={props.searchBanks}>
+          <input name="Branch" value={props.searchBranchInput} onChange={props.handleBankInfoInput} />
+          <button type="submit">Search</button>
+        </form>
+        <div className="select">
+          <select name="branch" value={`${props.bankBranchName}-${props.bankBranchCode}`} onChange={props.banksWasSelected}>
+            {props.selectableBranches.map(branch =>
+              <option key={branch.code} value={`${branch.name}-${branch.code}`}>{branch.name}</option>
+            )}
+          </select>
+        </div>
+      </div>
       <input
         className="input"
+        readOnly={true}
         type="text"
-        name="bankBranchCode"
-        value={props.bankBranchCode}
-        onChange={props.artistFormChanged}
+        name="bankBranchInfo"
+        value={props.bankBranchName ? `${props.bankBranchName} (${props.bankBranchCode})` : ''}
       />
+
       <p className="typ_form_label">Bank account number</p>
-      <span>*</span>
       <input
         className="input"
-        type="text"
+        type="number"
         name="bankAccountNumber"
         value={props.bankAccountNumber}
         onChange={props.artistFormChanged}
       />
       <p className="typ_form_label">Bank account name</p>
-      <span>*</span>
       <input
         className="input"
         type="text"
@@ -109,6 +127,13 @@ userDetailArtist.propTypes = {
   bankBranchCode: PropTypes.string,
   bankAccountName: PropTypes.string,
   bankAccountNumber: PropTypes.string,
+  selectableBanks: PropTypes.arrayOf(PropTypes.object),
+  selectableBranches: PropTypes.arrayOf(PropTypes.object),
+  searchBanks: PropTypes.func.isRequired,
+  searchBankInput: PropTypes.string,
+  searchBranchInput: PropTypes.string,
+  banksWasSelected: PropTypes.func.isRequired,
+  handleBankInfoInput: PropTypes.func.isRequired,
 }
 
 export default userDetailArtist

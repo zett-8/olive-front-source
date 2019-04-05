@@ -77,7 +77,14 @@ class UserPageContainer extends React.Component {
 
   async componentWillMount() {
     this.props.getPurchasedHistory(this.props.loginStatus.user_id)
+    this.setCurrentUserInfo()
+  }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.userDetail.contents !== prevProps.userDetail.contents) this.setCurrentUserInfo()
+  }
+
+  setCurrentUserInfo = () => {
     this.setState({
       firstName: this.props.userDetail.contents.first_name,
       lastName: this.props.userDetail.contents.last_name,

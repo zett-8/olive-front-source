@@ -42,7 +42,7 @@ artistDetail.propTypes = {
     artist_name: PropTypes.string,
     website: PropTypes.string,
     place: PropTypes.string,
-    sex: PropTypes.number,
+    sex: PropTypes.string,
     profile: PropTypes.string,
     birthday: PropTypes.string,
   }),

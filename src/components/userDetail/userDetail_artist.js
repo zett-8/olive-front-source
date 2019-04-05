@@ -38,7 +38,9 @@ const userDetailArtist = props => {
       <p className="typ_form_label">Sex</p>
       <div className="select">
         <select name="sex" value={props.sex} onChange={props.artistFormChanged}>
-          <option>other</option>
+          <option value={0}>Other</option>
+          <option value={1}>Man</option>
+          <option value={2}>Woman</option>
         </select>
       </div>
 

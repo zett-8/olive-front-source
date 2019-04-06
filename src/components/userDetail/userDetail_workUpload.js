@@ -6,8 +6,8 @@ import VOID from '../../assets/700.gif'
 const userDetailWorkUpload = props => {
   return (
     <React.Fragment>
-      <div className="userDetail__workUpload__images">
-        <p className="userDetail__workUpload__images__main">
+      <div className="workEditAndUpload__images">
+        <p className="workEditAndUpload__images__main">
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work[`imageUrl${props.workImageUrlCurrent}`]})` }}
@@ -15,7 +15,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('1')}>
+        <p className="workEditAndUpload__images__sub" onClick={() => props.workSubImagesClicked('1')}>
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work.imageUrl1})` }}
@@ -23,7 +23,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('2')}>
+        <p className="workEditAndUpload__images__sub" onClick={() => props.workSubImagesClicked('2')}>
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work.imageUrl2})` }}
@@ -31,7 +31,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('3')}>
+        <p className="workEditAndUpload__images__sub" onClick={() => props.workSubImagesClicked('3')}>
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work.imageUrl3})` }}
@@ -39,7 +39,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('4')}>
+        <p className="workEditAndUpload__images__sub" onClick={() => props.workSubImagesClicked('4')}>
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work.imageUrl4})` }}
@@ -47,7 +47,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <p className="userDetail__workUpload__images__sub" onClick={() => props.workSubImagesClicked('5')}>
+        <p className="workEditAndUpload__images__sub" onClick={() => props.workSubImagesClicked('5')}>
           <img
             src={VOID}
             style={{ backgroundImage: `url(${props.work.imageUrl5})` }}
@@ -55,7 +55,7 @@ const userDetailWorkUpload = props => {
           />
         </p>
 
-        <div className="userDetail__workUpload__images__buttons">
+        <div className="workEditAndUpload__images__buttons">
           <input style={{ display: 'none' }} type="file" accept="image/*" ref={props.buttonRef} onChange={props.workImageSelected} />
           <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>
             Select
@@ -66,7 +66,7 @@ const userDetailWorkUpload = props => {
         </div>
       </div>
 
-      <div className="userDetail__workUpload__form">
+      <div className="workEditAndUpload__form">
         <p className="typ_form_label">* Title</p>
         <input
           className="input"
@@ -127,7 +127,7 @@ const userDetailWorkUpload = props => {
           placeholder="frame"
         />
         <p className="typ_form_label">*Size (mm)</p>
-        <div className="userDetail__workUpload__form__sizeInputs">
+        <div className="workEditAndUpload__form__sizeInputs">
           <input
             className="input"
             type="number"
@@ -181,7 +181,7 @@ const userDetailWorkUpload = props => {
         </div>
 
         <p className="typ_form_label">Colors (Max 3)</p>
-        <p className="userDetail__workUpload__form__colors1">
+        <p className="workEditAndUpload__form__colors1">
           <label htmlFor="crimson">
             <input id="crimson" type="checkbox" name="crimson" value={!props.work.crimson} checked={props.work.crimson} onChange={props.workFormChanged} />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'crimson' }} />
@@ -203,7 +203,7 @@ const userDetailWorkUpload = props => {
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'purple' }} />
           </label>
         </p>
-        <p className="userDetail__workUpload__form__colors2">
+        <p className="workEditAndUpload__form__colors2">
           <label htmlFor="brown">
             <input id="brown" type="checkbox" name="brown" value={!props.work.brown} checked={props.work.brown} onChange={props.workFormChanged} />
             <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'brown' }} />

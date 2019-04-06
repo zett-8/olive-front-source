@@ -8,8 +8,10 @@ class ReviewPageContainer extends React.Component {
   componentWillMount() {
     // not logged in
     if (!Object.keys(this.props.loginStatus).length) this.props.history.push('/')
+  }
 
-    this.props.getSeedArtists()
+  componentDidMount() {
+    if (this.props.seedArtists.pristine) this.props.getSeedArtists()
   }
 
   render() {
@@ -27,6 +29,7 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     seedArtists: state.seedArtists,
+    userDetail: state.userDetail
   }),
   dispatch => ({
     getSeedArtists: () => dispatch(getSeedArtist()),

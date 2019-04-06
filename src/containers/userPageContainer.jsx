@@ -4,26 +4,19 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import NotificationSystem from 'react-notification-system'
 
+import WorkEditAndUpload from './workEditAndUploadPageContainer'
 import UserDetailOther from '../components/userDetail/userDetail_other'
 import UserDetailNav from '../components/userDetail/userDetail_nav'
 import UserDetailPrime from '../components/userDetail/userDetail_prime'
 import UserDetailBuyer from '../components/userDetail/userDetail_buyer'
 import UserDetailArtist from '../components/userDetail/userDetail_artist'
-import UserDetailWorkUpload from '../components/userDetail/userDetail_workUpload'
 import WorkList from '../components/workList'
-import { errorNotificationBody, successNotificationBody } from '../utils/notification'
 
-import { EmailValidation, TwoPasswordValidation, workFormValidation } from '../utils/Validator'
-import { uploadWork } from '../actions/workDetail'
 import { getPurchasedHistory } from '../actions/workList'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
-
-import One from '../assets/1.jpg'
-import Two from '../assets/2.jpg'
-import Three from '../assets/3.jpg'
-import Four from '../assets/4.jpg'
-import Five from '../assets/5.jpg'
+import { errorNotificationBody, successNotificationBody } from '../utils/notification'
+import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 
 class UserPageContainer extends React.Component {
   constructor(props) {
@@ -35,7 +28,6 @@ class UserPageContainer extends React.Component {
 
     this.iconRef = React.createRef()
     this.userIconSelectBtnRef = React.createRef()
-    this.workImageSelectBtnRef = React.createRef()
 
     this.state = {
       tab: 0,
@@ -71,12 +63,6 @@ class UserPageContainer extends React.Component {
       selectableBranches: [],
       searchBankInput: '',
       searchBranchInput: '',
-
-      // work upload tab
-      selectableSubGenres: [],
-      selectOrder: 1,
-      workImageUrlCurrent: '1',
-      work: JSON.parse(JSON.stringify(INITIAL_WORK_FORM))
     }
   }
 
@@ -343,102 +329,6 @@ class UserPageContainer extends React.Component {
     console.log('update!')
   }
 
-  // =============================
-  // work upload tab
-  // =============================
-
-  workFormChanged = e => {
-    let { name, value } = e.target
-    if (value === 'false' || value === 'true') value = value === 'true'
-
-    const work = this.state.work
-    work[name] = value
-
-    if (name === 'genre') {
-      const [selectedGenre] = this.props.genres.contents.filter(g => g.id === value - 0)
-      this.setState({ selectableSubGenres: selectedGenre.subgenres })
-      work.subgenre = ''
-    }
-
-    if (['price', 'height', 'width', 'depth' ].indexOf(name) >= 0 && value.length >= 2 && value[0] === '0')
-      work[name] = value.slice(1)
-
-    this.setState({ work })
-  }
-
-  workImageSelectBtnClicked = () => this.workImageSelectBtnRef.current.click()
-
-  workImageSelected = e => {
-    const f = e.target.files
-    if (f.length === 0) return null
-
-    const url = this.createObjectURL(f[0])
-
-    const work = this.state.work
-    work['image' + this.state.selectOrder] = f[0]
-    work['imageUrl' + this.state.selectOrder] = url
-
-    this.setState({ work, selectOrder: this.state.selectOrder + 1 })
-  }
-
-  workSubImagesClicked = num => this.setState({ workImageUrlCurrent: num })
-
-  resetWorkImages = () => {
-    const work = this.state.work
-    work.imageUrl1 = One
-    work.imageUrl2 = Two
-    work.imageUrl3 = Three
-    work.imageUrl4 = Four
-    work.imageUrl5 = Five
-    work.image1 = null
-    work.image2 = null
-    work.image3 = null
-    work.image4 = null
-    work.image5 = null
-
-    this.setState({ work, selectOrder: 1, workImageUrlCurrent: '1' })
-  }
-
-  resetWorkForm = () => {
-    this.setState({
-      selectableSubGenres: [],
-      selectOrder: 1,
-      workImageUrlCurrent: '1',
-      work: JSON.parse(JSON.stringify(INITIAL_WORK_FORM))
-    })
-  }
-
-  uploadWork = async e => {
-    const message = workFormValidation(this.state.work)
-
-    if (message) {
-      errorNotificationBody.title = 'Not Yet!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
-      return null
-    }
-
-    const work = new FormData()
-
-    work.append('status', this.props.userDetail.contents.debuted ? '1' : '0')
-    work.append('artist', this.props.loginStatus.user_id)
-    Object.keys(this.state.work).forEach(key => work.append(key, this.state.work[key]))
-
-    const err = await this.props.uploadWork(work)
-
-    if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
-      return null
-    }
-
-    successNotificationBody.message = '作品をアップロードしました'
-    this.notificationSystem.current.addNotification(successNotificationBody)
-
-    this.resetWorkForm()
-  }
-
   tabContents = () => {
     switch (this.state.tab) {
       case 0:
@@ -508,23 +398,7 @@ class UserPageContainer extends React.Component {
         )
 
       case 3:
-        return (
-          <div className="userDetail__workUpload">
-            <UserDetailWorkUpload
-              upload={this.uploadWork}
-              workImageSelectBtnClicked={this.workImageSelectBtnClicked}
-              workImageSelected={this.workImageSelected}
-              workFormChanged={this.workFormChanged}
-              workSubImagesClicked={this.workSubImagesClicked}
-              resetWorkImages={this.resetWorkImages}
-              buttonRef={this.workImageSelectBtnRef}
-              genres={this.props.genres.contents}
-              selectableSubGenres={this.state.selectableSubGenres}
-              workImageUrlCurrent={this.state.workImageUrlCurrent}
-              work={this.state.work}
-            />
-          </div>
-        )
+        return <WorkEditAndUpload />
 
       case 4:
         return (
@@ -571,7 +445,6 @@ export default connect(
   dispatch => ({
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
-    uploadWork: work => dispatch(uploadWork(work)),
     getPurchasedHistory: userId => dispatch(getPurchasedHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
@@ -579,38 +452,3 @@ export default connect(
   })
 )(UserPageContainer)
 
-const INITIAL_WORK_FORM = {
-  imageUrl1: One,
-  imageUrl2: Two,
-  imageUrl3: Three,
-  imageUrl4: Four,
-  imageUrl5: Five,
-  image1: null,
-  image2: null,
-  image3: null,
-  image4: null,
-  image5: null,
-  title: '',
-  caption: '',
-  technique: '',
-  year: '',
-  edition: '',
-  sign: '',
-  frame: '',
-  height: '',
-  width: '',
-  depth: '',
-  genre: '',
-  subgenre: '',
-  price: '',
-
-  crimson: false,
-  mediumblue: false,
-  forestgreen: false,
-  gold: false,
-  purple: false,
-  brown: false,
-  black: false,
-  grey: false,
-  ivory: false,
-}

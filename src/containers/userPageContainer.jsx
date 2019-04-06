@@ -398,7 +398,7 @@ class UserPageContainer extends React.Component {
         )
 
       case 3:
-        return <WorkEditAndUpload />
+        return <WorkEditAndUpload edit={false} />
 
       case 4:
         return (

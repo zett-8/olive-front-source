@@ -13,6 +13,7 @@ import FavoriteContainer from './containers/favoritePageContainer'
 import UserContainer from './containers/userPageContainer'
 import ArtistContainer from './containers/artistPageContainer'
 import WorkDetailContainer from './containers/workdetailPageContainer'
+import WorkEditAndUploadContainer from './containers/workEditAndUploadPageContainer'
 import FilteredWorksContainer from './containers/filteredWorksPageContainer'
 import DealContainer from './containers/dealPageContainer'
 import LogoutContainer from './containers/logoutPageContainer'
@@ -36,6 +37,7 @@ export default () => (
             <Route exact path="/review" component={ReviewContainer} />
             <Route exact path="/artist/:id" component={ArtistContainer} />
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
+            <Route exact path="/work/:id/edit" render={props => <WorkEditAndUploadContainer {...props} edit={true} />} />
             <Route exact path="/work/:workId/deal/:myUUID/:clientId" component={DealContainer} />
             <Route exact path="/filteredWorks/:info" component={FilteredWorksContainer} />
             <Route exact path="/user" component={UserContainer} />

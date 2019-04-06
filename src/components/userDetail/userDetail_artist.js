@@ -11,12 +11,13 @@ const userDetailArtist = props => {
         className="input"
         type="text"
         name="artistName"
+        required={true}
         value={props.artistName}
         onChange={props.artistFormChanged}
       />
 
       <p className="typ_form_label">* Profile</p>
-      <textarea className="text_input" name="profile" value={props.profile} onChange={props.artistFormChanged} />
+      <textarea className="text_input" name="profile" required={true} value={props.profile} onChange={props.artistFormChanged} />
 
       <p className="typ_form_label">Website</p>
       <input className="input" type="text" name="website" value={props.website} onChange={props.artistFormChanged} />
@@ -44,7 +45,7 @@ const userDetailArtist = props => {
         </select>
       </div>
 
-      <p className="typ_form_label" style={{ marginTop: '2.3rem' }}>Bank</p>
+      <p className="typ_form_label" style={{ marginTop: '2.3rem' }}>* Bank</p>
       <div className="searchSelector">
         <form name="Bank" onSubmit={props.searchBanks}>
           <input name="Bank" value={props.searchBankInput} onChange={props.handleBankInfoInput} />
@@ -66,7 +67,7 @@ const userDetailArtist = props => {
         value={props.bankName ? `${props.bankName} (${props.bankCode})` : ''}
       />
 
-      <p className="typ_form_label">Bank branch</p>
+      <p className="typ_form_label">* Bank branch</p>
       <div className="searchSelector">
         <form name="Branch" onSubmit={props.searchBanks}>
           <input name="Branch" value={props.searchBranchInput} onChange={props.handleBankInfoInput} />
@@ -88,19 +89,21 @@ const userDetailArtist = props => {
         value={props.bankBranchName ? `${props.bankBranchName} (${props.bankBranchCode})` : ''}
       />
 
-      <p className="typ_form_label">Bank account number</p>
+      <p className="typ_form_label">* Bank account number</p>
       <input
         className="input"
         type="number"
         name="bankAccountNumber"
+        required={true}
         value={props.bankAccountNumber}
         onChange={props.artistFormChanged}
       />
-      <p className="typ_form_label">Bank account name</p>
+      <p className="typ_form_label">* Bank account name</p>
       <input
         className="input"
         type="text"
         name="bankAccountName"
+        required={true}
         value={props.bankAccountName}
         onChange={props.artistFormChanged}
       />

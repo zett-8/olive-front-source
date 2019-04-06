@@ -32,6 +32,14 @@ export const uploadWork = work => () => {
     .catch(res => res)
 }
 
+export const updateWork = (id, work) => dispatch => {
+  return Api.updateWork(id, work)
+    .then(() => {
+      dispatch(getWorkDetail(id))
+    })
+    .catch(res => res)
+}
+
 export const changeWorkStatus = (workId, status) => dispatch => {
   return Api.changeWorkStatus(workId, status)
     .then(() => {

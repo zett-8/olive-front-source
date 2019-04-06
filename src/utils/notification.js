@@ -1,5 +1,5 @@
 export const errorNotificationBody = {
-  title: '',
+  title: 'Something Went Wrong!',
   message: '',
   level: 'error',
   autoDismiss: 4,

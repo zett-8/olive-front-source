@@ -71,14 +71,16 @@ const userDetailWorkUpload = props => {
         <input
           className="input"
           name="title"
+          required={true}
           value={props.work.title}
           onChange={props.workFormChanged}
           placeholder="Work Title"
         />
         <p className="typ_form_label">* Caption</p>
         <textarea
-          className="input"
+          className="text_input"
           name="caption"
+          required={true}
           value={props.work.caption}
           onChange={props.workFormChanged}
           placeholder="caption"
@@ -132,6 +134,7 @@ const userDetailWorkUpload = props => {
             className="input"
             type="number"
             name="height"
+            required={true}
             value={props.work.height}
             onChange={props.workFormChanged}
             placeholder="height"
@@ -141,6 +144,7 @@ const userDetailWorkUpload = props => {
             className="input"
             type="number"
             name="width"
+            required={true}
             value={props.work.width}
             onChange={props.workFormChanged}
             placeholder="width"
@@ -150,6 +154,7 @@ const userDetailWorkUpload = props => {
             className="input"
             type="number"
             name="depth"
+            required={true}
             value={props.work.depth}
             onChange={props.workFormChanged}
             placeholder="depth"
@@ -158,7 +163,7 @@ const userDetailWorkUpload = props => {
 
         <p className="typ_form_label">* Genre</p>
         <div className="select">
-          <select name="genre" value={props.work.genre} onChange={props.workFormChanged}>
+          <select name="genre" required={true} value={props.work.genre} onChange={props.workFormChanged}>
             <option value="">select genre</option>
             {props.genres.map(g => (
               <option key={g.id} value={g.id}>
@@ -170,7 +175,7 @@ const userDetailWorkUpload = props => {
 
         <p className="typ_form_label">* SubGenre</p>
         <div className="select">
-          <select name="subgenre" value={props.work.subgenre} onChange={props.workFormChanged}>
+          <select name="subgenre" required={true} value={props.work.subgenre} onChange={props.workFormChanged}>
             <option value="">select sub genre</option>
             {props.selectableSubGenres.map(sg => (
               <option key={sg.id} value={sg.id}>
@@ -231,12 +236,20 @@ const userDetailWorkUpload = props => {
           className="input"
           name="price"
           type="number"
+          required={true}
           value={props.work.price}
           onChange={props.workFormChanged}
         />
-        <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
-          Upload!
-        </button>
+        {props.edit ? (
+          <button className="b_btn b_btn__13rem" type="button" onClick={props.update}>
+            Save
+          </button>
+        ) : (
+          <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
+            Upload!
+          </button>
+        )}
+
       </div>
     </React.Fragment>
   )
@@ -244,6 +257,7 @@ const userDetailWorkUpload = props => {
 
 userDetailWorkUpload.propTypes = {
   upload: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
   workFormChanged: PropTypes.func.isRequired,
   workImageSelectBtnClicked: PropTypes.func.isRequired,
   workImageSelected: PropTypes.func.isRequired,
@@ -281,7 +295,8 @@ userDetailWorkUpload.propTypes = {
     black: PropTypes.bool,
     grey: PropTypes.bool,
     ivory: PropTypes.bool,
-  })
+  }),
+  edit: PropTypes.bool
 }
 
 export default userDetailWorkUpload

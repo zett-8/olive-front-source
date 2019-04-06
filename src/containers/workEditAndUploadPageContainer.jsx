@@ -1,18 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import NotificationSystem from "react-notification-system";
 
 import UserDetailWorkUpload from '../components/userDetail/userDetail_workUpload'
+
+import { workFormValidation } from '../utils/Validator'
+import { errorNotificationBody, successNotificationBody } from '../utils/notification'
+import { uploadWork, updateWork, getWorkDetail, clearWorkDetail } from '../actions/workDetail'
 
 import One from '../assets/1.jpg'
 import Two from '../assets/2.jpg'
 import Three from '../assets/3.jpg'
 import Four from '../assets/4.jpg'
 import Five from '../assets/5.jpg'
-import { workFormValidation } from '../utils/Validator'
-import { errorNotificationBody, successNotificationBody } from '../utils/notification'
-import NotificationSystem from "react-notification-system";
-
-import { uploadWork } from '../actions/workDetail'
 
 class WorkEditAndUpload extends React.Component {
   constructor(props) {
@@ -31,6 +31,59 @@ class WorkEditAndUpload extends React.Component {
       work: JSON.parse(JSON.stringify(INITIAL_WORK_FORM))
     }
   }
+
+  componentWillMount() { this.setState({ edit: this.props.edit }) }
+
+  async componentDidMount() {
+    if (this.state.edit) {
+      await this.props.getWorkDetail(this.props.match.params.id)
+
+      const work = this.state.work
+      const currentWork = this.props.workDetail.contents
+
+      if (currentWork.sold) this.props.history.push('/')
+
+      const displaceableImages = ['1', '2', '3', '4', '5'].filter((num) => !currentWork['image' + num])
+
+      this.setState({
+        selectableSubGenres: currentWork.genre.subgenres,
+        selectOrder: displaceableImages[0] || '6',
+        displaceableImages
+      })
+
+      work.imageUrl1 = currentWork.image1
+      work.imageUrl2 = currentWork.image2 || Two
+      work.imageUrl3 = currentWork.image3 || Three
+      work.imageUrl4 = currentWork.image4 || Four
+      work.imageUrl5 = currentWork.image5 || Five
+      work.image1 = currentWork.image1
+      work.image2 = currentWork.image2
+      work.image3 = currentWork.image3
+      work.image4 = currentWork.image4
+      work.image5 = currentWork.image5
+      work.title = currentWork.title
+      work.caption = currentWork.caption
+      work.technique = currentWork.technique
+      work.year = currentWork.year
+      work.edition = currentWork.edition
+      work.sign = currentWork.sign
+      work.frame = currentWork.frame
+      work.height = String(currentWork.height)
+      work.width = String(currentWork.width)
+      work.depth = String(currentWork.depth)
+      work.genre = String(currentWork.genre.id)
+      work.subgenre = String(currentWork.subgenre.id)
+      work.price = String(currentWork.price)
+
+      Object.keys(currentWork.colors).forEach(colorName => {
+        work[colorName] = currentWork.colors[colorName]
+      })
+
+      this.setState({ work })
+    }
+  }
+
+  componentWillUnmount() { this.props.clearWorkDetail() }
 
   workSubImagesClicked = num => this.setState({ workImageUrlCurrent: num })
 
@@ -51,6 +104,17 @@ class WorkEditAndUpload extends React.Component {
 
   resetWorkImages = () => {
     const work = this.state.work
+
+    if (this.state.edit) {
+      this.state.displaceableImages.forEach(num => {
+        work['image' + num] = null
+        work['imageUrl' + num] = INITIAL_WORK_FORM['imageUrl' + num]
+      })
+
+      this.setState({ work, selectOrder: this.state.displaceableImages[0] || '6', workImageUrlCurrent: '1' })
+      return null
+    }
+
     work.imageUrl1 = One
     work.imageUrl2 = Two
     work.imageUrl3 = Three
@@ -93,7 +157,44 @@ class WorkEditAndUpload extends React.Component {
     this.setState({ work })
   }
 
-  uploadWork = async e => {
+  updateWork = async () => {
+    const message = workFormValidation(this.state.work)
+
+    if (message) {
+      errorNotificationBody.title = 'Not Yet!'
+      errorNotificationBody.message = message
+      this.notificationSystem.current.addNotification(errorNotificationBody)
+      return null
+    }
+
+    const work = new FormData()
+
+    Object.keys(this.state.work).forEach(key => work.append(key, this.state.work[key]))
+
+    ;['1', '2', '3', '4', '5'].forEach(num => {
+      work.delete('image' + num)
+      work.delete('imageUrl' + num)
+    })
+
+    if (this.state.displaceableImages !== '6'){
+      this.state.displaceableImages.forEach(num => work.append('image' + num, this.state.work['image' + num]))
+    }
+
+    const err = await this.props.updateWork(this.props.workDetail.contents.id, work)
+
+    if (err) {
+      errorNotificationBody.children = (
+        <div><p>{err.response.data.message}</p><p>(エラーID: {err.response.data.errorID})</p></div>
+      )
+      this.notificationSystem.current.addNotification(errorNotificationBody)
+      return null
+    }
+
+    successNotificationBody.title = 'Saved New Changes!'
+    this.notificationSystem.current.addNotification(successNotificationBody)
+  }
+
+  uploadWork = async () => {
     const message = workFormValidation(this.state.work)
 
     if (message) {
@@ -126,22 +227,26 @@ class WorkEditAndUpload extends React.Component {
 
   render() {
     return (
-      <div className="workEditAndUpload">
+      <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
-        <UserDetailWorkUpload
-          upload={this.uploadWork}
-          workImageSelectBtnClicked={this.workImageSelectBtnClicked}
-          workImageSelected={this.workImageSelected}
-          workFormChanged={this.workFormChanged}
-          workSubImagesClicked={this.workSubImagesClicked}
-          resetWorkImages={this.resetWorkImages}
-          buttonRef={this.workImageSelectBtnRef}
-          genres={this.props.genres.contents}
-          selectableSubGenres={this.state.selectableSubGenres}
-          workImageUrlCurrent={this.state.workImageUrlCurrent}
-          work={this.state.work}
-        />
-      </div>
+        <div className="workEditAndUpload">
+          <UserDetailWorkUpload
+            upload={this.uploadWork}
+            update={this.updateWork}
+            workImageSelectBtnClicked={this.workImageSelectBtnClicked}
+            workImageSelected={this.workImageSelected}
+            workFormChanged={this.workFormChanged}
+            workSubImagesClicked={this.workSubImagesClicked}
+            resetWorkImages={this.resetWorkImages}
+            buttonRef={this.workImageSelectBtnRef}
+            genres={this.props.genres.contents}
+            selectableSubGenres={this.state.selectableSubGenres}
+            workImageUrlCurrent={this.state.workImageUrlCurrent}
+            work={this.state.work}
+            edit={this.state.edit}
+          />
+        </div>
+      </React.Fragment>
     )
   }
 }
@@ -150,10 +255,14 @@ export default connect(
   state => ({
     loginStatus: state.loginStatus,
     genres: state.genres,
-    userDetail: state.userDetail
+    userDetail: state.userDetail,
+    workDetail: state.workDetail
   }),
   dispatch => ({
-    uploadWork: work => dispatch(uploadWork(work))
+    uploadWork: work => dispatch(uploadWork(work)),
+    updateWork: (id, work) => dispatch(updateWork(id, work)),
+    getWorkDetail: id => dispatch(getWorkDetail(id)),
+    clearWorkDetail: () => dispatch(clearWorkDetail())
   })
 )(WorkEditAndUpload)
 

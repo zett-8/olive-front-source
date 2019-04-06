@@ -56,7 +56,7 @@ const userDetailWorkUpload = props => {
         </p>
 
         <div className="userDetail__workUpload__images__buttons">
-          <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.workImageSelected} />
+          <input style={{ display: 'none' }} type="file" accept="image/*" ref={props.buttonRef} onChange={props.workImageSelected} />
           <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>
             Select
           </button>
@@ -159,6 +159,7 @@ const userDetailWorkUpload = props => {
         <p className="typ_form_label">* Genre</p>
         <div className="select">
           <select name="genre" value={props.work.genre} onChange={props.workFormChanged}>
+            <option value="">select genre</option>
             {props.genres.map(g => (
               <option key={g.id} value={g.id}>
                 {g.name}
@@ -170,6 +171,7 @@ const userDetailWorkUpload = props => {
         <p className="typ_form_label">* SubGenre</p>
         <div className="select">
           <select name="subgenre" value={props.work.subgenre} onChange={props.workFormChanged}>
+            <option value="">select sub genre</option>
             {props.selectableSubGenres.map(sg => (
               <option key={sg.id} value={sg.id}>
                 {sg.name}
@@ -178,7 +180,7 @@ const userDetailWorkUpload = props => {
           </select>
         </div>
 
-        <p className="typ_form_label">Colors</p>
+        <p className="typ_form_label">Colors (Max 3)</p>
         <p className="userDetail__workUpload__form__colors1">
           <label htmlFor="crimson">
             <input id="crimson" type="checkbox" name="crimson" value={!props.work.crimson} checked={props.work.crimson} onChange={props.workFormChanged} />
@@ -233,7 +235,7 @@ const userDetailWorkUpload = props => {
           onChange={props.workFormChanged}
         />
         <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
-          Save
+          Upload!
         </button>
       </div>
     </React.Fragment>

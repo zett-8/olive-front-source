@@ -37,16 +37,27 @@ export const TwoPasswordValidation = (pass1, pass2) => {
 export const workFormValidation = work => {
   let message = ''
 
+  const colors = ['crimson', 'mediumblue', 'forestgreen', 'gold', 'purple', 'brown', 'black', 'grey', 'ivory']
+
   if (
     work.title === '' ||
     work.caption === '' ||
     work.height === '' ||
     work.width === '' ||
     work.depth === '' ||
+    work.genre === '' ||
+    work.subgenre === '' ||
     work.price === ''
   ) {
     message = '必須項目(*)を入力してください'
   }
+
+  let colorCount = 0
+  colors.forEach(color => {
+    if (work[color] === true) colorCount += 1
+  })
+
+  if (colorCount > 3) message = '選べるカラーは３つまでです'
 
   if (work.image1 === null) message = '少なくとも１つの画像をアップロードしてください'
 

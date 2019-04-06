@@ -6,7 +6,42 @@ import VOID from '../assets/700.gif'
 import HeartIMG from 'react-svg-loader!../assets/heart.svg' // eslint-disable-line
 
 const workDetail = props => {
-  const circumstantialUrl = process.env.NODE_ENV === 'local' ? '' : ''
+  const soldOutButton = () => (
+    props.bought ? (
+      <Link
+        to={`/work/${props.detail.id}/deal/${props.self.UUID}/${
+          props.detail.artist.id === props.self.user_id ? props.detail.buyer.id : props.detail.artist.id
+        }`}
+      >
+        <p className="b_btn message">
+          Message
+        </p>
+      </Link>
+    ) : (
+      <p className="sold">SOLD</p>
+    )
+  )
+
+  const onSellButton = () => (
+    props.detail.artist.id === props.self.user_id ? ( // eslint-disable-line
+      <Link to={`/work/${props.detail.id}/edit/`}>
+        <p className="b_btn message">
+        Edit
+        </p>
+      </Link>
+    ) : (
+      props.detail.status === 0 ? (
+        null
+      ) : (
+        <button className="b_btn b_btn__13rem" type="button" onClick={props.chosePaymentMethod}>
+          Buy
+        </button>
+      )
+    )
+  )
+
+  soldOutButton.propTypes = { bought: PropTypes.bool }
+  onSellButton.propTypes = { chosePaymentMethod: PropTypes.func.isRequired }
 
   return (
     <React.Fragment>
@@ -15,7 +50,7 @@ const workDetail = props => {
           <img
             ref={props.mainImageRef}
             src={VOID}
-            style={{ backgroundImage: `url(${circumstantialUrl + props.detail.image1})` }}
+            style={{ backgroundImage: `url(${props.detail.image1})` }}
             alt="main"
           />
         </p>
@@ -26,9 +61,9 @@ const workDetail = props => {
               <p key={n} className={`workDetail__left__subImage${n}`}>
                 <img
                   src={VOID}
-                  style={{ backgroundImage: `url(${circumstantialUrl + props.detail['image' + n]})` }}
+                  style={{ backgroundImage: `url(${props.detail['image' + n]})` }}
                   alt={'img' + n}
-                  onClick={() => props.changeMainImage(circumstantialUrl + props.detail['image' + n])}
+                  onClick={() => props.changeMainImage(props.detail['image' + n])}
                 />
               </p>
             )
@@ -88,25 +123,8 @@ const workDetail = props => {
         </p>
 
         <div className="workDetail__right__buttons">
-          {props.detail.sold ? ( // eslint-disable-line
-            props.bought ? (
-              <p className="b_btn message">
-                <Link
-                  to={`/work/${props.detail.id}/deal/${props.self.UUID}/${
-                    props.detail.artist.id === props.self.user_id ? props.detail.buyer.id : props.detail.artist.id
-                  }`}
-                >
-                  Message
-                </Link>
-              </p>
-            ) : (
-              <p className="sold">SOLD</p>
-            )
-          ) : (
-            <button className="b_btn b_btn__13rem" type="button" onClick={props.chosePaymentMethod}>
-              Buy
-            </button>
-          )}
+          {props.detail.sold ? soldOutButton() : onSellButton()}
+
           {props.detail.favorite_users.indexOf(props.self.user_id) === -1 ? (
             <button className="w_btn w_btn__favorite" type="button" onClick={props.toggleFavorite}>
               <HeartIMG className="w_btn__favorite__nega" alt="heart" />
@@ -131,6 +149,7 @@ workDetail.propTypes = {
   }),
   detail: PropTypes.shape({
     id: PropTypes.number,
+    status: PropTypes.number,
     image1: PropTypes.string,
     image2: PropTypes.string,
     image3: PropTypes.string,
@@ -155,9 +174,7 @@ workDetail.propTypes = {
     sold: PropTypes.bool,
     favorite_users: PropTypes.arrayOf(PropTypes.number),
   }),
-  chosePaymentMethod: PropTypes.func.isRequired,
   toggleFavorite: PropTypes.func.isRequired,
-  bought: PropTypes.bool,
   mainImageRef: PropTypes.shape({
     current: PropTypes.object,
   }),

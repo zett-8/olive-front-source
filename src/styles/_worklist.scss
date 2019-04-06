@@ -10,7 +10,14 @@
 
     display: grid;
 
-    p { font-size: 1.2rem; font-weight: 400; }
+    p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10rem;
+    }
 
     img {
       background: center no-repeat;

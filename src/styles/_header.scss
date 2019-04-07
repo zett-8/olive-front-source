@@ -123,21 +123,17 @@
 
 
   &__first_row {
-    display: flex;
-    margin-top: 1.5rem;
-
+    p { margin-bottom: 0.4rem; }
     &__ordering {
-      width: 100%;
-      min-width: max-content;
-      div {
-        display: flex;
-        label {
-          display: flex;
-          margin-right: 1.7rem;
-        }
+      display: grid;
+      grid-template-columns: repeat(3, min-content) minmax(max-content, 1fr);
+      align-items: center;
+      grid-column-gap: 0.2rem;
+      > label {
+        span { padding: 0.6rem 1rem; }
       }
+      > div { text-align: right; margin-left: 1rem; }
     }
-    &__sell { text-align: right; align-self: flex-end; }
   }
 
   &__genres {
@@ -148,17 +144,17 @@
 
   &__width {
     margin-top: 1.5rem;
-    input { width: 30vw; }
+    input { width: 30vw; max-width: 15rem; }
   }
 
   &__height {
     margin-top: 0.6rem;
-    input { width: 30vw; }
+    input { width: 30vw; max-width: 15rem; }
   }
 
   &__depth {
     margin-top: 0.6rem;
-    input { width: 30vw; }
+    input { width: 30vw; max-width: 15rem; }
   }
 
   &__colors {

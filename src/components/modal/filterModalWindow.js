@@ -30,53 +30,50 @@ const filterModalWindow = props => {
       contentLabel="search filter"
     >
       <div className="searchFilterModal">
-        <h2>Seach Filter</h2>
         {/* <h2 ref={subtitle => (subtitle = subtitle)}>Search filter</h2> */}
         <div className="searchFilterModal__first_row">
+          <p>Ordering</p>
           <div className="searchFilterModal__first_row__ordering">
-            <p>Ordering</p>
-            <div>
-              <label htmlFor="random">
-                <input
-                  id="random"
-                  type="radio"
-                  name="ordering"
-                  value="random"
-                  checked={props.ordering === 'random'}
-                  onChange={props.filterChanged}
-                />
-                <span>Random</span>
-              </label>
+            <label className="orderingChecker" htmlFor="random">
+              <input
+                id="random"
+                type="radio"
+                name="ordering"
+                value="random"
+                checked={props.ordering === 'random'}
+                onChange={props.filterChanged}
+              />
+              <span>Random</span>
+            </label>
 
-              <label htmlFor="popular">
-                <input
-                  id="popular"
-                  type="radio"
-                  name="ordering"
-                  value="popular"
-                  checked={props.ordering === 'popular'}
-                  onChange={props.filterChanged}
-                />
-                <span>Popular</span>
-              </label>
+            <label className="orderingChecker" htmlFor="popular">
+              <input
+                id="popular"
+                type="radio"
+                name="ordering"
+                value="popular"
+                checked={props.ordering === 'popular'}
+                onChange={props.filterChanged}
+              />
+              <span>Popular</span>
+            </label>
 
-              <label htmlFor="new">
-                <input
-                  id="new"
-                  type="radio"
-                  name="ordering"
-                  value="new"
-                  checked={props.ordering === 'new'}
-                  onChange={props.filterChanged}
-                />
-                <span>New</span>
-              </label>
+            <label className="orderingChecker" htmlFor="new">
+              <input
+                id="new"
+                type="radio"
+                name="ordering"
+                value="new"
+                checked={props.ordering === 'new'}
+                onChange={props.filterChanged}
+              />
+              <span>New</span>
+            </label>
+
+            <div className="searchFilterModal__first_row__sell radio-btn">
+              <input id="onSellOnly" type="checkbox" name="excludeSoldWorks" value={props.excludeSoldWorks} onChange={props.filterChanged} />
+              <label htmlFor="onSellOnly">In Stock</label> {/* eslint-disable-line */}
             </div>
-          </div>
-
-          <div className="searchFilterModal__first_row__sell radio-btn">
-            <input id="onSellOnly" type="checkbox" name="excludeSoldWorks" value={props.excludeSoldWorks} onChange={props.filterChanged} />
-            <label htmlFor="onSellOnly">On Sell Only</label> {/* eslint-disable-line */}
           </div>
         </div>
 

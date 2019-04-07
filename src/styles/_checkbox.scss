@@ -1,5 +1,5 @@
 .radio-btn {
-	width: 50%;
+	width: 100%;
 }
 .radio-btn input[type='checkbox'] {
 	position: absolute;
@@ -61,5 +61,21 @@
     height: 1rem;
     width: 2rem;
     transition: height 100ms ease-in-out;
+  }
+}
+
+
+.orderingChecker {
+  input { display: none; }
+
+  input:checked + span {
+    color: white;
+    background-color: #777777;
+    border-radius: 4px;
+    transition: 300ms ease-in-out;
+  }
+
+  span {
+    transition: 150ms ease-in-out;
   }
 }

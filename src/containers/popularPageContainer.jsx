@@ -3,12 +3,23 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getPopularWorks } from '../actions/workList'
+import { getPopularWorks, getNextPopularWoks } from '../actions/workList'
+import scrollHandler from '../utils/scrollHandler'
 
 class PopularPageContainer extends React.Component {
-  componentDidMount() {
-    if (this.props.workList.popularWorks.pristine) this.props.getPopularWorks()
+  async componentDidMount() {
+    if (this.props.workList.popularWorks.pristine) {
+      await this.props.getPopularWorks()
+      this.fetchNextWorks()
+    }
+
+    window.addEventListener('scroll', this.handleScroll)
   }
+
+  componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
+
+  fetchNextWorks = () => this.props.getNextPopularWoks(this.props.workList.popularWorks.nextWorksApi)
+  handleScroll = () =>scrollHandler(this.fetchNextWorks)
 
   render() {
     if (this.props.workList.popularWorks.pristine) return null
@@ -23,5 +34,6 @@ export default connect(
   }),
   dispatch => ({
     getPopularWorks: () => dispatch(getPopularWorks()),
+    getNextPopularWoks: url => dispatch(getNextPopularWoks(url))
   })
 )(PopularPageContainer)

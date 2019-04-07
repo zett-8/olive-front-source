@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import NotificationSystem from "react-notification-system";
 
-import UserDetailWorkUpload from '../components/userDetail/userDetail_workUpload'
+import UserDetailWorkUpload from '../components/workForm'
 
 import { workFormValidation } from '../utils/Validator'
 import { errorNotificationBody, successNotificationBody } from '../utils/notification'

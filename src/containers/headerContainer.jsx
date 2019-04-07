@@ -88,7 +88,7 @@ class HeaderContainer extends React.Component {
     this.setState({ [name]: value })
   }
 
-  filterWorks = () => {
+  filterWorks = async () => {
     let q = `ordering=${this.state.ordering}`
 
     let colors = [];
@@ -109,7 +109,7 @@ class HeaderContainer extends React.Component {
     if (this.state.excludeSoldWorks) q += '&excludeSoldWorks=true'
 
     this.closeModal()
-    this.props.getFilteredWorks(q)
+    await this.props.getFilteredWorks(q)
     this.props.history.push(`/filteredWorks/${q}`)
   }
 

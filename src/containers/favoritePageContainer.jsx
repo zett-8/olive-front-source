@@ -3,19 +3,28 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getFavoriteWorks } from '../actions/workList'
+import { getFavoriteWorks, getNextFavoriteWorks } from '../actions/workList'
+import scrollHandler from '../utils/scrollHandler'
 
 class FavoritePageContainer extends React.Component {
-  componentWillMount() {
-    if (this.props.workList.favoriteWorks.pristine) this.props.getFavoriteWorks(this.props.loginStatus.user_id)
+  async componentWillMount() {
+    if (this.props.workList.favoriteWorks.pristine) {
+      await this.props.getFavoriteWorks(this.props.loginStatus.user_id)
+      this.fetchNextWorks()
+    }
+
+    window.addEventListener('scroll', this.handleScroll)
   }
+
+  componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
+
+  fetchNextWorks = () => this.props.getNextFavoriteWorks(this.props.workList.favoriteWorks.nextWorksApi)
+  handleScroll = () => scrollHandler(this.fetchNextWorks)
 
   render() {
     if (this.props.workList.favoriteWorks.pristine) return null
 
     return <WorkList works={this.props.workList.favoriteWorks.contents} />
-
-
   }
 }
 
@@ -26,5 +35,6 @@ export default connect(
   }),
   dispatch => ({
     getFavoriteWorks: userId => dispatch(getFavoriteWorks(userId)),
+    getNextFavoriteWorks: url => dispatch(getNextFavoriteWorks(url))
   })
 )(FavoritePageContainer)

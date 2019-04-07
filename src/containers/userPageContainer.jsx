@@ -67,8 +67,8 @@ class UserPageContainer extends React.Component {
   }
 
   async componentWillMount() {
-    this.props.getPurchasedHistory(this.props.loginStatus.user_id)
     this.setCurrentUserInfo()
+    this.props.getPurchasedHistory(this.props.loginStatus.user_id)
   }
 
   componentDidUpdate(prevProps) {
@@ -443,9 +443,9 @@ export default connect(
     workList: state.workList
   }),
   dispatch => ({
+    getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
     updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
     updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
-    getPurchasedHistory: userId => dispatch(getPurchasedHistory(userId)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
     updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
     updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),

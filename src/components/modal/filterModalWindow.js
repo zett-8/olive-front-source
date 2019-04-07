@@ -184,7 +184,7 @@ const filterModalWindow = props => {
 
         <div className="searchFilterModal__buttons">
           <button className="b_btn b_btn__8rem" type="button" onClick={props.filterWorks}>search</button>
-          <button className="w_btn w_btn__8rem" type="button" onClick={() => console.log('not yet')}>
+          <button className="w_btn w_btn__8rem" type="button" onClick={() => null}>
             clear
           </button>
           <button className="w_btn w_btn__8rem" type="button" onClick={props.closeModal}>

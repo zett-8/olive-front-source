@@ -21,17 +21,18 @@ export default {
     params.append('icon', icon)
     return axios.patch(`${PATH}/api/v1/userDetails/${UUID}/`, params)
   },
-  getPurchasedHistory: userId => axios.get(`${PATH}/api/v1/works/?historyOf=${userId}`),
 
   // About works
   uploadWork: work => axios.post(`${PATH}/api/v1/works/`, work),
   updateWork: (id, work) => axios.put(`${PATH}/api/v1/works/${id}/`, work),
   purchaseWork: (description, tokenId, price, receipt) => axios.get(`${PATH}/api/v1/purchase-work/${description}/${tokenId}/${price}/${receipt}/`),
   workWasBought: (buyerUUID, workId, status) => axios.patch(`${PATH}/api/v1/works/${workId}/`, { sold: true, buyer: buyerUUID, status }),
+  getNextPageWorks: url => axios.get(url),
   getNewWorks: () => axios.get(`${PATH}/api/v1/works/?new=true`),
   getPopularWorks: () => axios.get(`${PATH}/api/v1/works/?popular=true`),
   getFilteredWorks: q => axios.get(`${PATH}/api/v1/filteredWorks/?${q}`),
   getFavoriteWorks: userId => axios.get(`${PATH}/api/v1/works/?favoritesOf=${userId}`),
+  getPurchasedHistory: userId => axios.get(`${PATH}/api/v1/purchasedWorks/?of=${userId}`),
   getWorkDetail: id => axios.get(`${PATH}/api/v1/works/${id}/`),
   getWorksOfAnArtist: id => axios.get(`${PATH}/api/v1/works/?artist=${id}`),
   changeWorkStatus: (workId, status) => axios.patch(`${PATH}/api/v1/works/${workId}/`, { status }),

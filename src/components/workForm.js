@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import VOID from '../../assets/700.gif'
+import VOID from '../assets/700.gif'
 
 const userDetailWorkUpload = props => {
   return (

@@ -5,21 +5,32 @@ import ArtistDetail from '../components/artistDetail'
 import WorkList from '../components/workList'
 
 import { clearArtistDetail, getArtistDetail } from '../actions/artistDetail'
-import { clearWorksOfArtist, getWorksOfAnArtist } from '../actions/workList'
+import { clearWorksOfArtist, getWorksOfAnArtist, getNextWorksOfAnArtist } from '../actions/workList'
+import scrollHandler from '../utils/scrollHandler'
 
 class ArtistPageContainer extends React.Component {
-  componentWillUnmount() {
-    this.props.clearArtistDetail()
-    this.props.clearWorksOfArtist()
-  }
-
   async componentWillMount() {
     const ID = this.props.match.params.id
 
 
     if (this.props.artistDetail.pristine) this.props.getArtistDetail(ID)
-    if (this.props.workList.artistWorks.pristine) this.props.getWorksOfAnArtist(ID)
+    if (this.props.workList.artistWorks.pristine) {
+      await this.props.getWorksOfAnArtist(ID)
+      this.fetchNextWorks()
+    }
+
+    window.addEventListener('scroll', this.handleScroll)
   }
+
+   componentWillUnmount() {
+    this.props.clearArtistDetail()
+    this.props.clearWorksOfArtist()
+
+    ;window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  fetchNextWorks = () => this.props.getNextWorksOfAnArtist(this.props.workList.artistWorks.nextWorksApi)
+  handleScroll = () => scrollHandler(this.fetchNextWorks)
 
   render() {
     if (this.props.artistDetail.pristine) return null
@@ -45,6 +56,7 @@ export default connect(
     clearArtistDetail: () => dispatch(clearArtistDetail()),
     getArtistDetail: id => dispatch(getArtistDetail(id)),
     clearWorksOfArtist: () => dispatch(clearWorksOfArtist()),
-    getWorksOfAnArtist: id => dispatch(getWorksOfAnArtist(id))
+    getWorksOfAnArtist: id => dispatch(getWorksOfAnArtist(id)),
+    getNextWorksOfAnArtist: url => dispatch(getNextWorksOfAnArtist(url))
   })
 )(ArtistPageContainer)

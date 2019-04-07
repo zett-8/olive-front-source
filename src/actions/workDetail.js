@@ -26,9 +26,7 @@ export const getWorkDetail = id => dispatch => {
 
 export const uploadWork = work => () => {
   return Api.uploadWork(work)
-    .then(() => {
-      console.log('uploaded')
-    })
+    .then(() => null)
     .catch(res => res)
 }
 
@@ -50,9 +48,7 @@ export const changeWorkStatus = (workId, status) => dispatch => {
 
 export const purchaseWork = (description, token, price, receipt) => () => {
   return Api.purchaseWork(description, token, price, receipt)
-    .then(() => {
-      console.log('bought')
-    })
+    .then(() => null)
     .catch(res => res)
 }
 

@@ -48,6 +48,6 @@ export const updateEmail = (userId, email) => dispatch => {
 
 export const updatePassword = (userId, oldPassword, newPassword) => () => {
   return Api.updatePassword(userId, oldPassword, newPassword)
-    .then(() => console.log('password is updated'))
+    .then(() => null)
     .catch(res => res)
 }

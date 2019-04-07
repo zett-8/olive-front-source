@@ -36,6 +36,7 @@
                 "SwitchCase": 1
             }
         ],
+        "no-console": "error",
         "object-curly-newline": "off",
         "object-shorthand": "off",
         "react/destructuring-assignment": "off",

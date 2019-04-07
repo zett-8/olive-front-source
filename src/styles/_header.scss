@@ -163,14 +163,11 @@
 
   &__colors {
     margin-top: 1.5rem;
-    div {
+    > div {
       display: flex;
-      label {
-        display: flex;
-        align-items: center;
-        margin-right: 0.7rem;
-        input { margin-right: 0.2rem; }
-      }
+      height: 2rem;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 

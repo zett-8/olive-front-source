@@ -28,9 +28,9 @@ class UserPageContainer extends React.Component {
 
     this.iconRef = React.createRef()
     this.userIconSelectBtnRef = React.createRef()
-
+    console.log('aaa')
     this.state = {
-      tab: 0,
+      tab: 3,
 
       // prime tab
       iconImage: null,

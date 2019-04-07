@@ -137,41 +137,41 @@ const filterModalWindow = props => {
         <div className="searchFilterModal__colors">
           <p>Color</p>
           <div>
-            <label htmlFor="crimson">
+            <label className="colorChecker" htmlFor="crimson">
               <input id="crimson" type="checkbox" name="colorCrimson" value={!props.colorCrimson} checked={props.colorCrimson} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'crimson' }} />
+              <span style={{ backgroundColor: 'crimson' }} />
             </label>
-            <label htmlFor="mediumBlue">
+            <label className="colorChecker" htmlFor="mediumBlue">
               <input id="mediumBlue" type="checkbox" name="colorMediumBlue" value={!props.colorMediumBlue} checked={props.colorMediumBlue} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'mediumblue' }} />
+              <span style={{ backgroundColor: 'mediumblue' }} />
             </label>
-            <label htmlFor="forestGreen">
+            <label className="colorChecker" htmlFor="forestGreen">
               <input id="forestGreen" type="checkbox" name="colorForestGreen" value={!props.colorForestGreen} checked={props.colorForestGreen} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'forestgreen' }} />
+              <span style={{ backgroundColor: 'forestgreen' }} />
             </label>
-            <label htmlFor="gold">
+            <label className="colorChecker" htmlFor="gold">
               <input id="gold" type="checkbox" name="colorGold" value={!props.colorGold} checked={props.colorGold} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'gold' }} />
+              <span style={{ backgroundColor: 'gold' }} />
             </label>
-            <label htmlFor="purple">
+            <label className="colorChecker" htmlFor="purple">
               <input id="purple" type="checkbox" name="colorPurple" value={!props.colorPurple} checked={props.colorPurple} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'purple' }} />
+              <span style={{ backgroundColor: 'purple' }} />
             </label>
-            <label htmlFor="brown">
+            <label className="colorChecker" htmlFor="brown">
               <input id="brown" type="checkbox" name="colorBrown" value={!props.colorBrown} checked={props.colorBrown} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'brown' }} />
+              <span style={{ backgroundColor: 'brown' }} />
             </label>
-            <label htmlFor="black">
+            <label className="colorChecker" htmlFor="black">
               <input id="black" type="checkbox" name="colorBlack" value={!props.colorBlack} checked={props.colorBlack} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'black' }} />
+              <span style={{ backgroundColor: 'black' }} />
             </label>
-            <label htmlFor="grey">
+            <label className="colorChecker" htmlFor="grey">
               <input id="grey" type="checkbox" name="colorGrey" value={!props.colorGrey} checked={props.colorGrey} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'grey' }} />
+              <span style={{ backgroundColor: 'grey' }} />
             </label>
-            <label htmlFor="ivory">
+            <label className="colorChecker" htmlFor="ivory">
               <input id="ivory" type="checkbox" name="colorIvory" value={!props.colorIvory} checked={props.colorIvory} onChange={props.filterChanged} />
-              <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
+              <span style={{ backgroundColor: 'ivory', border: '1px solid grey' }} />
             </label>
           </div>
         </div>

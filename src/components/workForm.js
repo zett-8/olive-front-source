@@ -187,47 +187,41 @@ const userDetailWorkUpload = props => {
 
         <p className="typ_form_label">Colors (Max 3)</p>
         <p className="workEditAndUpload__form__colors1">
-          <label htmlFor="crimson">
+          <label className="colorChecker" htmlFor="crimson">
             <input id="crimson" type="checkbox" name="crimson" value={!props.work.crimson} checked={props.work.crimson} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'crimson' }} />
+            <span style={{ backgroundColor: 'crimson' }} />
           </label>
-          <label htmlFor="mediumBlue">
+          <label className="colorChecker" htmlFor="mediumBlue">
             <input id="mediumBlue" type="checkbox" name="mediumblue" value={!props.work.mediumblue} checked={props.work.mediumblue} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'mediumblue' }} />
+            <span style={{ backgroundColor: 'mediumblue' }} />
           </label>
-          <label htmlFor="forestGreen">
+          <label className="colorChecker" htmlFor="forestGreen">
             <input id="forestGreen" type="checkbox" name="forestgreen" value={!props.work.forestgreen} checked={props.work.forestgreen} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'forestgreen' }} />
+            <span style={{ backgroundColor: 'forestgreen' }} />
           </label>
-          <label htmlFor="gold">
+          <label className="colorChecker" htmlFor="gold">
             <input id="gold" type="checkbox" name="gold" value={!props.work.gold} checked={props.work.gold} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'gold' }} />
+            <span style={{ backgroundColor: 'gold' }} />
           </label>
-          <label htmlFor="purple">
+          <label className="colorChecker" htmlFor="purple">
             <input id="purple" type="checkbox" name="purple" value={!props.work.purple} checked={props.work.purple} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'purple' }} />
+            <span style={{ backgroundColor: 'purple' }} />
           </label>
-        </p>
-        <p className="workEditAndUpload__form__colors2">
-          <label htmlFor="brown">
+          <label className="colorChecker" htmlFor="brown">
             <input id="brown" type="checkbox" name="brown" value={!props.work.brown} checked={props.work.brown} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'brown' }} />
+            <span style={{ backgroundColor: 'brown' }} />
           </label>
-          <label htmlFor="black">
+          <label className="colorChecker" htmlFor="black">
             <input id="black" type="checkbox" name="black" value={!props.work.black} checked={props.work.black} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'black' }} />
+            <span style={{ backgroundColor: 'black' }} />
           </label>
-          <label htmlFor="grey">
+          <label className="colorChecker" htmlFor="grey">
             <input id="grey" type="checkbox" name="grey" value={!props.work.grey} checked={props.work.grey} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'grey' }} />
+            <span style={{ backgroundColor: 'grey' }} />
           </label>
-          <label htmlFor="ivory">
+          <label className="colorChecker" htmlFor="ivory">
             <input id="ivory" type="checkbox" name="ivory" value={!props.work.ivory} checked={props.work.ivory} onChange={props.workFormChanged} />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
-          </label>
-          <label htmlFor="dummy" style={{ opacity: '0' }}>
-            <input id="dummy" type="checkbox" name="dummy" />
-            <span style={{ display: 'inline-block', height: '2rem', width: '2rem', borderRadius: '50%', backgroundColor: 'ivory', border: '1px solid grey' }} />
+            <span style={{ backgroundColor: 'ivory', border: '1px solid grey' }} />
           </label>
         </p>
 

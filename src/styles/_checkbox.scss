@@ -43,3 +43,23 @@
 	-webkit-transition: 0.25s all ease;
 	        transition: 0.25s all ease;
 }
+
+
+.colorChecker {
+  input { display: none; }
+
+  input:checked + span {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    transition: height 100ms ease-in-out;
+  }
+
+  span {
+    display: inline-block;
+    height: 1rem;
+    width: 2rem;
+    transition: height 100ms ease-in-out;
+  }
+}

@@ -88,6 +88,32 @@ class HeaderContainer extends React.Component {
     this.setState({ [name]: value })
   }
 
+  resetFilter = () => {
+    this.setState({
+      ordering: 'random',
+      genre: '',
+      selectableSubGenres: [],
+      subGenre: '',
+      minWidth: '',
+      maxWidth: '',
+      minHeight: '',
+      maxHeight: '',
+      minDepth: '',
+      maxDepth: '',
+      colorCrimson: false,
+      colorMediumBlue: false,
+      colorForestGreen: false,
+      colorGold: false,
+      colorPurple: false,
+      colorBrown: false,
+      colorBlack: false,
+      colorGrey: false,
+      colorIvory: false,
+      excludeSoldWorks: false,
+      price: '',
+    })
+  }
+
   filterWorks = async () => {
     let q = `ordering=${this.state.ordering}`
 
@@ -149,6 +175,7 @@ class HeaderContainer extends React.Component {
             selectableSubGenres={this.state.selectableSubGenres}
             genres={this.props.genres.contents}
             filterChanged={this.filterChanged}
+            resetFilter={this.resetFilter}
             filterWorks={this.filterWorks}
           />
 

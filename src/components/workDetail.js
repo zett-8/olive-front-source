@@ -79,14 +79,14 @@ const workDetail = props => {
           </p>
           <p className="typ_infoList_left">Year</p>
           <p className="typ_infoList_right">{props.detail.year ? props.detail.year : '-'}</p>
-          <p className="typ_infoList_left">Technique</p>
-          <p className="typ_infoList_right">{props.detail.technique ? props.detail.technique : '-'}</p>
           <p className="typ_infoList_left">Genre</p>
           <p className="typ_infoList_right">{props.detail.genre.name}</p>
           <p className="typ_infoList_left">Sub genre</p>
           <p className="typ_infoList_right">{props.detail.subgenre.name}</p>
-          <p className="typ_infoList_left">Size</p>
-          <p className="typ_infoList_right">{`W ${props.detail.width} mm x H ${props.detail.height} mm x D ${props.detail.depth} mm`}</p>
+          <p className="typ_infoList_left">Technique</p>
+          <p className="typ_infoList_right">{props.detail.technique ? props.detail.technique : '-'}</p>
+          <p className="typ_infoList_left">Size (mm)</p>
+          <p className="typ_infoList_right">{`W ${props.detail.width} x H ${props.detail.height} x D ${props.detail.depth}`}</p>
           <p className="typ_infoList_left">Color</p>
           <p className="typ_infoList_right">
             {Object.keys(props.detail.colors).map(Cname => {

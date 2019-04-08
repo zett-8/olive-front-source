@@ -15,7 +15,12 @@ import WorkList from '../components/workList'
 import { getPurchasedHistory } from '../actions/workList'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
-import { errorNotificationBody, successNotificationBody } from '../utils/notification'
+import {
+  errorNotificationBody,
+  notYetNotificationBody,
+  oopsNotificationBody,
+  successNotificationBody
+} from '../utils/notification'
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
 
 class UserPageContainer extends React.Component {
@@ -127,6 +132,11 @@ class UserPageContainer extends React.Component {
 
     const err = this.props.uploadUserIcon(this.props.loginStatus.uuid, this.state.iconImage)
 
+    if (err) {
+      this.notificationSystem.current.addNotification(errorNotificationBody)
+      return null
+    }
+
     this.setState({ iconImage: null })
   }
 
@@ -136,26 +146,22 @@ class UserPageContainer extends React.Component {
     const message = EmailValidation(this.state.email)
 
     if (message) {
-      errorNotificationBody.title = 'Oops'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = message
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
     const err = await this.props.updateEmail(this.props.loginStatus.uuid, this.state.email)
 
-    if (err) {
-      errorNotificationBody.message = 'メールアドレスの変更に失敗しました'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
-    }
+    if (err) this.notificationSystem.current.addNotification(errorNotificationBody)
   }
 
   updatePassword = async () => {
     const message = TwoPasswordValidation(this.state.oldPassword, this.state.newPassword)
 
     if (message) {
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = message
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
@@ -166,14 +172,12 @@ class UserPageContainer extends React.Component {
     )
 
     if (err) {
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
-    body.level = 'success'
-    body.message = 'パスワードを変更しました'
-    this.notificationSystem.current.addNotification(errorNotificationBody)
+    successNotificationBody.title = 'Updated Password!'
+    this.notificationSystem.current.addNotification(successNotificationBody)
 
     this.setState({ oldPassword: '', newPassword: '' })
   }
@@ -188,9 +192,8 @@ class UserPageContainer extends React.Component {
     const state = this.state
 
     if (!state.firstName || !state.lastName || !state.zipCode || !state.address || !state.phoneNumber) {
-      errorNotificationBody.title = 'Not Yet!'
-      errorNotificationBody.message = '*必須項目を入力してください'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = '*必須項目を入力してください'
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
@@ -206,7 +209,6 @@ class UserPageContainer extends React.Component {
     const err = await this.props.updateBuyerInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
-      errorNotificationBody.message = 'Buyer情報の更新に失敗しました'
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
@@ -293,9 +295,8 @@ class UserPageContainer extends React.Component {
       !this.state.bankAccountNumber ||
       !this.state.bankAccountName
     ) {
-      errorNotificationBody.title = 'Not Yet!'
-      errorNotificationBody.message = '*必須項目を入力してください'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = '*必須項目を入力してください'
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
@@ -318,15 +319,12 @@ class UserPageContainer extends React.Component {
     const err = await this.props.updateArtistInfo(this.props.loginStatus.uuid, data)
 
     if (err) {
-      errorNotificationBody.message = 'Artist情報の更新に失敗しました'
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     successNotificationBody.title = 'Updated Artist Info!'
     this.notificationSystem.current.addNotification(successNotificationBody)
-
-    console.log('update!')
   }
 
   tabContents = () => {

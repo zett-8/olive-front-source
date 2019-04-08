@@ -5,7 +5,7 @@ import NotificationSystem from 'react-notification-system'
 import LoginForm from '../components/loginForm'
 import SignUpForm from '../components/signUpForm'
 import { FormValidation } from '../utils/Validator'
-import { errorNotificationBody } from '../utils/notification'
+import { errorNotificationBody, oopsNotificationBody } from '../utils/notification'
 
 import API from '../utils/api'
 import { signUp, login } from '../actions/loginStatus'
@@ -36,17 +36,15 @@ class LoginPageContainer extends React.Component {
   handleForgetPassword = async () => {
     const message = FormValidation(this.state.email, 'pass1234')
     if (message) {
-      errorNotificationBody.title = 'Oops!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = message
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
     const err = await API.checkUserEmail(this.state.email)
     if (err) {
-      errorNotificationBody.title = 'Something is wrong!'
-      errorNotificationBody.message = '登録されていないメールアドレスです'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = '登録されていないメールアドレスです'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
@@ -58,26 +56,22 @@ class LoginPageContainer extends React.Component {
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
-      errorNotificationBody.title = 'Oops!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = message
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
     if (this.state.invitation) {
       const err = await API.checkInvitationCode(this.state.invitation)
       if (err) {
-        errorNotificationBody.title = 'Something is wrong!'
-        errorNotificationBody.message = err.response.data.message
-        this.notificationSystem.current.addNotification(errorNotificationBody)
+        oopsNotificationBody.message = '無効な招待コードです'
+        this.notificationSystem.current.addNotification(oopsNotificationBody)
         return null
       }
     }
 
     const error = await this.props.signUp(this.state.email, this.state.password, this.state.invitation || 'non')
     if (error) {
-      errorNotificationBody.title = 'Something went wrong!'
-      errorNotificationBody.message = error.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
@@ -88,16 +82,13 @@ class LoginPageContainer extends React.Component {
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
-      errorNotificationBody.title = 'Something is wrong!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = message
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
     const err = await this.props.login(this.state.email, this.state.password)
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }

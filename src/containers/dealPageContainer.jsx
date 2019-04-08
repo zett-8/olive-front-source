@@ -64,9 +64,8 @@ class DealPageContainer extends React.Component {
       this.props.loginStatus.user_id === work.buyer.id ? work.artist.id : work.buyer.id,
       this.state.message
     )
+
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }

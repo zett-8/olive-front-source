@@ -5,7 +5,7 @@ import NotificationSystem from "react-notification-system";
 import UserDetailWorkUpload from '../components/workForm'
 
 import { workFormValidation } from '../utils/Validator'
-import { errorNotificationBody, successNotificationBody } from '../utils/notification'
+import {errorNotificationBody, notYetNotificationBody, successNotificationBody} from '../utils/notification'
 import { uploadWork, updateWork, getWorkDetail, clearWorkDetail } from '../actions/workDetail'
 
 import One from '../assets/1.jpg'
@@ -161,9 +161,8 @@ class WorkEditAndUpload extends React.Component {
     const message = workFormValidation(this.state.work)
 
     if (message) {
-      errorNotificationBody.title = 'Not Yet!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = message
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
@@ -183,9 +182,6 @@ class WorkEditAndUpload extends React.Component {
     const err = await this.props.updateWork(this.props.workDetail.contents.id, work)
 
     if (err) {
-      errorNotificationBody.children = (
-        <div><p>{err.response.data.message}</p><p>(エラーID: {err.response.data.errorID})</p></div>
-      )
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
@@ -198,9 +194,8 @@ class WorkEditAndUpload extends React.Component {
     const message = workFormValidation(this.state.work)
 
     if (message) {
-      errorNotificationBody.title = 'Not Yet!'
-      errorNotificationBody.message = message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = message
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
@@ -213,8 +208,6 @@ class WorkEditAndUpload extends React.Component {
     const err = await this.props.uploadWork(work)
 
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }

@@ -6,7 +6,12 @@ import NotificationSystem from 'react-notification-system'
 import StripeProvider from '../hocs/stripeProvider'
 import WorkDetail from '../components/workDetail'
 import PurchaseModalWindow from '../components/modal/purchaseModalWindow'
-import { errorNotificationBody } from '../utils/notification'
+import {
+  errorNotificationBody,
+  notYetNotificationBody,
+  oopsNotificationBody,
+  wentWrongNotificationBody
+} from '../utils/notification'
 
 import { clearWorkDetail, getWorkDetail, purchaseWork, workWasBought, toggleFavorite } from '../actions/workDetail'
 
@@ -40,35 +45,28 @@ class WorkDetailPageContainer extends React.Component {
 
   toggleFavorite = async () => {
     if (!Object.keys(this.props.loginStatus).length) {
-      errorNotificationBody.title = 'User Only'
-      errorNotificationBody.message = 'お気に入りに追加するにはログインしてください'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = 'お気に入りに追加するにはログインしてください'
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
     const err = await this.props.toggleFavorite(this.props.workDetail.contents.id, this.props.loginStatus.user_id)
 
-    if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
-    }
+    if (err) this.notificationSystem.current.addNotification(errorNotificationBody)
   }
 
   chosePaymentMethod = () => {
     // buyer情報が登録できていない場合
     if (!this.props.loginStatus.buyer) {
-      errorNotificationBody.title = 'Oops!'
-      errorNotificationBody.message = '購入者情報を登録してください'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      notYetNotificationBody.message = '購入者情報を登録してください'
+      this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
 
     // 自分の作品は購入できない
     if (this.props.loginStatus.user_id === this.props.workDetail.contents.artist.user_id) {
-      errorNotificationBody.title = 'Oops!'
-      errorNotificationBody.message = '自分の作品は購入できません'
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = '自分の作品は購入できません'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 
@@ -79,9 +77,8 @@ class WorkDetailPageContainer extends React.Component {
     const err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
 
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      return null
     }
 
     this.closeModal()
@@ -97,17 +94,14 @@ class WorkDetailPageContainer extends React.Component {
 
     let err = await this.props.purchaseWork(description, token.id, price, receipt)
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
     err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '3')
     if (err) {
-      errorNotificationBody.title = 'エラーID: ' + err.response.data.errorID
-      errorNotificationBody.message = err.response.data.message
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      wentWrongNotificationBody.children = (<div><p>購入は完了しましたが、更新に失敗しました。</p><br /><p>お手数ですが、お問い合わせをお願いします。</p></div>)
+      this.notificationSystem.current.addNotification(wentWrongNotificationBody)
     }
 
     this.closeModal()

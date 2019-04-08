@@ -11,7 +11,8 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-20%',
     transform: 'translate(-50%, -50%)',
-    width: 'max-content'
+    maxWidth: '90%',
+    minWidth: 'max-content'
   },
   // overlay : {
   //   backgroundColor: '#f6f6f6'

@@ -124,6 +124,7 @@
 
   &__first_row {
     p { margin-bottom: 0.4rem; }
+    width: 100%;
     &__ordering {
       display: grid;
       grid-template-columns: repeat(3, min-content) minmax(max-content, 1fr);

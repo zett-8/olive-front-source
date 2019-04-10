@@ -9,7 +9,7 @@ const dealInfo = props => {
       <div className="deal__info__main" style={{ backgroundImage: `url(${props.work.image1})` }} />
       <div className="deal__info__list">
         <p className="typ_infoList_left">Work Title</p>
-        <p className="typ_infoList_right">{props.work.name}</p>
+        <p className="typ_infoList_right">{props.work.title}</p>
         <p className="typ_infoList_left">Work Price</p>
         <p className="typ_infoList_right">
           ¥&nbsp;
@@ -37,7 +37,7 @@ dealInfo.propTypes = {
   work: PropTypes.shape({
     status: PropTypes.number,
     image1: PropTypes.string,
-    name: PropTypes.string,
+    title: PropTypes.string,
     price: PropTypes.number,
     artist: PropTypes.shape({
       id: PropTypes.number,

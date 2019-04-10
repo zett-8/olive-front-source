@@ -41,7 +41,7 @@ class DealPageContainer extends React.Component {
       this.setState({ verified: true })
 
     this.props.getMessages(this.props.workDetail.contents.id)
-    this.props.getBuyerInfo(this.props.workDetail.contents.buyer.id)
+    this.props.getBuyerInfo(this.props.loginStatus.token, this.props.workDetail.contents.buyer.id)
 
     this.setState({ role: work.buyer.id === self.user_id ? 'buyer' : 'artist' })
   }
@@ -118,7 +118,7 @@ export default connect(
   }),
   dispatch => ({
     getWorkDetail: id => dispatch(getWorkDetail(id)),
-    getBuyerInfo: id => dispatch(getBuyerInfo(id)),
+    getBuyerInfo: (token, buyerId) => dispatch(getBuyerInfo(token, buyerId)),
     changeWorkStatus: (workId, status) => dispatch(changeWorkStatus(workId, status)),
     clearMessage: () => dispatch(clearMessage()),
     getMessages: workId => dispatch(getMessages(workId)),

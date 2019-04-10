@@ -6,6 +6,8 @@ const userDetailArtist = props => {
 
   return (
     <div>
+      {props.readyAsArtist ? null : <p className="mb-3rem">* 作品をアップロードするにはアーティスト情報を登録してください。</p>}
+
       <p className="typ_form_label">* Artist name</p>
       <input
         className="input"
@@ -116,6 +118,7 @@ const userDetailArtist = props => {
 }
 
 userDetailArtist.propTypes = {
+  readyAsArtist: PropTypes.bool.isRequired,
   artistFormChanged: PropTypes.func.isRequired,
   updateArtistInfo: PropTypes.func.isRequired,
   artistName: PropTypes.string,

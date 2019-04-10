@@ -75,6 +75,8 @@ class LoginPageContainer extends React.Component {
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
+
+    this.props.history.push('/message/sent-email/')
   }
 
   login = async e => {
@@ -88,6 +90,11 @@ class LoginPageContainer extends React.Component {
     }
 
     const err = await this.props.login(this.state.email, this.state.password)
+    if (err && err.response.status === 404) {
+      oopsNotificationBody.message = '登録されていないメールアドレスです'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null

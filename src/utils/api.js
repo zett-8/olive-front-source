@@ -49,6 +49,13 @@ export default {
   updateArtistInfo: (UUID, data) => axios.put(`${PATH}/api/v1/userDetails/${UUID}/`, data),
 
   // About buyers
-  getBuyerInfo: BuyerId => axios.get(`${PATH}/api/v1/buyerInfo/${BuyerId}/`),
+  getBuyerInfo: (token, BuyerId) => {
+    const header = setToken(token)
+    return axios.get(`${PATH}/api/v1/buyerInfo/${BuyerId}/`, header)
+  },
   updateBuyerInfo: (UUID, data) => axios.put(`${PATH}/api/v1/userDetails/${UUID}/`, data),
+}
+
+const setToken = (token, data = {}) => {
+  return { headers: { Authorization: 'Token ' + token }, data }
 }

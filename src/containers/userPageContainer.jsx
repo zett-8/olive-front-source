@@ -370,6 +370,7 @@ class UserPageContainer extends React.Component {
         return (
           <div className="userDetail__artist">
             <UserDetailArtist
+              readyAsArtist={this.props.userDetail.contents.ready_as_artist}
               artistName={this.state.artistName}
               profile={this.state.profile}
               website={this.state.website}
@@ -424,7 +425,12 @@ class UserPageContainer extends React.Component {
         <NotificationSystem ref={this.notificationSystem} />
         <div className="userDetail">
           <div className="userDetail__nav">
-            <UserDetailNav self={this.props.loginStatus} navClicked={this.navClicked} tab={this.state.tab}/>
+            <UserDetailNav
+              self={this.props.loginStatus}
+              navClicked={this.navClicked}
+              tab={this.state.tab}
+              debuted={this.props.userDetail.contents.debuted}
+            />
           </div>
           {this.tabContents()}
         </div>

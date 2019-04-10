@@ -9,7 +9,7 @@ const registrationDone = props => {
         <br />
         ログインページからログインしてご利用ください。
       </div>
-      <button className="btn btn__loginPage" type="button" onClick={() => props.history.push('/login')}>Login Page</button>
+      <button className="w_btn w_btn__20rem" type="button" onClick={() => props.history.push('/login')}>Login Page</button>
     </React.Fragment>
   )
 }

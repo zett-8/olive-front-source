@@ -61,6 +61,13 @@ class LoginPageContainer extends React.Component {
       return null
     }
 
+    const err = await API.checkUserEmail(this.state.email)
+    if (!err) {
+      oopsNotificationBody.message = 'すでに登録されているアドレスです'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
+
     if (this.state.invitation) {
       const err = await API.checkInvitationCode(this.state.invitation)
       if (err) {

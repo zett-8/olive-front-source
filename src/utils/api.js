@@ -8,7 +8,7 @@ export default {
   checkInvitationCode: code => axios.get(`${PATH}/api/v1/checkInvitationCode/${code}/`).then(() => null).catch(res => res),
   checkUserEmail: email => axios.get(`${PATH}/api/v1/checkUserEmail/${email}/`).then(() => null).catch(res => res),
   resetPassword: email => axios.get(`${PATH}/api/v1/reset-password/${email}/`).then(() => null).catch(res => res),
-  signUp: (email, password, invitationCode) => axios.post(`${PATH}/api/v1/users/`, { email, password, invitationCode }),
+  signUp: (email, password, invitationCode) => axios.post(`${PATH}/api/v1/generate-signup-url/`, { email, password, invitationCode }),
   login: (email, password) => axios.post(`${PATH}/api-token-auth/`, { username: email, password }),
 
   // About users

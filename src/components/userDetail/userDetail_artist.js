@@ -48,7 +48,7 @@ const userDetailArtist = props => {
       <p className="typ_form_label" style={{ marginTop: '2.3rem' }}>* Bank</p>
       <div className="searchSelector">
         <form name="Bank" onSubmit={props.searchBanks}>
-          <input name="Bank" value={props.searchBankInput} onChange={props.handleBankInfoInput} />
+          <input name="Bank" value={props.searchBankInput} placeholder="例) 三菱、ゆうちょ、楽天" onChange={props.handleBankInfoInput} />
           <button type="submit">Search</button>
         </form>
         <div className="select">

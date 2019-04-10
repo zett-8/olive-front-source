@@ -189,7 +189,7 @@ export default (state = INITIAL_STATE, action) => {
         nextWorksApi: newState.filteredWorks.nextWorksApi
       }
       return newState
-    
+
     case actionTypes.GET_NEXT_FILTERED_WORKS:
       newState.filteredWorks = {
         pristine: false,

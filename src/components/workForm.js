@@ -91,7 +91,7 @@ const userDetailWorkUpload = props => {
           name="technique"
           value={props.work.technique}
           onChange={props.workFormChanged}
-          placeholder="technique"
+          placeholder="例）銀塩プリント、油絵"
         />
         <p className="typ_form_label">Year</p>
         <input
@@ -99,7 +99,7 @@ const userDetailWorkUpload = props => {
           name="year"
           value={props.work.year}
           onChange={props.workFormChanged}
-          placeholder="year"
+          placeholder="例）2013年制作、2015年秋頃"
         />
 
         <p className="typ_form_label">Sign</p>
@@ -108,7 +108,7 @@ const userDetailWorkUpload = props => {
           name="sign"
           value={props.work.sign}
           onChange={props.workFormChanged}
-          placeholder="sign"
+          placeholder="例）有り（作品裏側）"
         />
 
         <p className="typ_form_label">Edition</p>
@@ -117,7 +117,7 @@ const userDetailWorkUpload = props => {
           name="edition"
           value={props.work.edition}
           onChange={props.workFormChanged}
-          placeholder="edition"
+          placeholder="例）1/20、エディション無し"
         />
 
         <p className="typ_form_label">Frame</p>
@@ -126,7 +126,7 @@ const userDetailWorkUpload = props => {
           name="frame"
           value={props.work.frame}
           onChange={props.workFormChanged}
-          placeholder="frame"
+          placeholder="例）フレーム無し、メタルフレーム"
         />
         <p className="typ_form_label">*Size (mm)</p>
         <div className="workEditAndUpload__form__sizeInputs">

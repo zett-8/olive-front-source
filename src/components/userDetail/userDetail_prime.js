@@ -29,7 +29,7 @@ const userDetailPrime = props => {
         <button className="b_btn b_btn__20rem" type="button" onClick={props.updateEmail}>Change Email</button>
 
         <p className="typ_form_label">Password</p>
-        <input className="input" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormChanged} />
+        <input className="input mb-1rem" type="password" name="oldPassword" placeholder="現在のパスワード" value={props.oldPassword} onChange={props.primeFormChanged} />
         <input className="input" type="password" name="newPassword" placeholder="新しいパスワード" value={props.newPassword} onChange={props.primeFormChanged} />
         <button className="b_btn b_btn__20rem" type="button" onClick={props.updatePassword}>Change password</button>
       </div>

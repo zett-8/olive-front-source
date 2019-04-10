@@ -52,10 +52,19 @@ export default (state = INITIAL_STATE, action) => {
       }
       return newState
 
-    case actionTypes.GET_NEXT_NEW_WORKS:
+    case actionTypes.LOAD_NEXT_NEW_WORKS:
       newState.newWorks = {
         pristine: false,
         contents: [...newState.newWorks.contents, ...newState.newWorks.stock],
+        stock: [],
+        nextWorksApi: newState.newWorks.nextWorksApi
+      }
+      return newState
+
+    case actionTypes.GET_NEXT_NEW_WORKS:
+      newState.newWorks = {
+        pristine: false,
+        contents: newState.newWorks.contents,
         stock: action.payload.results,
         nextWorksApi: action.payload.next
       }
@@ -73,10 +82,19 @@ export default (state = INITIAL_STATE, action) => {
       }
       return newState
 
-    case actionTypes.GET_NEXT_POPULAR_WORKS:
+    case actionTypes.LOAD_NEXT_POPULAR_WORKS:
       newState.popularWorks = {
         pristine: false,
         contents: [...newState.popularWorks.contents, ...newState.popularWorks.stock],
+        stock: [],
+        nextWorksApi: newState.popularWorks.nextWorksApi
+      }
+      return newState
+
+    case actionTypes.GET_NEXT_POPULAR_WORKS:
+      newState.popularWorks = {
+        pristine: false,
+        contents: newState.popularWorks.contents,
         stock: action.payload.results,
         nextWorksApi: action.payload.next
       }
@@ -94,10 +112,19 @@ export default (state = INITIAL_STATE, action) => {
       }
       return newState
 
-    case actionTypes.GET_NEXT_FAVORITE_WORKS:
+    case actionTypes.LOAD_NEXT_FAVORITE_WORKS:
       newState.favoriteWorks = {
         pristine: false,
         contents: [...newState.favoriteWorks.contents, ...newState.favoriteWorks.stock],
+        stock: [],
+        nextWorksApi: newState.favoriteWorks.nextWorksApi
+      }
+      return newState
+
+    case actionTypes.GET_NEXT_FAVORITE_WORKS:
+      newState.favoriteWorks = {
+        pristine: false,
+        contents: newState.favoriteWorks.contents,
         stock: action.payload.results,
         nextWorksApi: action.payload.next
       }
@@ -124,10 +151,19 @@ export default (state = INITIAL_STATE, action) => {
       }
       return newState
 
-    case actionTypes.GET_NEXT_WORKS_OF_ARTIST:
+    case actionTypes.LOAD_NEXT_WORKS_OF_ARTIST:
       newState.artistWorks = {
         pristine: false,
         contents: [...newState.artistWorks.contents, ...newState.artistWorks.stock],
+        stock: [],
+        nextWorksApi: newState.artistWorks.nextWorksApi
+      }
+      return newState
+
+    case actionTypes.GET_NEXT_WORKS_OF_ARTIST:
+      newState.artistWorks = {
+        pristine: false,
+        contents: newState.artistWorks.contents,
         stock: action.payload.results,
         nextWorksApi: action.payload.next
       }
@@ -145,10 +181,19 @@ export default (state = INITIAL_STATE, action) => {
       }
       return newState
 
-    case actionTypes.GET_NEXT_FILTERED_WORKS:
+    case actionTypes.LOAD_NEXT_FILTERED_WORKS:
       newState.filteredWorks = {
         pristine: false,
         contents: [...newState.filteredWorks.contents, ...newState.filteredWorks.stock],
+        stock: [],
+        nextWorksApi: newState.filteredWorks.nextWorksApi
+      }
+      return newState
+    
+    case actionTypes.GET_NEXT_FILTERED_WORKS:
+      newState.filteredWorks = {
+        pristine: false,
+        contents: newState.filteredWorks.contents,
         stock: action.payload.results,
         nextWorksApi: action.payload.next
       }

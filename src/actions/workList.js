@@ -2,19 +2,24 @@ import Api from '../utils/api'
 
 export const actionTypes = {
   GET_POPULAR_WORKS: 'GET_POPULAR_WORKS',
+  LOAD_NEXT_POPULAR_WORKS: 'LOAD_NEXT_POPULAR_WORKS',
   GET_NEXT_POPULAR_WORKS: 'GET_NEXT_POPULAR_WORKS',
 
   GET_NEW_WORKS: 'GET_NEW_WORKS',
+  LOAD_NEXT_NEW_WORKS: 'LOAD_NEXT_NEW_WORKS',
   GET_NEXT_NEW_WORKS: 'GET_NEXT_NEW_WORKS',
 
   GET_FAVORITE_WORKS: 'GET_FAVORITE_WORKS',
+  LOAD_NEXT_FAVORITE_WORKS: 'LOAD_NEXT_FAVORITE_WORKS',
   GET_NEXT_FAVORITE_WORKS: 'GET_NEXT_FAVORITE_WORKS',
 
   CLEAR_WORKS_OF_ARTIST: 'CLEAR_WORKS_OF_ARTIST',
   GET_WORKS_OF_ARTIST: 'GET_WORKS_OF_AN_ARTIST',
+  LOAD_NEXT_WORKS_OF_ARTIST: 'LOAD_NEXT_WORKS_OF_ARTIST',
   GET_NEXT_WORKS_OF_ARTIST: 'GET_NEXT_WORKS_OF_ARTIST',
 
   GET_FILTERED_WORKS: 'GET_FILTERED_WORKS',
+  LOAD_NEXT_FILTERED_WORKS: 'LOAD_NEXT_FILTERED_WORKS',
   GET_NEXT_FILTERED_WORKS: 'GET_NEXT_FILTERED_WORKS',
 
   GET_PURCHASED_HISTORY: 'GET_PURCHASED_HISTORY'
@@ -32,13 +37,7 @@ export const getPopularWorks = () => dispatch => {
 }
 
 export const getNextPopularWoks = url => dispatch => {
-  if (url === null) {
-    dispatch({
-      type: actionTypes.GET_NEXT_POPULAR_WORKS,
-      payload: { results: [], next: null }
-    })
-    return null
-  }
+  dispatch({ type: actionTypes.LOAD_NEXT_POPULAR_WORKS })
 
   return Api.getNextPageWorks(url)
     .then(res => {
@@ -63,13 +62,7 @@ export const getNewWorks = () => dispatch => {
 }
 
 export const getNextNewWorks = url => dispatch => {
-  if (url === null) {
-    dispatch({
-      type: actionTypes.GET_NEXT_NEW_WORKS,
-      payload: { results: [], next: null }
-    })
-    return null
-  }
+  dispatch({ type: actionTypes.LOAD_NEXT_NEW_WORKS })
 
   return Api.getNextPageWorks(url)
     .then(res => {
@@ -94,13 +87,7 @@ export const getFavoriteWorks = (userId) => dispatch => {
 }
 
 export const getNextFavoriteWorks = url => dispatch => {
-  if (url === null) {
-    dispatch({
-      type: actionTypes.GET_NEXT_FAVORITE_WORKS,
-      payload: { results: [], next: null }
-    })
-    return null
-  }
+  dispatch({ type: actionTypes.LOAD_NEXT_FAVORITE_WORKS })
 
   return Api.getNextPageWorks(url)
     .then(res => dispatch({
@@ -125,13 +112,7 @@ export const getWorksOfAnArtist = (id) => dispatch => {
 }
 
 export const getNextWorksOfAnArtist = url => dispatch => {
-  if (url === null) {
-    dispatch({
-      type: actionTypes.GET_NEXT_WORKS_OF_ARTIST,
-      payload: { results: [], next: null }
-    })
-    return null
-  }
+  dispatch({ type: actionTypes.LOAD_NEXT_WORKS_OF_ARTIST })
 
   return Api.getNextPageWorks(url)
     .then(res => dispatch({
@@ -154,13 +135,7 @@ export const getFilteredWorks = q => dispatch => {
 }
 
 export const getNextFilteredWorks = url => dispatch => {
-  if (url === null) {
-    dispatch({
-      type: actionTypes.GET_NEXT_FILTERED_WORKS,
-      payload: { results: [], next: null }
-    })
-    return null
-  }
+  dispatch({ type: actionTypes.LOAD_NEXT_FILTERED_WORKS })
 
   return Api.getNextPageWorks(url)
     .then(res => dispatch({

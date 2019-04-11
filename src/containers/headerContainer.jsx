@@ -45,7 +45,8 @@ class HeaderContainer extends React.Component {
   componentWillMount() {
     this.props.getGenres()
 
-    if (Object.keys(this.props.loginStatus).length) this.props.getUserDetail(this.props.loginStatus.uuid)
+    if (Object.keys(this.props.loginStatus).length)
+      this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
   }
 
   burgerToggleClicked = () => {
@@ -199,6 +200,6 @@ export default connect(
   dispatch => ({
     getGenres: () => dispatch(getGenres()),
     getFilteredWorks: q => dispatch(getFilteredWorks(q)),
-    getUserDetail: UUID => dispatch(getUserDetail(UUID))
+    getUserDetail: (token, UUID) => dispatch(getUserDetail(token, UUID))
   })
 )(HeaderContainer)

@@ -12,7 +12,10 @@ export default {
   login: (email, password) => axios.post(`${PATH}/api-token-auth/`, { username: email, password }),
 
   // About users
-  getUserDetail: UUID => axios.get(`${PATH}/api/v1/userDetails/${UUID}/`),
+  getUserDetail: (token, UUID) => {
+    const header = setToken(token)
+    return axios.get(`${PATH}/api/v1/userDetails/${UUID}/`, header)
+  },
   updateEmail: (token, UUID, email) => {
     const header = setToken(token)
     return axios.patch(`${PATH}/api/v1/users/${UUID}/`, { email }, header)
@@ -21,10 +24,11 @@ export default {
     const header = setToken(token)
     return axios.patch(`${PATH}/api/v1/users/${UUID}/`, { oldPassword, newPassword }, header)
   },
-  uploadUserIcon: (UUID, icon) => {
+  uploadUserIcon: (token, UUID, icon) => {
+    const header = setToken(token)
     const params = new FormData()
     params.append('icon', icon)
-    return axios.patch(`${PATH}/api/v1/userDetails/${UUID}/`, params)
+    return axios.patch(`${PATH}/api/v1/userDetails/${UUID}/`, params, header)
   },
 
   // About works

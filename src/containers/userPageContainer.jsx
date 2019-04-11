@@ -125,18 +125,20 @@ class UserPageContainer extends React.Component {
     this.iconRef.current.style.backgroundImage = `url(${url})`
   }
 
-  uploadUserIcon = e => {
+  uploadUserIcon = async e => {
     e.preventDefault()
 
     if (this.state.iconImage === null) return
 
-    const err = this.props.uploadUserIcon(this.props.loginStatus.uuid, this.state.iconImage)
+    const err = await this.props.uploadUserIcon(this.props.loginStatus.token, this.props.loginStatus.uuid, this.state.iconImage)
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
 
+    successNotificationBody.title = 'Updated User Icon!'
+    this.notificationSystem.current.addNotification(successNotificationBody)
     this.setState({ iconImage: null })
   }
 
@@ -451,7 +453,7 @@ export default connect(
     getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
     updateEmail: (token, userId, email) => dispatch(updateEmail(token, userId, email)),
     updatePassword: (token, userId, oldPassword, newPassword) => dispatch(updatePassword(token, userId, oldPassword, newPassword)),
-    uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
+    uploadUserIcon: (token, id, icon) => dispatch(uploadUserIcon(token, id, icon)),
     updateBuyerInfo: (token, userId, data) => dispatch(updateBuyerInfo(token, userId, data)),
     updateArtistInfo: (token, userId, data) => dispatch(updateArtistInfo(token, userId, data)),
   })

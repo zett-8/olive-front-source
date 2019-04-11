@@ -17,7 +17,7 @@ const userDetailPrime = props => {
         <button className="w_btn w_btn__15rem" type="button" onClick={props.userIconSelectBtnClicked}>
           Select picture
         </button>
-        <input style={{ display: 'none' }} type="file" ref={props.buttonRef} onChange={props.userIconSelected} />
+        <input style={{ display: 'none' }} type="file" accept="image/*" ref={props.buttonRef} onChange={props.userIconSelected} />
         <button className="b_btn b_btn__10rem" type="submit" onClick={props.upload}>
           Save
         </button>

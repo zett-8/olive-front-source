@@ -7,8 +7,8 @@ export const actionTypes = {
   UPDATE_ARTIST_INFO: 'UPDATE_ARTIST_INFO'
 }
 
-export const getUserDetail = UUID => dispatch => {
-  return Api.getUserDetail(UUID)
+export const getUserDetail = (token, UUID) => dispatch => {
+  return Api.getUserDetail(token, UUID)
     .then(res => {
       dispatch({
         type: actionTypes.GET_USER_DETAIL,
@@ -18,16 +18,18 @@ export const getUserDetail = UUID => dispatch => {
     .catch(res => res)
 }
 
-export const uploadUserIcon = (id, icon) => dispatch => {
-  return Api.uploadUserIcon(id, icon)
-    .then(() => dispatch(getUserDetail(id)))
+export const uploadUserIcon = (token, id, icon) => dispatch => {
+  return Api.uploadUserIcon(token, id, icon)
+    .then(() => {
+      dispatch(getUserDetail(token, id))
+    })
     .catch(res => res)
 }
 
 export const updateBuyerInfo = (token, userId, data) => dispatch => {
   return Api.updateBuyerInfo(token, userId, data)
     .then(() => {
-      dispatch(getUserDetail(userId))
+      dispatch(getUserDetail(token, userId))
       dispatch({
         type: actionTypes.UPDATE_BUYER_INFO,
         payload: null
@@ -39,7 +41,7 @@ export const updateBuyerInfo = (token, userId, data) => dispatch => {
 export const updateArtistInfo = (token, userId, data) => dispatch => {
   return Api.updateArtistInfo(token, userId, data)
     .then(() => {
-      dispatch(getUserDetail(userId))
+      dispatch(getUserDetail(token, userId))
       dispatch({
         type: actionTypes.UPDATE_ARTIST_INFO,
         payload: null

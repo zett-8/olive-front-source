@@ -90,10 +90,12 @@ export const getNextFavoriteWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_FAVORITE_WORKS })
 
   return Api.getNextPageWorks(url)
-    .then(res => dispatch({
-      type: actionTypes.GET_NEXT_FAVORITE_WORKS,
-      payload: res.data
-    }))
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_NEXT_FAVORITE_WORKS,
+        payload: res.data
+      })
+    })
     .catch(res => res)
 }
 
@@ -115,10 +117,12 @@ export const getNextWorksOfAnArtist = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_WORKS_OF_ARTIST })
 
   return Api.getNextPageWorks(url)
-    .then(res => dispatch({
-      type: actionTypes.GET_NEXT_WORKS_OF_ARTIST,
-      payload: res.data
-    }))
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_NEXT_WORKS_OF_ARTIST,
+        payload: res.data
+      })
+    })
     .catch(res => res)
 }
 
@@ -138,10 +142,12 @@ export const getNextFilteredWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_FILTERED_WORKS })
 
   return Api.getNextPageWorks(url)
-    .then(res => dispatch({
-      type: actionTypes.GET_NEXT_FILTERED_WORKS,
-      payload: res.data
-    }))
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_NEXT_FILTERED_WORKS,
+        payload: res.data
+      })
+    })
     .catch(res => res)
 }
 

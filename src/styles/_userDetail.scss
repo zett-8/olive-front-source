@@ -109,6 +109,8 @@
   &__artist {
     @include basic_for_prime_buyer_artist;
 
+    .to-artist-page { margin-bottom: 3rem; }
+
     .searchSelector {
       display: grid;
       grid-template-columns: 1fr;

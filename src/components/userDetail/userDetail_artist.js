@@ -6,7 +6,12 @@ const userDetailArtist = props => {
 
   return (
     <div>
-      {props.readyAsArtist ? null : <p className="mb-3rem">* 作品をアップロードするにはアーティスト情報を登録してください。</p>}
+      {props.readyAsArtist ? (
+        <button className="w_btn w_btn__100 to-artist-page" type="button" onClick={props.goToArtistPage}>
+          Go to my artist page
+        </button>
+      ) : <p className="mb-3rem">* 作品をアップロードするにはアーティスト情報を登録してください。</p>
+      }
 
       <p className="typ_form_label">* Artist name</p>
       <input
@@ -118,6 +123,7 @@ const userDetailArtist = props => {
 }
 
 userDetailArtist.propTypes = {
+  goToArtistPage: PropTypes.func.isRequired,
   readyAsArtist: PropTypes.bool.isRequired,
   artistFormChanged: PropTypes.func.isRequired,
   updateArtistInfo: PropTypes.func.isRequired,

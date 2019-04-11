@@ -226,6 +226,8 @@ class UserPageContainer extends React.Component {
 
   artistFormChanged = e => this.setState({ [e.target.name]: e.target.value })
 
+  goToArtistPage = () => this.props.history.push(`/artist/${this.props.userDetail.contents.id}/`)
+
   searchBanks = async e => {
     e.preventDefault()
 
@@ -373,6 +375,7 @@ class UserPageContainer extends React.Component {
         return (
           <div className="userDetail__artist">
             <UserDetailArtist
+              goToArtistPage={this.goToArtistPage}
               readyAsArtist={this.props.userDetail.contents.ready_as_artist}
               artistName={this.state.artistName}
               profile={this.state.profile}

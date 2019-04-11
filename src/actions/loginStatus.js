@@ -37,8 +37,8 @@ export const logout = () => dispatch => {
   })
 }
 
-export const updateEmail = (userId, email) => dispatch => {
-  return Api.updateEmail(userId, email)
+export const updateEmail = (token, userId, email) => dispatch => {
+  return Api.updateEmail(token, userId, email)
     .then(() => {
       alert('メールアドレスを変更しました。\n新しいメールアドレスでもう一度ログインしてください')
       dispatch(logout())
@@ -46,8 +46,8 @@ export const updateEmail = (userId, email) => dispatch => {
     .catch(res => res)
 }
 
-export const updatePassword = (userId, oldPassword, newPassword) => () => {
-  return Api.updatePassword(userId, oldPassword, newPassword)
+export const updatePassword = (token, userId, oldPassword, newPassword) => () => {
+  return Api.updatePassword(token, userId, oldPassword, newPassword)
     .then(() => null)
     .catch(res => res)
 }

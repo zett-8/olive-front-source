@@ -151,7 +151,7 @@ class UserPageContainer extends React.Component {
       return null
     }
 
-    const err = await this.props.updateEmail(this.props.loginStatus.uuid, this.state.email)
+    const err = await this.props.updateEmail(this.props.loginStatus.token, this.props.loginStatus.uuid, this.state.email)
 
     if (err) this.notificationSystem.current.addNotification(errorNotificationBody)
   }
@@ -166,6 +166,7 @@ class UserPageContainer extends React.Component {
     }
 
     const err = await this.props.updatePassword(
+      this.props.loginStatus.token,
       this.props.loginStatus.uuid,
       this.state.oldPassword,
       this.state.newPassword
@@ -206,7 +207,7 @@ class UserPageContainer extends React.Component {
       phone_number: this.state.phoneNumber,
     }
 
-    const err = await this.props.updateBuyerInfo(this.props.loginStatus.uuid, data)
+    const err = await this.props.updateBuyerInfo(this.props.loginStatus.token, this.props.loginStatus.uuid, data)
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -316,7 +317,7 @@ class UserPageContainer extends React.Component {
       bank_account_name: this.state.bankAccountName,
     }
 
-    const err = await this.props.updateArtistInfo(this.props.loginStatus.uuid, data)
+    const err = await this.props.updateArtistInfo(this.props.loginStatus.token, this.props.loginStatus.uuid, data)
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -448,11 +449,11 @@ export default connect(
   }),
   dispatch => ({
     getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
-    updateEmail: (userId, email) => dispatch(updateEmail(userId, email)),
-    updatePassword: (userId, oldPassword, newPassword) => dispatch(updatePassword(userId, oldPassword, newPassword)),
+    updateEmail: (token, userId, email) => dispatch(updateEmail(token, userId, email)),
+    updatePassword: (token, userId, oldPassword, newPassword) => dispatch(updatePassword(token, userId, oldPassword, newPassword)),
     uploadUserIcon: (id, icon) => dispatch(uploadUserIcon(id, icon)),
-    updateBuyerInfo: (userId, data) => dispatch(updateBuyerInfo(userId, data)),
-    updateArtistInfo: (userId, data) => dispatch(updateArtistInfo(userId, data)),
+    updateBuyerInfo: (token, userId, data) => dispatch(updateBuyerInfo(token, userId, data)),
+    updateArtistInfo: (token, userId, data) => dispatch(updateArtistInfo(token, userId, data)),
   })
 )(UserPageContainer)
 

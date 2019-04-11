@@ -74,7 +74,12 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   purchaseWithBankTransfer = async () => {
-    const err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '2')
+    const err = await this.props.workWasBought(
+      this.props.loginStatus.token,
+      this.props.loginStatus.uuid,
+      this.props.workDetail.contents.id,
+      '2'
+    )
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -149,7 +154,7 @@ export default connect(
   }),
   dispatch => ({
     clearWorkDetail: () => dispatch(clearWorkDetail()),
-    workWasBought: (buyerUUID, workId, status) => dispatch(workWasBought(buyerUUID, workId, status)),
+    workWasBought: (token, buyerUUID, workId, status) => dispatch(workWasBought(token, buyerUUID, workId, status)),
     purchaseWork: (description, token, price, receipt) => dispatch(purchaseWork(description, token, price, receipt)),
     toggleFavorite: (workId, userId) => dispatch(toggleFavorite(workId, userId)),
     getWorkDetail: id => dispatch(getWorkDetail(id)),

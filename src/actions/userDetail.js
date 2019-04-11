@@ -24,8 +24,8 @@ export const uploadUserIcon = (id, icon) => dispatch => {
     .catch(res => res)
 }
 
-export const updateBuyerInfo = (userId, data) => dispatch => {
-  return Api.updateBuyerInfo(userId, data)
+export const updateBuyerInfo = (token, userId, data) => dispatch => {
+  return Api.updateBuyerInfo(token, userId, data)
     .then(() => {
       dispatch(getUserDetail(userId))
       dispatch({
@@ -36,8 +36,8 @@ export const updateBuyerInfo = (userId, data) => dispatch => {
     .catch(res => res)
 }
 
-export const updateArtistInfo = (userId, data) => dispatch => {
-  return Api.updateArtistInfo(userId, data)
+export const updateArtistInfo = (token, userId, data) => dispatch => {
+  return Api.updateArtistInfo(token, userId, data)
     .then(() => {
       dispatch(getUserDetail(userId))
       dispatch({

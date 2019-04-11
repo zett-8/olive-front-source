@@ -179,7 +179,7 @@ class WorkEditAndUpload extends React.Component {
       this.state.displaceableImages.forEach(num => work.append('image' + num, this.state.work['image' + num]))
     }
 
-    const err = await this.props.updateWork(this.props.workDetail.contents.id, work)
+    const err = await this.props.updateWork(this.props.loginStatus.token, this.props.workDetail.contents.id, work)
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -205,7 +205,7 @@ class WorkEditAndUpload extends React.Component {
     work.append('artist', this.props.loginStatus.user_id)
     Object.keys(this.state.work).forEach(key => work.append(key, this.state.work[key]))
 
-    const err = await this.props.uploadWork(work)
+    const err = await this.props.uploadWork(this.props.loginStatus.token, work)
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -252,8 +252,8 @@ export default connect(
     workDetail: state.workDetail
   }),
   dispatch => ({
-    uploadWork: work => dispatch(uploadWork(work)),
-    updateWork: (id, work) => dispatch(updateWork(id, work)),
+    uploadWork: (token, work) => dispatch(uploadWork(token, work)),
+    updateWork: (token, id, work) => dispatch(updateWork(token, id, work)),
     getWorkDetail: id => dispatch(getWorkDetail(id)),
     clearWorkDetail: () => dispatch(clearWorkDetail())
   })

@@ -24,22 +24,22 @@ export const getWorkDetail = id => dispatch => {
     .catch(res => res)
 }
 
-export const uploadWork = work => () => {
-  return Api.uploadWork(work)
+export const uploadWork = (token, work) => () => {
+  return Api.uploadWork(token, work)
     .then(() => null)
     .catch(res => res)
 }
 
-export const updateWork = (id, work) => dispatch => {
-  return Api.updateWork(id, work)
+export const updateWork = (token, id, work) => dispatch => {
+  return Api.updateWork(token, id, work)
     .then(() => {
       dispatch(getWorkDetail(id))
     })
     .catch(res => res)
 }
 
-export const changeWorkStatus = (workId, status) => dispatch => {
-  return Api.changeWorkStatus(workId, status)
+export const changeWorkStatus = (token, workId, status) => dispatch => {
+  return Api.changeWorkStatus(token, workId, status)
     .then(() => {
       dispatch(getWorkDetail(workId))
     })
@@ -52,8 +52,8 @@ export const purchaseWork = (description, token, price, receipt) => () => {
     .catch(res => res)
 }
 
-export const workWasBought = (buyerUUID, workId, status) => dispatch => {
-  return Api.workWasBought(buyerUUID, workId, status)
+export const workWasBought = (token, buyerUUID, workId, status) => dispatch => {
+  return Api.workWasBought(token, buyerUUID, workId, status)
     .then(() => {
       dispatch(getWorkDetail(workId))
     })

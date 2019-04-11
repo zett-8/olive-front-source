@@ -46,9 +46,9 @@ class DealPageContainer extends React.Component {
     this.setState({ role: work.buyer.id === self.user_id ? 'buyer' : 'artist' })
   }
 
-  notifyPayment = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 3)
-  notifyShipment = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 4)
-  notifyReception = () => this.props.changeWorkStatus(this.props.workDetail.contents.id, 5)
+  notifyPayment = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 3)
+  notifyShipment = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 4)
+  notifyReception = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 5)
 
   messageTyped = e => this.setState({ message: e.target.value })
 
@@ -119,7 +119,7 @@ export default connect(
   dispatch => ({
     getWorkDetail: id => dispatch(getWorkDetail(id)),
     getBuyerInfo: (token, buyerId) => dispatch(getBuyerInfo(token, buyerId)),
-    changeWorkStatus: (workId, status) => dispatch(changeWorkStatus(workId, status)),
+    changeWorkStatus: (token, workId, status) => dispatch(changeWorkStatus(token, workId, status)),
     clearMessage: () => dispatch(clearMessage()),
     getMessages: workId => dispatch(getMessages(workId)),
     sendMessage: (workId, sender, receiver, body) => dispatch(sendMessage(workId, sender, receiver, body)),

@@ -20,8 +20,8 @@ export const STRIPE_API_KEY = stripeApiKey[ENV]
 
 export const BANK_INFO = () => (
   <div className="bankInfo">
-    <p>銀行 001 支店 400</p>
-    <p>普) 12345678</p>
-    <p>カ)ヌーン</p>
+    <p>三菱UFJ銀行 (0005) 渋谷支店 (135)</p>
+    <p>普) 1940647</p>
+    <p>カブシキガイシャ ヌーン</p>
   </div>
 )

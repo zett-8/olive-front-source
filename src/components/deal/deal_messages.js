@@ -32,8 +32,8 @@ const dealMessages = props => {
         })}
       </div>
       <form onSubmit={props.sendMessage}>
-        <input
-          className="input input__message"
+        <textarea
+          className="text_input deal-message-textArea"
           placeholder="Message"
           value={props.inputMessage}
           onChange={props.messageTyped}

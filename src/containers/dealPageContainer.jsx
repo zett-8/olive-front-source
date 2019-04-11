@@ -25,20 +25,22 @@ class DealPageContainer extends React.Component {
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     await this.props.clearMessage()
 
-    const { workId, clientId, myUUID } = this.props.match.params
-    const self = this.props.loginStatus
-
-    // kick out stranger
-    if (myUUID !== self.uuid) this.props.history.push('/')
-
+    const { workId } = this.props.match.params
     const err = await this.props.getWorkDetail(workId)
+
+    const self = this.props.loginStatus
     const work = this.props.workDetail.contents
 
-    if (!err && (work.buyer.id === parseInt(clientId, 10) || work.artist.id === parseInt(clientId, 10)))
-      this.setState({ verified: true })
+    // kick out stranger
+    if (work.artist.id !== self.user_id && work.buyer.id !== self.user_id) {
+      this.props.history.push('/')
+      return null
+    }
+
+    this.setState({ verified: true })
 
     this.props.getMessages(this.props.workDetail.contents.id)
     this.props.getBuyerInfo(this.props.loginStatus.token, this.props.workDetail.contents.buyer.id)

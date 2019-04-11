@@ -38,7 +38,7 @@ export default () => (
             <Route exact path="/artist/:id" component={ArtistContainer} />
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
             <Route exact path="/work/:id/edit" render={props => <WorkEditAndUploadContainer {...props} edit={true} />} />
-            <Route exact path="/work/:workId/deal/:myUUID/:clientId" component={DealContainer} />
+            <Route exact path="/work/:workId/deal" component={DealContainer} />
             <Route exact path="/filteredWorks/:info" component={FilteredWorksContainer} />
             <Route exact path="/user" component={UserContainer} />
             <Route exact path="/logout" component={LogoutContainer} />

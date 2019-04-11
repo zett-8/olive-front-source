@@ -88,6 +88,8 @@ class WorkDetailPageContainer extends React.Component {
 
     this.closeModal()
     this.setState({ bought: true })
+
+    this.props.history.push(`/work/${this.props.workDetail.contents.id}/deal`)
   }
 
   purchaseWithCredit = async () => {
@@ -103,14 +105,22 @@ class WorkDetailPageContainer extends React.Component {
       return null
     }
 
-    err = await this.props.workWasBought(this.props.loginStatus.uuid, this.props.workDetail.contents.id, '3')
+    err = await this.props.workWasBought(
+      this.props.loginStatus.token,
+      this.props.loginStatus.uuid,
+      this.props.workDetail.contents.id,
+      '3'
+    )
     if (err) {
       wentWrongNotificationBody.children = (<div><p>購入は完了しましたが、更新に失敗しました。</p><br /><p>お手数ですが、お問い合わせをお願いします。</p></div>)
       this.notificationSystem.current.addNotification(wentWrongNotificationBody)
+      return null
     }
 
     this.closeModal()
     this.setState({ bought: true })
+
+    this.props.history.push(`/work/${this.props.workDetail.contents.id}/deal`)
   }
 
   changeMainImage = url => (this.mainImageRef.current.style.backgroundImage = `url(${url})`)

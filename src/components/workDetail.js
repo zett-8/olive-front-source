@@ -8,11 +8,7 @@ import HeartIMG from 'react-svg-loader!../assets/heart.svg' // eslint-disable-li
 const workDetail = props => {
   const soldOutButton = () => (
     props.bought ? (
-      <Link
-        to={`/work/${props.detail.id}/deal/${props.self.UUID}/${
-          props.detail.artist.id === props.self.user_id ? props.detail.buyer.id : props.detail.artist.id
-        }`}
-      >
+      <Link to={`/work/${props.detail.id}/deal/`}>
         <p className="b_btn message">
           Message
         </p>

@@ -1,0 +1,14 @@
+.landing {
+
+  &__olive-tree {
+    display: grid;
+    height: 66vh;
+    text-align: center;
+    min-height: max-content;
+    &__img {
+      align-self: center;
+      margin: 0 auto;
+      width: 80vw;
+    }
+  }
+}

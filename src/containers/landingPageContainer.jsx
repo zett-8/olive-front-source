@@ -6,9 +6,11 @@ import Olive from '../assets/olive.jpg'
 class LandingPageContainer extends React.Component {
   render() {
     return (
-      <React.Fragment>
-        <p style={{ textAlign: 'center'}}><img src={Olive} alt="" style={{ margin: '0 auto', width: '80vw'}} /></p>
-      </React.Fragment>
+      <div className="landing">
+        <p className="landing__olive-tree">
+          <img className="landing__olive-tree__img" src={Olive} alt="" />
+        </p>
+      </div>
     )
   }
 }

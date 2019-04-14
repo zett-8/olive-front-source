@@ -13,7 +13,7 @@ import UserDetailArtist from '../components/userDetail/userDetail_artist'
 import WorkList from '../components/workList'
 
 import { getPurchasedHistory } from '../actions/workList'
-import { uploadUserIcon, updateBuyerInfo, updateArtistInfo } from '../actions/userDetail'
+import { uploadUserIcon, updateBuyerInfo, updateArtistInfo, getUserDetail } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
 import {
   errorNotificationBody,
@@ -74,6 +74,10 @@ class UserPageContainer extends React.Component {
   async componentWillMount() {
     this.setCurrentUserInfo()
     this.props.getPurchasedHistory(this.props.loginStatus.user_id)
+  }
+
+  componentDidMount() {
+    if (this.props.userDetail.pristine) this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
   }
 
   componentDidUpdate(prevProps) {
@@ -454,6 +458,7 @@ export default connect(
   }),
   dispatch => ({
     getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
+    getUserDetail: (token, uuid) => dispatch(getUserDetail(token, uuid)),
     updateEmail: (token, userId, email) => dispatch(updateEmail(token, userId, email)),
     updatePassword: (token, userId, oldPassword, newPassword) => dispatch(updatePassword(token, userId, oldPassword, newPassword)),
     uploadUserIcon: (token, id, icon) => dispatch(uploadUserIcon(token, id, icon)),

@@ -28,6 +28,10 @@ class LoginPageContainer extends React.Component {
     if (Object.keys(this.props.loginStatus).length) this.props.history.push(`/user/${this.props.loginStatus.uuid}`)
   }
 
+  componentDidMount() {
+    if (this.props.guest) this.setState({ login: false, invitation: this.props.match.params.code })
+  }
+
   switch = () => {
     this.setState({ login: !this.state.login })
   }
@@ -128,6 +132,7 @@ class LoginPageContainer extends React.Component {
         ) : (
           <SignUpForm
             signUp={this.signUp}
+            guest={this.props.guest || false}
             handleInputChanged={this.handleInputChanged}
             email={this.state.email}
             password={this.state.password}

@@ -31,6 +31,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={LandingPageContainer} />
             <Route exact path="/login" component={LoginPageContainer} />
+            <Route exact path='/sign-up/:code/' component={props => <LoginPageContainer {...props} guest={true} />} />
             <Route exact path="/new" component={NewPageContainer} />
             <Route exact path="/popular" component={PopularContainer} />
             <Route exact path="/favorites" component={FavoriteContainer} />

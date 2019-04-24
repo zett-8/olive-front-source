@@ -61,21 +61,28 @@
         }
       }
 
-      &__phaseLine3 {
+      &__phaseLine3, &__phaseLine4 {
+        @include phaseLineBase;
+        .circle1, .line1, .line2 {
+          background-color: crimson;
+        }
+      }
+
+      &__phaseLine5 {
         @include phaseLineBase;
         .circle1, .circle2, .line1, .line2, .line3 {
           background-color: crimson;
         }
       }
 
-      &__phaseLine4 {
+      &__phaseLine6 {
         @include phaseLineBase;
         .circle1, .circle2, .circle3, .line1, .line2, .line3, .line4, .line5 {
           background-color: crimson;
         }
       }
 
-      &__phaseLine5 {
+      &__phaseLine7 {
         @include phaseLineBase;
         .line, .circle {
           background-color: crimson;

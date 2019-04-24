@@ -109,7 +109,7 @@ class WorkDetailPageContainer extends React.Component {
       this.props.loginStatus.token,
       this.props.loginStatus.uuid,
       this.props.workDetail.contents.id,
-      '3'
+      '4'
     )
     if (err) {
       wentWrongNotificationBody.children = (<div><p>購入は完了しましたが、更新に失敗しました。</p><br /><p>お手数ですが、お問い合わせをお願いします。</p></div>)

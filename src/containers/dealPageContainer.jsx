@@ -49,8 +49,8 @@ class DealPageContainer extends React.Component {
   }
 
   notifyPayment = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 3)
-  notifyShipment = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 4)
-  notifyReception = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 5)
+  notifyShipment = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 6)
+  notifyReception = () => this.props.changeWorkStatus(this.props.loginStatus.token, this.props.workDetail.contents.id, 7)
 
   messageTyped = e => this.setState({ message: e.target.value })
 

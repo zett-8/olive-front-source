@@ -23,13 +23,35 @@ const dealProgress = props => {
           <React.Fragment>
             <p className="deal__progress__message__main">
               <span className="circle" />
+              お支払いを確認しています。
+            </p>
+            <span>現在お支払いの確認を行っております。しばらくお待ちください。</span>
+          </React.Fragment>
+        )
+
+      case 'buyer-phase-4':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              お支払いを確認しています。
+            </p>
+            <span>現在お支払いの確認を行っております。しばらくお待ちください。</span>
+          </React.Fragment>
+        )
+
+      case 'buyer-phase-5':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
               発送をお待ちください
             </p>
             <span>支払を完了しました。アーティストの発送をお待ちください</span>
           </React.Fragment>
         )
 
-      case 'buyer-phase-4':
+      case 'buyer-phase-6':
         return (
           <React.Fragment>
             <p className="deal__progress__message__main">
@@ -40,12 +62,15 @@ const dealProgress = props => {
           </React.Fragment>
         )
 
-      case 'buyer-phase-5':
+      case 'buyer-phase-7':
         return (
-          <p className="deal__progress__message__main">
-            <span className="circle" />
-            取引終了です
-          </p>
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              取引終了です
+            </p>
+            <span>May the art be with you :)</span>
+          </React.Fragment>
         )
 
       case 'artist-phase-2':
@@ -64,13 +89,35 @@ const dealProgress = props => {
           <React.Fragment>
             <p className="deal__progress__message__main">
               <span className="circle" />
+              支払いを確認しています。
+            </p>
+            <span>現在支払いの確認を行っております。しばらくお待ちください。</span>
+          </React.Fragment>
+        )
+
+      case 'artist-phase-4':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              支払いを確認しています。
+            </p>
+            <span>現在支払いの確認を行っております。しばらくお待ちください。</span>
+          </React.Fragment>
+        )
+
+      case 'artist-phase-5':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
               支払を確認しました。発送してください
             </p>
             <span>支払確定しました。購入者の住所を確認して作品を発送してください。</span>
           </React.Fragment>
         )
 
-      case 'artist-phase-4':
+      case 'artist-phase-6':
         return (
           <React.Fragment>
             <p className="deal__progress__message__main">
@@ -81,12 +128,15 @@ const dealProgress = props => {
           </React.Fragment>
         )
 
-      case 'artist-phase-5':
+      case 'artist-phase-7':
         return (
-          <p className="deal__progress__message__main">
-            <span className="circle" />
-            取引終了です
-          </p>
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              取引終了です
+            </p>
+            <span>次の作品をお待ちしてます。</span>
+          </React.Fragment>
         )
 
       default:
@@ -103,14 +153,14 @@ const dealProgress = props => {
           </button>
         )
 
-      case 'buyer-phase-4':
+      case 'buyer-phase-6':
         return (
           <button className="b_btn b_btn__30rem" type="button" onClick={props.notifyReception}>
             受取連絡をする
           </button>
         )
 
-      case 'artist-phase-3':
+      case 'artist-phase-5':
         return (
           <button className="b_btn b_btn__30rem" type="button" onClick={props.notifyShipment}>
             発送連絡をする

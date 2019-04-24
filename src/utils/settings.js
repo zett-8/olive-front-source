@@ -11,7 +11,7 @@ const PATHS = {
 const stripeApiKey = {
   local: 'pk_test_ReCanV8j6r2cNQgScUgSfTJV00GG2wEOWg',
   development: 'pk_test_ReCanV8j6r2cNQgScUgSfTJV00GG2wEOWg',
-  production: ''
+  production: 'pk_live_OHA1RGAlHpkVGFelM5ctt0a0003yTibExk'
 }
 
 export const PATH = PATHS[ENV]

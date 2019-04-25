@@ -73,6 +73,17 @@ const dealProgress = props => {
           </React.Fragment>
         )
 
+      case 'buyer-phase-8':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              取引終了です
+            </p>
+            <span>May the art be with you :)</span>
+          </React.Fragment>
+        )
+
       case 'artist-phase-2':
         return (
           <React.Fragment>
@@ -129,6 +140,17 @@ const dealProgress = props => {
         )
 
       case 'artist-phase-7':
+        return (
+          <React.Fragment>
+            <p className="deal__progress__message__main">
+              <span className="circle" />
+              取引終了です
+            </p>
+            <span>次の作品をお待ちしてます。</span>
+          </React.Fragment>
+        )
+
+      case 'artist-phase-8':
         return (
           <React.Fragment>
             <p className="deal__progress__message__main">

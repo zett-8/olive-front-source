@@ -48,6 +48,10 @@ export default {
     const header = setToken(token)
     return axios.patch(`${PATH}/api/v1/works/${workId}/`, { status }, header)
   },
+  deleteWork: (token, workId) => {
+    const header = setToken(token)
+    return axios.delete(`${PATH}/api/v1/works/${workId}/`, header)
+  },
   purchaseWork: (description, tokenId, price, receipt) => axios.get(`${PATH}/api/v1/purchase-work/${description}/${tokenId}/${price}/${receipt}/`),
   getNextPageWorks: url => axios.get(url),
   getNewWorks: () => axios.get(`${PATH}/api/v1/works/?new=true`),

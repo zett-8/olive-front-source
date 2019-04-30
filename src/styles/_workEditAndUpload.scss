@@ -59,5 +59,10 @@
     }
 
     > button { justify-self: right; }
+
+    > div.editFormButtons {
+      justify-self: right;
+      :first-child { margin-right: 2rem; }
+    }
   }
 }

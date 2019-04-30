@@ -104,6 +104,19 @@ a {
   }
 }
 
+.r_btn {
+  background-color: white;
+  color: crimson;
+  border: crimson 0.05rem solid;
+  height: 3rem;
+  border-radius: 5rem;
+  letter-spacing: 0.2rem;
+  font-family: $font-button;
+  font-weight: 200;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
 .input {
   border: none;
   border-bottom: 0.2px black solid;

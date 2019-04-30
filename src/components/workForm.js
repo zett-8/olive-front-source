@@ -235,9 +235,14 @@ const userDetailWorkUpload = props => {
           onChange={props.workFormChanged}
         />
         {props.edit ? (
-          <button className="b_btn b_btn__13rem" type="button" onClick={props.update}>
-            Save
-          </button>
+          <div className="editFormButtons">
+            <button className="b_btn b_btn__13rem" type="button" onClick={props.update}>
+              Save
+            </button>
+            <button className="r_btn b_btn__13rem" type="button" onClick={props.delete}>
+              Delete
+            </button>
+          </div>
         ) : (
           <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
             Upload!
@@ -252,6 +257,7 @@ const userDetailWorkUpload = props => {
 userDetailWorkUpload.propTypes = {
   upload: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
+  delete: PropTypes.func.isRequired,
   workFormChanged: PropTypes.func.isRequired,
   workImageSelectBtnClicked: PropTypes.func.isRequired,
   workImageSelected: PropTypes.func.isRequired,

@@ -6,7 +6,7 @@ import UserDetailWorkUpload from '../components/workForm'
 
 import { workFormValidation } from '../utils/Validator'
 import {errorNotificationBody, notYetNotificationBody, successNotificationBody} from '../utils/notification'
-import { uploadWork, updateWork, getWorkDetail, clearWorkDetail } from '../actions/workDetail'
+import { uploadWork, updateWork, deleteWork, getWorkDetail, clearWorkDetail } from '../actions/workDetail'
 
 import One from '../assets/1.jpg'
 import Two from '../assets/2.jpg'
@@ -218,6 +218,17 @@ class WorkEditAndUpload extends React.Component {
     this.resetWorkForm()
   }
 
+  deleteWork = async () => {
+    const err = await this.props.deleteWork(this.props.loginStatus.token, this.props.workDetail.contents.id)
+
+    if (err) {
+      this.notificationSystem.current.addNotification(errorNotificationBody)
+      return null
+    }
+
+    this.props.history.push(`/artist/${this.props.loginStatus.user_id}/`)
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -226,6 +237,7 @@ class WorkEditAndUpload extends React.Component {
           <UserDetailWorkUpload
             upload={this.uploadWork}
             update={this.updateWork}
+            delete={this.deleteWork}
             workImageSelectBtnClicked={this.workImageSelectBtnClicked}
             workImageSelected={this.workImageSelected}
             workFormChanged={this.workFormChanged}
@@ -254,6 +266,7 @@ export default connect(
   dispatch => ({
     uploadWork: (token, work) => dispatch(uploadWork(token, work)),
     updateWork: (token, id, work) => dispatch(updateWork(token, id, work)),
+    deleteWork: (token, workId) => dispatch(deleteWork(token, workId)),
     getWorkDetail: id => dispatch(getWorkDetail(id)),
     clearWorkDetail: () => dispatch(clearWorkDetail())
   })

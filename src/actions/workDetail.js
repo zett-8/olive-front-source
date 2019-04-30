@@ -30,6 +30,12 @@ export const uploadWork = (token, work) => () => {
     .catch(res => res)
 }
 
+export const deleteWork = (token, workId) => () => {
+  return Api.deleteWork(token, workId)
+    .then(() => null)
+    .catch(res => res)
+}
+
 export const updateWork = (token, id, work) => dispatch => {
   return Api.updateWork(token, id, work)
     .then(() => {

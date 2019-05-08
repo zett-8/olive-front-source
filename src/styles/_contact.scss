@@ -1,0 +1,14 @@
+.contactForm {
+  display: grid;
+  grid-template-columns: minmax(30rem, 40%);
+
+  justify-content: center;
+
+  &__label { margin-top: 3rem; margin-bottom: 1rem; }
+
+  &__input { margin-top: -1rem}
+
+  &__textArea { height: 20rem; }
+
+  &__button { justify-self: right; margin-top: 2rem; }
+}

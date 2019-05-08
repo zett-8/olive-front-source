@@ -2,8 +2,8 @@ import React from 'react'
 import RegistrationDone from '../components/message/registration_done'
 import RegistrationFail from '../components/message/registration_fail'
 import RegistrationError from '../components/message/registration_error'
-
 import SentEmail from '../components/message/sent-email'
+import Contact from '../components/message/contact'
 
 class Message extends React.Component {
   componentWillMount() {
@@ -23,6 +23,9 @@ class Message extends React.Component {
 
       case 'sent-email':
         return <SentEmail />
+
+      case 'contact':
+        return <Contact history={this.props.history} />
 
       default:
         return null

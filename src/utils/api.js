@@ -52,6 +52,7 @@ export default {
     const header = setToken(token)
     return axios.delete(`${PATH}/api/v1/works/${workId}/`, header)
   },
+  sendContact: formData => axios.post(`${PATH}/api/v1/contact/`, formData),
   purchaseWork: (description, tokenId, price, receipt) => axios.get(`${PATH}/api/v1/purchase-work/${description}/${tokenId}/${price}/${receipt}/`),
   getNextPageWorks: url => axios.get(url),
   getNewWorks: () => axios.get(`${PATH}/api/v1/works/?new=true`),

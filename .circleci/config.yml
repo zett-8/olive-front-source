@@ -72,6 +72,55 @@ jobs:
               "text": "Olive FRONT(DEV) was updated !!"
             }'
 
+  deploy_prod:
+        executor: default_executor
+        steps:
+        - checkout
+        - setup_remote_docker
+
+        - run: npm install
+        - run:
+            name: build prod
+            command: |
+              npm run build:prod
+
+        - run:
+            name: install python
+            command: |
+              apt-get update && apt-get install -y python3
+        - run: apt-get -y install python3-dev
+
+        - run:
+            name: install pip
+            command: |
+              curl -O https://bootstrap.pypa.io/get-pip.py
+        - run: python3 get-pip.py
+        - run: pip install --upgrade pip
+
+        - run: pip install awscli
+        - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile olive-IAM
+        - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile olive-IAM
+        - run: aws configure set region $DEFAULT_REGION_NAME --profile olive-IAM
+
+        - run:
+            name: delete existing js files
+            command: |
+              aws s3 rm s3://olive-gallery.com --exclude '*' --include '*.js' --include '*.js.map' --recursive
+        - run:
+            name: deploy to aws s3
+            command: |
+              aws s3 sync dist s3://olive-gallery.com/
+
+        - run:
+            name: notify to slack
+            command: |
+              curl -X POST \
+              $SLACK_WEBHOOK_URL \
+              -H 'content-type: application/json' \
+              -d '{
+                "text": "Olive FRONT(PROD) was updated !!"
+              }'
+
 workflows:
   version: 2
   build_test_and_deploy:
@@ -87,4 +136,10 @@ workflows:
           filters:
             branches:
               only: /^dev/
+
+      - deploy_prod:
+          context: olive
+          filters:
+            branches:
+              only: /^master/
 

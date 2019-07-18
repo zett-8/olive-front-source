@@ -20,6 +20,8 @@
 
   &__progress {
 
+    text-align: center;
+
     &__message {
       width: 90%;
       background-color: #eeeeee;
@@ -102,7 +104,7 @@
       }
 
     }
-    button { display: grid; margin: 4rem auto 0 auto;}
+    button { margin: 4rem auto 0 auto;}
   }
 
   &__info {

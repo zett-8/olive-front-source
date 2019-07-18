@@ -72,7 +72,7 @@ const filterModalWindow = props => {
             </label>
 
             <div className="searchFilterModal__first_row__sell radio-btn">
-              <input id="onSellOnly" type="checkbox" name="excludeSoldWorks" value={props.excludeSoldWorks} onChange={props.filterChanged} />
+              <input id="onSellOnly" type="checkbox" name="excludeSoldWorks" value={!props.excludeSoldWorks} checked={props.excludeSoldWorks} onChange={props.filterChanged} />
               <label htmlFor="onSellOnly">In Stock</label> {/* eslint-disable-line */}
             </div>
           </div>

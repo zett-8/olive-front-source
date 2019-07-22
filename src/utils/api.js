@@ -56,6 +56,7 @@ export default {
   purchaseWork: (description, tokenId, price, receipt) => axios.get(`${PATH}/api/v1/purchase-work/${description}/${tokenId}/${price}/${receipt}/`),
   getNextPageWorks: url => axios.get(url),
   getNewWorks: () => axios.get(`${PATH}/api/v1/works/?new=true`),
+  getRecommendWorks: () => axios.get(`${PATH}/api/v1/works/?recommend=true`),
   getPopularWorks: () => axios.get(`${PATH}/api/v1/works/?popular=true`),
   getFilteredWorks: q => axios.get(`${PATH}/api/v1/filteredWorks/?${q}`),
   getFavoriteWorks: userId => axios.get(`${PATH}/api/v1/works/?favoritesOf=${userId}`),

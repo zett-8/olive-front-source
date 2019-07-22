@@ -1,6 +1,10 @@
 import Api from '../utils/api'
 
 export const actionTypes = {
+  GET_RECOMMEND_WORKS: 'GET_RECOMMEND_WORKS',
+  LOAD_NEXT_RECOMMEND_WORKS: 'LOAD_NEXT_RECOMMEND_WORKS',
+  GET_NEXT_RECOMMEND_WORKS: 'GET_NEXT_RECOMMEND_WORKS',
+
   GET_POPULAR_WORKS: 'GET_POPULAR_WORKS',
   LOAD_NEXT_POPULAR_WORKS: 'LOAD_NEXT_POPULAR_WORKS',
   GET_NEXT_POPULAR_WORKS: 'GET_NEXT_POPULAR_WORKS',
@@ -23,6 +27,30 @@ export const actionTypes = {
   GET_NEXT_FILTERED_WORKS: 'GET_NEXT_FILTERED_WORKS',
 
   GET_PURCHASED_HISTORY: 'GET_PURCHASED_HISTORY'
+}
+
+export const getRecommendWorks = () => dispatch => {
+  return Api.getRecommendWorks()
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_RECOMMEND_WORKS,
+        payload: res.data
+      })
+    })
+    .catch(res => res)
+}
+
+export const getNextRecommendWorks = url => dispatch => {
+  dispatch({ type: actionTypes.LOAD_NEXT_RECOMMEND_WORKS })
+
+  return Api.getNextPageWorks(url)
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_NEXT_RECOMMEND_WORKS,
+        payload: res.data
+      })
+    })
+    .catch(res => res)
 }
 
 export const getPopularWorks = () => dispatch => {

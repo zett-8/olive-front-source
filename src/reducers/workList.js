@@ -1,6 +1,12 @@
 import { actionTypes } from '../actions/workList'
 
 const INITIAL_STATE = {
+  recommendWorks: {
+    pristine: true,
+    contents: [],
+    stock: [],
+    nextWorksApi: ''
+  },
   popularWorks: {
     pristine: true,
     contents: [],
@@ -41,6 +47,36 @@ export default (state = INITIAL_STATE, action) => {
   const newState = JSON.parse(JSON.stringify(state))
 
   switch (action.type) {
+    // ========================
+    // ===== New Works
+    case actionTypes.GET_RECOMMEND_WORKS:
+      newState.recommendWorks = {
+        pristine: false,
+        contents: action.payload.results,
+        stock: [],
+        nextWorksApi: action.payload.next
+      }
+      return newState
+
+    case actionTypes.LOAD_NEXT_RECOMMEND_WORKS:
+      newState.recommendWorks = {
+        pristine: false,
+        contents: [...newState.recommendWorks.contents, ...newState.recommendWorks.stock],
+        stock: [],
+        nextWorksApi: newState.recommendWorks.nextWorksApi
+      }
+      return newState
+
+    case actionTypes.GET_NEXT_RECOMMEND_WORKS:
+      newState.recommendWorks = {
+        pristine: false,
+        contents: newState.recommendWorks.contents,
+        stock: action.payload.results,
+        nextWorksApi: action.payload.next
+      }
+      return newState
+
+
     // ========================
     // ===== New Works
     case actionTypes.GET_NEW_WORKS:

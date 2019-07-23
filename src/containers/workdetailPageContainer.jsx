@@ -95,7 +95,7 @@ class WorkDetailPageContainer extends React.Component {
   purchaseWithCredit = async () => {
     const detail = this.props.userDetail.contents
     let { token } = await this.props.stripe.createToken({name: `${detail.last_name} ${detail.first_name}`})
-    const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.name}`
+    const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.title}`
     const price = this.props.workDetail.contents.price
     const receipt = this.props.loginStatus.email
 

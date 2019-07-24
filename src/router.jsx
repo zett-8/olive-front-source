@@ -20,7 +20,7 @@ import LogoutContainer from './containers/logoutPageContainer'
 import MessageContainer from './containers/messagePageContainer'
 import PasswordResetContainer from './containers/passwordResetPageContainer'
 import ContactContainer from './containers/contactPageContainer'
-import TermsPageContainer from './containers/TermsPageContainer'
+import TermsPageContainer from './containers/termsPageContainer'
 import Page404 from './components/404'
 
 

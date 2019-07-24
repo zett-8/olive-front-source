@@ -15,9 +15,9 @@ export const header = props => {
       <div className="nav__left">
         <p className="typ_header_menu" onClick={() => props.menuClicked('/popular')}>Popular</p>
         <p className="typ_header_menu" onClick={() => props.menuClicked('/new')}>New</p>
-        {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
-          <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p>
-        ) : null}
+        {/* {Object.keys(props.loginStatus).length && props.loginStatus.artist ? ( */}
+        {/* <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p> */}
+        {/* ) : null} */}
       </div>
 
       <h1 onClick={() => props.menuClicked('/')}>Olive</h1>

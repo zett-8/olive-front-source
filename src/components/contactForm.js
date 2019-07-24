@@ -18,9 +18,10 @@ const contactForm = props => {
       <div className="select">
         <select name="type" value={props.type} required={true} onChange={props.contactFormIsTyped}>
           <option value="">お問い合わせ内容</option>
-          <option>a</option>
-          <option>b</option>
-          <option>c</option>
+          <option>アカウントについて</option>
+          <option>作品について</option>
+          <option>サービスの不具合について</option>
+          <option>その他</option>
         </select>
       </div>
       <p className="contactForm__label typ_form_label">Message</p>

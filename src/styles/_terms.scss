@@ -1,4 +1,5 @@
 .terms {
+
   &__chapter {
     margin-left: 2rem;
     margin-top: 3rem;
@@ -15,5 +16,25 @@
   ol { margin-left: 7rem; }
 
   ul { margin-left: 4rem; }
+
+
+  @media only screen and (max-width: $bp-medium) {
+      &__chapter {
+      margin-left: 0rem;
+      margin-top: 3rem;
+    }
+
+    &__article {
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    span { margin-left: 1rem; }
+
+    ol { margin-left: 3rem; }
+
+    ul { margin-left: 4rem; }
+  }
 
 }

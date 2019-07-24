@@ -7,7 +7,7 @@ const footer = () => {
       <div className="footer__menu">
         <p className="typ_footer"><Link to="/about">About</Link></p>
         <p className="typ_footer"><Link to="/help">Help</Link></p>
-        <p className="typ_footer"><Link to="/guidelines">Guidelines</Link></p>
+        <p className="typ_footer"><Link to="/terms">Terms</Link></p>
         <p className="typ_footer"><Link to="/privacy">Privacy</Link></p>
         <p className="typ_footer">
           <Link to="/contact">Contact</Link>

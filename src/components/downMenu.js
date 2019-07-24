@@ -7,13 +7,14 @@ const downMenu = props => {
       <p className="typ_header_menu" onClick={() => props.menuClicked('/popular')}>Popular</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/new')}>New</p>
 
-      {Object.keys(props.loginStatus).length && props.loginStatus.artist ? (
-        <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p>
-      ) : null}
+      {/* {Object.keys(props.loginStatus).length && props.loginStatus.artist ? ( */}
+      {/* <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p> */}
+      {/* ) : null} */}
+
       <hr />
       <p className="typ_header_menu" onClick={() => props.menuClicked('/about')}>About</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/help')}>Help</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/guideline')}>Guidelines</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/terms')}>Terms</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/privacy')}>Privacy</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/contact')}>Contact</p>
     </nav>

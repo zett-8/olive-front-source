@@ -20,6 +20,7 @@ import LogoutContainer from './containers/logoutPageContainer'
 import MessageContainer from './containers/messagePageContainer'
 import PasswordResetContainer from './containers/passwordResetPageContainer'
 import ContactContainer from './containers/contactPageContainer'
+import TermsPageContainer from './containers/TermsPageContainer'
 import Page404 from './components/404'
 
 
@@ -43,9 +44,13 @@ export default () => (
             <Route exact path="/work/:workId/deal" component={DealContainer} />
             <Route exact path="/filteredWorks/:info" component={FilteredWorksContainer} />
             <Route exact path="/user" component={UserContainer} />
-            <Route exact path="/contact" component={ContactContainer} />
             <Route exact path="/logout" component={LogoutContainer} />
 
+            {/* footer */}
+            <Route exact path="/terms" component={TermsPageContainer} />
+            <Route exact path="/contact" component={ContactContainer} />
+
+            {/* exceptions */}
             <Route exact path="/password-reset/:email" component={PasswordResetContainer} />
             <Route exact path="/message/:type" component={MessageContainer} />
 

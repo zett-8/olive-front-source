@@ -36,6 +36,7 @@ const loginForm = props => (
           />
         </label>
       )}
+      <span><a href="/terms" target="_blank">* 利用規約</a></span>
       <button className="b_btn b_btn__30rem" type="submit">
         Create Account
       </button>

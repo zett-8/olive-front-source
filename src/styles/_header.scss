@@ -6,6 +6,10 @@
   grid-template-columns: 1fr min-content 1fr;
   align-items: center;
 
+  @media only screen and (max-width: $bp-small) {
+    h1 { margin-top: -15px; }
+  }
+
   &__toggleButton {
     display: none;
 
@@ -43,7 +47,7 @@
   }
 
   svg {
-    height: 2.3rem;
+    height: 2rem;
     fill: none;
     stroke-width: 6rem;
     stroke: #111111;

@@ -9,8 +9,9 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: min-content min-content;
     grid-gap: 1rem;
+    margin-bottom: 4rem;
 
-    @media only screen and (max-width: $bp-medium) { margin-bottom: 1.5rem; padding: 0; }
+    @media only screen and (max-width: $bp-medium) { margin-bottom: 3.5rem; padding: 0; }
 
     &__main { grid-column: 1 / -1; @include IMG; }
     &__sub { @include IMG; }

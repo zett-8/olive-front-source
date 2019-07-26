@@ -13,7 +13,7 @@
   &__toggleButton {
     display: none;
 
-    @media only screen and (max-width: $bp-small) {
+    @media only screen and (max-width: $bp-medium) {
       display: block;
       width: 2rem;
       margin-top: -3rem;
@@ -61,7 +61,7 @@
     margin-top: -2rem;
     P { margin-right: 2rem; cursor: pointer; }
 
-    @media only screen and (max-width: $bp-small) {
+    @media only screen and (max-width: $bp-medium) {
       display: none;
     }
   }
@@ -75,6 +75,10 @@
     @media only screen and (max-width: $bp-small) {
       margin-top: -2rem;
       P { margin-left: 1.3rem; cursor: pointer; }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      .userMark { display: none; }
     }
   }
 
@@ -91,33 +95,58 @@
 
 
   z-index: 2;
-  transform: translateY(-450px);
+  transform: translateY(-550px);
 
   grid-column: col-start / col-end;
   grid-row: 1 / 2;
 
   p {
-    margin: 0 0 2rem 1rem;
+    margin: 0 0 1.3rem 1rem;
     cursor: pointer;
   }
 
   hr {
     margin-bottom: 2rem;
     height: 0.5px;
-    border: none;
-    background-color: #777777;
+    background-color: #777;
+  }
+
+  hr:first-of-type { margin-bottom: 3rem; }
+
+  hr:last-of-type { margin-top: 3rem; }
+
+  &__down {
+    display: none;
+
+    @media only screen and (max-width: $bp-medium) {
+      display: block;
+      height: 100vh;
+      transform: translateY(90px);
+    }
+  }
+
+  &__works {
+
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    margin-left: 1rem;
+    &__icon {
+      @include icon;
+      height: 5rem;
+      width: 5rem;
+      margin-right: 2rem;
+    }
+
+    &__email {
+      margin: 0 !important;
+    }
   }
 }
 
-.down-menu__down {
-  display: none;
-
-  @media only screen and (max-width: $bp-small) {
-    display: block;
-    height: 100vh;
-    transform: translateY(90px);
-  }
-}
 
 .searchFilterModal {
   font-size: 1.3rem;

@@ -32,7 +32,7 @@ export const header = props => {
             <p onClick={() => props.menuClicked('/favorites')}>
               <FavoriteIMG alt="favorite" />
             </p>
-            <p onClick={() => props.menuClicked('/user')}>
+            <p className="userMark" onClick={() => props.menuClicked('/user')}>
               <AccountIMG alt="account" />
             </p>
           </React.Fragment>
@@ -42,7 +42,7 @@ export const header = props => {
             <p onClick={props.openModal}>
               <SearchIMG alt="search" />
             </p>
-            <p onClick={() => props.menuClicked('/login')}>
+            <p className="userMark" onClick={() => props.menuClicked('/login')}>
               <AccountIMG alt="account" />
             </p>
           </React.Fragment>

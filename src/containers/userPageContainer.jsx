@@ -15,6 +15,7 @@ import WorkList from '../components/workList'
 import { getPurchasedHistory } from '../actions/workList'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo, getUserDetail } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
+import { changeUserTab } from '../actions/userPageTab'
 import {
   errorNotificationBody,
   notYetNotificationBody,
@@ -35,8 +36,6 @@ class UserPageContainer extends React.Component {
     this.userIconSelectBtnRef = React.createRef()
 
     this.state = {
-      tab: 0,
-
       // prime tab
       iconImage: null,
       email: '',
@@ -107,7 +106,7 @@ class UserPageContainer extends React.Component {
     })
   }
 
-  navClicked = num => this.setState({ tab: num })
+  navClicked = num => this.props.changeUserTab(num)
 
   logout = () => this.props.history.push('/logout')
 
@@ -337,7 +336,7 @@ class UserPageContainer extends React.Component {
   }
 
   tabContents = () => {
-    switch (this.state.tab) {
+    switch (this.props.userTab.num) {
       case 0:
         return (
           <div className="userDetail__prime">
@@ -407,7 +406,7 @@ class UserPageContainer extends React.Component {
         )
 
       case 3:
-        return <WorkEditAndUpload edit={false} />
+        return <div><WorkEditAndUpload mypage={true} edit={false} /></div>
 
       case 4:
         return (
@@ -434,13 +433,15 @@ class UserPageContainer extends React.Component {
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
         <div className="userDetail">
-          <div className="userDetail__nav">
-            <UserDetailNav
-              self={this.props.loginStatus}
-              navClicked={this.navClicked}
-              tab={this.state.tab}
-              debuted={this.props.userDetail.contents.debuted}
-            />
+          <div className="userDetail__navWrapper">
+            <div className="userDetail__nav">
+              <UserDetailNav
+                self={this.props.loginStatus}
+                navClicked={this.navClicked}
+                tab={this.props.userTab.num}
+                debuted={this.props.userDetail.contents.debuted}
+              />
+            </div>
           </div>
           {this.tabContents()}
         </div>
@@ -454,7 +455,8 @@ export default connect(
     loginStatus: state.loginStatus,
     userDetail: state.userDetail,
     genres: state.genres,
-    workList: state.workList
+    workList: state.workList,
+    userTab: state.userTab
   }),
   dispatch => ({
     getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
@@ -464,6 +466,7 @@ export default connect(
     uploadUserIcon: (token, id, icon) => dispatch(uploadUserIcon(token, id, icon)),
     updateBuyerInfo: (token, userId, data) => dispatch(updateBuyerInfo(token, userId, data)),
     updateArtistInfo: (token, userId, data) => dispatch(updateArtistInfo(token, userId, data)),
+    changeUserTab: num => dispatch(changeUserTab(num))
   })
 )(UserPageContainer)
 

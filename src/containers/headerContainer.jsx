@@ -8,6 +8,7 @@ import DownMenu from '../components/downMenu'
 import { getGenres } from '../actions/genres'
 import { getFilteredWorks } from '../actions/workList'
 import { getUserDetail } from '../actions/userDetail'
+import { changeUserTab } from '../actions/userPageTab'
 
 class HeaderContainer extends React.Component {
   constructor(props) {
@@ -54,7 +55,10 @@ class HeaderContainer extends React.Component {
   }
 
   // slide down menu function
-  menuClicked = page => {
+  menuClicked = (page, num) => {
+    if (page === '/user') {
+      this.props.changeUserTab(num)
+    }
     this.props.history.push(page)
     this.setState({ downMenuClass: true })
   }
@@ -147,6 +151,7 @@ class HeaderContainer extends React.Component {
           class={this.state.downMenuClass}
           menuClicked={this.menuClicked}
           loginStatus={this.props.loginStatus}
+          userDetail={this.props.userDetail.contents}
         />
 
         <header className="nav">
@@ -195,11 +200,13 @@ class HeaderContainer extends React.Component {
 export default connect(
   state => ({
     loginStatus: state.loginStatus,
+    userDetail: state.userDetail,
     genres: state.genres,
   }),
   dispatch => ({
     getGenres: () => dispatch(getGenres()),
     getFilteredWorks: q => dispatch(getFilteredWorks(q)),
-    getUserDetail: (token, UUID) => dispatch(getUserDetail(token, UUID))
+    getUserDetail: (token, UUID) => dispatch(getUserDetail(token, UUID)),
+    changeUserTab: num => dispatch(changeUserTab(num))
   })
 )(HeaderContainer)

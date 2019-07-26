@@ -8,10 +8,7 @@ const userDetailPrime = props => {
         <div
           className="userDetail__prime__iconForm__icon"
           ref={props.iconRef}
-          style={{
-            backgroundImage: `url(${(process.env.NODE_ENV === 'local' ? '' : '') +
-              props.detail.icon})`,
-          }}
+          style={{ backgroundImage: `url(${props.detail.icon})` }}
         />
 
         <button className="w_btn w_btn__15rem" type="button" onClick={props.userIconSelectBtnClicked}>

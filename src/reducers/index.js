@@ -9,6 +9,7 @@ import seedArtistReducer from './seedArtists'
 import artistDetailReducer from './artistDetail'
 import buyerDetailReducer from './buyerDetail'
 import messagesReducer from './messages'
+import userTabReducer from './userPageTab'
 
 export default combineReducers({
   loginStatus: loginStatusReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
   artistDetail: artistDetailReducer,
   buyerDetail: buyerDetailReducer,
   messages: messagesReducer,
+  userTab: userTabReducer
 })

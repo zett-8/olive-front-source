@@ -233,7 +233,7 @@ class WorkEditAndUpload extends React.Component {
     return (
       <React.Fragment>
         <NotificationSystem ref={this.notificationSystem} />
-        <div className="workEditAndUpload">
+        <div className={'workEditAndUpload' + (this.props.mypage ? " mypage" : "")}>
           <UserDetailWorkUpload
             upload={this.uploadWork}
             update={this.updateWork}

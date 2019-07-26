@@ -2,17 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const downMenu = props => {
-  return (
-    <nav className={props.class ? 'down-menu' : 'down-menu down-menu__down'}>
-      <div className="down-menu__works">
-        <p className="typ_header_menu" onClick={() => props.menuClicked('/popular')}>Popular</p>
-        <p className="typ_header_menu" onClick={() => props.menuClicked('/new')}>New</p>
-      </div>
-      {/* {Object.keys(props.loginStatus).length && props.loginStatus.artist ? ( */}
-      {/* <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p> */}
-      {/* ) : null} */}
-
-      <hr />
+  const userMenu = () => (
+    <React.Fragment>
       <div className="down-menu__user">
         <div
           className="down-menu__user__icon"
@@ -33,6 +24,21 @@ const downMenu = props => {
       ) : null}
 
       <hr />
+    </React.Fragment>
+  )
+
+  return (
+    <nav className={props.class ? 'down-menu' : 'down-menu down-menu__down'}>
+      <div className="down-menu__works">
+        <p className="typ_header_menu" onClick={() => props.menuClicked('/popular')}>Popular</p>
+        <p className="typ_header_menu" onClick={() => props.menuClicked('/new')}>New</p>
+      </div>
+      {/* {Object.keys(props.loginStatus).length && props.loginStatus.artist ? ( */}
+      {/* <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p> */}
+      {/* ) : null} */}
+      <hr />
+      {props.loginStatus.email ? userMenu() : null}
+
       <p className="typ_header_menu" onClick={() => props.menuClicked('/about')}>About</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/help')}>Help</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/terms')}>Terms</p>

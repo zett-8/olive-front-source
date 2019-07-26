@@ -42,7 +42,7 @@ export const header = props => {
             <p onClick={props.openModal}>
               <SearchIMG alt="search" />
             </p>
-            <p className="userMark" onClick={() => props.menuClicked('/login')}>
+            <p className="userMark_login" onClick={() => props.menuClicked('/login')}>
               <AccountIMG alt="account" />
             </p>
           </React.Fragment>

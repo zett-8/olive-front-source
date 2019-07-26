@@ -57,7 +57,7 @@ class HeaderContainer extends React.Component {
   // slide down menu function
   menuClicked = (page, num) => {
     if (page === '/user') {
-      this.props.changeUserTab(num)
+      this.props.changeUserTab(num || 0)
     }
     this.props.history.push(page)
     this.setState({ downMenuClass: true })

@@ -31,6 +31,7 @@
 .radio-btn input[type='checkbox']:checked + label {
 	padding-left: 10px;
 	color: #ffffff;
+  margin-right: 25px;
 }
 .radio-btn input[type='checkbox']:checked + label::before {
 	top: 0;

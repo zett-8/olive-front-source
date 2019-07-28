@@ -2,8 +2,34 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import VOID from '../assets/700.gif'
+import Loading from '../assets/loading.gif'
 
 const userDetailWorkUpload = props => {
+  const UploadButtonRenderer = () => (
+    props.uploadButtonIsWorking ? (
+      <button className="w_btn b_btn__13rem" type="button" onClick={() => null}>
+        <p><img alt="" src={Loading} height="10px" /></p>
+      </button>
+    ) : (
+      <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
+        Upload!
+      </button>
+    )
+  )
+
+  const saveButtonRenderer = () => (
+    props.saveButtonIsWorking ? (
+      <button className="w_btn b_btn__13rem" type="button" onClick={() => null}>
+        <p><img alt="" src={Loading} height="10px" /></p>
+      </button>
+    ) : (
+      <button className="b_btn b_btn__13rem" type="button" onClick={props.update}>
+        Save
+      </button>
+    )
+
+  )
+
   return (
     <React.Fragment>
       <div className="workEditAndUpload__images">
@@ -236,18 +262,12 @@ const userDetailWorkUpload = props => {
         />
         {props.edit ? (
           <div className="editFormButtons">
-            <button className="b_btn b_btn__13rem" type="button" onClick={props.update}>
-              Save
-            </button>
+            {saveButtonRenderer()}
             <button className="r_btn b_btn__13rem" type="button" onClick={props.delete}>
               Delete
             </button>
           </div>
-        ) : (
-          <button className="b_btn b_btn__13rem" type="button" onClick={props.upload}>
-            Upload!
-          </button>
-        )}
+        ) : UploadButtonRenderer()}
 
       </div>
     </React.Fragment>
@@ -255,8 +275,8 @@ const userDetailWorkUpload = props => {
 }
 
 userDetailWorkUpload.propTypes = {
-  upload: PropTypes.func.isRequired,
-  update: PropTypes.func.isRequired,
+  upload: PropTypes.func.isRequired, // eslint-disable-line
+  update: PropTypes.func.isRequired, // eslint-disable-line
   delete: PropTypes.func.isRequired,
   workFormChanged: PropTypes.func.isRequired,
   workImageSelectBtnClicked: PropTypes.func.isRequired,
@@ -296,7 +316,9 @@ userDetailWorkUpload.propTypes = {
     grey: PropTypes.bool,
     ivory: PropTypes.bool,
   }),
-  edit: PropTypes.bool
+  edit: PropTypes.bool,
+  uploadButtonIsWorking: PropTypes.bool, // eslint-disable-line
+  saveButtonIsWorking: PropTypes.bool, // eslint-disable-line
 }
 
 export default userDetailWorkUpload

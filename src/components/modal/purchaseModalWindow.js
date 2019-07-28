@@ -4,6 +4,8 @@ import ModalSetting from 'react-modal'
 import { CardElement } from 'react-stripe-elements'
 import { BANK_INFO } from '../../utils/settings'
 
+import Loading from '../../assets/loading.gif'
+
 const customStyles = {
   content: {
     zIndex: '100',
@@ -33,9 +35,26 @@ const purchaseModalWindow = props => {
       <div className="checkout-modal">
         <h2>支払方法を選択</h2>
         {BANK_INFO()}
-        <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithBankTransfer}>銀行振込で支払う</button>
+        {props.buyTransferButtonIsWorking ? (
+          <button className="w_btn b_btn__20rem" type="button" onClick={() => null}>
+            <p><img alt="" src={Loading} height="10px" /></p>
+          </button>
+        ) : (
+          <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithBankTransfer}>
+            銀行振込で支払う
+          </button>
+        )}
+
         <CardElement />
-        <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithCredit}>カードで支払う</button>
+        {props.buyCreditButtonIsWorking ? (
+          <button className="w_btn b_btn__20rem" type="button" onClick={() => null}>
+            <p><img alt="" src={Loading} height="10px" /></p>
+          </button>
+        ) : (
+          <button className="b_btn b_btn__20rem" type="button" onClick={props.purchaseWithCredit}>
+            カードで支払う
+          </button>
+        )}
       </div>
     </ModalSetting>
   )
@@ -46,6 +65,8 @@ purchaseModalWindow.propTypes = {
   closeModal: PropTypes.func.isRequired,
   purchaseWithCredit: PropTypes.func.isRequired,
   purchaseWithBankTransfer: PropTypes.func.isRequired,
+  buyTransferButtonIsWorking: PropTypes.bool,
+  buyCreditButtonIsWorking: PropTypes.bool
 }
 
 export default purchaseModalWindow

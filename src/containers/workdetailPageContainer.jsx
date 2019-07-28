@@ -21,6 +21,8 @@ class WorkDetailPageContainer extends React.Component {
 
     this.state = {
       modalIsOpen: false,
+      buyTransferButtonIsWorking: false,
+      buyCreditButtonIsWorking: false
     }
 
     this.notificationSystem = React.createRef()
@@ -74,6 +76,8 @@ class WorkDetailPageContainer extends React.Component {
   }
 
   purchaseWithBankTransfer = async () => {
+    this.setState({ buyTransferButtonIsWorking: true })
+
     const err = await this.props.workWasBought(
       this.props.loginStatus.token,
       this.props.loginStatus.uuid,
@@ -90,9 +94,13 @@ class WorkDetailPageContainer extends React.Component {
     this.setState({ bought: true })
 
     this.props.history.push(`/work/${this.props.workDetail.contents.id}/deal`)
+
+    this.setState({ buyTransferButtonIsWorking: false })
   }
 
   purchaseWithCredit = async () => {
+    this.setState({ buyCreditButtonIsWorking: true })
+
     const detail = this.props.userDetail.contents
     let { token } = await this.props.stripe.createToken({name: `${detail.last_name} ${detail.first_name}`})
     const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.title}`
@@ -121,6 +129,8 @@ class WorkDetailPageContainer extends React.Component {
     this.setState({ bought: true })
 
     this.props.history.push(`/work/${this.props.workDetail.contents.id}/deal`)
+
+    this.setState({ buyCreditButtonIsWorking: false })
   }
 
   changeMainImage = url => (this.mainImageRef.current.style.backgroundImage = `url(${url})`)
@@ -136,6 +146,8 @@ class WorkDetailPageContainer extends React.Component {
           modalIsOpen={this.state.modalIsOpen}
           purchaseWithCredit={this.purchaseWithCredit}
           purchaseWithBankTransfer={this.purchaseWithBankTransfer}
+          buyTransferButtonIsWorking={this.state.buyTransferButtonIsWorking}
+          buyCreditButtonIsWorking={this.state.buyCreditButtonIsWorking}
         />
 
         <div className="workDetail">

@@ -25,6 +25,8 @@ class WorkEditAndUpload extends React.Component {
     this.state = {
       edit: false,
 
+      uploadButtonIsWorking: false,
+      saveButtonIsWorking: false,
       selectableSubGenres: [],
       selectOrder: 1,
       workImageUrlCurrent: '1',
@@ -158,6 +160,8 @@ class WorkEditAndUpload extends React.Component {
   }
 
   updateWork = async () => {
+    this.setState({ saveButtonIsWorking: true })
+
     const message = workFormValidation(this.state.work)
 
     if (message) {
@@ -188,9 +192,12 @@ class WorkEditAndUpload extends React.Component {
 
     successNotificationBody.title = 'Saved New Changes!'
     this.notificationSystem.current.addNotification(successNotificationBody)
+
+    this.setState({ saveButtonIsWorking: false })
   }
 
   uploadWork = async () => {
+    this.setState({ uploadButtonIsWorking: true })
     const message = workFormValidation(this.state.work)
 
     if (message) {
@@ -216,6 +223,7 @@ class WorkEditAndUpload extends React.Component {
     this.notificationSystem.current.addNotification(successNotificationBody)
 
     this.resetWorkForm()
+    this.setState({ uploadButtonIsWorking: false })
   }
 
   deleteWork = async () => {
@@ -249,6 +257,8 @@ class WorkEditAndUpload extends React.Component {
             workImageUrlCurrent={this.state.workImageUrlCurrent}
             work={this.state.work}
             edit={this.state.edit}
+            uploadButtonIsWorking={this.state.uploadButtonIsWorking}
+            saveButtonIsWorking={this.state.saveButtonIsWorking}
           />
         </div>
       </React.Fragment>

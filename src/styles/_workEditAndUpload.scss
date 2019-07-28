@@ -63,7 +63,7 @@
 
     > div.editFormButtons {
       justify-self: right;
-      :first-child { margin-right: 2rem; }
+      button:first-of-type { margin-right: 2rem; }
     }
   }
 }

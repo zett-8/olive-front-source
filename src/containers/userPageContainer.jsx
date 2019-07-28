@@ -235,7 +235,7 @@ class UserPageContainer extends React.Component {
     e.preventDefault()
 
     if (e.target.name === 'Bank') {
-      const banks = await axios.get(`https://bank.teraren.com/banks/search.json?name=${this.state.searchBankInput}`).then(res => res.data)
+      const banks = await axios.get(`https://bank.teraren.com/banks/search.json?name=${this.state.searchBankInput.slice(-2) === '銀行' ? this.state.searchBankInput.slice(0, -2) : this.state.searchBankInput}`).then(res => res.data)
       this.setState({ selectableBanks: banks })
 
       if (this.state.selectableBanks.length) {

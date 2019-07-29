@@ -9,7 +9,7 @@ const userDetailNav = props => {
         {props.self.artist ? (
           <p className="userDetail__nav__each" onClick={() => props.navClicked(3)}>Upload</p>
         ) : (
-          <p className="userDetail__nav__each">(upload)</p>
+          <p className="userDetail__nav__each" style={{ color: 'gray' }}>(upload)</p>
         )}
       </React.Fragment>
     )

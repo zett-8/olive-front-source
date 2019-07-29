@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Loading from '../assets/loading.gif'
 
 const loginForm = props => (
   <React.Fragment>
@@ -37,9 +38,15 @@ const loginForm = props => (
         </label>
       )}
       <span><a href="/terms" target="_blank">* 利用規約</a></span>
-      <button className="b_btn b_btn__30rem" type="submit">
-        Create Account
-      </button>
+      {props.signUpButtonIsWorking ? (
+        <button className="w_btn b_btn__30rem" disabled={true} type="button">
+          <span><img alt="" src={Loading} height="10px" /></span>
+        </button>
+      ) : (
+        <button className="b_btn b_btn__30rem" type="submit">
+          Create Account
+        </button>
+      )}
     </form>
     {props.guest ? null : (
       <React.Fragment>
@@ -60,6 +67,7 @@ loginForm.propTypes = {
   invitation: PropTypes.string,
   handleInputChanged: PropTypes.func.isRequired,
   handleSwitch: PropTypes.func.isRequired,
+  signUpButtonIsWorking: PropTypes.bool
 }
 
 export default loginForm

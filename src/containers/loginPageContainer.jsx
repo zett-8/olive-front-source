@@ -22,11 +22,12 @@ class LoginPageContainer extends React.Component {
       password: '',
       invitation: '',
       login: true,
+      signUpButtonIsWorking: false
     }
   }
 
   componentWillMount() {
-    if (Object.keys(this.props.loginStatus).length) this.props.history.push(`/user/${this.props.loginStatus.uuid}`)
+    if (Object.keys(this.props.loginStatus).length) this.props.history.push(`/user`)
   }
 
   componentDidMount() {
@@ -57,6 +58,7 @@ class LoginPageContainer extends React.Component {
 
   signUp = async e => {
     e.preventDefault()
+    this.setState({ signUpButtonIsWorking: true })
 
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
@@ -86,6 +88,8 @@ class LoginPageContainer extends React.Component {
       this.notificationSystem.current.addNotification(errorNotificationBody)
       return null
     }
+
+    this.setState({ signUpButtonIsWorking: false })
 
     this.props.history.push('/message/sent-email/')
   }
@@ -141,6 +145,7 @@ class LoginPageContainer extends React.Component {
             password={this.state.password}
             invitation={this.state.invitation}
             handleSwitch={this.switch}
+            signUpButtonIsWorking={this.state.signUpButtonIsWorking}
           />
         )}
         </div>

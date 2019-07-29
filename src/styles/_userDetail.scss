@@ -51,14 +51,19 @@
     align-items: center;
     //justify-content: right;
 
-    > p {
+    &__each {
       background-color: $color-gray;
       height: 4rem;
       line-height: 4rem;
       padding-left: 2.5rem;
       border-bottom: 0.5px #999 solid;
+      cursor: pointer;
 
       &:last-child { border-bottom: none; }
+    }
+
+    &__each:hover {
+      background-color: #cccccc;
     }
 
   }

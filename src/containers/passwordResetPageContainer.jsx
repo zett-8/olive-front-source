@@ -24,8 +24,8 @@ class PasswordReset extends React.Component {
           <br />
           よろしければ、「OK」を押してください。
         </div>
-        <button className="btn btn__send" type="button" onClick={this.resetPassword}>OK</button>
-        <button className="btn btn__selectPic" type="button" onClick={() => this.props.history.push('/login')}>Cancel</button>
+        <button className="b_btn b_btn__8rem" type="button" onClick={this.resetPassword}>OK</button>
+        <button className="w_btn w_btn__8rem" type="button" onClick={() => this.props.history.push('/login')}>Cancel</button>
       </div>
     )
   }

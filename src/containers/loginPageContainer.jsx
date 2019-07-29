@@ -9,6 +9,7 @@ import { errorNotificationBody, oopsNotificationBody } from '../utils/notificati
 
 import API from '../utils/api'
 import { signUp, login } from '../actions/loginStatus'
+import { getUserDetail } from '../actions/userDetail'
 
 class LoginPageContainer extends React.Component {
   constructor(props) {
@@ -110,6 +111,8 @@ class LoginPageContainer extends React.Component {
       return null
     }
 
+    this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
+
     this.props.history.push('/')
   }
 
@@ -153,5 +156,6 @@ export default connect(
   dispatch => ({
     signUp: (email, password, invitationCode) => dispatch(signUp(email, password, invitationCode)),
     login: (email, password) => dispatch(login(email, password)),
+    getUserDetail: (token, uuid) => dispatch(getUserDetail(token, uuid))
   })
 )(LoginPageContainer)

@@ -107,21 +107,24 @@
       }
     }
 
+    &__shopping {
+
+      @include basic_for_prime_buyer_artist;
+
+      > input { margin-bottom: 2.3rem; }
+      > button { justify-self: right; }
+
+      justify-content: normal;
+      margin-left: 0;
+
+    }
+
     .logout {
       width: 100%;
       margin-top: 5rem;
     }
   }
 
-  &__buyer {
-    @include basic_for_prime_buyer_artist;
-
-    > div {
-
-      > input { margin-bottom: 2.3rem; }
-      > button { justify-self: right; }
-    }
-  }
 
   &__artist {
     @include basic_for_prime_buyer_artist;

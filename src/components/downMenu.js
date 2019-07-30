@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const downMenu = props => {
-  const userMenu = () => (
+  const userMenuRenderer = () => (
     <React.Fragment>
       <div className="down-menu__user">
         <div
@@ -11,17 +11,18 @@ const downMenu = props => {
         />
         <p className="typ_header_menu down-menu__user__email">{props.loginStatus.email}</p>
       </div>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 0)}>Prime</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 1)}>Shopping info</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 4)}>Order history</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 0)}>Settings</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 1)}>Order history</p>
       {props.userDetail.debuted ? (
         <React.Fragment>
-          <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 2)}>Artist</p>
+          <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 2)}>Artist profile</p>
           {props.userDetail.ready_as_artist ? (
             <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 3)}>Upload</p>
           ) : <p className="typ_header_menu" style={{ color: 'gray' }} onClick={() => props.menuClicked('/user', 3)}>(Upload)</p>}
+          <p className="typ_header_menu" onClick={() => props.menuClicked(`/artist/${props.userDetail.id}`)}>My page</p>
         </React.Fragment>
       ) : null}
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/logout')}>Logout</p>
 
       <hr />
     </React.Fragment>
@@ -37,7 +38,7 @@ const downMenu = props => {
       {/* <p className="typ_header_menu" onClick={() => props.menuClicked('/review')}>Seeds</p> */}
       {/* ) : null} */}
       <hr />
-      {props.loginStatus.email ? userMenu() : null}
+      {props.loginStatus.email ? userMenuRenderer() : null}
 
       <p className="typ_header_menu" onClick={() => props.menuClicked('/about')}>About</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/help')}>Help</p>
@@ -56,6 +57,7 @@ downMenu.propTypes = {
     artist: PropTypes.bool,
   }),
   userDetail: PropTypes.shape({
+    id: PropTypes.number,
     icon: PropTypes.string,
     debuted: PropTypes.bool,
     ready_as_artist: PropTypes.bool

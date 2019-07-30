@@ -44,7 +44,6 @@ class UserPageContainer extends React.Component {
 
       // buyer tab
       firstName: '',
-
       lastName: '',
       zipCode: '',
       address: '',
@@ -107,6 +106,8 @@ class UserPageContainer extends React.Component {
   }
 
   navClicked = num => this.props.changeUserTab(num)
+
+  goToMyPage = () => this.props.history.push(`/artist/${this.props.userDetail.contents.id}`)
 
   logout = () => this.props.history.push('/logout')
 
@@ -228,8 +229,6 @@ class UserPageContainer extends React.Component {
   // =============================
 
   artistFormChanged = e => this.setState({ [e.target.name]: e.target.value })
-
-  goToArtistPage = () => this.props.history.push(`/artist/${this.props.userDetail.contents.id}/`)
 
   searchBanks = async e => {
     e.preventDefault()
@@ -354,15 +353,6 @@ class UserPageContainer extends React.Component {
               newPassword={this.state.newPassword}
               updateEmail={this.updateEmail}
               updatePassword={this.updatePassword}
-              logout={this.logout}
-            />
-          </div>
-        )
-
-      case 1:
-        return (
-          <div className="userDetail__buyer">
-            <UserDetailBuyer
               firstName={this.state.firstName}
               lastName={this.state.lastName}
               zipCode={this.state.zipCode}
@@ -370,7 +360,15 @@ class UserPageContainer extends React.Component {
               phoneNumber={this.state.phoneNumber}
               buyerFormChanged={this.buyerFormChanged}
               updateBuyerInfo={this.updateBuyerInfo}
+              logout={this.logout}
             />
+          </div>
+        )
+
+      case 1:
+        return (
+          <div className="userDetail_purchasedHistory">
+            <WorkList works={this.props.workList.purchasedWorks.contents} />
           </div>
         )
 
@@ -378,7 +376,6 @@ class UserPageContainer extends React.Component {
         return (
           <div className="userDetail__artist">
             <UserDetailArtist
-              goToArtistPage={this.goToArtistPage}
               readyAsArtist={this.props.userDetail.contents.ready_as_artist}
               artistName={this.state.artistName}
               profile={this.state.profile}
@@ -408,12 +405,6 @@ class UserPageContainer extends React.Component {
       case 3:
         return <div><WorkEditAndUpload mypage={true} edit={false} /></div>
 
-      case 4:
-        return (
-          <div className="userDetail_purchasedHistory">
-            <WorkList works={this.props.workList.purchasedWorks.contents} />
-          </div>
-        )
 
       case 5:
         return (
@@ -440,6 +431,8 @@ class UserPageContainer extends React.Component {
                 navClicked={this.navClicked}
                 tab={this.props.userTab.num}
                 debuted={this.props.userDetail.contents.debuted}
+                goToMyPage={this.goToArtistPage}
+                logout={this.logout}
               />
             </div>
           </div>

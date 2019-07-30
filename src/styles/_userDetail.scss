@@ -58,14 +58,14 @@
       padding-left: 2.5rem;
       border-bottom: 0.5px #999 solid;
       cursor: pointer;
+      transition: $transition;
 
       &:last-child { border-bottom: none; }
-    }
 
-    &__each:hover {
-      background-color: #f5f5f5;
+      &:hover {
+        opacity: $opacity;
+      }
     }
-
   }
 
   &__prime {

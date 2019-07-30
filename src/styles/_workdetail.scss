@@ -59,6 +59,14 @@
       grid-row-gap: 0.6rem;
       grid-column-gap: 3rem;
 
+      a {
+        transition: $transition;
+
+        &:hover {
+          opacity: $opacity;
+        }
+      }
+
     }
 
     &__price {
@@ -109,4 +117,3 @@
 
   .StripeElement { border-bottom: 1px grey solid; margin-top: 2rem; }
 }
-

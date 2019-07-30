@@ -4,6 +4,8 @@ $color-basic: #222222;
 $color-gray: #eeeeee;
 $font-basic: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 $font-button: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+$transition: all 0.1s ease-out;
+$opacity: 0.6;
 
 // responsive breakpoints
 $bp-largest: 75em; // 1200px
@@ -36,6 +38,10 @@ a {
   color: $color-basic;
 }
 
+button:hover {
+  opacity: $opacity;
+}
+
 #root {
   display: grid;
   grid-template-rows: 10rem min-content 5rem;
@@ -54,11 +60,13 @@ a {
   height: 3rem;
   border: none;
   border-radius: 5rem;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   font-family: $font-button;
   font-weight: 200;
   font-size: 1.2rem;
+  outline: none;
   cursor: pointer;
+  transition: $transition;
 
   &__8rem { width: 8rem; }
   &__10rem { width: 10rem; }
@@ -73,11 +81,13 @@ a {
   border: black 0.05rem solid;
   height: 3rem;
   border-radius: 5rem;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   font-family: $font-button;
   font-weight: 200;
   font-size: 1.2rem;
+  outline: none;
   cursor: pointer;
+  transition: $transition;
 
   &__8rem { width: 8rem; }
   &__15rem { width: 15rem; }
@@ -110,10 +120,11 @@ a {
   border: crimson 0.05rem solid;
   height: 3rem;
   border-radius: 5rem;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   font-family: $font-button;
   font-weight: 200;
   font-size: 1.2rem;
+  outline: none;
   cursor: pointer;
 }
 
@@ -122,6 +133,7 @@ a {
   border-bottom: 0.2px black solid;
   font-size: 1.5rem;
   font-weight: 100;
+  outline: none;
   height: 3rem;
 }
 
@@ -129,6 +141,7 @@ a {
   border: 0.2px grey solid;
   font-size: 1.5rem;
   font-weight: 100;
+  outline: none;
 }
 
 @mixin icon {

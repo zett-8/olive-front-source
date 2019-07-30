@@ -84,6 +84,21 @@
 
 }
 
+.typ_header_menu {
+  transition: $transition;
+
+  &:hover {
+    opacity: $opacity;
+  }
+}
+
+.nav__right p {
+  transition: $transition;
+
+  &:hover {
+    opacity: $opacity;
+  }
+}
 
 .down-menu {
   display: block;

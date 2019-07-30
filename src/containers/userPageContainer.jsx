@@ -5,10 +5,8 @@ import { Redirect } from 'react-router-dom'
 import NotificationSystem from 'react-notification-system'
 
 import WorkEditAndUpload from './workEditAndUploadPageContainer'
-import UserDetailOther from '../components/userDetail/userDetail_other'
 import UserDetailNav from '../components/userDetail/userDetail_nav'
 import UserDetailPrime from '../components/userDetail/userDetail_prime'
-import UserDetailBuyer from '../components/userDetail/userDetail_buyer'
 import UserDetailArtist from '../components/userDetail/userDetail_artist'
 import WorkList from '../components/workList'
 

@@ -12,8 +12,8 @@ const downMenu = props => {
         <p className="typ_header_menu down-menu__user__email">{props.loginStatus.email}</p>
       </div>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 0)}>Prime</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 1)}>Buyer</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 4)}>History</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 1)}>Shopping info</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 4)}>Order history</p>
       {props.userDetail.debuted ? (
         <React.Fragment>
           <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 2)}>Artist</p>

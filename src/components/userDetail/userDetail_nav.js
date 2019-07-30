@@ -18,9 +18,9 @@ const userDetailNav = props => {
   return (
     <React.Fragment>
       <p className="userDetail__nav__each" onClick={() => props.navClicked(0)}>Prime</p>
-      <p className="userDetail__nav__each" onClick={() => props.navClicked(1)}>Buyer</p>
+      <p className="userDetail__nav__each" onClick={() => props.navClicked(1)}>Shopping info</p>
       {props.debuted ? buttonsForArtist() : null }
-      <p className="userDetail__nav__each" onClick={() => props.navClicked(4)}>History</p>
+      <p className="userDetail__nav__each" onClick={() => props.navClicked(4)}>Order history</p>
       {/* <p className={props.tab === 5 ? 'userDetail__nav__current' : 'userDetail__nav__others'} onClick={() => props.navClicked(5)}>Other</p> */}
     </React.Fragment>
   )

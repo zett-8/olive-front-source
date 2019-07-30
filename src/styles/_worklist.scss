@@ -28,6 +28,36 @@
   }
 }
 
+.oneWorkList {
+  display: grid;
+  grid-template-columns: minmax(20rem, 1fr);
+  grid-gap: 4rem;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: end;
+
+  .work {
+
+    display: grid;
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10rem;
+    }
+
+    img {
+      background: center no-repeat;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
 .noWorkList {
   line-height: 65vh;
   text-align: center;

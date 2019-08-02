@@ -32,6 +32,7 @@ class WorkDetailPageContainer extends React.Component {
   componentWillUnmount() { this.props.clearWorkDetail() }
 
   async componentWillMount() {
+    window.scrollTo(0, 0)
     await this.props.getWorkDetail(this.props.match.params.id)
 
     const w = this.props.workDetail.contents,

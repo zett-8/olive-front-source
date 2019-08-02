@@ -9,6 +9,8 @@ import scrollHandler from '../utils/scrollHandler'
 class FilteredWorks extends React.Component {
 
   componentDidMount() {
+    document.title = 'Filtered Works | Olive'
+
     window.addEventListener('scroll', this.handleScroll)
     this.fetchNextWorks()
   }

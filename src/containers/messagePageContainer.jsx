@@ -10,6 +10,10 @@ class Message extends React.Component {
     this.setState({ type: this.props.match.params.type })
   }
 
+  componentDidMount() {
+    document.title = 'アートをもっと自由に | Olive'
+  }
+
   pageRenderer = () => {
     switch (this.state.type) {
       case 'registration-done':

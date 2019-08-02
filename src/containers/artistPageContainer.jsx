@@ -13,16 +13,17 @@ class ArtistPageContainer extends React.Component {
     const ID = this.props.match.params.id
 
 
-    if (this.props.artistDetail.pristine) this.props.getArtistDetail(ID)
+    if (this.props.artistDetail.pristine) await this.props.getArtistDetail(ID)
     if (this.props.workList.artistWorks.pristine) {
       await this.props.getWorksOfAnArtist(ID)
       this.fetchNextWorks()
     }
 
+    document.title = this.props.artistDetail.contents.artist_name + ' | Olive'
     window.addEventListener('scroll', this.handleScroll)
   }
 
-   componentWillUnmount() {
+  componentWillUnmount() {
     this.props.clearArtistDetail()
     this.props.clearWorksOfArtist()
 

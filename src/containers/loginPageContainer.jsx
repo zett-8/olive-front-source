@@ -31,6 +31,8 @@ class LoginPageContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'Login SignUp | Olive'
+
     if (this.props.guest) this.setState({ login: false, invitation: this.props.match.params.code })
   }
 

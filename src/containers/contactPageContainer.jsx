@@ -21,6 +21,8 @@ class ContactPageContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = '問い合わせ | Olive'
+
     if (Object.keys(this.props.loginStatus).length) this.setState({ loggedIn: true, email: this.props.loginStatus.email })
   }
 

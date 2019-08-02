@@ -2,6 +2,10 @@ import React from 'react'
 import API from '../utils/api'
 
 class PasswordReset extends React.Component {
+  componentDidMount() {
+    this.set
+  }
+
   componentWillMount() {
     this.setState({ email: this.props.match.params.email })
   }

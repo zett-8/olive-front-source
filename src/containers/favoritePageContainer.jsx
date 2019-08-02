@@ -16,6 +16,10 @@ class FavoritePageContainer extends React.Component {
     window.addEventListener('scroll', this.handleScroll)
   }
 
+  componentDidMount() {
+    document.title = 'Favorite Works | Olive'
+  }
+
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
   fetchNextWorks = () => this.props.getNextFavoriteWorks(this.props.workList.favoriteWorks.nextWorksApi)

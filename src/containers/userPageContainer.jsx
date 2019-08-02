@@ -73,6 +73,7 @@ class UserPageContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = 'User page | Olive'
     if (this.props.userDetail.pristine) this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
   }
 

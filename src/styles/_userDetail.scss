@@ -108,8 +108,14 @@
     }
 
     &__shopping {
-
       @include basic_for_prime_buyer_artist;
+
+      p:first-of-type {
+        margin-bottom: 1rem;
+      }
+
+      margin-top: 3rem;
+      margin-bottom: 2rem;
 
       > input { margin-bottom: 2.3rem; }
       > button { justify-self: right; }

@@ -430,7 +430,6 @@ class UserPageContainer extends React.Component {
                 tab={this.props.userTab.num}
                 debuted={this.props.userDetail.contents.debuted}
                 goToMyPage={this.goToMyPage}
-                logout={this.logout}
               />
             </div>
           </div>

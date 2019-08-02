@@ -22,7 +22,6 @@ const downMenu = props => {
           <p className="typ_header_menu" onClick={() => props.menuClicked(`/artist/${props.userDetail.id}`)}>My page</p>
         </React.Fragment>
       ) : null}
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/logout')}>Logout</p>
 
       <hr />
     </React.Fragment>

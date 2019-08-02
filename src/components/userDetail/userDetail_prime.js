@@ -32,6 +32,7 @@ const userDetailPrime = props => {
       </div>
 
       <div className="userDetail__prime__shopping">
+        <p>*作品を購入するには、発送先情報を設定してください</p>
         <p className="typ_form_label">* First Name</p>
         <input className="input" type="text" name="firstName" value={props.firstName} onChange={props.buyerFormChanged} />
 

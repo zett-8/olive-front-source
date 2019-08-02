@@ -10,7 +10,7 @@ import './styles/main.scss'
 import TagManager from 'react-gtm-module'
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('olive 0.83')
+  console.log('olive 0.84')
 
   const tagManagerArgs = {
     gtmId: 'GTM-WD5QC5V'

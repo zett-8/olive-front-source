@@ -24,8 +24,9 @@
   @media only screen and (max-width: $bp-medium) { margin: 0 }
 
   > div {
-    width: 40rem;
+    width: 36rem;
     display: grid;
+    @media only screen and (max-width: $bp-medium) { width: 40rem; }
     @media only screen and (max-width: $bp-small) { width: 80vw; }
   }
 }
@@ -170,6 +171,16 @@
       }
 
       > button { justify-self: right; }
+    }
+  }
+
+  &__purchasedHistory {
+    width: 36rem;
+    margin-left: 6rem;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: auto;
+      margin-left: 0;
     }
   }
 }

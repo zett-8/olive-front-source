@@ -51,20 +51,23 @@ const workDetail = props => {
           />
         </p>
 
-        {['1', '2', '3', '4', '5'].map(n => {
-          if (props.detail['image' + n] !== null) {
-            return (
-              <p key={n} className={`workDetail__left__subImage${n}`}>
-                <img
-                  src={VOID}
-                  style={{ backgroundImage: `url(${props.detail['image' + n]})` }}
-                  alt={'img' + n}
-                  onClick={() => props.changeMainImage(props.detail['image' + n])}
-                />
-              </p>
-            )
-          }
-        })}
+        {props.detail.image2 ? (
+          ['1', '2', '3', '4', '5'].map(n => {
+            if (props.detail['image' + n] !== null) {
+              return (
+                <p key={n} className={`workDetail__left__subImage${n}`}>
+                  <img
+                    src={VOID}
+                    style={{ backgroundImage: `url(${props.detail['image' + n]})` }}
+                    alt={'img' + n}
+                    onClick={() => props.changeMainImage(props.detail['image' + n])}
+                  />
+                </p>
+              )
+            }
+          })
+        ) : null}
+
       </div>
       <div className="workDetail__right">
         <h3>{props.detail.title}</h3>

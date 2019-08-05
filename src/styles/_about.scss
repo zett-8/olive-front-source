@@ -1,0 +1,17 @@
+.aboutUs {
+  padding: 4rem 6rem 6rem 6rem;
+  @media only screen and (max-width: 1000px) {
+    padding: 0 0 0 0;
+  }
+
+  &__chapter {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  &__sentence {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+  }
+}

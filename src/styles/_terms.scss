@@ -1,4 +1,8 @@
 .terms {
+  padding: 4rem 6rem 6rem 6rem;
+  @media only screen and (max-width: 1000px) {
+    padding: 0 0 0 0;
+  }
 
   &__chapter {
     margin-left: 2rem;

@@ -1,6 +1,11 @@
 .privacy {
   margin-top: 3rem;
 
+  padding: 4rem 8rem 6rem 8rem;
+  @media only screen and (max-width: 1000px) {
+    padding: 0 0 0 0;
+  }
+
   &__desc {
     margin: 0.8rem 0 2.5rem 0;
   }

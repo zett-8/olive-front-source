@@ -66,6 +66,7 @@ class LoginPageContainer extends React.Component {
     if (message) {
       oopsNotificationBody.message = message
       this.notificationSystem.current.addNotification(oopsNotificationBody)
+      this.setState({ signUpButtonIsWorking: false })
       return null
     }
 
@@ -73,6 +74,7 @@ class LoginPageContainer extends React.Component {
     if (!err) {
       oopsNotificationBody.message = 'すでに登録されているアドレスです'
       this.notificationSystem.current.addNotification(oopsNotificationBody)
+      this.setState({ signUpButtonIsWorking: false })
       return null
     }
 
@@ -81,6 +83,7 @@ class LoginPageContainer extends React.Component {
       if (err) {
         oopsNotificationBody.message = '無効な招待コードです'
         this.notificationSystem.current.addNotification(oopsNotificationBody)
+        this.setState({ signUpButtonIsWorking: false })
         return null
       }
     }
@@ -88,6 +91,7 @@ class LoginPageContainer extends React.Component {
     const error = await this.props.signUp(this.state.email, this.state.password, this.state.invitation || 'non')
     if (error) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      this.setState({ signUpButtonIsWorking: false })
       return null
     }
 

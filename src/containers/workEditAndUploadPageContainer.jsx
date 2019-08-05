@@ -167,6 +167,7 @@ class WorkEditAndUpload extends React.Component {
     if (message) {
       notYetNotificationBody.message = message
       this.notificationSystem.current.addNotification(notYetNotificationBody)
+      this.setState({ saveButtonIsWorking: false })
       return null
     }
 
@@ -187,6 +188,7 @@ class WorkEditAndUpload extends React.Component {
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      this.setState({ saveButtonIsWorking: false })
       return null
     }
 
@@ -203,6 +205,7 @@ class WorkEditAndUpload extends React.Component {
     if (message) {
       notYetNotificationBody.message = message
       this.notificationSystem.current.addNotification(notYetNotificationBody)
+      this.setState({ uploadButtonIsWorking: false })
       return null
     }
 
@@ -216,6 +219,7 @@ class WorkEditAndUpload extends React.Component {
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      this.setState({ uploadButtonIsWorking: false })
       return null
     }
 

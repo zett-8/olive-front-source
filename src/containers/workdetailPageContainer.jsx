@@ -94,6 +94,7 @@ class WorkDetailPageContainer extends React.Component {
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      this.setState({ buyTransferButtonIsWorking: false })
       return null
     }
 
@@ -117,6 +118,7 @@ class WorkDetailPageContainer extends React.Component {
     let err = await this.props.purchaseWork(description, token.id, price, receipt)
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
+      this.setState({ buyCreditButtonIsWorking: false })
       return null
     }
 
@@ -129,6 +131,7 @@ class WorkDetailPageContainer extends React.Component {
     if (err) {
       wentWrongNotificationBody.children = (<div><p>購入は完了しましたが、更新に失敗しました。</p><br /><p>お手数ですが、お問い合わせをお願いします。</p></div>)
       this.notificationSystem.current.addNotification(wentWrongNotificationBody)
+      this.setState({ buyCreditButtonIsWorking: false })
       return null
     }
 

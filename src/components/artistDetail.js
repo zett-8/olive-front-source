@@ -13,14 +13,35 @@ const artistDetail = props => {
         />
         <p className="artistDetail__info__name">{props.detail.artist_name}</p>
         <div className="artistDetail__info__list">
-          <p className="typ_infoList_left">Website</p>
-          <p className="typ_infoList_right">{props.detail.website || '-'}</p>
-          <p className="typ_infoList_left">Place</p>
-          <p className="typ_infoList_right">{props.detail.place || '-'}</p>
-          <p className="typ_infoList_left">Birthday</p>
-          <p className="typ_infoList_right">{props.detail.birthday || '-'}</p>
-          <p className="typ_infoList_left">Sex</p>
-          <p className="typ_infoList_right">{props.detail.sex}</p>
+          {props.detail.website ? (
+            <React.Fragment>
+              <p className="typ_infoList_left">Website</p>
+              <p className="typ_infoList_right">
+                {<a href={props.detail.website} target="_blank" rel="noopener noreferrer">{props.detail.website}</a> || '-'}
+              </p>
+            </React.Fragment>
+          ) : null}
+
+          {props.detail.place ? (
+            <React.Fragment>
+              <p className="typ_infoList_left">Place</p>
+              <p className="typ_infoList_right">{props.detail.place || '-'}</p>
+            </React.Fragment>
+          ) : null}
+
+          {props.detail.birthday ? (
+            <React.Fragment>
+              <p className="typ_infoList_left">Birthday</p>
+              <p className="typ_infoList_right">{props.detail.birthday || '-'}</p>
+            </React.Fragment>
+          ) : null}
+
+          {props.detail.sex !== 'Other' ? (
+            <React.Fragment>
+              <p className="typ_infoList_left">Sex</p>
+              <p className="typ_infoList_right">{props.detail.sex}</p>
+            </React.Fragment>
+          ) : null}
         </div>
       </div>
       <div className="artistDetail__profile">

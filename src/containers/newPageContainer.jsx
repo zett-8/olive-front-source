@@ -8,6 +8,8 @@ import scrollHandler from '../utils/scrollHandler'
 
 class NewPageContainer extends React.Component {
   async componentDidMount() {
+    document.title = 'New Works | Olive'
+
     if (this.props.workList.newWorks.pristine) {
       await this.props.getNewWorks()
       this.fetchNextWorks()

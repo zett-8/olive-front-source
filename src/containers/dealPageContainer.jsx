@@ -26,6 +26,8 @@ class DealPageContainer extends React.Component {
   }
 
   async componentDidMount() {
+    document.title = '取引ページ | Olive'
+
     await this.props.clearMessage()
 
     const { workId } = this.props.match.params

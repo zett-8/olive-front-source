@@ -8,6 +8,8 @@ import scrollHandler from '../utils/scrollHandler'
 
 class PopularPageContainer extends React.Component {
   async componentDidMount() {
+    document.title = 'Popular Works | Olive'
+
     if (this.props.workList.popularWorks.pristine) {
       await this.props.getPopularWorks()
       this.fetchNextWorks()

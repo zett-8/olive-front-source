@@ -56,6 +56,10 @@ button:hover {
   }
 }
 
+.contents{
+  min-height: 72vh;
+}
+
 .b_btn {
   background-color: #222222;
   color: white;
@@ -137,6 +141,8 @@ button:hover {
   font-weight: 100;
   outline: none;
   height: 3rem;
+
+  @media only screen and (max-width: $bp-small) { font-size: 16px; }
 }
 
 .text_input {
@@ -144,6 +150,8 @@ button:hover {
   font-size: 1.5rem;
   font-weight: 100;
   outline: none;
+
+  @media only screen and (max-width: $bp-small) { font-size: 16px; }
 }
 
 @mixin icon {

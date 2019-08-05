@@ -32,6 +32,7 @@ class WorkDetailPageContainer extends React.Component {
   componentWillUnmount() { this.props.clearWorkDetail() }
 
   async componentWillMount() {
+    window.scrollTo(0, 0)
     await this.props.getWorkDetail(this.props.match.params.id)
 
     const w = this.props.workDetail.contents,
@@ -40,6 +41,12 @@ class WorkDetailPageContainer extends React.Component {
     if (w.sold && (w.artist.id === login.user_id || w.buyer.id === login.user_id)) {
       this.setState({ bought: true })
     }
+
+    document.title = this.props.workDetail.contents.title + ' - ' + this.props.workDetail.contents.artist.artist_name + ' | Olive'
+  }
+
+  componentDidMount() {
+
   }
 
   openModal = () => this.setState({ modalIsOpen: true })

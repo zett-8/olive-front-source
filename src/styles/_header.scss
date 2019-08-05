@@ -168,7 +168,8 @@
 .ReactModal__Content.ReactModal__Content--after-open {
   border: none !important;
   border-radius: 0 !important;
-  padding: 40px !important;
+  //padding: 40px !important;
+  @media only screen and (max-width: $bp-small) { padding: 20px !important; }
 }
 
 .searchFilterModal > div {
@@ -251,5 +252,7 @@
     justify-content: space-around;
     margin-top: 6rem;
     margin-bottom: 0;
+
+    .non-transition { transition: none; }
   }
 }

@@ -37,13 +37,21 @@ export default () => {
 
       <p className="privacy__article typ_terms_article">お問い合せ</p>
       <p className="privacy__sentence">当社の個人情報の取扱に関するお問い合せは下記までご連絡ください。</p>
-      <p className="privacy__sentence">株式会社noon</p>
-      <p className="privacy__sentence">代表取締役社長　関　弘章</p>
-      <p className="privacy__sentence">〒150-0041</p>
-      <p className="privacy__sentence">東京都渋谷区神南1-20-7</p>
-      <p className="privacy__sentence">川原ビル6階</p>
-      <p className="privacy__sentence">TEL:03-6206-9618</p>
-      <p className="privacy__sentence">Mail:info@noon-inc.com</p>
+      <p className="privacy__sentence">
+        株式会社noo
+        <br />
+        代表取締役社長　関　弘章
+        <br />
+        〒150-0041
+        <br />
+        東京都渋谷区神南1-20-7
+        <br />
+        川原ビル6階
+        <br />
+        TEL:03-6206-9618
+        <br />
+        Mail:info@noon-inc.com
+      </p>
     </div>
   )
 }

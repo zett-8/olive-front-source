@@ -1,44 +1,30 @@
 .terms {
-  padding: 4rem 6rem 6rem 6rem;
-  @media only screen and (max-width: 1000px) {
-    padding: 0 0 0 0;
-  }
+  margin: 10rem auto;
+  max-width: 500px;
+  font-size: 1.2rem;
 
-  &__chapter {
-    margin-left: 2rem;
-    margin-top: 3rem;
-  }
+  &__chapter { margin-top: 2rem; }
 
   &__article {
-    margin-left: 5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+    margin-top: 1.5rem;
+    font-weight: bold;
   }
 
-  span { margin-left: 7rem; }
+  span {
+    display: block;
+    margin-top: 1.5rem;
+  }
 
-  ol { margin-left: 7rem; }
+  ol {
+    margin-top: 1.5rem;
+    margin-left: 1.3rem;
+  }
 
-  ul { margin-left: 4rem; }
+  ul { margin-top: 1.2rem; }
 
 
   @media only screen and (max-width: $bp-medium) {
-      &__chapter {
-      margin-left: 0rem;
-      margin-top: 3rem;
-    }
 
-    &__article {
-      margin-left: 1rem;
-      margin-top: 0.5rem;
-      margin-bottom: 0.2rem;
-    }
-
-    span { margin-left: 1rem; }
-
-    ol { margin-left: 3rem; }
-
-    ul { margin-left: 4rem; }
   }
 
 }

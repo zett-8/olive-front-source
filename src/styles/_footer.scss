@@ -14,7 +14,16 @@
 
   &__menu {
     display: flex;
-    p { margin-right: 2rem; }
+    p {
+      margin-right: 2rem;
+      transition: $transition;
+
+      &:hover {
+        opacity: $opacity;
+      }
+    }
+
+
 
     @media only screen and (max-width: $bp-medium) {
       display: none;

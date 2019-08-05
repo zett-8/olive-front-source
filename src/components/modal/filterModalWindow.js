@@ -5,14 +5,15 @@ import ModalSetting from 'react-modal'
 const customStyles = {
   content: {
     zIndex: '12',
-    top: '48%',
+    top: '50%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-20%',
     transform: 'translate(-50%, -50%)',
     maxWidth: '90%',
-    minWidth: 'max-content'
+    minWidth: 'max-content',
+    maxHeight: '100%'
   },
   // overlay : {
   //   backgroundColor: '#f6f6f6'
@@ -111,7 +112,7 @@ const filterModalWindow = props => {
         <div className="searchFilterModal__width">
           <p>Width</p>
           <input className="input" name="minWidth" type="number" value={props.minWidth} onChange={props.filterChanged} />
-          <span> 〜 </span>
+          <span className="hyphen"> - </span>
           <input className="input" name="maxWidth" type="number" value={props.maxWidth} onChange={props.filterChanged} />
           <span> mm</span>
         </div>
@@ -119,7 +120,7 @@ const filterModalWindow = props => {
         <div className="searchFilterModal__height">
           <p>Height</p>
           <input className="input" name="minHeight" type="number" value={props.minHeight} onChange={props.filterChanged} />
-          <span> 〜 </span>
+          <span className="hyphen"> - </span>
           <input className="input" name="maxHeight" type="number" value={props.maxHeight} onChange={props.filterChanged} />
           <span> mm</span>
         </div>
@@ -127,7 +128,7 @@ const filterModalWindow = props => {
         <div className="searchFilterModal__depth">
           <p>Depth</p>
           <input className="input" name="minDepth" type="number" value={props.minDepth} onChange={props.filterChanged} />
-          <span> 〜 </span>
+          <span className="hyphen"> - </span>
           <input className="input" name="maxDepth" type="number" value={props.maxDepth} onChange={props.filterChanged} />
           <span> mm</span>
         </div>
@@ -176,17 +177,17 @@ const filterModalWindow = props => {
 
         <div className="searchFilterModal__price">
           <p>Price</p>
-          <span>¥ 0 〜 </span>
+          <span>¥ 0 - </span>
           <input className="input" type="number" name="price" value={props.price} onChange={props.filterChanged} />
         </div>
 
         <div className="searchFilterModal__buttons">
-          <button className="b_btn b_btn__8rem" type="button" onClick={props.filterWorks}>search</button>
+          <button className="b_btn b_btn__8rem" type="button" onClick={props.filterWorks}>Search</button>
           <button className="w_btn w_btn__8rem" type="button" onClick={props.resetFilter}>
-            clear
+            Clear
           </button>
           <button className="w_btn w_btn__8rem" type="button" onClick={props.closeModal}>
-            close
+            Close
           </button>
         </div>
       </div>

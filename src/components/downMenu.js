@@ -18,7 +18,7 @@ const downMenu = props => {
           <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 2)}>Artist profile</p>
           {props.userDetail.ready_as_artist ? (
             <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 3)}>Upload</p>
-          ) : <p className="typ_header_menu" style={{ color: 'gray' }} onClick={() => props.menuClicked('/user', 3)}>(Upload)</p>}
+          ) : <p className="typ_header_menu" style={{ color: 'gray' }} onClick={() => null}>(Upload)</p>}
           <p className="typ_header_menu" onClick={() => props.menuClicked(`/artist/${props.userDetail.id}`)}>My page</p>
         </React.Fragment>
       ) : null}

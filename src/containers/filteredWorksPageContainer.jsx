@@ -3,35 +3,42 @@ import { connect } from 'react-redux'
 
 import WorkList from '../components/workList'
 
-import { getNextFilteredWorks } from '../actions/workList'
+import { getNextFilteredWorks, getFilteredWorks } from '../actions/workList'
 import scrollHandler from '../utils/scrollHandler'
 
 class FilteredWorks extends React.Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     document.title = 'Filtered Works | Olive'
 
+    const q = this.props.match.params.info
+    await this.props.getFilteredWorks(q)
+    this.props.getNextFilteredWorks(this.props.workList.filteredWorks.nextWorksApi)
+
     window.addEventListener('scroll', this.handleScroll)
-    this.fetchNextWorks()
   }
 
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
-  fetchNextWorks = () => this.props.getNextFilteredWorks(this.props.worksList.filteredWorks.nextWorksApi)
+  fetchNextWorks = () => {
+    if (this.props.workList.filteredWorks.stock.length)
+      this.props.getNextFilteredWorks(this.props.workList.filteredWorks.nextWorksApi)
+  }
   handleScroll = () => scrollHandler(this.fetchNextWorks)
 
   render() {
-    if (this.props.worksList.filteredWorks.pristine) return null
+    if (this.props.workList.filteredWorks.pristine) return null
 
-    return <WorkList works={this.props.worksList.filteredWorks.contents} />
+    return <WorkList works={this.props.workList.filteredWorks.contents} />
   }
 }
 
 export default connect(
   state => ({
-    worksList: state.workList,
+    workList: state.workList,
   }),
   dispatch => ({
+    getFilteredWorks: q => dispatch(getFilteredWorks(q)),
     getNextFilteredWorks: url => dispatch(getNextFilteredWorks(url))
   })
 )(FilteredWorks)

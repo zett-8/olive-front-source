@@ -12,7 +12,7 @@ class PopularPageContainer extends React.Component {
 
     if (this.props.workList.popularWorks.pristine) {
       await this.props.getPopularWorks()
-      this.fetchNextWorks()
+      this.props.getNextPopularWoks(this.props.workList.popularWorks.nextWorksApi)
     }
 
     window.addEventListener('scroll', this.handleScroll)
@@ -20,7 +20,10 @@ class PopularPageContainer extends React.Component {
 
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
-  fetchNextWorks = () => this.props.getNextPopularWoks(this.props.workList.popularWorks.nextWorksApi)
+  fetchNextWorks = () => {
+    if (this.props.workList.popularWorks.stock.length)
+      this.props.getNextPopularWoks(this.props.workList.popularWorks.nextWorksApi)
+  }
   handleScroll = () =>scrollHandler(this.fetchNextWorks)
 
   render() {

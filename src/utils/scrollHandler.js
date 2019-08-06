@@ -5,5 +5,5 @@ export default func => {
   const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
   const windowBottom = windowHeight + window.pageYOffset
 
-  if (windowBottom === docHeight) func()
+  if (windowBottom > docHeight - 50) func()
 }

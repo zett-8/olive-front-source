@@ -12,7 +12,7 @@ class NewPageContainer extends React.Component {
 
     if (this.props.workList.newWorks.pristine) {
       await this.props.getNewWorks()
-      this.fetchNextWorks()
+      this.props.getNextNewWorks(this.props.workList.newWorks.nextWorksApi)
     }
 
     window.addEventListener('scroll', this.handleScroll)
@@ -20,7 +20,10 @@ class NewPageContainer extends React.Component {
 
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
-  fetchNextWorks = () => this.props.getNextNewWorks(this.props.workList.newWorks.nextWorksApi)
+  fetchNextWorks = () => {
+    if (this.props.workList.newWorks.stock.length)
+      this.props.getNextNewWorks(this.props.workList.newWorks.nextWorksApi)
+  }
   handleScroll = () => scrollHandler(this.fetchNextWorks)
 
   render() {

@@ -9,18 +9,21 @@ import scrollHandler from '../utils/scrollHandler'
 class LandingPageContainer extends React.Component {
   async componentDidMount() {
     document.title = '現代アートをもっと自由に | Olive'
-  //
+
     if (this.props.workList.recommendWorks.pristine) {
       await this.props.getRecommendWorks()
-  //     this.fetchNextWorks()
+      this.props.getNextRecommendWorks(this.props.workList.recommendWorks.nextWorksApi)
     }
-  //
+
     window.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
-  fetchNextWorks = () => this.props.getNextRecommendWorks(this.props.workList.recommendWorks.nextWorksApi)
+  fetchNextWorks = () => {
+    if (this.props.workList.recommendWorks.stock.length)
+      this.props.getNextRecommendWorks(this.props.workList.recommendWorks.nextWorksApi)
+  }
   handleScroll = () =>scrollHandler(this.fetchNextWorks)
 
   render() {

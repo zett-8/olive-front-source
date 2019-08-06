@@ -140,8 +140,8 @@ class HeaderContainer extends React.Component {
     if (this.state.excludeSoldWorks) q += '&excludeSoldWorks=true'
 
     this.closeModal()
-    await this.props.getFilteredWorks(q)
-    this.props.history.push(`/filteredWorks/${q}`)
+
+    this.props.history.push(`/filter/${q}`)
   }
 
   render() {

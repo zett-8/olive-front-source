@@ -10,7 +10,7 @@ class FavoritePageContainer extends React.Component {
   async componentWillMount() {
     if (this.props.workList.favoriteWorks.pristine) {
       await this.props.getFavoriteWorks(this.props.loginStatus.user_id)
-      this.fetchNextWorks()
+      this.props.getNextFavoriteWorks(this.props.workList.favoriteWorks.nextWorksApi)
     }
 
     window.addEventListener('scroll', this.handleScroll)
@@ -22,7 +22,10 @@ class FavoritePageContainer extends React.Component {
 
   componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
 
-  fetchNextWorks = () => this.props.getNextFavoriteWorks(this.props.workList.favoriteWorks.nextWorksApi)
+  fetchNextWorks = () => {
+    if (this.props.workList.favoriteWorks.stock.length)
+      this.props.getNextFavoriteWorks(this.props.workList.favoriteWorks.nextWorksApi)
+  }
   handleScroll = () => scrollHandler(this.fetchNextWorks)
 
   render() {

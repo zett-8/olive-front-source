@@ -15,6 +15,7 @@ import ArtistContainer from './containers/artistPageContainer'
 import WorkDetailContainer from './containers/workdetailPageContainer'
 import WorkEditAndUploadContainer from './containers/workEditAndUploadPageContainer'
 import FilteredWorksContainer from './containers/filteredWorksPageContainer'
+import FilteredWorksJump from './containers/filterJumpPageContainer'
 import DealContainer from './containers/dealPageContainer'
 import LogoutContainer from './containers/logoutPageContainer'
 import MessageContainer from './containers/messagePageContainer'
@@ -45,6 +46,7 @@ export default () => (
             <Route exact path="/work/:id/detail" component={WorkDetailContainer} />
             <Route exact path="/work/:id/edit" render={props => <WorkEditAndUploadContainer {...props} edit={true} />} />
             <Route exact path="/work/:workId/deal" component={DealContainer} />
+            <Route exact path="/filter/:info" component={FilteredWorksJump} />
             <Route exact path="/filteredWorks/:info" component={FilteredWorksContainer} />
             <Route exact path="/user" component={UserContainer} />
             <Route exact path="/logout" component={LogoutContainer} />

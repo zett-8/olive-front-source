@@ -111,6 +111,13 @@ class WorkDetailPageContainer extends React.Component {
 
     const detail = this.props.userDetail.contents
     let { token } = await this.props.stripe.createToken({name: `${detail.last_name} ${detail.first_name}`})
+    if (token === undefined) {
+      oopsNotificationBody.message = '無効なカード情報、または未対応のカードです'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      this.setState({ buyCreditButtonIsWorking: false })
+      return null
+    }
+
     const description = `[ID: ${this.props.workDetail.contents.id}] ${this.props.workDetail.contents.title}`
     const price = this.props.workDetail.contents.price
     const receipt = this.props.loginStatus.email

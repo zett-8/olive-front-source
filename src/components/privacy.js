@@ -38,7 +38,7 @@ export default () => {
       <p className="privacy__article typ_terms_article">お問い合せ</p>
       <p className="privacy__sentence">当社の個人情報の取扱に関するお問い合せは下記までご連絡ください。</p>
       <p className="privacy__sentence">
-        株式会社noo
+        株式会社noon
         <br />
         代表取締役社長　関　弘章
         <br />

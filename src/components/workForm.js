@@ -164,6 +164,10 @@ const userDetailWorkUpload = props => {
             value={props.work.height}
             onChange={props.workFormChanged}
             placeholder="height"
+            pattern="\d*"
+            onCopy={e => e.preventDefault()}
+            onPaste={e => e.preventDefault()}
+            style={{ imeMode: 'disabled' }}
           />
           <span>x</span>
           <input
@@ -174,6 +178,10 @@ const userDetailWorkUpload = props => {
             value={props.work.width}
             onChange={props.workFormChanged}
             placeholder="width"
+            pattern="\d*"
+            onCopy={e => e.preventDefault()}
+            onPaste={e => e.preventDefault()}
+            style={{ imeMode: 'disabled' }}
           />
           <span>x</span>
           <input
@@ -184,6 +192,10 @@ const userDetailWorkUpload = props => {
             value={props.work.depth}
             onChange={props.workFormChanged}
             placeholder="depth"
+            pattern="\d*"
+            onCopy={e => e.preventDefault()}
+            onPaste={e => e.preventDefault()}
+            style={{ imeMode: 'disabled' }}
           />
         </div>
 
@@ -251,11 +263,15 @@ const userDetailWorkUpload = props => {
           </label>
         </p>
 
-        <p className="typ_form_label">* Price</p>
+        <p className="typ_form_label">* Price (円)</p>
         <input
           className="input"
           name="price"
           type="number"
+          pattern="\d*"
+          onCopy={e => e.preventDefault()}
+          onPaste={e => e.preventDefault()}
+          style={{ imeMode: 'disabled', width: '100%' }}
           required={true}
           value={props.work.price}
           onChange={props.workFormChanged}

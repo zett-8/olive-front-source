@@ -1,5 +1,6 @@
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const passwordRegex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i
+const onlyNumberRegex = /[0-9]+/
 
 export const FormValidation = (email, password) => {
   const emailIsValid = emailRegex.test(email)
@@ -37,29 +38,44 @@ export const TwoPasswordValidation = (pass1, pass2) => {
 export const workFormValidation = work => {
   let message = ''
 
-  const colors = ['crimson', 'mediumblue', 'forestgreen', 'gold', 'purple', 'brown', 'black', 'grey', 'ivory']
+  if (work.image1 === null) {
+    message = '少なくとも１つの画像をアップロードしてください'
+    return message
+  }
 
   if (
     work.title === '' ||
     work.caption === '' ||
-    work.height === '' ||
-    work.width === '' ||
-    work.depth === '' ||
     work.genre === '' ||
-    work.subgenre === '' ||
-    work.price === ''
+    work.subgenre === ''
   ) {
     message = '必須項目(*)を入力してください'
+    return message
   }
+
+  const colors = ['crimson', 'mediumblue', 'forestgreen', 'gold', 'purple', 'brown', 'black', 'grey', 'ivory']
 
   let colorCount = 0
   colors.forEach(color => {
     if (work[color] === true) colorCount += 1
   })
 
-  if (colorCount > 3) message = '選べるカラーは３つまでです'
+  if (colorCount > 3) {
+    message = '選べるカラーは３つまでです'
+    return message
+  }
 
-  if (work.image1 === null) message = '少なくとも１つの画像をアップロードしてください'
+  const heightCheck = onlyNumberRegex.test(work.height)
+  const widthCheck = onlyNumberRegex.test(work.width)
+  const depthtCheck = onlyNumberRegex.test(work.depth)
+  if(!heightCheck || !widthCheck || !depthtCheck) {
+    message = 'Sizeは半角数字のみで入力してください'
+    return message
+  }
 
-  return message
+  const priceCheck = onlyNumberRegex.test(work.price)
+  if (!priceCheck) {
+    message = 'Priceは半角数字のみで入力してください'
+    return message
+  }
 }

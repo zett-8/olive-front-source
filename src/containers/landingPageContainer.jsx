@@ -8,7 +8,7 @@ import scrollHandler from '../utils/scrollHandler'
 
 class LandingPageContainer extends React.Component {
   async componentDidMount() {
-    document.title = 'アートをもっと自由に | Olive'
+    document.title = '現代アートをもっと自由に | Olive'
 
     if (this.props.workList.recommendWorks.pristine) {
       await this.props.getRecommendWorks()

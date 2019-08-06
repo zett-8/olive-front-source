@@ -3,10 +3,9 @@ import Privacy from '../components/privacy'
 
 
 class PrivacyPageContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    document.title = 'Privacy | Olive'
+  componentDidMount() {
+    window.scrollTo(0, 0)
+    document.title = 'Terms | Olive'
   }
 
   render() {

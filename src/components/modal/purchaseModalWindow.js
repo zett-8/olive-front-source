@@ -46,6 +46,7 @@ const purchaseModalWindow = props => {
         )}
 
         <CardElement />
+        <p style={{ marginTop: '-1.4rem' }}>[ 対応カード: VISA, MasterCard, AMEX ]</p>
         {props.buyCreditButtonIsWorking ? (
           <button className="w_btn b_btn__20rem" type="button" onClick={() => null}>
             <p><img alt="" src={Loading} height="10px" /></p>

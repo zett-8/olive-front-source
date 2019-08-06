@@ -136,7 +136,8 @@
 
     @media only screen and (max-width: $bp-medium) {
       display: block;
-      height: 100vh;
+      height: min-content;
+      padding-bottom: 2rem;
       transform: translateY(90px);
     }
   }

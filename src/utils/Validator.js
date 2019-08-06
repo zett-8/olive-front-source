@@ -68,7 +68,7 @@ export const workFormValidation = work => {
   const heightCheck = onlyNumberRegex.test(work.height)
   const widthCheck = onlyNumberRegex.test(work.width)
   const depthtCheck = onlyNumberRegex.test(work.depth)
-  if(!heightCheck || !widthCheck || !depthtCheck) {
+  if (!heightCheck || !widthCheck || !depthtCheck) {
     message = 'Sizeは半角数字のみで入力してください'
     return message
   }

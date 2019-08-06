@@ -123,6 +123,8 @@ export const getFavoriteWorks = (userId) => dispatch => {
 export const getNextFavoriteWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_FAVORITE_WORKS })
 
+  if (url === null) return null
+
   return Api.getNextPageWorks(url)
     .then(res => {
       dispatch({
@@ -150,6 +152,8 @@ export const getWorksOfAnArtist = (id) => dispatch => {
 export const getNextWorksOfAnArtist = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_WORKS_OF_ARTIST })
 
+  if (url === null) return null
+
   return Api.getNextPageWorks(url)
     .then(res => {
       dispatch({
@@ -174,6 +178,8 @@ export const getFilteredWorks = q => dispatch => {
 
 export const getNextFilteredWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_FILTERED_WORKS })
+
+  if (url === null) return null
 
   return Api.getNextPageWorks(url)
     .then(res => {

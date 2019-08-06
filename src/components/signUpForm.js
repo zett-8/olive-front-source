@@ -4,7 +4,7 @@ import Loading from '../assets/loading.gif'
 
 const loginForm = props => (
   <React.Fragment>
-    <h2>Create Account</h2>
+    <h2>{props.guest ? 'Create Account (Invited Artist)' : 'Create Account'}</h2>
     <form onSubmit={props.signUp}>
       <label htmlFor="email">
         <input

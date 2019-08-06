@@ -25,7 +25,7 @@
       height: 30vmin;
       justify-self: center;
 
-      @media only screen and (max-width: $bp-medium) { width: 35vmin; height: 35vmin; }
+      @media only screen and (max-width: $bp-small) { width: 35vmin; height: 35vmin; }
     }
 
     &__name {

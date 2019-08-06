@@ -117,7 +117,8 @@ class LoginPageContainer extends React.Component {
       return null
     }
     if (err) {
-      this.notificationSystem.current.addNotification(errorNotificationBody)
+      oopsNotificationBody.message = 'パスワードが違います'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
 

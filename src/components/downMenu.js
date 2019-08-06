@@ -43,6 +43,9 @@ const downMenu = props => {
       <p className="typ_header_menu" onClick={() => props.menuClicked('/help')}>Help</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/terms')}>Terms</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/privacy')}>Privacy</p>
+      <p className="typ_header_menu"><a href="https://twitter.com/olive_gallery" target="_blank" rel="noopener noreferrer">Twitter</a></p>
+      <p className="typ_header_menu"><a href="https://www.facebook.com/Olive-473729523378839" target="_blank" rel="noopener noreferrer">Facebook</a></p>
+      <p className="typ_header_menu"><a href="https://www.instagram.com/olive_art_gallery" target="_blank" rel="noopener noreferrer">Instagram</a></p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/contact')}>Contact</p>
     </nav>
   )

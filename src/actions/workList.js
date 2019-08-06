@@ -43,6 +43,8 @@ export const getRecommendWorks = () => dispatch => {
 export const getNextRecommendWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_RECOMMEND_WORKS })
 
+  if (url === null) return null
+
   return Api.getNextPageWorks(url)
     .then(res => {
       dispatch({
@@ -66,6 +68,8 @@ export const getPopularWorks = () => dispatch => {
 
 export const getNextPopularWoks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_POPULAR_WORKS })
+
+  if (url === null) return null
 
   return Api.getNextPageWorks(url)
     .then(res => {
@@ -91,6 +95,8 @@ export const getNewWorks = () => dispatch => {
 
 export const getNextNewWorks = url => dispatch => {
   dispatch({ type: actionTypes.LOAD_NEXT_NEW_WORKS })
+
+  if (url === null) return null
 
   return Api.getNextPageWorks(url)
     .then(res => {

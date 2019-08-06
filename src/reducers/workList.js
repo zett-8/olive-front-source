@@ -1,4 +1,5 @@
 import { actionTypes } from '../actions/workList'
+import shuffle from '../utils/shuffler'
 
 const INITIAL_STATE = {
   recommendWorks: {
@@ -52,7 +53,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_RECOMMEND_WORKS:
       newState.recommendWorks = {
         pristine: false,
-        contents: action.payload.results,
+        contents: shuffle(action.payload.results),
         stock: [],
         nextWorksApi: action.payload.next
       }
@@ -71,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
       newState.recommendWorks = {
         pristine: false,
         contents: newState.recommendWorks.contents,
-        stock: action.payload.results,
+        stock: shuffle(action.payload.results),
         nextWorksApi: action.payload.next
       }
       return newState
@@ -82,7 +83,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_NEW_WORKS:
       newState.newWorks = {
         pristine: false,
-        contents: action.payload.results,
+        contents: shuffle(action.payload.results),
         stock: [],
         nextWorksApi: action.payload.next
       }
@@ -101,7 +102,7 @@ export default (state = INITIAL_STATE, action) => {
       newState.newWorks = {
         pristine: false,
         contents: newState.newWorks.contents,
-        stock: action.payload.results,
+        stock: shuffle(action.payload.results),
         nextWorksApi: action.payload.next
       }
       return newState
@@ -112,7 +113,7 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.GET_POPULAR_WORKS:
       newState.popularWorks = {
         pristine: false,
-        contents: action.payload.results,
+        contents: shuffle(action.payload.results),
         stock: [],
         nextWorksApi: action.payload.next
       }
@@ -131,7 +132,7 @@ export default (state = INITIAL_STATE, action) => {
       newState.popularWorks = {
         pristine: false,
         contents: newState.popularWorks.contents,
-        stock: action.payload.results,
+        stock: shuffle(action.payload.results),
         nextWorksApi: action.payload.next
       }
       return newState

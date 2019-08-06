@@ -291,6 +291,8 @@ class UserPageContainer extends React.Component {
   handleBankInfoInput = e => this.setState({ [`search${e.target.name}Input`]: e.target.value })
 
   updateArtistInfo = async () => {
+    const birthdayRex = /^\d{4}-\d{2}-\d{2}$/
+
     if (
       !this.state.artistName ||
       !this.state.profile ||
@@ -305,6 +307,13 @@ class UserPageContainer extends React.Component {
       this.notificationSystem.current.addNotification(notYetNotificationBody)
       return null
     }
+
+    if (!birthdayRex.test(this.state.birthday)) {
+      oopsNotificationBody.children = (<p>誕生日は<br />1980-01-01 (半角数字)<br />の形式で入力してください</p>)
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
+
 
     const data = {
       user_id: this.props.loginStatus.user_id,

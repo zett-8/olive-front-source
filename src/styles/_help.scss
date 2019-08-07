@@ -1,16 +1,40 @@
 .help {
+  margin: 5rem auto;
+  max-width: 500px;
   padding: 4rem 6rem 6rem 6rem;
   @media only screen and (max-width: 1000px) {
     padding: 0 0 0 0;
   }
 
   &__question {
-    margin-top: 5rem;
+    display: block;
+    margin-top: 3rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dotted $color-basic;
+    cursor: pointer;
+
+    &:hover {
+      opacity: $opacity;
+    }
+  }
+
+  &__toggle {
+    display: none;
   }
 
   &__answer {
-    margin-left: 2rem;
+    padding: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+
     font-size: 1.15rem;
     line-height: 2rem;
+  }
+
+  &__toggle:checked + &__answer {
+    padding: 2rem 0;
+    height: auto;
+    opacity: 1;
   }
 }

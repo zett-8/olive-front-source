@@ -190,6 +190,7 @@ class HeaderContainer extends React.Component {
             burgerToggleClicked={this.burgerToggleClicked}
             loginStatus={this.props.loginStatus}
             openModal={this.openModal}
+            downMenuClass={this.state.downMenuClass}
           />
         </header>
       </React.Fragment>

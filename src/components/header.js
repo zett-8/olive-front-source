@@ -8,7 +8,13 @@ import SearchIMG from 'react-svg-loader!../assets/search.svg' // eslint-disable-
 export const header = props => {
   return (
     <React.Fragment>
-      <div role="button" tabIndex={0} onClick={props.burgerToggleClicked} className="nav__toggleButton">
+      <div
+        role="button"
+        tabIndex={0}
+        style={{ outline: 'none' }}
+        onClick={props.burgerToggleClicked}
+        className={props.downMenuClass ? 'nav__toggleButton' : 'nav__toggleButton-x'}
+      >
         <button type="button" />
       </div>
 
@@ -60,6 +66,7 @@ header.propTypes = {
   menuClicked: PropTypes.func.isRequired,
   burgerToggleClicked: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
+  downMenuClass: PropTypes.bool
 }
 
 export default header

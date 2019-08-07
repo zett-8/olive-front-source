@@ -48,6 +48,46 @@
     }
   }
 
+  &__toggleButton-x {
+    display: none;
+    outline: none;
+    cursor: pointer;
+
+    @media only screen and (max-width: $bp-medium) {
+      display: block;
+      width: 2rem;
+      margin-top: -3rem;
+
+      button {
+        display: block;
+        border: none;
+        border-radius: 0;
+
+        background-color: #030303;
+        height: 1px;
+        width: 2rem;
+
+        margin-bottom: 4px;
+        transform: rotate(45deg);
+        transition: 40ms;
+
+        &::before {
+          content: "";
+          display: block;
+          border: none;
+          border-radius: 0;
+
+          background-color: #030303;
+          height: 1px;
+          width: 2rem;
+
+          transform: rotate(90deg);
+          //transform: translateY(-1rem);
+        }
+      }
+    }
+  }
+
   svg {
     height: 2rem;
     fill: none;

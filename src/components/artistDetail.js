@@ -16,7 +16,7 @@ const artistDetail = props => {
           {props.detail.website ? (
             <React.Fragment>
               <p className="typ_infoList_left">Website</p>
-              <p className="typ_infoList_right">
+              <p className="typ_infoList_right artistDetail__info__list__right">
                 {<a href={props.detail.website} target="_blank" rel="noopener noreferrer">{props.detail.website}</a> || '-'}
               </p>
             </React.Fragment>
@@ -25,7 +25,7 @@ const artistDetail = props => {
           {props.detail.place ? (
             <React.Fragment>
               <p className="typ_infoList_left">Place</p>
-              <p className="typ_infoList_right">{props.detail.place || '-'}</p>
+              <p className="typ_infoList_right artistDetail__info__list__right">{props.detail.place || '-'}</p>
             </React.Fragment>
           ) : null}
 

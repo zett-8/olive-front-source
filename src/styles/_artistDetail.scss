@@ -45,6 +45,8 @@
       grid-column-gap: 2rem;
 
       justify-content: center;
+
+      &__right { word-break: break-all; }
     }
   }
 

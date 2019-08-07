@@ -65,6 +65,7 @@ class LoginPageContainer extends React.Component {
     const message = FormValidation(this.state.email, this.state.password)
     if (message) {
       oopsNotificationBody.message = message
+      oopsNotificationBody.autoDismiss = 4
       this.notificationSystem.current.addNotification(oopsNotificationBody)
       this.setState({ signUpButtonIsWorking: false })
       return null

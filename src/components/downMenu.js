@@ -6,10 +6,13 @@ const downMenu = props => {
     <React.Fragment>
       <div className="down-menu__user">
         <div
+          role="button"
+          tabIndex={0}
           className="down-menu__user__icon"
-          style={{ backgroundImage: `url(${props.userDetail.icon})` }}
+          style={{ backgroundImage: `url(${props.userDetail.icon})`, outline: 'none', cursor: 'pointer' }}
+          onClick={() => props.menuClicked('/user', 0)}
         />
-        <p className="typ_header_menu down-menu__user__email">{props.loginStatus.email}</p>
+        <p className="typ_header_menu down-menu__user__email" onClick={() => props.menuClicked('/user', 0)}>{props.loginStatus.email}</p>
       </div>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 0)}>Settings</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/user', 1)}>Order history</p>

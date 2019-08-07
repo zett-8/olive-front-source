@@ -80,7 +80,7 @@ const userDetailWorkUpload = props => {
             alt=""
           />
         </p>
-
+        <p style={{ gridColumn: '1 / 4' }}>*Image size = 1000KBまで</p>
         <div className="workEditAndUpload__images__buttons">
           <input style={{ display: 'none' }} type="file" accept="image/*" ref={props.buttonRef} onChange={props.workImageSelected} />
           <button className="w_btn w_btn__15rem" type="button" onClick={props.workImageSelectBtnClicked}>

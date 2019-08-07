@@ -5,7 +5,12 @@ import NotificationSystem from "react-notification-system";
 import UserDetailWorkUpload from '../components/workForm'
 
 import { workFormValidation } from '../utils/Validator'
-import {errorNotificationBody, notYetNotificationBody, successNotificationBody} from '../utils/notification'
+import {
+  errorNotificationBody,
+  notYetNotificationBody,
+  oopsNotificationBody,
+  successNotificationBody
+} from '../utils/notification'
 import { uploadWork, updateWork, deleteWork, getWorkDetail, clearWorkDetail } from '../actions/workDetail'
 
 import One from '../assets/1.jpg'
@@ -94,6 +99,12 @@ class WorkEditAndUpload extends React.Component {
   workImageSelected = e => {
     const f = e.target.files
     if (f.length === 0) return null
+    if (f[0].size > 1000000) {
+      oopsNotificationBody.message = '画像のサイズは1000KB以下でお願いします'
+      oopsNotificationBody.autoDismiss = 3
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
 
     const url = this.createObjectURL(f[0])
 

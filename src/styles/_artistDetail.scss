@@ -86,7 +86,8 @@
         margin-top: -5.8rem;
         transform: translateY(31px);
       }
-      .sw2:checked + .profile_contents { display: block; margin-top: 1.8rem; }
+      .sw2:checked + .sw1 { display: none !important; }
+      .sw2:checked ~ .profile_contents { display: block; margin-top: 1.8rem; }
     }
   }
 }

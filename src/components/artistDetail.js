@@ -46,10 +46,10 @@ const artistDetail = props => {
       </div>
       <div className="artistDetail__profile">
         <div className="artistDetail__profile__box">
+          <input className="sw2" type="checkbox" id="label5" />
           <label className="sw1" htmlFor="label5"> {/*eslint-disable-line*/}
             read more...
           </label>
-          <input className="sw2" type="checkbox" id="label5" />
           <div className="profile_contents">{props.detail.profile}</div>
         </div>
       </div>

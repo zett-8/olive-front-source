@@ -1,7 +1,7 @@
 import React from 'react'
-import Help from '../components/help'
+import Help from '../components/faq'
 
-class helpPageContainer extends React.Component {
+class FAQPageContainer extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     document.title = 'Help | Olive'
@@ -12,4 +12,4 @@ class helpPageContainer extends React.Component {
   }
 }
 
-export default helpPageContainer
+export default FAQPageContainer

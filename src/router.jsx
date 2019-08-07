@@ -22,7 +22,7 @@ import MessageContainer from './containers/messagePageContainer'
 import PasswordResetContainer from './containers/passwordResetPageContainer'
 import ContactContainer from './containers/contactPageContainer'
 import AboutContainer from './containers/aboutPageContainer'
-import HelpContainer from './containers/helpPageContainer'
+import FAQContainer from './containers/FAQPageContainer'
 import TermsPageContainer from './containers/termsPageContainer'
 import PrivacyPageContainer from './containers/privacyPageContainer'
 import Page404 from './components/404'
@@ -53,7 +53,7 @@ export default () => (
 
             {/* footer */}
             <Route exact path="/about" component={AboutContainer} />
-            <Route exact path="/faq" component={HelpContainer} />
+            <Route exact path="/faq" component={FAQContainer} />
             <Route exact path="/terms" component={TermsPageContainer} />
             <Route exact path="/privacy" component={PrivacyPageContainer} />
             <Route exact path="/contact" component={ContactContainer} />

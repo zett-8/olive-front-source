@@ -1,4 +1,4 @@
-.aboutUs {
+.help {
   margin: 5rem auto;
   max-width: 500px;
   font-size: 1.2rem;
@@ -8,5 +8,15 @@
   &__sentence {
     display: block;
     margin-top: 1.5rem;
+  }
+
+  ol {
+    margin-top: 1.5rem;
+    margin-left: 1.3rem;
+  }
+
+  ul {
+    margin-top: 1.2rem;
+    margin-left: 1.3rem;
   }
 }

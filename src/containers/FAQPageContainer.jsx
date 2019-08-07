@@ -1,5 +1,5 @@
 import React from 'react'
-import Help from '../components/faq'
+import FAQ from '../components/faq'
 
 class FAQPageContainer extends React.Component {
   componentDidMount() {
@@ -8,7 +8,7 @@ class FAQPageContainer extends React.Component {
   }
 
   render() {
-    return <Help/>
+    return <FAQ />
   }
 }
 

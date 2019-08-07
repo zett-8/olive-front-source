@@ -1,22 +1,40 @@
 .help {
   margin: 5rem auto;
   max-width: 500px;
-  font-size: 1.2rem;
+  padding: 4rem 6rem 6rem 6rem;
+  @media only screen and (max-width: 1000px) {
+    padding: 0 0 0 0;
+  }
 
-  &__chapter { margin-top: 2rem; }
-
-  &__sentence {
+  &__question {
     display: block;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dotted $color-basic;
+    cursor: pointer;
+
+    &:hover {
+      opacity: $opacity;
+    }
   }
 
-  ol {
-    margin-top: 1.5rem;
-    margin-left: 1.3rem;
+  &__toggle {
+    display: none;
   }
 
-  ul {
-    margin-top: 1.2rem;
-    margin-left: 1.3rem;
+  &__answer {
+    padding: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    font-size: 1.15rem;
+    line-height: 2rem;
+  }
+
+  &__toggle:checked + &__answer {
+    padding: 2rem 0;
+    height: auto;
+    opacity: 1;
   }
 }

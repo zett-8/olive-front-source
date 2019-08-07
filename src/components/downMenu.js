@@ -43,7 +43,7 @@ const downMenu = props => {
       {props.loginStatus.email ? userMenuRenderer() : null}
 
       <p className="typ_header_menu" onClick={() => props.menuClicked('/about')}>About</p>
-      <p className="typ_header_menu" onClick={() => props.menuClicked('/help')}>Help</p>
+      <p className="typ_header_menu" onClick={() => props.menuClicked('/faq')}>FAQ</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/terms')}>Terms</p>
       <p className="typ_header_menu" onClick={() => props.menuClicked('/privacy')}>Privacy</p>
       <p className="typ_header_menu"><a href="https://twitter.com/olive_gallery" target="_blank" rel="noopener noreferrer">Twitter</a></p>

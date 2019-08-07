@@ -6,7 +6,7 @@ const footer = () => {
     <footer className="footer">
       <div className="footer__menu">
         <p className="typ_footer"><Link to="/about">About</Link></p>
-        <p className="typ_footer"><Link to="/help">Help</Link></p>
+        <p className="typ_footer"><Link to="/faq">FAQ</Link></p>
         <p className="typ_footer"><Link to="/terms">Terms</Link></p>
         <p className="typ_footer"><Link to="/privacy">Privacy</Link></p>
         <p className="typ_footer"><a href="https://twitter.com/olive_gallery" target="_blank" rel="noopener noreferrer">Twitter</a></p>

@@ -24,7 +24,7 @@ const workList = props => {
         {props.works.map(w => (
           <div className="work" key={w.id}>
             <Link key={w.id} to={`/work/${w.id}/detail`}>
-              <LazyLoad offset={150} once height={300} placeholder={<img alt="" width="100%" src={Loading} />}>
+              <LazyLoad offset={150} once height={300} placeholder={<div className="workPlaceHolder"><img alt="" src={Loading} /></div>}>
                 <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
               </LazyLoad>
             </Link>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import LazyLoad from 'react-lazyload'
 
 import VOID from '../assets/700.gif'
-import Loading from '../assets/loading.gif'
 
 const workList = props => {
   const workListRenderer = () => (
@@ -24,7 +23,7 @@ const workList = props => {
         {props.works.map(w => (
           <div className="work" key={w.id}>
             <Link key={w.id} to={`/work/${w.id}/detail`}>
-              <LazyLoad offset={150} once height={300} placeholder={<div className="workPlaceHolder"><img alt="" src={Loading} /></div>}>
+              <LazyLoad offset={150} once height={300}>
                 <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
               </LazyLoad>
             </Link>

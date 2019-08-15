@@ -12,6 +12,10 @@ export default {
   login: (email, password) => axios.post(`${PATH}/api-token-auth/`, { username: email, password }),
 
   // About users
+  inviteOtherArtist: (token, formData) => {
+    const header = setToken(token)
+    return axios.post(`${PATH}/api/v1/invite-other-artist/`, formData, header)
+  },
   getUserDetail: (token, UUID) => {
     const header = setToken(token)
     return axios.get(`${PATH}/api/v1/userDetails/${UUID}/`, header)

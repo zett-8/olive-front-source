@@ -12,6 +12,7 @@ const userDetailNav = props => {
           <p className="userDetail__nav__each" style={{ color: 'gray' }}>(upload)</p>
         )}
         <p className="userDetail__nav__each" onClick={() => props.goToMyPage()}>My page</p>
+        <p className="userDetail__nav__each" onClick={() => props.navClicked(4)}>Invite other artist</p>
       </React.Fragment>
     )
   }

@@ -8,9 +8,11 @@ import WorkEditAndUpload from './workEditAndUploadPageContainer'
 import UserDetailNav from '../components/userDetail/userDetail_nav'
 import UserDetailPrime from '../components/userDetail/userDetail_prime'
 import UserDetailArtist from '../components/userDetail/userDetail_artist'
+import UserDetailInvite from '../components/userDetail/userDetail_invite'
 import WorkList from '../components/workList'
 
 import { getPurchasedHistory } from '../actions/workList'
+import { inviteOtherArtist } from '../actions/invitation'
 import { uploadUserIcon, updateBuyerInfo, updateArtistInfo, getUserDetail } from '../actions/userDetail'
 import { updateEmail, updatePassword } from '../actions/loginStatus'
 import { changeUserTab } from '../actions/userPageTab'
@@ -18,9 +20,10 @@ import {
   errorNotificationBody,
   notYetNotificationBody,
   oopsNotificationBody,
-  successNotificationBody
+  successNotificationBody,
 } from '../utils/notification'
 import { EmailValidation, TwoPasswordValidation } from '../utils/Validator'
+import API from "../utils/api";
 
 class UserPageContainer extends React.Component {
   constructor(props) {
@@ -64,6 +67,9 @@ class UserPageContainer extends React.Component {
       selectableBranches: [],
       searchBankInput: '',
       searchBranchInput: '',
+
+      // invite tab
+      inviteEmail: '',
     }
   }
 
@@ -74,7 +80,8 @@ class UserPageContainer extends React.Component {
 
   componentDidMount() {
     document.title = 'User page | Olive'
-    if (this.props.userDetail.pristine) this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
+    if (this.props.userDetail.pristine)
+      this.props.getUserDetail(this.props.loginStatus.token, this.props.loginStatus.uuid)
   }
 
   componentDidUpdate(prevProps) {
@@ -133,7 +140,11 @@ class UserPageContainer extends React.Component {
 
     if (this.state.iconImage === null) return
 
-    const err = await this.props.uploadUserIcon(this.props.loginStatus.token, this.props.loginStatus.uuid, this.state.iconImage)
+    const err = await this.props.uploadUserIcon(
+      this.props.loginStatus.token,
+      this.props.loginStatus.uuid,
+      this.state.iconImage
+    )
 
     if (err) {
       this.notificationSystem.current.addNotification(errorNotificationBody)
@@ -156,7 +167,11 @@ class UserPageContainer extends React.Component {
       return null
     }
 
-    const err = await this.props.updateEmail(this.props.loginStatus.token, this.props.loginStatus.uuid, this.state.email)
+    const err = await this.props.updateEmail(
+      this.props.loginStatus.token,
+      this.props.loginStatus.uuid,
+      this.state.email
+    )
 
     if (err) this.notificationSystem.current.addNotification(errorNotificationBody)
   }
@@ -233,7 +248,15 @@ class UserPageContainer extends React.Component {
     e.preventDefault()
 
     if (e.target.name === 'Bank') {
-      const banks = await axios.get(`https://bank.teraren.com/banks/search.json?name=${this.state.searchBankInput.slice(-2) === '銀行' ? this.state.searchBankInput.slice(0, -2) : this.state.searchBankInput}`).then(res => res.data)
+      const banks = await axios
+        .get(
+          `https://bank.teraren.com/banks/search.json?name=${
+            this.state.searchBankInput.slice(-2) === '銀行'
+              ? this.state.searchBankInput.slice(0, -2)
+              : this.state.searchBankInput
+          }`
+        )
+        .then(res => res.data)
       this.setState({ selectableBanks: banks })
 
       if (this.state.selectableBanks.length) {
@@ -242,13 +265,15 @@ class UserPageContainer extends React.Component {
           bankCode: this.state.selectableBanks[0].code,
         })
 
-        const branches = await axios.get(`https://bank.teraren.com/banks/${this.state.bankCode}/branches.json`).then(res => res.data)
+        const branches = await axios
+          .get(`https://bank.teraren.com/banks/${this.state.bankCode}/branches.json`)
+          .then(res => res.data)
 
         if (branches.length) {
           this.setState({
             selectableBranches: branches,
             bankBranchName: branches[0].name,
-            bankBranchCode: branches[0].code
+            bankBranchCode: branches[0].code,
           })
         }
       }
@@ -257,12 +282,18 @@ class UserPageContainer extends React.Component {
     }
 
     if (e.target.name === 'Branch') {
-      const branches = await axios.get(`https://bank.teraren.com/banks/${this.state.bankCode}/branches/search.json?name=${this.state.searchBranchInput}`).then(res => res.data)
+      const branches = await axios
+        .get(
+          `https://bank.teraren.com/banks/${this.state.bankCode}/branches/search.json?name=${
+            this.state.searchBranchInput
+          }`
+        )
+        .then(res => res.data)
       if (branches.length) {
         this.setState({
           selectableBranches: branches,
           bankBranchName: branches[0].name,
-          bankBranchCode: branches[0].code
+          bankBranchCode: branches[0].code,
         })
       }
     }
@@ -277,7 +308,7 @@ class UserPageContainer extends React.Component {
       this.setState({
         selectableBranches: branches,
         bankBranchName: branches[0].name,
-        bankBranchCode: branches[0].code
+        bankBranchCode: branches[0].code,
       })
       return null
     }
@@ -309,11 +340,18 @@ class UserPageContainer extends React.Component {
     }
 
     if (!birthdayRex.test(this.state.birthday)) {
-      oopsNotificationBody.children = (<p>誕生日は<br />1980-01-01 (半角数字)<br />の形式で入力してください</p>)
+      oopsNotificationBody.children = (
+        <p>
+          誕生日は
+          <br />
+          1980-01-01 (半角数字)
+          <br />
+          の形式で入力してください
+        </p>
+      )
       this.notificationSystem.current.addNotification(oopsNotificationBody)
       return null
     }
-
 
     const data = {
       user_id: this.props.loginStatus.user_id,
@@ -340,6 +378,44 @@ class UserPageContainer extends React.Component {
 
     successNotificationBody.title = 'Updated Artist Info!'
     this.notificationSystem.current.addNotification(successNotificationBody)
+  }
+
+  // =============================
+  // invite tab
+  // =============================
+
+  inviteEmailIsTyped = e => {
+    this.setState({ inviteEmail: e.target.value.trim() })
+  }
+
+  inviteOtherArtist = async () => {
+    const emailError = EmailValidation(this.state.inviteEmail)
+    if (emailError) {
+      oopsNotificationBody.message = '正しいメールアドレスを入力してください'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
+
+    const err = await API.checkUserEmail(this.state.inviteEmail)
+    if (!err) {
+      oopsNotificationBody.message = 'すでに登録されているアドレスです'
+      this.notificationSystem.current.addNotification(oopsNotificationBody)
+      return null
+    }
+
+    const formData = new FormData()
+    formData.append('email', this.state.inviteEmail)
+    formData.append('userID', this.props.userDetail.contents.id)
+
+    const error = await this.props.inviteOtherArtist(this.props.loginStatus.token, formData)
+    if (error) {
+      this.notificationSystem.current.addNotification(errorNotificationBody)
+    }
+
+    successNotificationBody.title = '招待メールを送りました！'
+    this.notificationSystem.current.addNotification(successNotificationBody)
+
+    this.setState({ inviteEmail: '' })
   }
 
   tabContents = () => {
@@ -411,8 +487,23 @@ class UserPageContainer extends React.Component {
         )
 
       case 3:
-        return <div><WorkEditAndUpload mypage={true} edit={false} /></div>
+        return (
+          <div>
+            <WorkEditAndUpload mypage={true} edit={false} />
+          </div>
+        )
 
+      case 4:
+        return (
+          <div className="userDetail__invite">
+            <UserDetailInvite
+              userDetail={this.props.userDetail.contents}
+              inviteEmail={this.state.inviteEmail}
+              inviteEmailIsTyped={this.inviteEmailIsTyped}
+              inviteOtherArtist={this.inviteOtherArtist}
+            />
+          </div>
+        )
 
       case 5:
         return (
@@ -456,17 +547,18 @@ export default connect(
     userDetail: state.userDetail,
     genres: state.genres,
     workList: state.workList,
-    userTab: state.userTab
+    userTab: state.userTab,
   }),
   dispatch => ({
-    getPurchasedHistory: (user_id) => dispatch(getPurchasedHistory(user_id)),
+    getPurchasedHistory: user_id => dispatch(getPurchasedHistory(user_id)),
     getUserDetail: (token, uuid) => dispatch(getUserDetail(token, uuid)),
     updateEmail: (token, userId, email) => dispatch(updateEmail(token, userId, email)),
-    updatePassword: (token, userId, oldPassword, newPassword) => dispatch(updatePassword(token, userId, oldPassword, newPassword)),
+    updatePassword: (token, userId, oldPassword, newPassword) =>
+      dispatch(updatePassword(token, userId, oldPassword, newPassword)),
     uploadUserIcon: (token, id, icon) => dispatch(uploadUserIcon(token, id, icon)),
     updateBuyerInfo: (token, userId, data) => dispatch(updateBuyerInfo(token, userId, data)),
     updateArtistInfo: (token, userId, data) => dispatch(updateArtistInfo(token, userId, data)),
-    changeUserTab: num => dispatch(changeUserTab(num))
+    changeUserTab: num => dispatch(changeUserTab(num)),
+    inviteOtherArtist: (token, email, UUID) => dispatch(inviteOtherArtist(token, email, UUID))
   })
 )(UserPageContainer)
-

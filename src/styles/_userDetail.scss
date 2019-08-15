@@ -183,4 +183,29 @@
       margin-left: 0;
     }
   }
+
+  &__invite {
+    width: 36rem;
+    margin-left: 6rem;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 40rem;
+      margin: 0 auto;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      width: auto;
+      padding: 0 2rem;
+      margin: 0;
+    }
+
+    > div { display: grid; }
+
+    input {
+      width: 100%;
+      margin: 4rem 0 2rem 0;
+    }
+
+    button { justify-self: right; }
+  }
 }

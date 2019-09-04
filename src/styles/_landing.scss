@@ -1,14 +1,114 @@
 .landing {
-
-  &__olive-tree {
+  overflow-x: scroll;
+  &__grayBar {
+    position: absolute;
     display: grid;
-    height: 66vh;
-    text-align: center;
-    min-height: max-content;
-    &__img {
-      align-self: center;
-      margin: 0 auto;
-      width: 80vw;
+    grid-template-columns: 4rem 1fr 4rem;
+    grid-row-gap: 1.5rem;
+    left: 0;
+    background-color: $color-gray;
+    width: 100%;
+
+
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: 2rem 1fr 2rem;
+    }
+
+    p:first-child {
+      grid-column: 2 / 3;
+      align-self: end;
+      padding-top: 5rem;
+    }
+
+    p:last-child {
+      grid-column: 2 / 3;
+      padding-bottom: 5rem;
     }
   }
+
+  &__popular {
+    margin-top: 8rem;
+  }
+
+  &__new {
+    margin-top: 8rem;
+  }
+
+  &__workTitle {
+    font-size: 1.3rem;
+    border-bottom: 1px solid black;
+    line-height: 1.5rem;
+    width: max-content;
+    margin-bottom: 1.5rem;
+  }
+
+  &__works {
+    height: 250px;
+    overflow-y: hidden;
+
+    ul {
+      padding-bottom: 60px;
+      width: calc(100vw - 8rem);
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+
+      @media only screen and (max-width: $bp-small) {
+        width: calc(100vw - 4rem);
+      }
+
+      li {
+        display: inline-block;
+        margin-right: 3rem;
+      }
+    }
+
+    &__work {
+
+      p {
+        font-size: 1.2rem;
+        font-weight: 400;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 10rem;
+      }
+
+      img {
+        background: center no-repeat;
+        background-size: contain;
+        width: 20rem;
+        height: 100%;
+      }
+
+    }
+  }
+  &__grayLink {
+    background-color: $color-gray;
+
+
+    p {
+      padding: 2rem;
+      text-align: center;
+    }
+    //width: 50%;
+  }
+
+  &__grayLink:hover {
+    cursor: pointer;
+    opacity: 0.8;
+
+  }
+  //&__olive-tree {
+  //  display: grid;
+  //  height: 66vh;
+  //  text-align: center;
+  //  min-height: max-content;
+  //  &__img {
+  //    align-self: center;
+  //    margin: 0 auto;
+  //    width: 80vw;
+  //  }
+  //}
 }

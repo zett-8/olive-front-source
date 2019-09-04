@@ -1,45 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import WorkList from '../components/workList'
+import Landing from '../components/landing'
 
-import { getRecommendWorks, getNextRecommendWorks } from '../actions/workList'
-import scrollHandler from '../utils/scrollHandler'
+import { getPopularWorksForLanding, getNewWorksForLanding } from '../actions/landingWorks'
 
 class LandingPageContainer extends React.Component {
   async componentDidMount() {
-    document.title = '現代アートをもっと自由に | Olive'
-
-    if (this.props.workList.recommendWorks.pristine) {
-      await this.props.getRecommendWorks()
-      this.props.getNextRecommendWorks(this.props.workList.recommendWorks.nextWorksApi)
+    if (this.props.landingWorks.newWorks.pristine) {
+      this.props.getNewWorksForLanding()
     }
 
-    window.addEventListener('scroll', this.handleScroll)
-  }
+    if (this.props.landingWorks.newWorks.pristine) {
+      this.props.getPopularWorksForLanding()
+    }
 
-  componentWillUnmount() { window.removeEventListener('scroll', this.handleScroll) }
-
-  fetchNextWorks = () => {
-    if (this.props.workList.recommendWorks.stock.length)
-      this.props.getNextRecommendWorks(this.props.workList.recommendWorks.nextWorksApi)
+    document.title = '現代アートをもっと自由に | Olive'
   }
-  handleScroll = () =>scrollHandler(this.fetchNextWorks)
 
   render() {
-    if (this.props.workList.recommendWorks.pristine) return null
-
-    return <WorkList works={this.props.workList.recommendWorks.contents} />
+    return <Landing landingWorks={this.props.landingWorks} />
   }
 }
 
 export default connect(
   state => ({
-    workList: state.workList
+    landingWorks: state.landingWorks
   }),
   dispatch => ({
-    getRecommendWorks: () => dispatch(getRecommendWorks()),
-    getNextRecommendWorks: url => dispatch(getNextRecommendWorks(url))
+    getPopularWorksForLanding: () => dispatch(getPopularWorksForLanding()),
+    getNewWorksForLanding: url => dispatch(getNewWorksForLanding(url))
   })
 )(LandingPageContainer)
 

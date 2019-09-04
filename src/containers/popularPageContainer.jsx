@@ -9,6 +9,7 @@ import scrollHandler from '../utils/scrollHandler'
 class PopularPageContainer extends React.Component {
   async componentDidMount() {
     document.title = 'Popular Works | Olive'
+    window.scrollTo(0, 0)
 
     if (this.props.workList.popularWorks.pristine) {
       await this.props.getPopularWorks()

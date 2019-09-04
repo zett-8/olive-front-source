@@ -10,6 +10,7 @@ import artistDetailReducer from './artistDetail'
 import buyerDetailReducer from './buyerDetail'
 import messagesReducer from './messages'
 import userTabReducer from './userPageTab'
+import landingWorksReducer from './landingWorks'
 
 export default combineReducers({
   loginStatus: loginStatusReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
   artistDetail: artistDetailReducer,
   buyerDetail: buyerDetailReducer,
   messages: messagesReducer,
-  userTab: userTabReducer
+  userTab: userTabReducer,
+  landingWorks: landingWorksReducer
 })

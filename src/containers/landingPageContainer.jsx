@@ -3,37 +3,42 @@ import { connect } from 'react-redux'
 
 import Landing from '../components/landing'
 
+import { getRecommendWorks } from '../actions/workList'
 import { getPopularWorksForLanding, getNewWorksForLanding } from '../actions/landingWorks'
 
 class LandingPageContainer extends React.Component {
   async componentDidMount() {
-    if (this.props.landingWorks.newWorks.pristine) {
-      this.props.getNewWorksForLanding()
+    if (this.props.workList.recommendWorks.pristine) {
+      this.props.getRecommendWorks()
     }
 
     if (this.props.landingWorks.newWorks.pristine) {
       this.props.getPopularWorksForLanding()
     }
 
+    if (this.props.landingWorks.newWorks.pristine) {
+      this.props.getNewWorksForLanding()
+    }
+
     document.title = '現代アートをもっと自由に | Olive'
   }
 
   render() {
-    return <Landing landingWorks={this.props.landingWorks} />
+    return <Landing recommendWorks={this.props.workList.recommendWorks.contents} landingWorks={this.props.landingWorks} />
   }
 }
 
 export default connect(
   state => ({
-    landingWorks: state.landingWorks
+    landingWorks: state.landingWorks,
+    workList: state.workList,
   }),
   dispatch => ({
+    getRecommendWorks: () => dispatch(getRecommendWorks()),
     getPopularWorksForLanding: () => dispatch(getPopularWorksForLanding()),
-    getNewWorksForLanding: url => dispatch(getNewWorksForLanding(url))
+    getNewWorksForLanding: url => dispatch(getNewWorksForLanding(url)),
   })
 )(LandingPageContainer)
-
-
 
 // import React from 'react'
 // import { connect } from 'react-redux'

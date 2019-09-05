@@ -49,7 +49,7 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     // ========================
-    // ===== New Works
+    // ===== Recommend Works
     case actionTypes.GET_RECOMMEND_WORKS:
       newState.recommendWorks = {
         pristine: false,

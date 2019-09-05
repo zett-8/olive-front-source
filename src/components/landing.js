@@ -20,8 +20,33 @@ const landing = props => {
         </p>
       </div>
 
+      <div className="landing__recommend">
+        <p className="landing__workTitle">Recommend Artworks</p>
+        <div className="landing__works">
+          <ul>
+            {props.recommendWorks.map(w => (
+              <li key={w.id}>
+                <div className="landing__works__work" key={w.id}>
+                  <Link key={w.id} to={`/work/${w.id}/detail`}>
+                    <LazyLoad offset={150} once height={300}>
+                      <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
+                    </LazyLoad>
+                  </Link>
+                  <p>{w.title}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Link to="/popular">
+          <div className="landing__grayLink">
+            <p>See more</p>
+          </div>
+        </Link>
+      </div>
+
       <div className="landing__popular">
-        <p className="landing__workTitle">Popular Works</p>
+        <p className="landing__workTitle">Popular Artworks</p>
         <div className="landing__works">
           <ul>
             {props.landingWorks.popularWorks.contents.map(w => (
@@ -46,7 +71,7 @@ const landing = props => {
       </div>
 
       <div className="landing__new">
-        <p className="landing__workTitle">New Works</p>
+        <p className="landing__workTitle">New Artworks</p>
         <div className="landing__works">
           <ul>
             {props.landingWorks.newWorks.contents.map(w => (
@@ -74,6 +99,7 @@ const landing = props => {
 }
 
 landing.propTypes = {
+  recommendWorks: PropTypes.arrayOf(PropTypes.object),
   landingWorks: PropTypes.shape({
     newWorks: PropTypes.object,
     popularWorks: PropTypes.object

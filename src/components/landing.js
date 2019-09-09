@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import LazyLoad from 'react-lazyload'
 import VOID from '../assets/700.gif'
 
 const landing = props => {
@@ -28,9 +27,7 @@ const landing = props => {
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
-                    <LazyLoad offset={150} once height={300}>
-                      <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
-                    </LazyLoad>
+                    <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
                   <p>{w.title}</p>
                 </div>
@@ -38,11 +35,6 @@ const landing = props => {
             ))}
           </ul>
         </div>
-        <Link to="/popular">
-          <div className="landing__grayLink">
-            <p>See more</p>
-          </div>
-        </Link>
       </div>
 
       <div className="landing__popular">
@@ -53,9 +45,7 @@ const landing = props => {
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
-                    <LazyLoad offset={150} once height={300}>
-                      <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
-                    </LazyLoad>
+                    <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
                   <p>{w.title}</p>
                 </div>
@@ -78,9 +68,7 @@ const landing = props => {
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
-                    <LazyLoad offset={150} once height={300}>
-                      <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
-                    </LazyLoad>
+                    <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
                   <p>{w.title}</p>
                 </div>

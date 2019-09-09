@@ -19,24 +19,56 @@
       grid-column: 2 / 3;
       align-self: end;
       padding-top: 5rem;
+
+      width: 80%;
+      margin: 0 auto;
+      @media only screen and (max-width: $bp-small) {
+        width: auto;
+        margin: 0;
+      }
     }
 
     p:last-child {
       grid-column: 2 / 3;
       padding-bottom: 5rem;
+
+      width: 80%;
+      margin: 0 auto;
+      @media only screen and (max-width: $bp-small) {
+        width: auto;
+        margin: 0;
+      }
     }
   }
 
   &__recommend {
-    margin-top: 8rem;
+    width: 80%;
+    margin: 8rem auto 0 auto;
+
+    @media only screen and (max-width: $bp-small) {
+      width: auto;
+      margin: 8rem 0 0 0;
+    }
   }
 
   &__popular {
-    margin-top: 8rem;
+    width: 80%;
+    margin: 8rem auto 0 auto;
+
+    @media only screen and (max-width: $bp-small) {
+      width: auto;
+      margin: 8rem 0 0 0;
+    }
   }
 
   &__new {
-    margin-top: 8rem;
+    width: 80%;
+    margin: 8rem auto 0 auto;
+
+    @media only screen and (max-width: $bp-small) {
+      width: auto;
+      margin: 8rem 0 0 0;
+    }
   }
 
   &__workTitle {

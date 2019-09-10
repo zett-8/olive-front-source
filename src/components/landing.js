@@ -9,13 +9,13 @@ const landing = props => {
       <div className="landing__grayBar">
         <p className="typ_landing_h">Welcome to Olive</p>
         <p className="typ_landing_p">
-          「現代アートをもっと自由に」を掲げたオンラインギャラリー。アーティストの完全招待制で運営しています。招待する権限を持つのは運営だけでなく、既に登録されているアーティストです。Oliveでは会員登録することなく、全ての作品が閲覧可能です。作品を自由に閲覧して頂き、気に入った作品があったら購入するだけです。（※購入の際に会員登録が必要になります）
+          「現代アートをもっと自由に」を掲げたオンラインギャラリー。Oliveでは会員登録することなく、全ての作品が閲覧可能です。作品を自由に閲覧して頂き、気に入った作品があったら購入するだけです。（※購入の際に会員登録が必要になります）アーティストの完全招待制で運営しています。招待する権限を持つのは運営だけでなく、既に登録されているアーティストです。
         </p>
       </div>
       <div className="landing__grayBar" style={{ position: 'relative', gridTemplateColumns: '1fr' }}>
         <p className="typ_landing_h">Welcome to Olive</p>
         <p className="typ_landing_p">
-          「現代アートをもっと自由に」を掲げたオンラインギャラリー。アーティストの完全招待制で運営しています。招待する権限を持つのは運営だけでなく、既に登録されているアーティストです。Oliveでは会員登録することなく、全ての作品が閲覧可能です。作品を自由に閲覧して頂き、気に入った作品があったら購入するだけです。（※購入の際に会員登録が必要になります）
+          「現代アートをもっと自由に」を掲げたオンラインギャラリー。Oliveでは会員登録することなく、全ての作品が閲覧可能です。作品を自由に閲覧して頂き、気に入った作品があったら購入するだけです。（※購入の際に会員登録が必要になります）アーティストの完全招待制で運営しています。招待する権限を持つのは運営だけでなく、既に登録されているアーティストです。
         </p>
       </div>
 
@@ -26,10 +26,14 @@ const landing = props => {
             {props.recommendWorks.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
+                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p>{w.title}</p>
+                  <p style={{ textAlign: 'right' }}>
+                    ¥&nbsp;
+                    {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                  </p>
                 </div>
               </li>
             ))}
@@ -44,10 +48,14 @@ const landing = props => {
             {props.landingWorks.popularWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
+                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p>{w.title}</p>
+                  <p style={{ textAlign: 'right' }}>
+                    ¥&nbsp;
+                    {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                  </p>
                 </div>
               </li>
             ))}
@@ -67,10 +75,14 @@ const landing = props => {
             {props.landingWorks.newWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
+                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p>{w.title}</p>
+                  <p style={{ textAlign: 'right' }}>
+                    ¥&nbsp;
+                    {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                  </p>
                 </div>
               </li>
             ))}

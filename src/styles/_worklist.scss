@@ -11,13 +11,19 @@
     display: grid;
 
     p {
-      font-size: 1.2rem;
-      font-weight: 400;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding-right: 10rem;
-    }
+        text-align: right;
+        font-size: 1.41rem;
+        font-weight: 400;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        //padding-right: 10rem;
+      }
+
+      p:last-child {
+        font-size: 1.2rem;
+        color: #333333;
+      }
 
     img {
       background: center no-repeat;

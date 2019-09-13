@@ -26,11 +26,11 @@ const landing = props => {
             {props.recommendWorks.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
-                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p style={{ textAlign: 'right' }}>
+                  <p>{w.title}</p>
+                  <p>
                     ¥&nbsp;
                     {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
                   </p>
@@ -48,11 +48,11 @@ const landing = props => {
             {props.landingWorks.popularWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
-                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p style={{ textAlign: 'right' }}>
+                  <p>{w.title}</p>
+                  <p>
                     ¥&nbsp;
                     {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
                   </p>
@@ -75,11 +75,11 @@ const landing = props => {
             {props.landingWorks.newWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
-                  <p>{w.title}</p>
                   <Link key={w.id} to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
-                  <p style={{ textAlign: 'right' }}>
+                  <p>{w.title}</p>
+                  <p>
                     ¥&nbsp;
                     {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
                   </p>

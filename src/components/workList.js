@@ -15,6 +15,10 @@ const workList = props => {
               <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
             </Link>
             <p>{w.title}</p>
+            <p>
+              ¥&nbsp;
+              {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+            </p>
           </div>
         ))}
       </div>
@@ -28,6 +32,10 @@ const workList = props => {
               </LazyLoad>
             </Link>
             <p>{w.title}</p>
+            <p>
+              ¥&nbsp;
+              {String(w.price).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+            </p>
           </div>
         ))}
       </div>

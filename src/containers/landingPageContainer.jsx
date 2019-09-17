@@ -23,8 +23,33 @@ class LandingPageContainer extends React.Component {
     document.title = '現代アートをもっと自由に | Olive'
   }
 
+  arrowClick = (id, n) => this.scrollLeft(document.getElementById(id), n * 300, 500);
+
+  scrollLeft = (element, change, duration) => {
+    let start = element.scrollLeft
+    let currentTime = 0
+    const increment = 20
+
+    const easeInOutQuad = (t, b, c, d) => {
+      t /= d/2
+      if (t < 1) return c/2*t*t + b
+      t--
+      return -c/2 * (t*(t-2) - 1) + b
+    }
+
+    const animateScroll = () => {
+      currentTime += increment
+      element.scrollLeft = easeInOutQuad(currentTime, start, change, duration)
+      if(currentTime < duration) setTimeout(animateScroll, increment)
+    }
+
+    animateScroll()
+  }
+
+
+
   render() {
-    return <Landing recommendWorks={this.props.workList.recommendWorks.contents} landingWorks={this.props.landingWorks} />
+    return <Landing scrollLeft={this.arrowClick} recommendWorks={this.props.workList.recommendWorks.contents} landingWorks={this.props.landingWorks} />
   }
 }
 

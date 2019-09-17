@@ -22,11 +22,13 @@ const landing = props => {
       <div className="landing__recommend">
         <p className="landing__workTitle">Recommend Artworks</p>
         <div className="landing__works">
-          <ul>
+          <div role="button" tabIndex={0} className="arrow leftArrow" onClick={() => props.scrollLeft('sc1', -1)}>&lt;</div>
+          <div role="button" tabIndex={0} className="arrow rightArrow" onClick={() => props.scrollLeft('sc1', 1)}>&gt;</div>
+          <ul id="sc1">
             {props.recommendWorks.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
-                  <Link key={w.id} to={`/work/${w.id}/detail`}>
+                  <Link to={`/work/${w.id}/detail`}>
                     <img alt="" src={VOID} style={{ backgroundImage: `url(${w.image1})` }} />
                   </Link>
                   <p>{w.title}</p>
@@ -44,7 +46,9 @@ const landing = props => {
       <div className="landing__popular">
         <p className="landing__workTitle">Popular Artworks</p>
         <div className="landing__works">
-          <ul>
+          <div role="button" tabIndex={0} className="arrow leftArrow" onClick={() => props.scrollLeft('sc2', -1)}>&lt;</div>
+          <div role="button" tabIndex={0} className="arrow rightArrow" onClick={() => props.scrollLeft('sc2', 1)}>&gt;</div>
+          <ul id="sc2">
             {props.landingWorks.popularWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
@@ -71,7 +75,9 @@ const landing = props => {
       <div className="landing__new">
         <p className="landing__workTitle">New Artworks</p>
         <div className="landing__works">
-          <ul>
+          <div role="button" tabIndex={0} className="arrow leftArrow" onClick={() => props.scrollLeft('sc3', -1)}>&lt;</div>
+          <div role="button" tabIndex={0} className="arrow rightArrow" onClick={() => props.scrollLeft('sc3', 1)}>&gt;</div>
+          <ul id="sc3">
             {props.landingWorks.newWorks.contents.map(w => (
               <li key={w.id}>
                 <div className="landing__works__work" key={w.id}>
@@ -103,7 +109,8 @@ landing.propTypes = {
   landingWorks: PropTypes.shape({
     newWorks: PropTypes.object,
     popularWorks: PropTypes.object
-  })
+  }),
+  scrollLeft: PropTypes.func
 }
 
 export default landing

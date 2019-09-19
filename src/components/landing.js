@@ -67,7 +67,7 @@ const landing = props => {
         </div>
         <Link to="/popular">
           <div className="landing__grayLink">
-            <p>See more</p>
+            <p>Load more</p>
           </div>
         </Link>
       </div>
@@ -96,7 +96,7 @@ const landing = props => {
         </div>
         <Link to="/new">
           <div className="landing__grayLink">
-            <p>See more</p>
+            <p>Load more</p>
           </div>
         </Link>
       </div>

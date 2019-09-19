@@ -68,7 +68,7 @@
     @media only screen and (max-width: $bp-small) {
       right: 1.5%;
     }
-    right: 12%;
+    right: calc(10% + 19px);
   }
 
   &__recommend {

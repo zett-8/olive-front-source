@@ -4,14 +4,14 @@ const ENV = process.env.NODE_ENV
 
 const PATHS = {
   local: 'http://localhost:8008',
-  development: 'http://ec2co-ecsel-ldr54y7zto1q-1944992330.ap-northeast-1.elb.amazonaws.com:8008',
-  production: 'https://backend.olive-gallery.com',
+  development: '****',
+  production: '****',
 }
 
 const stripeApiKey = {
-  local: 'pk_test_ReCanV8j6r2cNQgScUgSfTJV00GG2wEOWg',
-  development: 'pk_test_ReCanV8j6r2cNQgScUgSfTJV00GG2wEOWg',
-  production: 'pk_live_OHA1RGAlHpkVGFelM5ctt0a0003yTibExk'
+  local: '****',
+  development: '****',
+  production: '****'
 }
 
 export const PATH = PATHS[ENV]

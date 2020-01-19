@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
   console.log('olive 0.9')
 
   const tagManagerArgs = {
-    gtmId: 'GTM-WD5QC5V'
+    gtmId: '****'
   }
 
   TagManager.initialize(tagManagerArgs)

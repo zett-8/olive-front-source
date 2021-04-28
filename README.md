@@ -1,23 +1,23 @@
-# Olive-front  
+# Olive-front
 **Build by React**
 
-master [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/master.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/master)  
-dev [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/dev.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/dev)  
-feature [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/feature.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/feature)  
+master [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/master.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/master)
+dev [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/dev.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/dev)
+feature [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/feature.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/feature)
 <br>
 
 
-## Dependencies
-Node: 10.15.3  
+## Requirements
+Node: 10.15.3
 React: 16.7.0
 その他: package.json 参照
 
 <br>
 
-## Setup 
+## Setup
 #### 1/4 - Clone
 ```terminal
-git clone 
+git clone
 
 cd olive-front/
 ```
@@ -31,14 +31,14 @@ cp pre-push ./.git/hooks/
 chmod a+x ./.git/hooks/pre-push
 ```
 これでlint errorのあるコードはgitにpushできないようにします。
-**※使ってるエディターでEslintの設定を必ずしてください**  
+**※使ってるエディターでEslintの設定を必ずしてください**
 
 
 <br>
 
 #### 3/4 - install dependencies
 ```terminal
-yarn 
+yarn
 
 or
 
@@ -48,7 +48,7 @@ npm install
 <br />
 
 #### 4/4 - Start
-npm run [サーバー環境]で起動
+npm run \<server name\> で起動
 ```terminal
 npm run local
 
@@ -59,14 +59,6 @@ npm run dev
 
 <br>
 
-
-## Reviews
-みんなでレビューしましょう。  
-わからなくてもコードを読みましょう。  
-質問しましょう、指摘しましょう。改善していきましょう。  
-みんなで作りましょう。
-
-<br>
 
 ## Prefixes
 - hot: 緊急かつ重大な修正

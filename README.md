@@ -1,16 +1,16 @@
 # Olive-front
 **Build by React**
 
-master [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/master.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/master)
-dev [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/dev.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/dev)
-feature [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/feature.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/feature)
+master [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/master.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/master)  
+dev [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/dev.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/dev)  
+feature [![CircleCI](https://circleci.com/gh/noon-inc/olive-front/tree/feature.svg?style=svg&circle-token=bba726407e316b9437247bdc682548f52a8f6998)](https://circleci.com/gh/noon-inc/olive-front/tree/feature)  
 <br>
 
 
 ## Requirements
-Node: 10.15.3
-React: 16.7.0
-その他: package.json 参照
+Node: 10.15.3  
+React: 16.7.0  
+その他: package.json 参照  
 
 <br>
 
